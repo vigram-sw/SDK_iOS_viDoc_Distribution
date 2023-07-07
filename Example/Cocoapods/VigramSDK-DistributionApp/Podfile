@@ -1,0 +1,11 @@
+# Uncomment the next line to define a global platform for your project
+
+platform :ios, '13.0'
+
+target 'VigramSDK-DistributionApp' do
+  # Comment the next line if you don't want to use dynamic frameworks
+  use_frameworks!
+
+  # Pods for VigramSDK-DistributionApp
+  pod 'Vigram', :git => 'https://github.com/vigram-gmbh/SDK_iOS_viDoc_Distribution.git'
+end

@@ -1,0 +1,42 @@
+{
+  "name": "Vigram",
+  "version": "0.5.3-3",
+  "summary": "VigramSDK allows the seamless communication with the Vigram module.",
+  "description": "VigramSDK connects to the Vigram module, forwards Ntrip correction data to it and \nreceives RTK and laser information.",
+  "homepage": "https://vigram.de",
+  "license": {
+    "type": "Copyright",
+    "text": "Copyright 2020\nPermission is granted to...\n"
+  },
+  "source": {
+    "git": "https://github.com/vigram-gmbh/SDK_iOS_viDoc_Distribution.git",
+    "tag": "0.5.3-3"
+  },
+  "authors": {
+    "Iaroslav Khaustov": "iaroslav.khaustov@vigram.com"
+  },
+  "platforms": {
+    "ios": "13.0"
+  },
+  "swift_versions": "5.7",
+  "default_subspecs": "Core",
+  "subspecs": [
+    {
+      "name": "Core",
+      "vendored_frameworks": "VigramSDK.xcframework"
+    },
+    {
+      "name": "Rx",
+      "source_files": "VigramSDK+Rx/*.swift",
+      "dependencies": {
+        "Vigram/Core": [
+
+        ],
+        "RxSwift": [
+          "~> 6.2"
+        ]
+      }
+    }
+  ],
+  "swift_version": "5.7"
+}

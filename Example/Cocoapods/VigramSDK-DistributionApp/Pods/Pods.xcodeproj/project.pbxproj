@@ -1,0 +1,557 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXAggregateTarget section */
+		1CBC6AEFA9D8332BBDFB2F854BC42048 /* Vigram */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 79CC959155540B59A0F346ADE7580FBB /* Build configuration list for PBXAggregateTarget "Vigram" */;
+			buildPhases = (
+				406CF9D3B55492FEF204551986D96B9B /* [CP] Copy XCFrameworks */,
+			);
+			dependencies = (
+			);
+			name = Vigram;
+		};
+/* End PBXAggregateTarget section */
+
+/* Begin PBXBuildFile section */
+		0640B7D50209430B467CB04B8F83D983 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
+		0AD02261BB48ED5F8A2351EF10158D43 /* Pods-VigramSDK-DistributionApp-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = B53762224AF3E017537C7DDF516F2229 /* Pods-VigramSDK-DistributionApp-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CE09465D0688A25487B6CCC339663999 /* Pods-VigramSDK-DistributionApp-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = AEC0BB0D5FF9E319464CED80F4C8CD6C /* Pods-VigramSDK-DistributionApp-dummy.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		47C4E69AF0D5163BA8989A43CDE56D4D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1CBC6AEFA9D8332BBDFB2F854BC42048;
+			remoteInfo = Vigram;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		16093D1BB0BE8460ED00650587BCD13D /* Pods-VigramSDK-DistributionApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-VigramSDK-DistributionApp.release.xcconfig"; sourceTree = "<group>"; };
+		363FB38441DB598123C514162685BF88 /* Vigram.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Vigram.debug.xcconfig; sourceTree = "<group>"; };
+		5D17166F2E9642BC8188A88BF2A458E6 /* Pods-VigramSDK-DistributionApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-VigramSDK-DistributionApp.debug.xcconfig"; sourceTree = "<group>"; };
+		6CFA6CAA1E97BA7633A81099C663001D /* VigramSDK.xcframework */ = {isa = PBXFileReference; includeInIndex = 1; path = VigramSDK.xcframework; sourceTree = "<group>"; };
+		73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		7E72F37CC7E0F68B8A8F58764F56F26F /* Pods-VigramSDK-DistributionApp-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-VigramSDK-DistributionApp-frameworks.sh"; sourceTree = "<group>"; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		AEC0BB0D5FF9E319464CED80F4C8CD6C /* Pods-VigramSDK-DistributionApp-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-VigramSDK-DistributionApp-dummy.m"; sourceTree = "<group>"; };
+		B53762224AF3E017537C7DDF516F2229 /* Pods-VigramSDK-DistributionApp-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-VigramSDK-DistributionApp-umbrella.h"; sourceTree = "<group>"; };
+		B62EDA6EDBED7C0C7776DBA7CFD7BB87 /* Vigram-xcframeworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Vigram-xcframeworks.sh"; sourceTree = "<group>"; };
+		B63208DA80F0C662EB1B1FE07B71F391 /* Vigram.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Vigram.release.xcconfig; sourceTree = "<group>"; };
+		C2CD5CE80CF6D62E669EABADE9044F99 /* Pods-VigramSDK-DistributionApp-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-VigramSDK-DistributionApp-acknowledgements.plist"; sourceTree = "<group>"; };
+		C6C564ABD0E3E7FF2B3064D649CDE452 /* Pods-VigramSDK-DistributionApp-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-VigramSDK-DistributionApp-Info.plist"; sourceTree = "<group>"; };
+		DA2EEA1C3A4D976934F071806D443F44 /* Pods-VigramSDK-DistributionApp */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-VigramSDK-DistributionApp"; path = Pods_VigramSDK_DistributionApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E61EA18FD07AFFF3E19BB6C82E88108A /* Pods-VigramSDK-DistributionApp-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-VigramSDK-DistributionApp-acknowledgements.markdown"; sourceTree = "<group>"; };
+		FE2C2E708539AFBC2889091CA99C079D /* Pods-VigramSDK-DistributionApp.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-VigramSDK-DistributionApp.modulemap"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		BB4D6E4D7E99D44E8FEF1AAACFA3AC11 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0640B7D50209430B467CB04B8F83D983 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		3417490FEE605793726579328D2CCE03 /* Vigram */ = {
+			isa = PBXGroup;
+			children = (
+				83A9F9DBCB8EA14200C65205DD42A6C5 /* Core */,
+				DD3B15D260D5B0B63FE25126C0AACA18 /* Support Files */,
+			);
+			name = Vigram;
+			path = Vigram;
+			sourceTree = "<group>";
+		};
+		578452D2E740E91742655AC8F1636D1F /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		77ECCA5C08ABE89431220B82A45FFC11 /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				EDA37AB19752982266FC0B26DDCA9CC7 /* Pods-VigramSDK-DistributionApp */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		83A9F9DBCB8EA14200C65205DD42A6C5 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				98F8A62FE8A425875BD89EA64EDA4C15 /* Frameworks */,
+			);
+			name = Core;
+			sourceTree = "<group>";
+		};
+		8C9614349D4BBACE16BA4B52C719C936 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DA2EEA1C3A4D976934F071806D443F44 /* Pods-VigramSDK-DistributionApp */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		959524F094346E72B3AB5A24356E1AB5 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				3417490FEE605793726579328D2CCE03 /* Vigram */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		98F8A62FE8A425875BD89EA64EDA4C15 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6CFA6CAA1E97BA7633A81099C663001D /* VigramSDK.xcframework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CF1408CF629C7361332E53B88F7BD30C = {
+			isa = PBXGroup;
+			children = (
+				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
+				D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */,
+				959524F094346E72B3AB5A24356E1AB5 /* Pods */,
+				8C9614349D4BBACE16BA4B52C719C936 /* Products */,
+				77ECCA5C08ABE89431220B82A45FFC11 /* Targets Support Files */,
+			);
+			sourceTree = "<group>";
+		};
+		D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				578452D2E740E91742655AC8F1636D1F /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DD3B15D260D5B0B63FE25126C0AACA18 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				B62EDA6EDBED7C0C7776DBA7CFD7BB87 /* Vigram-xcframeworks.sh */,
+				363FB38441DB598123C514162685BF88 /* Vigram.debug.xcconfig */,
+				B63208DA80F0C662EB1B1FE07B71F391 /* Vigram.release.xcconfig */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/Vigram";
+			sourceTree = "<group>";
+		};
+		EDA37AB19752982266FC0B26DDCA9CC7 /* Pods-VigramSDK-DistributionApp */ = {
+			isa = PBXGroup;
+			children = (
+				FE2C2E708539AFBC2889091CA99C079D /* Pods-VigramSDK-DistributionApp.modulemap */,
+				E61EA18FD07AFFF3E19BB6C82E88108A /* Pods-VigramSDK-DistributionApp-acknowledgements.markdown */,
+				C2CD5CE80CF6D62E669EABADE9044F99 /* Pods-VigramSDK-DistributionApp-acknowledgements.plist */,
+				AEC0BB0D5FF9E319464CED80F4C8CD6C /* Pods-VigramSDK-DistributionApp-dummy.m */,
+				7E72F37CC7E0F68B8A8F58764F56F26F /* Pods-VigramSDK-DistributionApp-frameworks.sh */,
+				C6C564ABD0E3E7FF2B3064D649CDE452 /* Pods-VigramSDK-DistributionApp-Info.plist */,
+				B53762224AF3E017537C7DDF516F2229 /* Pods-VigramSDK-DistributionApp-umbrella.h */,
+				5D17166F2E9642BC8188A88BF2A458E6 /* Pods-VigramSDK-DistributionApp.debug.xcconfig */,
+				16093D1BB0BE8460ED00650587BCD13D /* Pods-VigramSDK-DistributionApp.release.xcconfig */,
+			);
+			name = "Pods-VigramSDK-DistributionApp";
+			path = "Target Support Files/Pods-VigramSDK-DistributionApp";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		C95416FD5957ED91DC400F32E5A2FDCC /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0AD02261BB48ED5F8A2351EF10158D43 /* Pods-VigramSDK-DistributionApp-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		E6C582C11CFF3A5AE65C57E0C3B77467 /* Pods-VigramSDK-DistributionApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 51954668F0F4CAE4FD72DBCEFA3C9811 /* Build configuration list for PBXNativeTarget "Pods-VigramSDK-DistributionApp" */;
+			buildPhases = (
+				C95416FD5957ED91DC400F32E5A2FDCC /* Headers */,
+				EBD397093EA54A69194E8D74A8A68F88 /* Sources */,
+				BB4D6E4D7E99D44E8FEF1AAACFA3AC11 /* Frameworks */,
+				BC7F24C226FF0CA0FBEA4BA957DC151B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				17F73651D34A6B38318ABF29F5FBE947 /* PBXTargetDependency */,
+			);
+			name = "Pods-VigramSDK-DistributionApp";
+			productName = Pods_VigramSDK_DistributionApp;
+			productReference = DA2EEA1C3A4D976934F071806D443F44 /* Pods-VigramSDK-DistributionApp */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BFDFE7DC352907FC980B868725387E98 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1300;
+				LastUpgradeCheck = 1300;
+			};
+			buildConfigurationList = 4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
+			productRefGroup = 8C9614349D4BBACE16BA4B52C719C936 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				E6C582C11CFF3A5AE65C57E0C3B77467 /* Pods-VigramSDK-DistributionApp */,
+				1CBC6AEFA9D8332BBDFB2F854BC42048 /* Vigram */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		BC7F24C226FF0CA0FBEA4BA957DC151B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		406CF9D3B55492FEF204551986D96B9B /* [CP] Copy XCFrameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Vigram/Vigram-xcframeworks-input-files.xcfilelist",
+			);
+			name = "[CP] Copy XCFrameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Vigram/Vigram-xcframeworks-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Vigram/Vigram-xcframeworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		EBD397093EA54A69194E8D74A8A68F88 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CE09465D0688A25487B6CCC339663999 /* Pods-VigramSDK-DistributionApp-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		17F73651D34A6B38318ABF29F5FBE947 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Vigram;
+			target = 1CBC6AEFA9D8332BBDFB2F854BC42048 /* Vigram */;
+			targetProxy = 47C4E69AF0D5163BA8989A43CDE56D4D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		32800D78A9F46C4688458732C3F123F6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 363FB38441DB598123C514162685BF88 /* Vigram.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		65F4B90CCF28BC7F558BB3FE4E8051CA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5D17166F2E9642BC8188A88BF2A458E6 /* Pods-VigramSDK-DistributionApp.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-VigramSDK-DistributionApp/Pods-VigramSDK-DistributionApp-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-VigramSDK-DistributionApp/Pods-VigramSDK-DistributionApp.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		8DE5143C03248BB6CD542DE3963D6F3A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_DEBUG=1",
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Debug;
+		};
+		9E406C6AAF85E580207CD97B0044DEAB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_RELEASE=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Release;
+		};
+		F173ABAC7916CEFCB437100512654D72 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 16093D1BB0BE8460ED00650587BCD13D /* Pods-VigramSDK-DistributionApp.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-VigramSDK-DistributionApp/Pods-VigramSDK-DistributionApp-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-VigramSDK-DistributionApp/Pods-VigramSDK-DistributionApp.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		F92F54F6730AC3DB866BAE0D9DEDDEE2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B63208DA80F0C662EB1B1FE07B71F391 /* Vigram.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8DE5143C03248BB6CD542DE3963D6F3A /* Debug */,
+				9E406C6AAF85E580207CD97B0044DEAB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		51954668F0F4CAE4FD72DBCEFA3C9811 /* Build configuration list for PBXNativeTarget "Pods-VigramSDK-DistributionApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				65F4B90CCF28BC7F558BB3FE4E8051CA /* Debug */,
+				F173ABAC7916CEFCB437100512654D72 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		79CC959155540B59A0F346ADE7580FBB /* Build configuration list for PBXAggregateTarget "Vigram" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				32800D78A9F46C4688458732C3F123F6 /* Debug */,
+				F92F54F6730AC3DB866BAE0D9DEDDEE2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+}

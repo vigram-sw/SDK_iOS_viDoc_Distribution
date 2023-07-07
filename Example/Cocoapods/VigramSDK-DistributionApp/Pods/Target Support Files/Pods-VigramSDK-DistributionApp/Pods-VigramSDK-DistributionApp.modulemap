@@ -1,0 +1,6 @@
+framework module Pods_VigramSDK_DistributionApp {
+  umbrella header "Pods-VigramSDK-DistributionApp-umbrella.h"
+
+  export *
+  module * { export * }
+}

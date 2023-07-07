@@ -1,0 +1,4 @@
+framework module VigramSDK {
+  header "VigramSDK-Swift.h"
+  requires objc
+}

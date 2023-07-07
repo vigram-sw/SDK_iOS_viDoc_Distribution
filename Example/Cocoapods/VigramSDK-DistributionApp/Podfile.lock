@@ -1,0 +1,23 @@
+PODS:
+  - Vigram (0.5.3-3):
+    - Vigram/Core (= 0.5.3-3)
+  - Vigram/Core (0.5.3-3)
+
+DEPENDENCIES:
+  - Vigram (from `https://github.com/vigram-gmbh/SDK_iOS_viDoc_Distribution.git`)
+
+EXTERNAL SOURCES:
+  Vigram:
+    :git: https://github.com/vigram-gmbh/SDK_iOS_viDoc_Distribution.git
+
+CHECKOUT OPTIONS:
+  Vigram:
+    :commit: 0db84e94b8df2102a8c2c20e141873b59c948411
+    :git: https://github.com/vigram-gmbh/SDK_iOS_viDoc_Distribution.git
+
+SPEC CHECKSUMS:
+  Vigram: dcbf57a1979d7ba7793de8ba97f7e21f1f79ca28
+
+PODFILE CHECKSUM: e84ef0fcf731c06c6f2ece081324fac7959acb18
+
+COCOAPODS: 1.12.0

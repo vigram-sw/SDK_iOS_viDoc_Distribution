@@ -1,0 +1,23 @@
+{
+  "pins" : [
+    {
+      "identity" : "rxswift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ReactiveX/RxSwift",
+      "state" : {
+        "revision" : "b4307ba0b6425c0ba4178e138799946c3da594f8",
+        "version" : "6.5.0"
+      }
+    },
+    {
+      "identity" : "sdk_ios_vidoc_distribution",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/vigram-gmbh/SDK_iOS_viDoc_Distribution",
+      "state" : {
+        "revision" : "a8aecd8fb96b8cba85d67f6c5bceb520f855a31d",
+        "version" : "0.5.3"
+      }
+    }
+  ],
+  "version" : 2
+}

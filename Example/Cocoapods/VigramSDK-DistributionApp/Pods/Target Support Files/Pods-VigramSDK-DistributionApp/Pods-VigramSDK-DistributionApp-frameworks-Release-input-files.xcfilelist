@@ -1,0 +1,2 @@
+${PODS_ROOT}/Target Support Files/Pods-VigramSDK-DistributionApp/Pods-VigramSDK-DistributionApp-frameworks.sh
+${PODS_XCFRAMEWORKS_BUILD_DIR}/Vigram/Core/VigramSDK.framework/VigramSDK
