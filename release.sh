@@ -26,7 +26,7 @@ Pod::Spec.new do |s|
     DESC
     s.homepage     = 'https://vigram.de'
     s.license = { :type => 'Copyright', :text => <<-LICENSE
-                   Copyright 2020
+                   Copyright 2023
                    Permission is granted to...
                   LICENSE
                 }
@@ -35,7 +35,7 @@ Pod::Spec.new do |s|
 
     s.platform = :ios
     s.swift_version = '5.5'
-    s.ios.deployment_target  = '13.0'
+    s.ios.deployment_target  = '15.0'
     s.default_subspec = 'Core'
 
     s.subspec 'Core' do |ss|
