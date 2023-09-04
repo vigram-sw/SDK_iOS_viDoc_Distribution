@@ -192,9 +192,6 @@ class Model: ObservableObject {
         Configuration.defaultRate = .hertz7
         // DEBUG CONFIG
         Configuration.debug = true
-//        Configuration.maximumSinglePointVerticalAccuracy = 10
-//        Configuration.maximumSinglePointAltitudeDifference = 10
-//        Configuration.maximumSinglePointHorizontalAccuracy = 10
         dateFormatter.dateFormat = "HH:mm:ss.SSS"
         dateFormatter2.dateFormat = "HH:mm:ss.SSS"
         dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
@@ -347,8 +344,7 @@ class Model: ObservableObject {
 
                 // Uncomment if needed - CONFIGURATION
 //                let peripheralConfiguration = PeripheralConfiguration(
-//                    rateOfChangeMessages: .hertz7,
-//                    dynamicType: .stationary
+//                    rateOfChangeMessages: .hertz7
 //                )
 
                 var path: URL?
