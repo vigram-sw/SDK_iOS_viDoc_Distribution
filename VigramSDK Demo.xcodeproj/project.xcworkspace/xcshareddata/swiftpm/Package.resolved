@@ -5,8 +5,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/ReactiveX/RxSwift",
       "state" : {
-        "revision" : "b4307ba0b6425c0ba4178e138799946c3da594f8",
-        "version" : "6.5.0"
+        "revision" : "9dcaa4b333db437b0fbfaf453fad29069044a8b4",
+        "version" : "6.6.0"
       }
     },
     {
@@ -14,8 +14,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/vigram-gmbh/SDK_iOS_viDoc_Distribution.git",
       "state" : {
-        "revision" : "830523c51d58020e1102044dae952403115a9230",
-        "version" : "0.5.3-beta4.6"
+        "revision" : "d6502bb21447749bd0272fe9375108c4d9779a15",
+        "version" : "0.5.4"
       }
     }
   ],

@@ -28,16 +28,11 @@ class Model: ObservableObject {
 
     // MARK: Publishers properties
 
-    @Published var flash = false
-    @Published var needUpdate = false
-    @Published var statusUpdate = ""
-    @Published var progressUpdate = ""
     @Published var timerValueStr = ""
     @Published var timerBackValueStr = ""
     @Published var rawxMessage = ""
     @Published var sfrbxMessage = ""
     @Published var titleAlert = ""
-    @Published var dynamicState = " "
     @Published var messageAlert = ""
     @Published var showingAlert = false
     @Published var isSharePresented: Bool = false
@@ -77,7 +72,6 @@ class Model: ObservableObject {
     @Published var nVelocity = ""
     @Published var eVelocity = ""
     @Published var dVelocity = ""
-    @Published var allAvailableSoftwareVersion = [DeviceMessage.Version.Software]()
     @Published var currentSoftwareVersion = ""
     @Published var currentHardwareVersion = ""
     @Published var currentBatteryCharge = ""
@@ -177,7 +171,9 @@ class Model: ObservableObject {
         ("Without laset: iPhone13ProMaxTop", AntennaOffset.Camera.iPhone13ProMaxTop),
         ("Without laset: iPhone13ProMaxMiddle", AntennaOffset.Camera.iPhone13ProMaxMiddle),
         ("Without laset: iPhone13ProMaxBottom", AntennaOffset.Camera.iPhone13ProMaxBottom),
-        ("Without laset: iPhone14Pro", AntennaOffset.Camera.iPhone14Pro),
+        ("Without laset: iPhone14ProTop", AntennaOffset.Camera.iPhone14ProTop),
+        ("Without laset: iPhone14ProMiddle", AntennaOffset.Camera.iPhone14ProMiddle),
+        ("Without laset: iPhone14ProBottom", AntennaOffset.Camera.iPhone14ProBottom),
         ("Without laset: iPhone14ProMaxTop", AntennaOffset.Camera.iPhone14ProMaxTop),
         ("Without laset: iPhone14ProMaxMiddle", AntennaOffset.Camera.iPhone14ProMaxMiddle),
         ("Without laset: iPhone14ProMaxBottom", AntennaOffset.Camera.iPhone14ProMaxBottom),
@@ -192,7 +188,6 @@ class Model: ObservableObject {
     // MARK: Init
 
     init() {
-        
         // DEFAULT RATE
         Configuration.defaultRate = .hertz7
         // DEBUG CONFIG
@@ -200,8 +195,6 @@ class Model: ObservableObject {
 //        Configuration.maximumSinglePointVerticalAccuracy = 10
 //        Configuration.maximumSinglePointAltitudeDifference = 10
 //        Configuration.maximumSinglePointHorizontalAccuracy = 10
-        // FORCE UPDATE
-        Configuration.forceUpdate = false
         dateFormatter.dateFormat = "HH:mm:ss.SSS"
         dateFormatter2.dateFormat = "HH:mm:ss.SSS"
         dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
@@ -218,15 +211,6 @@ class Model: ObservableObject {
                 print(error.localizedDescription)
             }
         }
-
-        Vigram.softwareService().getAllAvailableSoftware()
-            .sink { _ in } receiveValue: { [unowned self] softwareArray in
-                self.allAvailableSoftwareVersion.removeAll()
-                softwareArray.forEach({ [unowned self] software in
-                    self.allAvailableSoftwareVersion.append(software)
-                })
-            }
-            .store(in: &subscription)
 
         let tokenIsValid = Vigram.tokenIsValid()
 
@@ -258,16 +242,6 @@ class Model: ObservableObject {
     }
 
     // MARK: Public methods
-
-    func setForceUpdateSoftware(){
-        Configuration.forceUpdate = true
-        titleAlert = "Notification"
-        messageAlert = """
-            Please restart viDoc to start update.
-            Note: If the viDoc doesn't have the bootloader, the installation of the software is not possible.
-        """
-        showingAlert = true
-    }
 
     func authentificationToken() {
         // ENTER TOKEN HERE
@@ -301,16 +275,6 @@ class Model: ObservableObject {
             .store(in: &subscription)
     }
 
-    func installSoftware(_ software: DeviceMessage.Version.Software) {
-        peripheral?.setUpdateSoftwareToNextStartup(true, version: software)
-        titleAlert = "Notification"
-        messageAlert = """
-            Please restart viDoc to start update.
-            Note: If the viDoc doesn't have the bootloader, the installation of the software is not possible.
-        """
-        showingAlert = true
-    }
-
     func manualDisconnect() {
         normalDisconnect = true
         disconnect()
@@ -328,7 +292,6 @@ class Model: ObservableObject {
         gnssTimeString = ""
         rtkStatus = ""
         task?.disconnect()
-        dynamicState = " "
         timerValueStr = ""
         timerBackValueStr = ""
         currentBatteryCharge = ""
@@ -337,10 +300,6 @@ class Model: ObservableObject {
         bluetoothService.stopScan()
         connected = false
         nmeaReady = false
-        flash = false
-        needUpdate = false
-        statusUpdate = ""
-        progressUpdate = ""
         rawxMessage = ""
         sfrbxMessage = ""
         isConnectedDevice = false
@@ -440,50 +399,6 @@ class Model: ObservableObject {
                             self.isConnectedDevice = true
                             self.normalDisconnect = false
                             self.failDisconnect = false
-
-                            self.peripheral?.isNeedSoftwareUpdate?.sink(
-                                receiveCompletion: { _ in },
-                                receiveValue: { [unowned self] isNeedUpdate in
-                                    self.needUpdate = isNeedUpdate
-                                }
-                            ).store(in: &self.subscription)
-
-                            self.peripheral?.softwareUpdateState?.sink(
-                                receiveCompletion: { _ in },
-                                receiveValue: { [unowned self] updateState in
-                                    var status = ""
-                                    switch(updateState) {
-                                    case .startUpdate:
-                                        status = "Start update"
-                                        self.flash = true
-                                    case .updatingSoftware: status = "Updating..."
-                                    case .endUpdate:
-                                        status = "Update successfull"
-                                        self.titleAlert = "Update successfull"
-                                        self.messageAlert = "Please restart viDoc"
-                                        self.showingAlert = true
-                                        self.flash = false
-                                        Configuration.forceUpdate = false
-                                    case .errorUpdate:
-                                        self.titleAlert = "Update error"
-                                        self.messageAlert = "Please try again..."
-                                        self.showingAlert = true
-                                    case .none: status = ""
-                                    @unknown default:
-                                        break
-                                    }
-                                    self.statusUpdate = "Status: \(status)"
-                                 }
-                            )
-                            .store(in: &self.subscription)
-                            
-                            self.peripheral?.softwareUpdateProgress?.sink(
-                                receiveCompletion: { _ in },
-                                receiveValue: { [unowned self] progress in
-                                    self.progressUpdate = "Progress: \(String(format: "%.1f", progress)) %"
-                                }
-                            )
-                            .store(in: &self.subscription)
                             
                             self.peripheral?.start()
                                 .sink(receiveCompletion: { [unowned self] status in
@@ -1101,29 +1016,6 @@ class Model: ObservableObject {
         self.totalTime = nil
     }
 
-    func setDynamicState(type: DynamicStateType) {
-        peripheral?.setDynamicState(type: type)
-            .sink(receiveCompletion: { _ in }, receiveValue: { [unowned self] _ in
-                self.getDynamicState()
-            })
-            .store(in: &subscription)
-    }
-    
-    func getDynamicState() {
-        peripheral?.getCurrentDynamicState()
-            .sink(receiveCompletion: { _ in }, receiveValue: { [unowned self] state in
-                switch state.current {
-                case .pedestrian:
-                    self.dynamicState = "Pedestrian"
-                case .stationary:
-                    self.dynamicState = "Stationary"
-                @unknown default:
-                    break
-                }
-            })
-            .store(in: &subscription)
-    }
-
     func startLaser(){
         if let duration = Double(durationStr), duration > 0, duration <= 60 {
             if let peripheral = self.peripheral {
@@ -1277,9 +1169,7 @@ class Model: ObservableObject {
         
         if useLaser {
 
-            environmentDataService = Vigram.environmentDataService(
-                gpsService: gpsService, laserService: laser, peripheral: peripheral!, dynamicStateType: .stationary
-            )
+            environmentDataService = Vigram.environmentDataService(gpsService: gpsService, laserService: laser)
             singlePointRecordingService = Vigram.singlePointRecordingService(environmentDataService: environmentDataService)
             let typeOfLaser: LaserConfiguration.Position = isBottomLaser ? .bottom : .back
 
@@ -1308,11 +1198,7 @@ class Model: ObservableObject {
                 useDeviceMotion: true
             )
         } else {
-            environmentDataService = Vigram.environmentDataService(
-                gpsService: gpsService,
-                peripheral: self.peripheral!,
-                dynamicStateType: .stationary
-            )
+            environmentDataService = Vigram.environmentDataService(gpsService: gpsService)
             singlePointRecordingService = Vigram.singlePointRecordingService(environmentDataService: environmentDataService)
             if let distanceFromAntennaToGround = Double(distanceOfGroundStr) {
                 method = CoordinateCorrection.Method.constant(distanceFromAntennaToGround: distanceFromAntennaToGround)

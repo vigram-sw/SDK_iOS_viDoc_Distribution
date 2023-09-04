@@ -7,12 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		702C17102A58917200FA2245 /* VigramSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 702C170F2A58917200FA2245 /* VigramSDK */; };
 		707E0150298D08C100F3A611 /* VigramSDK_DemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707E014F298D08C100F3A611 /* VigramSDK_DemoApp.swift */; };
 		707E0152298D08C100F3A611 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707E0151298D08C100F3A611 /* ContentView.swift */; };
 		707E0154298D08C300F3A611 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 707E0153298D08C300F3A611 /* Assets.xcassets */; };
 		707E015E298D093000F3A611 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707E015D298D093000F3A611 /* Model.swift */; };
 		707E0161298D09CE00F3A611 /* SelectButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707E0160298D09CE00F3A611 /* SelectButton.swift */; };
+		70C899C92AA5F9DC000579AC /* VigramSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 70C899C82AA5F9DC000579AC /* VigramSDK */; };
+		70C899CB2AA5F9DC000579AC /* VigramSDK+Rx in Frameworks */ = {isa = PBXBuildFile; productRef = 70C899CA2AA5F9DC000579AC /* VigramSDK+Rx */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,7 +31,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				702C17102A58917200FA2245 /* VigramSDK in Frameworks */,
+				70C899C92AA5F9DC000579AC /* VigramSDK in Frameworks */,
+				70C899CB2AA5F9DC000579AC /* VigramSDK+Rx in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,7 +85,8 @@
 			);
 			name = "VigramSDK Demo";
 			packageProductDependencies = (
-				702C170F2A58917200FA2245 /* VigramSDK */,
+				70C899C82AA5F9DC000579AC /* VigramSDK */,
+				70C899CA2AA5F9DC000579AC /* VigramSDK+Rx */,
 			);
 			productName = "VigramSDK Demo";
 			productReference = 707E014C298D08C100F3A611 /* VigramSDK Demo.app */;
@@ -114,7 +117,7 @@
 			);
 			mainGroup = 707E0143298D08C100F3A611;
 			packageReferences = (
-				702C170E2A58917200FA2245 /* XCRemoteSwiftPackageReference "SDK_iOS_viDoc_Distribution" */,
+				70C899C72AA5F9DC000579AC /* XCRemoteSwiftPackageReference "SDK_iOS_viDoc_Distribution" */,
 			);
 			productRefGroup = 707E014D298D08C100F3A611 /* Products */;
 			projectDirPath = "";
@@ -355,21 +358,26 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		702C170E2A58917200FA2245 /* XCRemoteSwiftPackageReference "SDK_iOS_viDoc_Distribution" */ = {
+		70C899C72AA5F9DC000579AC /* XCRemoteSwiftPackageReference "SDK_iOS_viDoc_Distribution" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/vigram-gmbh/SDK_iOS_viDoc_Distribution.git";
 			requirement = {
-				kind = exactVersion;
-				version = "0.5.3-beta4.6";
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.5.4;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		702C170F2A58917200FA2245 /* VigramSDK */ = {
+		70C899C82AA5F9DC000579AC /* VigramSDK */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 702C170E2A58917200FA2245 /* XCRemoteSwiftPackageReference "SDK_iOS_viDoc_Distribution" */;
+			package = 70C899C72AA5F9DC000579AC /* XCRemoteSwiftPackageReference "SDK_iOS_viDoc_Distribution" */;
 			productName = VigramSDK;
+		};
+		70C899CA2AA5F9DC000579AC /* VigramSDK+Rx */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 70C899C72AA5F9DC000579AC /* XCRemoteSwiftPackageReference "SDK_iOS_viDoc_Distribution" */;
+			productName = "VigramSDK+Rx";
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
