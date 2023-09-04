@@ -196,19 +196,6 @@ class Model: ObservableObject {
         dateFormatter2.dateFormat = "HH:mm:ss.SSS"
         dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
 
-        // Create directory for firmware
-        let paths = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
-        let documentsDirectory = paths[0]
-        let docURL = URL(string: documentsDirectory)!
-        let dataPath = docURL.appendingPathComponent("Firmware")
-        if !FileManager.default.fileExists(atPath: dataPath.path) {
-            do {
-                try FileManager.default.createDirectory(atPath: dataPath.path, withIntermediateDirectories: true, attributes: nil)
-            } catch {
-                print(error.localizedDescription)
-            }
-        }
-
         let tokenIsValid = Vigram.tokenIsValid()
 
         switch tokenIsValid {
