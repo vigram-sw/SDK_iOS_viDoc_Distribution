@@ -92,19 +92,23 @@ public protocol EnvironmentDataService {
 }
 public protocol Peripheral {
   var nmea: VigramSDK.StatePublisher<any VigramSDK.NMEAMessage> { get }
+  var serialNumber: Swift.String? { get }
   var deviceMessages: VigramSDK.StatePublisher<VigramSDK.DeviceMessage> { get }
   var satelliteMessages: VigramSDK.StatePublisher<VigramSDK.SatelliteMessage> { get }
   var debug: VigramSDK.StatePublisher<Swift.String> { get }
+  var logger: (any VigramSDK.PeripheralLogger)? { get }
   var state: VigramSDK.StatePublisher<CoreBluetooth.CBPeripheralState> { get }
   var peripheral: CoreBluetooth.CBPeripheral { get }
   var configurationState: VigramSDK.StatePublisher<VigramSDK.StatePeripheralConfiguration> { get }
+  var viDocState: VigramSDK.StatePublisher<VigramSDK.StateViDoc> { get }
+  var viDocResetState: VigramSDK.StatePublisher<VigramSDK.StateResetViDoc> { get }
   var ppkMeasurementsState: VigramSDK.StatePublisher<Swift.Bool> { get }
   var deviceType: VigramSDK.DeviceType { get }
   func start() -> VigramSDK.SingleEventPublisher<Swift.Void>
   func send(_ data: Foundation.Data, chunkSize: Swift.Int) -> VigramSDK.SingleEventPublisher<Swift.Void>
+  func resetViDoc()
   func requestVersion() -> VigramSDK.SingleEventPublisher<VigramSDK.DeviceMessage.Version>
   func requestBattery() -> VigramSDK.SingleEventPublisher<VigramSDK.DeviceMessage.Battery>
-  func setDefaultStateMessages(activate: Swift.Bool) -> VigramSDK.SingleEventPublisher<VigramSDK.SatelliteMessage.Acknowledge>
   func getCurrentStatusGNSS(satellite: VigramSDK.NavigationSystemType) -> VigramSDK.SingleEventPublisher<VigramSDK.SatelliteMessage.StatusSattelite>
   func changeStatusGNSS(satellite: VigramSDK.NavigationSystemType, activate: Swift.Bool) -> VigramSDK.SingleEventPublisher<VigramSDK.SatelliteMessage.Acknowledge>
   func activateAllConstellationGNSS() -> VigramSDK.SingleEventPublisher<VigramSDK.SatelliteMessage.Acknowledge>
@@ -143,6 +147,9 @@ extension VigramSDK.PeripheralError : Foundation.LocalizedError {
   }
 }
 public protocol NtripTask {
+  var host: Swift.String? { get }
+  var port: Swift.Int? { get }
+  var mountPoint: Swift.String? { get }
   var data: VigramSDK.StatePublisher<Swift.Result<Foundation.Data, any Swift.Error>> { get }
   func resume() -> VigramSDK.SingleEventPublisher<Swift.Void>
   func disconnect()
@@ -203,6 +210,16 @@ extension VigramSDK.GPSService {
   public var timestampedCoordinate: VigramSDK.StatePublisher<(date: Foundation.Date, coordinate: VigramSDK.GPSCoordinate)> {
     get
   }
+}
+public enum StateViDoc {
+  case error(Swift.String)
+  case warning(Swift.String)
+  case notice(Swift.String)
+  case user(Swift.String)
+}
+public enum StateResetViDoc {
+  case failure(Swift.String)
+  case isReseting(Swift.Bool)
 }
 extension Foundation.URLSession {
   public enum Error : Swift.Error, Foundation.LocalizedError {
@@ -448,8 +465,10 @@ public enum GPSQualityIndicator : Swift.Int {
   case invalidFix
   case singlePoint
   case pseudoRangeDifferential
+  case notApplicable
   case rtkFixedAmbiguitySolution
   case rtkFloatingAmbiguitySolution
+  case isnDeadReckoning
   case manualInput
   public init?(rawValue: Swift.Int)
   public typealias RawValue = Swift.Int
@@ -510,6 +529,20 @@ public struct GSTMessage : VigramSDK.NMEAMessage {
     get
   }
 }
+public struct TXTMessage : VigramSDK.NMEAMessage {
+  public var time: VigramSDK.Time?
+  public var coordinate: VigramSDK.GPSCoordinate?
+  public var satelliteCount: Swift.Int?
+  public var hdop: Swift.Double?
+  public var vdop: Swift.Double?
+  public var pdop: Swift.Double?
+  public var accuracy: (horizontal: Swift.Double, vertical: Swift.Double)?
+  public var raw: Swift.String
+  public let totalNumberOfMessage: Swift.Int
+  public let messageNumber: Swift.Int
+  public let textIdentifier: Swift.Int
+  public let message: Swift.String?
+}
 public enum StatePeripheralConfiguration {
   case done
   case inProgress
@@ -545,6 +578,7 @@ extension VigramSDK.DeviceMessage.Version {
   public struct Hardware {
     public let major: Swift.UInt8
     public let minor: Swift.UInt8
+    public func toString() -> Swift.String
   }
 }
 extension VigramSDK.DeviceMessage.Version.Software {
@@ -657,6 +691,7 @@ public enum StateNtripConnection {
   case unknownError(Swift.String)
   case waiting(any Swift.Error)
   case failed(any Swift.Error)
+  case socketError(Swift.Int)
 }
 extension VigramSDK.DeviceMotionService {
   public func calibrate(updateInterval: Foundation.TimeInterval = 0.01, status: @escaping (Swift.Float) -> Swift.Void) -> VigramSDK.SingleEventPublisher<Swift.Void>
@@ -708,6 +743,7 @@ public struct EnvironmentData {
   public init(date: Foundation.Date, coordinate: VigramSDK.GPSCoordinate, verticalAccuracy: Swift.Double, horizontalAccuracy: Swift.Double, deviceMotion: VigramSDK.DeviceMotion, correction: VigramSDK.CoordinateCorrection)
 }
 public enum Configuration {
+  public static let sdkVersion: Swift.String
   public static var debug: Swift.Bool
   public static var serviceIdentifiers: [CoreBluetooth.CBUUID]?
   public static var defaultRate: VigramSDK.RateValue
@@ -802,6 +838,7 @@ public protocol PeripheralLogger : AnyObject {
   func log(nmea message: any VigramSDK.NMEAMessage)
   func log(device message: VigramSDK.DeviceMessage)
   func log(satellite message: VigramSDK.SatelliteMessage)
+  func log(other message: Swift.String)
 }
 public enum RequestError : Swift.Error {
   case dataEncodingFailed
@@ -845,13 +882,30 @@ public enum AntennaOffset {
     public static var iPhone13ProMaxTop: Swift.SIMD3<Swift.Double>
     public static var iPhone13ProMaxMiddle: Swift.SIMD3<Swift.Double>
     public static var iPhone13ProMaxBottom: Swift.SIMD3<Swift.Double>
-    public static var iPhone14Pro: Swift.SIMD3<Swift.Double>
+    public static var iPhone14ProTop: Swift.SIMD3<Swift.Double>
+    public static var iPhone14ProMiddle: Swift.SIMD3<Swift.Double>
+    public static var iPhone14ProBottom: Swift.SIMD3<Swift.Double>
     public static var iPhone14ProMaxTop: Swift.SIMD3<Swift.Double>
     public static var iPhone14ProMaxMiddle: Swift.SIMD3<Swift.Double>
     public static var iPhone14ProMaxBottom: Swift.SIMD3<Swift.Double>
-    public static var iPadPro11Top: Swift.SIMD3<Swift.Double>
-    public static var iPadPro11Bottom: Swift.SIMD3<Swift.Double>
-    public static var iPadPro11Mod: Swift.SIMD3<Swift.Double>
+    public static var iPadPro11TopAutoDetect: Swift.SIMD3<Swift.Double> {
+      get
+    }
+    public static var iPadPro11TopOldDevice: Swift.SIMD3<Swift.Double> {
+      get
+    }
+    public static var iPadPro11TopNewDevice: Swift.SIMD3<Swift.Double> {
+      get
+    }
+    public static var iPadPro11BottomAutoDetect: Swift.SIMD3<Swift.Double> {
+      get
+    }
+    public static var iPadPro11BottomOldDevice: Swift.SIMD3<Swift.Double> {
+      get
+    }
+    public static var iPadPro11BottomNewDevice: Swift.SIMD3<Swift.Double> {
+      get
+    }
   }
 }
 extension VigramSDK.AntennaOffset {

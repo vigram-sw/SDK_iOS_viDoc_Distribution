@@ -37,7 +37,7 @@ cd Example/Cocoapods
 
 echo "
 
-platform :ios, '13.0'
+platform :ios, '15.0'
 
 target '$SCHEME' do
 
