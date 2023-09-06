@@ -14,23 +14,23 @@
 		</data>
 		<key>Modules/VigramSDK.swiftmodule/arm64-apple-ios.abi.json</key>
 		<data>
-		+4wa+1fxhhgeG0ENQB2CxxZYooA=
+		3WekUe5haTzMsr2sNdfoNQirAWc=
 		</data>
 		<key>Modules/VigramSDK.swiftmodule/arm64-apple-ios.private.swiftinterface</key>
 		<data>
-		wjZXztC9Ctte9qOb/bwlG6/6v8c=
+		P/I4K40/pPZSfh2Z9j01w9MJ6UI=
 		</data>
 		<key>Modules/VigramSDK.swiftmodule/arm64-apple-ios.swiftdoc</key>
 		<data>
-		GIQwj7ygYYPoKqentSHI74d+Rek=
+		BrDHnQysgIvrnJ6e+Hs15ym+YIo=
 		</data>
 		<key>Modules/VigramSDK.swiftmodule/arm64-apple-ios.swiftinterface</key>
 		<data>
-		wjZXztC9Ctte9qOb/bwlG6/6v8c=
+		P/I4K40/pPZSfh2Z9j01w9MJ6UI=
 		</data>
 		<key>Modules/VigramSDK.swiftmodule/arm64-apple-ios.swiftmodule</key>
 		<data>
-		c2/puWWqSbBydx5SAbYQ+tav/LI=
+		PETVIrcPekzAkGKEm8wWLVnaiQY=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -46,7 +46,7 @@
 		</data>
 		<key>Vigram.podspec</key>
 		<data>
-		UZ5L23BYGQsuCTYfs65m2uJcbI4=
+		ZhOBoyO+wz9UF4PbUtOQczE6B5o=
 		</data>
 		<key>check.sh</key>
 		<data>
@@ -70,35 +70,35 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			5DCAMAgUCQqP3nClJqlwTm7beAgfwcyZuJk2x4adquc=
+			+pFIv/Zb5r2P9QtrbF9G4oHopGU3UerJjHYJbOYvBzM=
 			</data>
 		</dict>
 		<key>Modules/VigramSDK.swiftmodule/arm64-apple-ios.private.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			Z/HZ5pyeiakZVmwXzc18e1qjMWtrqvQ+4APZZOMfXrU=
+			SK6iwZ799f5lD7x9yH/cRYHW5yTbj3gXE9GED9cTM1A=
 			</data>
 		</dict>
 		<key>Modules/VigramSDK.swiftmodule/arm64-apple-ios.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			JoJoUNdlWYSrOtBzqqcVxVuF0ksKwtxAmGJQ7kpI5YE=
+			Q1iSVwkkP9jE9uLihVDozuw9/XLn3aKaWJasA4LtNZs=
 			</data>
 		</dict>
 		<key>Modules/VigramSDK.swiftmodule/arm64-apple-ios.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			Z/HZ5pyeiakZVmwXzc18e1qjMWtrqvQ+4APZZOMfXrU=
+			SK6iwZ799f5lD7x9yH/cRYHW5yTbj3gXE9GED9cTM1A=
 			</data>
 		</dict>
 		<key>Modules/VigramSDK.swiftmodule/arm64-apple-ios.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			ikr6CHjFaN7dzdVNwnwMZx1xrWFpkv293fgnVSihWhA=
+			BFuWMscwv1zlkYyCYzfpTTVCorhaYByDnS3/hrEQU/k=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
@@ -126,7 +126,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			no0gpLv0+Zwdf1FnmiTRZzRmiLzrouBUhL/aGj2VPPU=
+			ZJcVFlGXVt4ebUyf5hIG92pCLuQUnCPIzM91Ryx0l2Y=
 			</data>
 		</dict>
 		<key>check.sh</key>
