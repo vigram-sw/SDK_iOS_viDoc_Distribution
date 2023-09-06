@@ -25,6 +25,10 @@ public struct GPSCoordinate : Swift.Equatable {
   public init(latitude: Swift.Double, longitude: Swift.Double, referenceAltitude: Swift.Double, geoidSeparation: Swift.Double)
   public static func == (a: VigramSDK.GPSCoordinate, b: VigramSDK.GPSCoordinate) -> Swift.Bool
 }
+public protocol SoftwareService {
+  func getActualVersionSoftware() -> VigramSDK.SingleEventPublisher<VigramSDK.DeviceMessage.Version.Software>
+  func getAllAvailableSoftware() -> VigramSDK.SingleEventPublisher<[VigramSDK.DeviceMessage.Version.Software]>
+}
 public typealias StatePublisher<Element> = Combine.AnyPublisher<Element, Swift.Never>
 public typealias SingleEventPublisher<Element> = Combine.AnyPublisher<Element, any Swift.Error>
 public typealias EventsPublisher<Element> = Combine.AnyPublisher<Element, any Swift.Error>
@@ -96,6 +100,10 @@ public protocol Peripheral {
   var deviceMessages: VigramSDK.StatePublisher<VigramSDK.DeviceMessage> { get }
   var satelliteMessages: VigramSDK.StatePublisher<VigramSDK.SatelliteMessage> { get }
   var debug: VigramSDK.StatePublisher<Swift.String> { get }
+  var softwareNotice: VigramSDK.StatePublisher<(current: VigramSDK.DeviceMessage.Version.Software?, actual: VigramSDK.DeviceMessage.Version.Software?)>? { get }
+  var isNeedSoftwareUpdate: VigramSDK.StatePublisher<Swift.Bool>? { get }
+  var softwareUpdateState: VigramSDK.StatePublisher<VigramSDK.StateUpdateSoftware>? { get }
+  var softwareUpdateProgress: VigramSDK.StatePublisher<Swift.Double>? { get }
   var logger: (any VigramSDK.PeripheralLogger)? { get }
   var state: VigramSDK.StatePublisher<CoreBluetooth.CBPeripheralState> { get }
   var peripheral: CoreBluetooth.CBPeripheral { get }
@@ -118,10 +126,13 @@ public protocol Peripheral {
   func setMinimumElevation(angle: VigramSDK.ElevationValue) -> VigramSDK.SingleEventPublisher<VigramSDK.SatelliteMessage.Acknowledge>
   func setChangingRateOfMessages(_ rate: VigramSDK.RateValue) -> VigramSDK.SingleEventPublisher<VigramSDK.SatelliteMessage.Acknowledge>
   func getChangingRateOfMessages() -> VigramSDK.SingleEventPublisher<VigramSDK.SatelliteMessage.ChangingRate>
+  func setUpdateSoftwareToNextStartup(_: Swift.Bool, version: VigramSDK.DeviceMessage.Version.Software)
   func changeStatusAllNavMessages(activate: Swift.Bool) -> VigramSDK.SingleEventPublisher<VigramSDK.SatelliteMessage.Acknowledge>
   func changeStatusRXM(activate: Swift.Bool)
   func startRecordPPKMeasurements(url: Foundation.URL)
   func stopRecordPPKMeasurements()
+  func setDynamicState(type: VigramSDK.DynamicStateType) -> VigramSDK.SingleEventPublisher<VigramSDK.SatelliteMessage.Acknowledge>
+  func getCurrentDynamicState() -> VigramSDK.SingleEventPublisher<VigramSDK.SatelliteMessage.DynamicState>
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension VigramSDK.Peripheral {
@@ -205,6 +216,8 @@ public protocol GPSService : AnyObject {
   func reconnect()
   func startRecording()
   func stopRecording()
+  func startRecording(peripheral: any VigramSDK.Peripheral, dynamicStateType: VigramSDK.DynamicStateType)
+  func stopRecording(peripheral: any VigramSDK.Peripheral)
 }
 extension VigramSDK.GPSService {
   public var timestampedCoordinate: VigramSDK.StatePublisher<(date: Foundation.Date, coordinate: VigramSDK.GPSCoordinate)> {
@@ -232,6 +245,7 @@ extension Foundation.URLSession {
 }
 public enum SatelliteMessage {
   case changingRate(VigramSDK.SatelliteMessage.ChangingRate)
+  case dynamicState(VigramSDK.SatelliteMessage.DynamicState)
   case statusSattelite(VigramSDK.SatelliteMessage.StatusSattelite)
   case elevation(VigramSDK.SatelliteMessage.Elevation)
   case pvt(VigramSDK.SatelliteMessage.Pvt)
@@ -243,6 +257,9 @@ public enum SatelliteMessage {
 extension VigramSDK.SatelliteMessage {
   public struct ChangingRate {
     public let current: VigramSDK.RateValue
+  }
+  public struct DynamicState {
+    public let current: VigramSDK.DynamicStateType
   }
   public struct StatusSattelite {
     public let satelliteType: VigramSDK.NavigationSystemType
@@ -323,7 +340,16 @@ public enum RateValue : Swift.Int {
   }
 }
 public struct PeripheralConfiguration {
-  public init(rateOfChangeMessages: VigramSDK.RateValue = .hertz7, elevationValue: VigramSDK.ElevationValue = .ang10, glonassActivate: Swift.Bool = true, beidouActivate: Swift.Bool = true, galileoActivate: Swift.Bool = true, qzssActivate: Swift.Bool = true, sbassActivate: Swift.Bool = true, navDOPActivate: Swift.Bool = true, navPVTActivate: Swift.Bool = true)
+  public init(rateOfChangeMessages: VigramSDK.RateValue = .hertz7, elevationValue: VigramSDK.ElevationValue = .ang10, glonassActivate: Swift.Bool = true, beidouActivate: Swift.Bool = true, galileoActivate: Swift.Bool = true, qzssActivate: Swift.Bool = true, sbassActivate: Swift.Bool = true, navDOPActivate: Swift.Bool = true, navPVTActivate: Swift.Bool = true, dynamicType: VigramSDK.DynamicStateType = .pedestrian)
+}
+public enum DynamicStateType : Swift.String {
+  case pedestrian
+  case stationary
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
 }
 public protocol AverageComputable {
   static func average(of values: [Self]) -> Self
@@ -361,6 +387,7 @@ public enum Vigram {
 extension VigramSDK.Vigram {
   public static func initial(token: Swift.String) -> any VigramSDK.Authentication
   public static func tokenIsValid() -> Swift.Result<Swift.Bool, VigramSDK.AuthenticationError>
+  public static func softwareService() -> any VigramSDK.SoftwareService
   public static func bluetoothService() -> any VigramSDK.BluetoothService
   public static func peripheral(_ peripheral: CoreBluetooth.CBPeripheral, log: Foundation.URL?, configuration: VigramSDK.PeripheralConfiguration? = nil) throws -> any VigramSDK.Peripheral
   public static func peripheral(_ peripheral: CoreBluetooth.CBPeripheral, logger: (any VigramSDK.PeripheralLogger)? = nil, configuration: VigramSDK.PeripheralConfiguration? = nil) -> any VigramSDK.Peripheral
@@ -373,7 +400,16 @@ extension VigramSDK.Vigram {
   public static func deviceMotionService() -> any VigramSDK.DeviceMotionService
   public static func environmentDataService(deviceMotionService: any VigramSDK.DeviceMotionService = deviceMotionService(), gpsService: any VigramSDK.GPSService, laserService: (any VigramSDK.LaserService)? = nil) -> any VigramSDK.EnvironmentDataService
   public static func singlePointRecordingService(gpsService: any VigramSDK.GPSService, laserService: (any VigramSDK.LaserService)? = nil) -> any VigramSDK.SinglePointRecordingService
+  public static func environmentDataService(deviceMotionService: any VigramSDK.DeviceMotionService = deviceMotionService(), gpsService: any VigramSDK.GPSService, laserService: (any VigramSDK.LaserService)? = nil, peripheral: any VigramSDK.Peripheral, dynamicStateType: VigramSDK.DynamicStateType) -> any VigramSDK.EnvironmentDataService
+  public static func singlePointRecordingService(gpsService: any VigramSDK.GPSService, laserService: (any VigramSDK.LaserService)? = nil, peripheral: any VigramSDK.Peripheral, dynamicStateType: VigramSDK.DynamicStateType) -> any VigramSDK.SinglePointRecordingService
   public static func singlePointRecordingService(environmentDataService: any VigramSDK.EnvironmentDataService) -> any VigramSDK.SinglePointRecordingService
+}
+public enum StateUpdateSoftware {
+  case startUpdate(VigramSDK.DeviceMessage.Version.Software)
+  case updatingSoftware
+  case errorUpdate
+  case endUpdate
+  case none
 }
 public enum AuthenticationError : Swift.Error {
   case bundleNotExist(Swift.String)
@@ -392,6 +428,7 @@ public protocol Authentication {
 }
 extension VigramSDK.GPSCoordinate {
   public func translate(offset: Swift.SIMD3<Swift.Double>, orientation: Swift.SIMD3<Swift.Double>) -> VigramSDK.GPSCoordinate
+  public func translate(offset: Swift.SIMD3<Swift.Double>, orientation: Swift.SIMD3<Swift.Double>, laserDistance: Swift.Double, typeOfLaser: VigramSDK.LaserConfiguration.Position) -> VigramSDK.GPSCoordinate
 }
 public enum SinglePointRecordingError : Swift.Error {
   case badMeasurement([VigramSDK.EnvironmentData])
@@ -682,6 +719,16 @@ public struct NtripMountPoint {
   public var dataRate: Swift.Double?
   public var miscellaneous: Swift.String
 }
+public protocol SoftwareProcess {
+  var isWrite: Swift.Bool { get }
+  var errorWrite: Swift.Bool { get set }
+  var isNeedUpdateSoftware: VigramSDK.StatePublisher<Swift.Bool> { get }
+  var noticeSoftware: VigramSDK.StatePublisher<(current: VigramSDK.DeviceMessage.Version.Software?, actual: VigramSDK.DeviceMessage.Version.Software?)> { get }
+  var stateSoftwareUpdate: VigramSDK.StatePublisher<VigramSDK.StateUpdateSoftware> { get }
+  var progressSoftwareUpdate: VigramSDK.StatePublisher<Swift.Double> { get }
+  func setUpdateSoftwareAtStartup(_: Swift.Bool, software: VigramSDK.DeviceMessage.Version.Software)
+  func write()
+}
 public enum StateNtripConnection {
   case notConnected
   case setup
@@ -744,6 +791,7 @@ public struct EnvironmentData {
 }
 public enum Configuration {
   public static let sdkVersion: Swift.String
+  public static var forceUpdate: Swift.Bool
   public static var debug: Swift.Bool
   public static var serviceIdentifiers: [CoreBluetooth.CBUUID]?
   public static var defaultRate: VigramSDK.RateValue
@@ -967,6 +1015,9 @@ extension VigramSDK.ElevationValue : Swift.RawRepresentable {}
 extension VigramSDK.RateValue : Swift.Equatable {}
 extension VigramSDK.RateValue : Swift.Hashable {}
 extension VigramSDK.RateValue : Swift.RawRepresentable {}
+extension VigramSDK.DynamicStateType : Swift.Equatable {}
+extension VigramSDK.DynamicStateType : Swift.Hashable {}
+extension VigramSDK.DynamicStateType : Swift.RawRepresentable {}
 extension VigramSDK.GPSQualityIndicator : Swift.Equatable {}
 extension VigramSDK.GPSQualityIndicator : Swift.Hashable {}
 extension VigramSDK.GPSQualityIndicator : Swift.RawRepresentable {}
