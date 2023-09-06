@@ -28,11 +28,16 @@ class Model: ObservableObject {
 
     // MARK: Publishers properties
 
+    @Published var flash = false
+    @Published var needUpdate = false
+    @Published var statusUpdate = ""
+    @Published var progressUpdate = ""
     @Published var timerValueStr = ""
     @Published var timerBackValueStr = ""
     @Published var rawxMessage = ""
     @Published var sfrbxMessage = ""
     @Published var titleAlert = ""
+    @Published var dynamicState = " "
     @Published var messageAlert = ""
     @Published var showingAlert = false
     @Published var isSharePresented: Bool = false
@@ -72,6 +77,7 @@ class Model: ObservableObject {
     @Published var nVelocity = ""
     @Published var eVelocity = ""
     @Published var dVelocity = ""
+    @Published var allAvailableSoftwareVersion = [DeviceMessage.Version.Software]()
     @Published var currentSoftwareVersion = ""
     @Published var currentHardwareVersion = ""
     @Published var currentBatteryCharge = ""
@@ -100,6 +106,8 @@ class Model: ObservableObject {
     @Published var currentTimeString = ""
     @Published var unixTimeString = ""
     @Published var gnssTimeString = ""
+    @Published var ntripSizeParcel = ""
+    @Published var serialNumber = ""
 
     // MARK: Private properties
 
@@ -125,76 +133,33 @@ class Model: ObservableObject {
     private var socketCodeError: Int?
     let dateFormatter = DateFormatter()
     let dateFormatter2 = DateFormatter()
-
-    let laserOffsetsBottom = [
-        ("With laset: iPhoneXRBottom", AntennaOffset.Laser.iPhoneXRBottom),
-        ("With laset: iPhone11ProBottom", AntennaOffset.Laser.iPhone11ProBottom),
-        ("With laset: iPhone11ProMaxBottom", AntennaOffset.Laser.iPhone11ProMaxBottom),
-        ("With laset: iPhone12ProBottom", AntennaOffset.Laser.iPhone12ProBottom),
-        ("With laset: iPhone12ProMaxBottom", AntennaOffset.Laser.iPhone12ProMaxBottom),
-        ("With laset: iPhone13ProBottom", AntennaOffset.Laser.iPhone13ProBottom),
-        ("With laset: iPhone13ProMaxBottom", AntennaOffset.Laser.iPhone13ProMaxBottom),
-        ("With laset: iPhone14ProBottom", AntennaOffset.Laser.iPhone14ProBottom),
-        ("With laset: iPhone14ProMaxBottom", AntennaOffset.Laser.iPhone14ProMaxBottom),
-        ("With laset: iPadPro11", AntennaOffset.Laser.iPadPro11)
-    ]
-    
-    let laserOffsetsBack = [
-        ("With laset: iPhoneXRBack", AntennaOffset.Laser.iPhoneXRBack),
-        ("With laset: iPhone11ProBack", AntennaOffset.Laser.iPhone11ProBack),
-        ("With laset: iPhone11ProMaxBack", AntennaOffset.Laser.iPhone11ProMaxBack),
-        ("With laset: iPhone12ProBack", AntennaOffset.Laser.iPhone12ProBack),
-        ("With laset: iPhone12ProMaxBack", AntennaOffset.Laser.iPhone12ProMaxBack),
-        ("With laset: iPhone13ProBack", AntennaOffset.Laser.iPhone13ProBack),
-        ("With laset: iPhone13ProMaxBack", AntennaOffset.Laser.iPhone13ProMaxBack),
-        ("With laset: iPhone14ProBack", AntennaOffset.Laser.iPhone14ProBack),
-        ("With laset: iPhone14ProMaxBack", AntennaOffset.Laser.iPhone14ProMaxBack)
-    ]
-
-    let cameraOffsets = [
-        ("Without laset: iPhoneXR", AntennaOffset.Camera.iPhoneXR),
-        ("Without laset: iPhone11ProTop", AntennaOffset.Camera.iPhone11ProTop),
-        ("Without laset: iPhone11ProMiddle", AntennaOffset.Camera.iPhone11ProMiddle),
-        ("Without laset: iPhone11ProBottom", AntennaOffset.Camera.iPhone11ProBottom),
-        ("Without laset: iPhone11ProMaxTop", AntennaOffset.Camera.iPhone11ProMaxTop),
-        ("Without laset: iPhone11ProMaxMiddle", AntennaOffset.Camera.iPhone11ProMaxMiddle),
-        ("Without laset: iPhone11ProMaxBottom", AntennaOffset.Camera.iPhone11ProMaxBottom),
-        ("Without laset: iPhone12ProTop", AntennaOffset.Camera.iPhone12ProTop),
-        ("Without laset: iPhone12ProMiddle", AntennaOffset.Camera.iPhone12ProMiddle),
-        ("Without laset: iPhone12ProBottom", AntennaOffset.Camera.iPhone12ProBottom),
-        ("Without laset: iPhone12ProMaxTop", AntennaOffset.Camera.iPhone12ProMaxTop),
-        ("Without laset: iPhone12ProMaxMiddle", AntennaOffset.Camera.iPhone12ProMaxMiddle),
-        ("Without laset: iPhone12ProMaxBottom", AntennaOffset.Camera.iPhone12ProMaxBottom),
-        ("Without laset: iPhone13ProTop", AntennaOffset.Camera.iPhone13ProTop),
-        ("Without laset: iPhone13ProMiddle", AntennaOffset.Camera.iPhone13ProMiddle),
-        ("Without laset: iPhone13ProBottom", AntennaOffset.Camera.iPhone13ProBottom),
-        ("Without laset: iPhone13ProMaxTop", AntennaOffset.Camera.iPhone13ProMaxTop),
-        ("Without laset: iPhone13ProMaxMiddle", AntennaOffset.Camera.iPhone13ProMaxMiddle),
-        ("Without laset: iPhone13ProMaxBottom", AntennaOffset.Camera.iPhone13ProMaxBottom),
-        ("Without laset: iPhone14ProTop", AntennaOffset.Camera.iPhone14ProTop),
-        ("Without laset: iPhone14ProMiddle", AntennaOffset.Camera.iPhone14ProMiddle),
-        ("Without laset: iPhone14ProBottom", AntennaOffset.Camera.iPhone14ProBottom),
-        ("Without laset: iPhone14ProMaxTop", AntennaOffset.Camera.iPhone14ProMaxTop),
-        ("Without laset: iPhone14ProMaxMiddle", AntennaOffset.Camera.iPhone14ProMaxMiddle),
-        ("Without laset: iPhone14ProMaxBottom", AntennaOffset.Camera.iPhone14ProMaxBottom),
-        ("Without laset: iPadPro11TopOldDevice", AntennaOffset.Camera.iPadPro11TopOldDevice),
-        ("Without laset: iPadPro11TopNewDevice", AntennaOffset.Camera.iPadPro11TopNewDevice),
-        ("Without laset: iPadPro11BottomOldDevice", AntennaOffset.Camera.iPadPro11BottomOldDevice),
-        ("Without laset: iPadPro11BottomNewDevice", AntennaOffset.Camera.iPadPro11BottomNewDevice)
-    ]
-    
+    var laserOffsetsBottom = [(String, SIMD3<Double>)]()
+    var laserOffsetsBack = [(String, SIMD3<Double>)]()
+    var cameraOffsets = [(String, SIMD3<Double>)]()
     var currentAllOffsets = [(String, SIMD3<Double>)]()
-    
+
     // MARK: Init
 
     init() {
+
         // DEFAULT RATE
         Configuration.defaultRate = .hertz7
         // DEBUG CONFIG
-        Configuration.debug = true
+        Configuration.debug = false
+        // FORCE UPDATE
+        Configuration.forceUpdate = false
         dateFormatter.dateFormat = "HH:mm:ss.SSS"
         dateFormatter2.dateFormat = "HH:mm:ss.SSS"
         dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
+
+        Vigram.softwareService().getAllAvailableSoftware()
+            .sink { _ in } receiveValue: { [unowned self] softwareArray in
+                self.allAvailableSoftwareVersion.removeAll()
+                softwareArray.forEach({ [unowned self] software in
+                    self.allAvailableSoftwareVersion.append(software)
+                })
+            }
+            .store(in: &subscription)
 
         let tokenIsValid = Vigram.tokenIsValid()
 
@@ -226,6 +191,16 @@ class Model: ObservableObject {
     }
 
     // MARK: Public methods
+
+    func setForceUpdateSoftware(){
+        Configuration.forceUpdate = false
+        titleAlert = "Notification"
+        messageAlert = """
+            Please restart viDoc to start update.
+            Note: If the viDoc doesn't have the bootloader, the installation of the software is not possible.
+        """
+        showingAlert = true
+    }
 
     func authentificationToken() {
         // ENTER TOKEN HERE
@@ -259,6 +234,16 @@ class Model: ObservableObject {
             .store(in: &subscription)
     }
 
+    func installSoftware(_ software: DeviceMessage.Version.Software) {
+        peripheral?.setUpdateSoftwareToNextStartup(true, version: software)
+        titleAlert = "Notification"
+        messageAlert = """
+            Please restart viDoc to start update.
+            Note: If the viDoc doesn't have the bootloader, the installation of the software is not possible.
+        """
+        showingAlert = true
+    }
+
     func manualDisconnect() {
         normalDisconnect = true
         disconnect()
@@ -276,6 +261,7 @@ class Model: ObservableObject {
         gnssTimeString = ""
         rtkStatus = ""
         task?.disconnect()
+        dynamicState = " "
         timerValueStr = ""
         timerBackValueStr = ""
         currentBatteryCharge = ""
@@ -284,6 +270,10 @@ class Model: ObservableObject {
         bluetoothService.stopScan()
         connected = false
         nmeaReady = false
+        flash = false
+        needUpdate = false
+        statusUpdate = ""
+        progressUpdate = ""
         rawxMessage = ""
         sfrbxMessage = ""
         isConnectedDevice = false
@@ -318,9 +308,13 @@ class Model: ObservableObject {
         rmxIsActive = false
         viDocState = ""
         resetMessageError = ""
+        serialNumber = ""
         viDocIsReseting = false
         isBottomLaser = true
         isBackLaser = false
+        cameraOffsets = []
+        laserOffsetsBack = []
+        laserOffsetsBottom = []
     }
     
     func conectToVidoc(id: UUID){
@@ -331,7 +325,8 @@ class Model: ObservableObject {
 
                 // Uncomment if needed - CONFIGURATION
 //                let peripheralConfiguration = PeripheralConfiguration(
-//                    rateOfChangeMessages: .hertz7
+//                    rateOfChangeMessages: .hertz7,
+//                    dynamicType: .stationary
 //                )
 
                 var path: URL?
@@ -360,7 +355,6 @@ class Model: ObservableObject {
                     }
                     path = path?.appendingPathComponent(file)
                 }
-                
                 do {
                     try self.peripheral = Vigram.peripheral(
                         peripheral,
@@ -382,6 +376,52 @@ class Model: ObservableObject {
                             self.isConnectedDevice = true
                             self.normalDisconnect = false
                             self.failDisconnect = false
+                            
+                            self.serialNumber = self.peripheral?.serialNumber ?? ""
+
+                            self.peripheral?.isNeedSoftwareUpdate?.sink(
+                                receiveCompletion: { _ in },
+                                receiveValue: { [unowned self] isNeedUpdate in
+                                    self.needUpdate = isNeedUpdate
+                                }
+                            ).store(in: &self.subscription)
+
+                            self.peripheral?.softwareUpdateState?.sink(
+                                receiveCompletion: { _ in },
+                                receiveValue: { [unowned self] updateState in
+                                    var status = ""
+                                    switch(updateState) {
+                                    case .startUpdate:
+                                        status = "Start update"
+                                        self.flash = true
+                                    case .updatingSoftware: status = "Updating..."
+                                    case .endUpdate:
+                                        status = "Update successfull"
+                                        self.titleAlert = "Update successfull"
+                                        self.messageAlert = "Please restart viDoc"
+                                        self.showingAlert = true
+                                        self.flash = false
+                                        Configuration.forceUpdate = false
+                                    case .errorUpdate:
+                                        self.titleAlert = "Update error"
+                                        self.messageAlert = "Please try again..."
+                                        self.showingAlert = true
+                                    case .none: status = ""
+                                    @unknown default:
+                                        break
+                                    }
+                                    self.statusUpdate = "Status: \(status)"
+                                 }
+                            )
+                            .store(in: &self.subscription)
+                            
+                            self.peripheral?.softwareUpdateProgress?.sink(
+                                receiveCompletion: { _ in },
+                                receiveValue: { [unowned self] progress in
+                                    self.progressUpdate = "Progress: \(String(format: "%.1f", progress)) %"
+                                }
+                            )
+                            .store(in: &self.subscription)
                             
                             self.peripheral?.start()
                                 .sink(receiveCompletion: { [unowned self] status in
@@ -709,6 +749,22 @@ class Model: ObservableObject {
                 )
             }
             
+            task?.data
+                .sink(receiveValue: { [unowned self] result in
+                    switch result {
+                    case .success(let data):
+                        var tempString = self.ntripSizeParcel
+                        if !tempString.isEmpty {
+                            tempString += "\n"
+                        }
+                        tempString += "\(self.currentTimeString) - \(data.count) bytes"
+                        self.ntripSizeParcel = tempString
+                    case .failure(let error):
+                        print(error.localizedDescription)
+                    }
+                })
+                .store(in: &subscription)
+            
             task?.ntripState
                 .sink(receiveValue: { [unowned self] state in
                     if Configuration.debug {
@@ -811,8 +867,8 @@ class Model: ObservableObject {
     func disconnectNtrip(){
         task?.disconnect()
         ntripStarting = false
-        self.ntripStatus = "No connection"
-
+        ntripStatus = "No connection"
+        ntripSizeParcel = ""
     }
 
     // Requests GNSS Constellation
@@ -999,6 +1055,29 @@ class Model: ObservableObject {
         self.totalTime = nil
     }
 
+    func setDynamicState(type: DynamicStateType) {
+        peripheral?.setDynamicState(type: type)
+            .sink(receiveCompletion: { _ in }, receiveValue: { [unowned self] _ in
+                self.getDynamicState()
+            })
+            .store(in: &subscription)
+    }
+    
+    func getDynamicState() {
+        peripheral?.getCurrentDynamicState()
+            .sink(receiveCompletion: { _ in }, receiveValue: { [unowned self] state in
+                switch state.current {
+                case .pedestrian:
+                    self.dynamicState = "Pedestrian"
+                case .stationary:
+                    self.dynamicState = "Stationary"
+                @unknown default:
+                    break
+                }
+            })
+            .store(in: &subscription)
+    }
+
     func startLaser(){
         if let duration = Double(durationStr), duration > 0, duration <= 60 {
             if let peripheral = self.peripheral {
@@ -1152,7 +1231,9 @@ class Model: ObservableObject {
         
         if useLaser {
 
-            environmentDataService = Vigram.environmentDataService(gpsService: gpsService, laserService: laser)
+            environmentDataService = Vigram.environmentDataService(
+                gpsService: gpsService, laserService: laser, peripheral: peripheral!, dynamicStateType: .stationary
+            )
             singlePointRecordingService = Vigram.singlePointRecordingService(environmentDataService: environmentDataService)
             let typeOfLaser: LaserConfiguration.Position = isBottomLaser ? .bottom : .back
 
@@ -1181,7 +1262,11 @@ class Model: ObservableObject {
                 useDeviceMotion: true
             )
         } else {
-            environmentDataService = Vigram.environmentDataService(gpsService: gpsService)
+            environmentDataService = Vigram.environmentDataService(
+                gpsService: gpsService,
+                peripheral: self.peripheral!,
+                dynamicStateType: .stationary
+            )
             singlePointRecordingService = Vigram.singlePointRecordingService(environmentDataService: environmentDataService)
             if let distanceFromAntennaToGround = Double(distanceOfGroundStr) {
                 method = CoordinateCorrection.Method.constant(distanceFromAntennaToGround: distanceFromAntennaToGround)
@@ -1238,6 +1323,67 @@ class Model: ObservableObject {
             path = path?.appendingPathComponent(filename)
         }
         return path
+    }
+
+    func getAllOffsets() {
+        cameraOffsets.removeAll()
+        cameraOffsets =
+        [
+            ("Without laset: iPhoneXR", AntennaOffset.Camera.iPhoneXR),
+            ("Without laset: iPhone11ProTop", AntennaOffset.Camera.iPhone11ProTop),
+            ("Without laset: iPhone11ProMiddle", AntennaOffset.Camera.iPhone11ProMiddle),
+            ("Without laset: iPhone11ProBottom", AntennaOffset.Camera.iPhone11ProBottom),
+            ("Without laset: iPhone11ProMaxTop", AntennaOffset.Camera.iPhone11ProMaxTop),
+            ("Without laset: iPhone11ProMaxMiddle", AntennaOffset.Camera.iPhone11ProMaxMiddle),
+            ("Without laset: iPhone11ProMaxBottom", AntennaOffset.Camera.iPhone11ProMaxBottom),
+            ("Without laset: iPhone12ProTop", AntennaOffset.Camera.iPhone12ProTop),
+            ("Without laset: iPhone12ProMiddle", AntennaOffset.Camera.iPhone12ProMiddle),
+            ("Without laset: iPhone12ProBottom", AntennaOffset.Camera.iPhone12ProBottom),
+            ("Without laset: iPhone12ProMaxTop", AntennaOffset.Camera.iPhone12ProMaxTop),
+            ("Without laset: iPhone12ProMaxMiddle", AntennaOffset.Camera.iPhone12ProMaxMiddle),
+            ("Without laset: iPhone12ProMaxBottom", AntennaOffset.Camera.iPhone12ProMaxBottom),
+            ("Without laset: iPhone13ProTop", AntennaOffset.Camera.iPhone13ProTop),
+            ("Without laset: iPhone13ProMiddle", AntennaOffset.Camera.iPhone13ProMiddle),
+            ("Without laset: iPhone13ProBottom", AntennaOffset.Camera.iPhone13ProBottom),
+            ("Without laset: iPhone13ProMaxTop", AntennaOffset.Camera.iPhone13ProMaxTop),
+            ("Without laset: iPhone13ProMaxMiddle", AntennaOffset.Camera.iPhone13ProMaxMiddle),
+            ("Without laset: iPhone13ProMaxBottom", AntennaOffset.Camera.iPhone13ProMaxBottom),
+            ("Without laset: iPhone14ProTop", AntennaOffset.Camera.iPhone14ProTop),
+            ("Without laset: iPhone14ProMiddle", AntennaOffset.Camera.iPhone14ProMiddle),
+            ("Without laset: iPhone14ProBottom", AntennaOffset.Camera.iPhone14ProBottom),
+            ("Without laset: iPhone14ProMaxTop", AntennaOffset.Camera.iPhone14ProMaxTop),
+            ("Without laset: iPhone14ProMaxMiddle", AntennaOffset.Camera.iPhone14ProMaxMiddle),
+            ("Without laset: iPhone14ProMaxBottom", AntennaOffset.Camera.iPhone14ProMaxBottom),
+            ("Without laset: iPadPro11TopOldDevice", AntennaOffset.Camera.iPadPro11TopOldDevice),
+            ("Without laset: iPadPro11TopNewDevice", AntennaOffset.Camera.iPadPro11TopNewDevice),
+            ("Without laset: iPadPro11BottomOldDevice", AntennaOffset.Camera.iPadPro11BottomOldDevice),
+            ("Without laset: iPadPro11BottomNewDevice", AntennaOffset.Camera.iPadPro11BottomNewDevice)
+        ]
+        laserOffsetsBack.removeAll()
+        laserOffsetsBack = [
+            ("With laset: iPhoneXRBack", AntennaOffset.Laser.iPhoneXRBack),
+            ("With laset: iPhone11ProBack", AntennaOffset.Laser.iPhone11ProBack),
+            ("With laset: iPhone11ProMaxBack", AntennaOffset.Laser.iPhone11ProMaxBack),
+            ("With laset: iPhone12ProBack", AntennaOffset.Laser.iPhone12ProBack),
+            ("With laset: iPhone12ProMaxBack", AntennaOffset.Laser.iPhone12ProMaxBack),
+            ("With laset: iPhone13ProBack", AntennaOffset.Laser.iPhone13ProBack),
+            ("With laset: iPhone13ProMaxBack", AntennaOffset.Laser.iPhone13ProMaxBack),
+            ("With laset: iPhone14ProBack", AntennaOffset.Laser.iPhone14ProBack),
+            ("With laset: iPhone14ProMaxBack", AntennaOffset.Laser.iPhone14ProMaxBack)
+        ]
+        laserOffsetsBottom.removeAll()
+        laserOffsetsBottom = [
+            ("With laset: iPhoneXRBottom", AntennaOffset.Laser.iPhoneXRBottom),
+            ("With laset: iPhone11ProBottom", AntennaOffset.Laser.iPhone11ProBottom),
+            ("With laset: iPhone11ProMaxBottom", AntennaOffset.Laser.iPhone11ProMaxBottom),
+            ("With laset: iPhone12ProBottom", AntennaOffset.Laser.iPhone12ProBottom),
+            ("With laset: iPhone12ProMaxBottom", AntennaOffset.Laser.iPhone12ProMaxBottom),
+            ("With laset: iPhone13ProBottom", AntennaOffset.Laser.iPhone13ProBottom),
+            ("With laset: iPhone13ProMaxBottom", AntennaOffset.Laser.iPhone13ProMaxBottom),
+            ("With laset: iPhone14ProBottom", AntennaOffset.Laser.iPhone14ProBottom),
+            ("With laset: iPhone14ProMaxBottom", AntennaOffset.Laser.iPhone14ProMaxBottom),
+            ("With laset: iPadPro11", AntennaOffset.Laser.iPadPro11)
+        ]
     }
 }
 
