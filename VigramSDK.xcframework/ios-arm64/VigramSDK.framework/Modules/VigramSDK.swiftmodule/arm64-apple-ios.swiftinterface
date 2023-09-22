@@ -1,5 +1,5 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.8.1 (swiftlang-5.8.0.124.5 clang-1403.0.22.11.100)
+// swift-compiler-version: Apple Swift version 5.9 (swiftlang-5.9.0.128.108 clang-1500.0.40.1)
 // swift-module-flags: -target arm64-apple-ios15.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name VigramSDK
 // swift-module-flags-ignorable: -enable-bare-slash-regex
 import Combine
@@ -11,6 +11,7 @@ import Swift
 import UIKit
 import _Concurrency
 import _StringProcessing
+import _SwiftConcurrencyShims
 extension VigramSDK.GPSService {
   public func cameraCoordinate(offset: Swift.SIMD3<Swift.Double>, updateInterval: Foundation.TimeInterval) -> VigramSDK.EventsPublisher<VigramSDK.GPSCoordinate>
 }
@@ -124,9 +125,9 @@ public protocol Peripheral {
   func changeStatusNAVPVT(activate: Swift.Bool) -> VigramSDK.SingleEventPublisher<VigramSDK.SatelliteMessage.Acknowledge>
   func getCurrentMinimumElevation() -> VigramSDK.SingleEventPublisher<VigramSDK.SatelliteMessage.Elevation>
   func setMinimumElevation(angle: VigramSDK.ElevationValue) -> VigramSDK.SingleEventPublisher<VigramSDK.SatelliteMessage.Acknowledge>
-  func setChangingRateOfMessages(_ rate: VigramSDK.RateValue) -> VigramSDK.SingleEventPublisher<VigramSDK.SatelliteMessage.Acknowledge>
   func getChangingRateOfMessages() -> VigramSDK.SingleEventPublisher<VigramSDK.SatelliteMessage.ChangingRate>
-  func setUpdateSoftwareToNextStartup(_: Swift.Bool, version: VigramSDK.DeviceMessage.Version.Software)
+  func setChangingRateOfMessages(_ rate: VigramSDK.RateValue) -> VigramSDK.SingleEventPublisher<VigramSDK.SatelliteMessage.Acknowledge>
+  func setUpdateSoftwareToNextStartup(_ ask: Swift.Bool, version: VigramSDK.DeviceMessage.Version.Software)
   func changeStatusAllNavMessages(activate: Swift.Bool) -> VigramSDK.SingleEventPublisher<VigramSDK.SatelliteMessage.Acknowledge>
   func changeStatusRXM(activate: Swift.Bool)
   func startRecordPPKMeasurements(url: Foundation.URL)
@@ -162,11 +163,12 @@ public protocol NtripTask {
   var port: Swift.Int? { get }
   var mountPoint: Swift.String? { get }
   var data: VigramSDK.StatePublisher<Swift.Result<Foundation.Data, any Swift.Error>> { get }
+  var ntripState: VigramSDK.StatePublisher<VigramSDK.StateNtripConnection> { get }
   func resume() -> VigramSDK.SingleEventPublisher<Swift.Void>
   func disconnect()
+  @available(*, deprecated, message: "Use function disconnect instead this. This function is not needed.")
   func cancel()
   func setGGA(_ message: VigramSDK.GGAMessage)
-  var ntripState: VigramSDK.StatePublisher<VigramSDK.StateNtripConnection> { get }
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension VigramSDK.NtripTask {
@@ -399,8 +401,8 @@ extension VigramSDK.Vigram {
 extension VigramSDK.Vigram {
   public static func deviceMotionService() -> any VigramSDK.DeviceMotionService
   public static func environmentDataService(deviceMotionService: any VigramSDK.DeviceMotionService = deviceMotionService(), gpsService: any VigramSDK.GPSService, laserService: (any VigramSDK.LaserService)? = nil) -> any VigramSDK.EnvironmentDataService
-  public static func singlePointRecordingService(gpsService: any VigramSDK.GPSService, laserService: (any VigramSDK.LaserService)? = nil) -> any VigramSDK.SinglePointRecordingService
   public static func environmentDataService(deviceMotionService: any VigramSDK.DeviceMotionService = deviceMotionService(), gpsService: any VigramSDK.GPSService, laserService: (any VigramSDK.LaserService)? = nil, peripheral: any VigramSDK.Peripheral, dynamicStateType: VigramSDK.DynamicStateType) -> any VigramSDK.EnvironmentDataService
+  public static func singlePointRecordingService(gpsService: any VigramSDK.GPSService, laserService: (any VigramSDK.LaserService)? = nil) -> any VigramSDK.SinglePointRecordingService
   public static func singlePointRecordingService(gpsService: any VigramSDK.GPSService, laserService: (any VigramSDK.LaserService)? = nil, peripheral: any VigramSDK.Peripheral, dynamicStateType: VigramSDK.DynamicStateType) -> any VigramSDK.SinglePointRecordingService
   public static func singlePointRecordingService(environmentDataService: any VigramSDK.EnvironmentDataService) -> any VigramSDK.SinglePointRecordingService
 }
@@ -791,10 +793,10 @@ public struct EnvironmentData {
 }
 public enum Configuration {
   public static let sdkVersion: Swift.String
+  public static var defaultRate: VigramSDK.RateValue
   public static var forceUpdate: Swift.Bool
   public static var debug: Swift.Bool
   public static var serviceIdentifiers: [CoreBluetooth.CBUUID]?
-  public static var defaultRate: VigramSDK.RateValue
   public static var maximumBLEPacketSize: Swift.Int
   public static var deviceBLEPacketSize: Swift.Int
   public static var bleWriteTimeout: Swift.Double
