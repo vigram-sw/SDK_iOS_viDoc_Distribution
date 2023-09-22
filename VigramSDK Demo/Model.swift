@@ -739,8 +739,12 @@ class Model: ObservableObject {
                         message: ggamessage
                     )
                 }
-            } catch {}
-            
+            } catch {
+                titleAlert = "Error"
+                messageAlert = "Duration value is not correct"
+                showingAlert = true
+            }
+
             if let peripheral = self.peripheral {
                 gpsService = Vigram.gpsService(
                     peripheral: peripheral,
