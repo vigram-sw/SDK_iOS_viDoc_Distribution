@@ -353,8 +353,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/vigram-gmbh/SDK_iOS_viDoc_Distribution.git";
 			requirement = {
-				kind = exactVersion;
-				version = 0.5.3;
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.5.3;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
