@@ -10,27 +10,27 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		ziMGk9ItrznM29vmeiqKtZQT2aQ=
+		I5IDkrlDKVy88ErBT2/lA9rnww0=
 		</data>
 		<key>Modules/VigramSDK.swiftmodule/arm64-apple-ios.abi.json</key>
 		<data>
-		GwwPgMTYUZP87FiJauWVAoc4W20=
+		WOmye152jbd6GVU5F7j5SGxpvzw=
 		</data>
 		<key>Modules/VigramSDK.swiftmodule/arm64-apple-ios.private.swiftinterface</key>
 		<data>
-		b8Ajcr9XGY5TnVTqmoxqFMU9/ng=
+		cIeg2xUdk4aoZm72uboP7wd5zWs=
 		</data>
 		<key>Modules/VigramSDK.swiftmodule/arm64-apple-ios.swiftdoc</key>
 		<data>
-		REVpFe5h4tADQ9o2GkTiLEuZEbk=
+		bdwS4uxOF8jdqu4zjlzOmdRmCuM=
 		</data>
 		<key>Modules/VigramSDK.swiftmodule/arm64-apple-ios.swiftinterface</key>
 		<data>
-		b8Ajcr9XGY5TnVTqmoxqFMU9/ng=
+		cIeg2xUdk4aoZm72uboP7wd5zWs=
 		</data>
 		<key>Modules/VigramSDK.swiftmodule/arm64-apple-ios.swiftmodule</key>
 		<data>
-		UwyisourolZeJnTIcn25tP7m0bw=
+		pA4Dff/VJovlBni3LMGIb/yYLWs=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -70,35 +70,35 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			AiOhtHmmuzGeGUSxzHPiz/M110V9+we+tPLARB2N7EQ=
+			+KvKAL3lVY2ezD9wkyd7nv/MXc7/4CeSkHPEfvLTMNY=
 			</data>
 		</dict>
 		<key>Modules/VigramSDK.swiftmodule/arm64-apple-ios.private.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			ZMIiIAJFQgmPrJ2+3bsOhFV6kqZKE+JOLSM4tlpuxHs=
+			bdMMGa+6FtTvzo35oUJr7NCSOACH4wVt4pLRlPISqTQ=
 			</data>
 		</dict>
 		<key>Modules/VigramSDK.swiftmodule/arm64-apple-ios.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			m5xo65Ia2POXQ3qfuXKBmS6/pf6UBaZCnTYYT9ZU/MI=
+			4IL+eJVF82xj8CIjyd4C9TesNQpsjw6yCesXfiKmyUY=
 			</data>
 		</dict>
 		<key>Modules/VigramSDK.swiftmodule/arm64-apple-ios.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			ZMIiIAJFQgmPrJ2+3bsOhFV6kqZKE+JOLSM4tlpuxHs=
+			bdMMGa+6FtTvzo35oUJr7NCSOACH4wVt4pLRlPISqTQ=
 			</data>
 		</dict>
 		<key>Modules/VigramSDK.swiftmodule/arm64-apple-ios.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			PYWZ3LcXjc8Ia1vC+6+GesJYqirIDjk1KtyX5kxYJUM=
+			9503uVzpYKmQUtiyJMaRqAfPvL9lrAGh7CnaDlQoO9E=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

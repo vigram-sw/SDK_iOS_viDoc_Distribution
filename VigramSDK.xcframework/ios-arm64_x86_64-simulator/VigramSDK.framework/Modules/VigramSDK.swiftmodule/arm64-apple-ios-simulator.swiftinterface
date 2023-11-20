@@ -55,6 +55,7 @@ extension Swift.SIMD3 where Scalar : Swift.FloatingPoint {
   public init(pitch: Scalar, roll: Scalar, yaw: Scalar)
 }
 public protocol LaserService : AnyObject {
+  func getLasersStatus() -> VigramSDK.SingleEventPublisher<VigramSDK.DeviceMessage.LaserState>
   func turnLaserOn(at position: VigramSDK.LaserConfiguration.Position) -> VigramSDK.SingleEventPublisher<Swift.Void>
   func turnLaserOff(at position: VigramSDK.LaserConfiguration.Position) -> VigramSDK.SingleEventPublisher<Swift.Void>
   func record(configuration: VigramSDK.LaserConfiguration) -> VigramSDK.SingleEventPublisher<VigramSDK.DeviceMessage.Measurement>
@@ -98,6 +99,7 @@ public protocol EnvironmentDataService {
 public protocol Peripheral {
   var nmea: VigramSDK.StatePublisher<any VigramSDK.NMEAMessage> { get }
   var serialNumber: Swift.String? { get }
+  var isNewProtocol: Swift.Bool { get }
   var deviceMessages: VigramSDK.StatePublisher<VigramSDK.DeviceMessage> { get }
   var satelliteMessages: VigramSDK.StatePublisher<VigramSDK.SatelliteMessage> { get }
   var debug: VigramSDK.StatePublisher<Swift.String> { get }
@@ -147,11 +149,7 @@ public enum PeripheralError : Swift.Error {
   case laserNotAvailableInPPK
   case writeTimeOut
   case configurationFailed
-  public static func == (a: VigramSDK.PeripheralError, b: VigramSDK.PeripheralError) -> Swift.Bool
-  public func hash(into hasher: inout Swift.Hasher)
-  public var hashValue: Swift.Int {
-    get
-  }
+  case requestIsNotSupported(Swift.String)
 }
 extension VigramSDK.PeripheralError : Foundation.LocalizedError {
   public var errorDescription: Swift.String? {
@@ -590,6 +588,7 @@ public enum StatePeripheralConfiguration {
 public enum DeviceMessage {
   case battery(VigramSDK.DeviceMessage.Battery)
   case version(VigramSDK.DeviceMessage.Version)
+  case laserState(VigramSDK.DeviceMessage.LaserState)
   case measurement(VigramSDK.DeviceMessage.Measurement)
 }
 extension VigramSDK.DeviceMessage {
@@ -606,6 +605,26 @@ extension VigramSDK.DeviceMessage {
   public struct Battery {
     public let percentage: Swift.Int
   }
+  public enum LaserState {
+    case bothOff
+    case bottomIsOn
+    case backIsOn
+    public static func == (a: VigramSDK.DeviceMessage.LaserState, b: VigramSDK.DeviceMessage.LaserState) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+  public enum Baudrate {
+    case standart
+    case update
+    case safe
+    public static func == (a: VigramSDK.DeviceMessage.Baudrate, b: VigramSDK.DeviceMessage.Baudrate) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
 }
 extension VigramSDK.DeviceMessage.Version {
   public struct Software {
@@ -617,8 +636,10 @@ extension VigramSDK.DeviceMessage.Version {
   public struct Hardware {
     public let major: Swift.UInt8
     public let minor: Swift.UInt8
-    public func toString() -> Swift.String
   }
+}
+extension VigramSDK.DeviceMessage.Version.Hardware {
+  public func toString() -> Swift.String
 }
 extension VigramSDK.DeviceMessage.Version.Software {
   public func toString() -> Swift.String
@@ -1006,8 +1027,6 @@ extension VigramSDK.AntennaOffset {
   }
 }
 extension VigramSDK.DeviceMotion.Accuracy : Swift.Hashable {}
-extension VigramSDK.PeripheralError : Swift.Equatable {}
-extension VigramSDK.PeripheralError : Swift.Hashable {}
 extension VigramSDK.NavigationSystemType : Swift.Equatable {}
 extension VigramSDK.NavigationSystemType : Swift.Hashable {}
 extension VigramSDK.NavigationSystemType : Swift.RawRepresentable {}
@@ -1023,6 +1042,10 @@ extension VigramSDK.DynamicStateType : Swift.RawRepresentable {}
 extension VigramSDK.GPSQualityIndicator : Swift.Equatable {}
 extension VigramSDK.GPSQualityIndicator : Swift.Hashable {}
 extension VigramSDK.GPSQualityIndicator : Swift.RawRepresentable {}
+extension VigramSDK.DeviceMessage.LaserState : Swift.Equatable {}
+extension VigramSDK.DeviceMessage.LaserState : Swift.Hashable {}
+extension VigramSDK.DeviceMessage.Baudrate : Swift.Equatable {}
+extension VigramSDK.DeviceMessage.Baudrate : Swift.Hashable {}
 extension VigramSDK.DeviceType : Swift.Equatable {}
 extension VigramSDK.DeviceType : Swift.Hashable {}
 extension VigramSDK.NtripMountPoint.Authentication : Swift.Equatable {}
