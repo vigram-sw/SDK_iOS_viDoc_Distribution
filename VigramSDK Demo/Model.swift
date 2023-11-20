@@ -108,6 +108,7 @@ class Model: ObservableObject {
     @Published var gnssTimeString = ""
     @Published var ntripSizeParcel = ""
     @Published var serialNumber = ""
+    @Published var lasersState = ""
 
     // MARK: Private properties
 
@@ -315,6 +316,7 @@ class Model: ObservableObject {
         cameraOffsets = []
         laserOffsetsBack = []
         laserOffsetsBottom = []
+        lasersState = ""
     }
     
     func conectToVidoc(id: UUID){
@@ -1158,7 +1160,36 @@ class Model: ObservableObject {
             showingAlert = true
         }
     }
-    
+
+    func getLaserStatus(){
+        if let peripheral = self.peripheral {
+            self.laser = Vigram.laserService(peripheral: peripheral)
+        }
+        lasersState = ""
+        laser?.getLasersStatus()
+            .sink(receiveCompletion: { [unowned self] complition in
+                switch complition {
+                case .finished:
+                    break
+                case let .failure(error):
+                    self.messageAlert = error.localizedDescription
+                    self.showingAlert = true
+                }
+            }) { [unowned self] laserState in
+                switch laserState {
+                case .backIsOn:
+                    self.lasersState = "Back laser is on"
+                case .bothOff:
+                    self.lasersState = "Both lasers are off"
+                case .bottomIsOn:
+                    self.lasersState = "Bottom laser is on"
+                @unknown default:
+                    break
+                }
+            }
+            .store(in: &subscription)
+    }
+
     func turnOnLaser(){
         if let peripheral = self.peripheral {
             self.laser = Vigram.laserService(peripheral: peripheral)

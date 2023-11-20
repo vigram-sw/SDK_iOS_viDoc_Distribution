@@ -144,6 +144,15 @@ struct ContentView: View {
                                                 Text(model.peripheral?.peripheral.name ?? "")
                                                 Spacer()
                                             }
+                                            if let peripheral = model.peripheral {
+                                                HStack {
+                                                    Text("  Protocol: ")
+                                                        .font(Font.headline.bold())
+                                                        .foregroundColor(.black)
+                                                    Text(peripheral.isNewProtocol ? "New" : "Old")
+                                                    Spacer()
+                                                }
+                                            }
                                             HStack {
                                                 Text("  Device number: ")
                                                     .font(Font.headline.bold())
@@ -485,6 +494,20 @@ struct ContentView: View {
                                                 }
                                             }
                                         }
+                                        if let peripheral = model.peripheral, peripheral.isNewProtocol {
+                                            HStack {
+                                                Text("  Lasers state: ")
+                                                    .font(Font.headline.bold())
+                                                    .foregroundColor(.black)
+                                                Text(model.lasersState)
+                                                Spacer()
+                                            }
+                                        }
+                                        Button { model.getLaserStatus() } label: {
+                                            Text("Get lasers status")
+                                                .font(Font.headline.bold())
+                                                .foregroundColor(.black)
+                                        }.buttonStyle(.bordered)
                                         Button { model.turnOnLaser() } label: {
                                             Text("LaserOn")
                                                 .font(Font.headline.bold())
@@ -1097,7 +1120,7 @@ struct ContentView: View {
                     }
                 }
             }.padding(10)
-        }
+        }.preferredColorScheme(.light)
     }
 }
 
