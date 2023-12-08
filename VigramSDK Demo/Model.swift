@@ -88,7 +88,7 @@ class Model: ObservableObject {
     @Published var singlePointMeasurement: SinglePoint?
     @Published var durationStr = "5"
     @Published var distanceOfGroundStr = "50"
-
+    @Published var deviceNumberStr = ""
     @Published var currentRate = ""
     @Published var configuring = false
     @Published var rmxIsActive = false
@@ -108,7 +108,14 @@ class Model: ObservableObject {
     @Published var gnssTimeString = ""
     @Published var ntripSizeParcel = ""
     @Published var serialNumber = ""
+    @Published var currentDeviceStr = ""
     @Published var lasersState = ""
+    @Published var isNewProtocol = false
+    @Published var hasFrontLaser = false
+    @Published var hasBottomLaser = false
+    @Published var housing = ""
+    @Published var mountDeviceStr = ""
+    @Published var hwRevisionStr = ""
 
     // MARK: Private properties
 
@@ -132,6 +139,7 @@ class Model: ObservableObject {
     private var iss = true
     private var mount = [NtripMountPoint]()
     private var socketCodeError: Int?
+    private var isIncompatible = false
     let dateFormatter = DateFormatter()
     let dateFormatter2 = DateFormatter()
     var laserOffsetsBottom = [(String, SIMD3<Double>)]()
@@ -194,7 +202,7 @@ class Model: ObservableObject {
     // MARK: Public methods
 
     func setForceUpdateSoftware(){
-        Configuration.forceUpdate = false
+        Configuration.forceUpdate = true
         titleAlert = "Notification"
         messageAlert = """
             Please restart viDoc to start update.
@@ -209,14 +217,8 @@ class Model: ObservableObject {
         Vigram.initial(token: "").check()
             .sink { _ in } receiveValue: { [unowned self] result in
                 switch(result){
-                case.success(let resultSuccess):
-                    if resultSuccess {
-                        self.startScanBluetooth()
-                    } else {
-                        self.titleAlert = "Authentication is failure"
-                        self.messageAlert = "Please connect to web for authentication token"
-                        self.showingAlert = true
-                    }
+                case.success:
+                    self.startScanBluetooth()
                 case .failure(_):
                     self.titleAlert = "Authentication is failure"
                     self.messageAlert = "Please connect to web for authentication token"
@@ -252,10 +254,14 @@ class Model: ObservableObject {
 
     private func disconnect(){
         if !normalDisconnect {
-            failDisconnect = true
-            titleAlert = "Connection lost"
-            messageAlert = "viDoc is not response"
-            showingAlert = true
+            if isIncompatible {
+                showingAlert = true
+            } else {
+                failDisconnect = true
+                titleAlert = "Connection lost"
+                messageAlert = "viDoc is not response"
+                showingAlert = true
+            }
         }
         currentTimeString = ""
         unixTimeString = ""
@@ -302,7 +308,10 @@ class Model: ObservableObject {
         lonAccErr = ""
         latAccErr = ""
         currentRate = ""
+        lasersState = ""
+        laser = nil
         singlePointMeasurement = nil
+        gpsService = nil
         periphiralState = .disconnected
         bluetoothService.disconnect()
         startScanBluetooth()
@@ -310,13 +319,22 @@ class Model: ObservableObject {
         viDocState = ""
         resetMessageError = ""
         serialNumber = ""
+        currentDeviceStr = ""
         viDocIsReseting = false
         isBottomLaser = true
         isBackLaser = false
         cameraOffsets = []
         laserOffsetsBack = []
         laserOffsetsBottom = []
-        lasersState = ""
+        isNewProtocol = false
+        peripheral = nil
+        deviceNumberStr = ""
+        hasBottomLaser = false
+        hasFrontLaser = false
+        housing = ""
+        mountDeviceStr = ""
+        hwRevisionStr = ""
+        isIncompatible = false
     }
     
     func conectToVidoc(id: UUID){
@@ -445,23 +463,62 @@ class Model: ObservableObject {
                                             .store(in: &self.subscription)
                                         
                                         self.peripheral?.configurationState
+                                            .receive(on: DispatchQueue.main)
                                             .sink(receiveValue: { [unowned self] state in
                                                 switch(state){
                                                 case .inProgress:
                                                     self.configuring = true
                                                 case .done:
                                                     self.configuring = false
+                                                    self.requestBattery()
+                                                    self.requestVersion()
                                                 case .failed(let error):
-                                                    titleAlert = "Error"
-                                                    messageAlert = error.localizedDescription
-                                                    showingAlert = true
+                                                    self.titleAlert = "Error"
+                                                    self.messageAlert = error.localizedDescription
+                                                    self.showingAlert = true
                                                     self.configuring = false
+                                                case let .peripheralError(error):
+                                                    self.configuring = false
+                                                    self.titleAlert = "Error"
+                                                    self.messageAlert = error.localizedDescription
+                                                    self.isIncompatible = true
                                                 @unknown default:
                                                     break
                                                 }
                                             })
                                             .store(in: &self.subscription)
                                         
+                                        self.peripheral?.isNewProtocol
+                                            .sink(receiveValue: { [unowned self] value in
+                                                self.isNewProtocol = value
+                                            })
+                                            .store(in: &self.subscription)
+                                        
+                                        self.peripheral?.currentDevice
+                                            .sink(receiveValue: { [unowned self] value in
+                                                self.hasFrontLaser = value.hasFrontLaser
+                                                self.hasBottomLaser = value.hasBottomLaser
+                                                self.housing = value.getHousing?.rawValue ?? ""
+                                                self.mountDeviceStr = value.getMount?.rawValue ?? ""
+                                                self.hwRevisionStr = value.getHardwareRevision?.rawValue ?? ""
+
+                                                switch value.typeOfDevice {
+                                                case .viDoc:
+                                                    self.currentDeviceStr = "viDoc"
+                                                case .viDocLight:
+                                                    self.currentDeviceStr = "viDoc Light"
+                                                case .unknown:
+                                                    self.currentDeviceStr = "unknown device"
+                                                case .viDocWithOldSoftware:
+                                                    self.currentDeviceStr = "viDoc with old software"
+                                                case .viDocOldDevice:
+                                                    self.currentDeviceStr = "viDoc (old Device)"
+                                                @unknown default:
+                                                    break
+                                                }
+                                            })
+                                            .store(in: &self.subscription)
+
                                         self.peripheral?.viDocResetState
                                             .sink(receiveValue: { [unowned self] state in
                                                 switch state {
@@ -557,22 +614,7 @@ class Model: ObservableObject {
                                                 })
                                                 .store(in: &self.subscription)
                                         }
-                                        
-                                        self.peripheral?.requestVersion()
-                                            .sink(receiveCompletion: { _ in },
-                                                  receiveValue: { [unowned self] version in
-                                                self.currentSoftwareVersion = version.software.toString()
-                                                self.currentHardwareVersion = version.hardware.toString()
-                                            })
-                                            .store(in: &self.subscription)
-                                        
-                                        self.peripheral?.requestBattery()
-                                            .sink(receiveCompletion: { _ in },
-                                                  receiveValue: { [unowned self] battery in
-                                                self.currentBatteryCharge = String("\(battery.percentage) %")
-                                            })
-                                            .store(in: &self.subscription)
-                                        
+
                                         self.peripheral?.nmea
                                             .sink(receiveValue: { [unowned self] nmea in
                                                 
@@ -725,6 +767,7 @@ class Model: ObservableObject {
     }
 
     func connectToNtrip() {
+        task = nil
         socketCodeError = nil
         nci = NtripConnectionInformation.init(
             hostname: self.hostname,
@@ -743,7 +786,7 @@ class Model: ObservableObject {
                 }
             } catch {
                 titleAlert = "Error"
-                messageAlert = "Duration value is not correct"
+                messageAlert = "NtripConnectionInformation is incorrect"
                 showingAlert = true
             }
 
@@ -997,6 +1040,9 @@ class Model: ObservableObject {
 
     func changeRXM(activate: Bool) {
         peripheral?.changeStatusRXM(activate: activate)
+        if isNewProtocol {
+            getLaserStatus()
+        }
     }
     
     func reccon(){
@@ -1085,23 +1131,30 @@ class Model: ObservableObject {
     }
 
     func startLaser(){
-        if let duration = Double(durationStr), duration > 0, duration <= 60 {
+        if let duration = Double(durationStr) {
             if let peripheral = self.peripheral {
-                self.laser = Vigram.laserService(peripheral: peripheral)
-                let typeOfLaser: LaserConfiguration.Position = isBottomLaser ? .bottom : .back
-                let laserConfig = LaserConfiguration.init(shotMode: .fast, position: typeOfLaser, duration: duration)
-                self.laser?.record(configuration: laserConfig)
-                    .sink(receiveCompletion: { complition in
-                        switch(complition) {
-                        case .finished:
-                            print("Finish measurement")
-                        case .failure(let error):
-                            print("Error measurement: \(error.localizedDescription)")
-                        }
-                    }, receiveValue: { [unowned self] measurement in
-                        self.distance = "\(measurement.distance)"
-                    })
-                    .store(in: &self.subscription)
+                if !isNewProtocol && (duration <= 0 || duration > 60) {
+                    titleAlert = "Error"
+                    messageAlert = "The duration value of a laser recording session in this software version must be between 5 and 60 seconds."
+                    showingAlert = true
+                } else {
+                    self.laser = Vigram.laserService(peripheral: peripheral)
+                    let typeOfLaser: LaserConfiguration.Position = isBottomLaser ? .bottom : .back
+                    let laserConfig = LaserConfiguration.init(shotMode: .fast, position: typeOfLaser, duration: duration)
+                    self.laser?.record(configuration: laserConfig)
+                        .sink(receiveCompletion: { [unowned self] complition in
+                            switch(complition) {
+                            case .finished:
+                                break
+                            case .failure(let error):
+                                self.messageAlert = error.localizedDescription
+                                self.showingAlert = true
+                            }
+                        }, receiveValue: { [unowned self] measurement in
+                            self.distance = "\(measurement.distance)"
+                        })
+                        .store(in: &self.subscription)
+                }
             }
         } else {
             titleAlert = "Error"
@@ -1193,22 +1246,42 @@ class Model: ObservableObject {
     func turnOnLaser(){
         if let peripheral = self.peripheral {
             self.laser = Vigram.laserService(peripheral: peripheral)
-            let typeOfLaser: LaserConfiguration.Position = isBottomLaser ? .bottom : .back
-            self.laser?.turnLaserOn(at: typeOfLaser)
-                .sink(receiveCompletion: { _ in
-                }, receiveValue: { _ in })
-                .store(in: &self.subscription)
+        }
+        let typeOfLaser: LaserConfiguration.Position = isBottomLaser ? .bottom : .back
+        laser?.turnLaserOn(at: typeOfLaser)
+            .sink(receiveCompletion: { [unowned self] complition in
+                switch complition {
+                case .finished:
+                    break
+                case let .failure(error):
+                    self.messageAlert = error.localizedDescription
+                    self.showingAlert = true
+                }
+            }) { _ in }
+            .store(in: &self.subscription)
+        if isNewProtocol {
+            getLaserStatus()
         }
     }
-    
+
     func turnOffLaser(){
         if let peripheral = self.peripheral {
             self.laser = Vigram.laserService(peripheral: peripheral)
-            let typeOfLaser: LaserConfiguration.Position = isBottomLaser ? .bottom : .back
-            self.laser?.turnLaserOff(at: typeOfLaser)
-                .sink(receiveCompletion: { _ in
-                }, receiveValue: { _ in })
-                .store(in: &self.subscription)
+        }
+        let typeOfLaser: LaserConfiguration.Position = isBottomLaser ? .bottom : .back
+        laser?.turnLaserOff(at: typeOfLaser)
+            .sink(receiveCompletion: { [unowned self] complition in
+                switch complition {
+                case .finished:
+                    break
+                case let .failure(error):
+                    self.messageAlert = error.localizedDescription
+                    self.showingAlert = true
+                }
+            }) { _ in }
+            .store(in: &self.subscription)
+        if isNewProtocol {
+            getLaserStatus()
         }
     }
 
