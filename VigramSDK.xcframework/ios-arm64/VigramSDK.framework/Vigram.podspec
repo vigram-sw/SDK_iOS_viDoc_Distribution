@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
 s.name         = 'Vigram'
-s.version      = '0.5.5'
+s.version      = '0.6.2'
 s.summary      = 'VigramSDK allows the seamless communication with the Vigram module.'
 s.description  = <<-DESC
 VigramSDK connects to the Vigram module, forwards Ntrip correction data to it and 
@@ -12,7 +12,7 @@ Copyright 2023
 Permission is granted to...
 LICENSE
 }
-s.source = { :git => 'https://github.com/vigram-gmbh/SDK_iOS_viDoc_Distribution.git', :tag => '0.5.5' }
+s.source = { :git => 'https://github.com/vigram-gmbh/SDK_iOS_viDoc_Distribution.git', :tag => '0.6.2' }
 s.author = { 'Iaroslav Khaustov' => 'iaroslav.khaustov@vigram.com' }
 s.platform = :ios
 s.swift_version = '5.7'
