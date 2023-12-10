@@ -115,7 +115,6 @@ public protocol Peripheral {
   var viDocState: VigramSDK.StatePublisher<VigramSDK.StateViDoc> { get }
   var viDocResetState: VigramSDK.StatePublisher<VigramSDK.StateResetViDoc> { get }
   var ppkMeasurementsState: VigramSDK.StatePublisher<Swift.Bool> { get }
-  var deviceType: VigramSDK.DeviceType { get }
   func start() -> VigramSDK.SingleEventPublisher<Swift.Void>
   func send(_ data: Foundation.Data, chunkSize: Swift.Int) -> VigramSDK.SingleEventPublisher<Swift.Void>
   func resetViDoc()
@@ -163,6 +162,7 @@ public enum PeripheralError : Swift.Error {
   case accessDenied(Swift.String)
   case deviceNumberIsIncompatible
   case deviceFirmwareIsIncompatible
+  case deviceIsBusy(Swift.String)
 }
 extension VigramSDK.PeripheralError : Foundation.LocalizedError {
   public var errorDescription: Swift.String? {
