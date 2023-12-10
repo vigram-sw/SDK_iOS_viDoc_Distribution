@@ -14,43 +14,43 @@
 		</data>
 		<key>Modules/VigramSDK.swiftmodule/arm64-apple-ios-simulator.abi.json</key>
 		<data>
-		fJJDaehOlmr6vczfHFkJp5n0H+Y=
+		27A6YlVFb2LXYB7CfgmxIZlOSC4=
 		</data>
 		<key>Modules/VigramSDK.swiftmodule/arm64-apple-ios-simulator.private.swiftinterface</key>
 		<data>
-		1e+728Raq+Poe13O7L8Xq01krdM=
+		qlq+WUXiGx59nUc4r3qxkbDkNCg=
 		</data>
 		<key>Modules/VigramSDK.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
 		<data>
-		c1zqVaIMf1MpxKFS4IlMfsVsVuA=
+		GqSDUyJnTScjK6gy0rap5iTE1Pk=
 		</data>
 		<key>Modules/VigramSDK.swiftmodule/arm64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		1e+728Raq+Poe13O7L8Xq01krdM=
+		qlq+WUXiGx59nUc4r3qxkbDkNCg=
 		</data>
 		<key>Modules/VigramSDK.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		//6/8xOe1XyeeCaB/3bw5JDq5X8=
+		x99cKnNhGpbSWqiKFq+laCztN/I=
 		</data>
 		<key>Modules/VigramSDK.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<data>
-		fJJDaehOlmr6vczfHFkJp5n0H+Y=
+		27A6YlVFb2LXYB7CfgmxIZlOSC4=
 		</data>
 		<key>Modules/VigramSDK.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
 		<data>
-		MaOGgK1tHVUFf4xaChf+9+RPPXQ=
+		XEgoV8iPg6pESwIUv3sroYGDN1E=
 		</data>
 		<key>Modules/VigramSDK.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<data>
-		dFjSszvRh5bTbLP03Saxxqcmjvc=
+		v49JgjegWk+hx7TRjhdiSFRa3Y8=
 		</data>
 		<key>Modules/VigramSDK.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		MaOGgK1tHVUFf4xaChf+9+RPPXQ=
+		XEgoV8iPg6pESwIUv3sroYGDN1E=
 		</data>
 		<key>Modules/VigramSDK.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		qmY+tZuwI3uPqIRJ8sVKtnOh10o=
+		p9biegbzGE2FMLRckzKym89ZyIk=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -90,70 +90,70 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			yOcAmvRTpKPe7NrUb6+BkzhLhl55uAmJOVY0usmqKew=
+			HX3+/WOcgde8/qfvE6qzYfLGvA+oUulwIlXM+UuEHLA=
 			</data>
 		</dict>
 		<key>Modules/VigramSDK.swiftmodule/arm64-apple-ios-simulator.private.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			Dvv+p5jIjIR7KpVShTfPXKs0zPe53VvGJN/4xbsOfOM=
+			SPWzcVQOJAMIiLyHwsDxKts0aFR2HXgTggXvV/yTIKE=
 			</data>
 		</dict>
 		<key>Modules/VigramSDK.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			5UOsd/bKZ+vXhok1xqyNG6z/rAACSwABC54jYiXmxYo=
+			6qRsXVHym84LAdUrwn3l1wZV5syVmvFRUK79WxuePTA=
 			</data>
 		</dict>
 		<key>Modules/VigramSDK.swiftmodule/arm64-apple-ios-simulator.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			Dvv+p5jIjIR7KpVShTfPXKs0zPe53VvGJN/4xbsOfOM=
+			SPWzcVQOJAMIiLyHwsDxKts0aFR2HXgTggXvV/yTIKE=
 			</data>
 		</dict>
 		<key>Modules/VigramSDK.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			fca30/HDFtdmApvtfJSxcGAdUYejIWB70zcUrrJp5Z8=
+			PpytcwbqD4zqCt0ZaWROIfBpIIii0hAjrxofpbHdrvo=
 			</data>
 		</dict>
 		<key>Modules/VigramSDK.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			yOcAmvRTpKPe7NrUb6+BkzhLhl55uAmJOVY0usmqKew=
+			HX3+/WOcgde8/qfvE6qzYfLGvA+oUulwIlXM+UuEHLA=
 			</data>
 		</dict>
 		<key>Modules/VigramSDK.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			kUIepep51OnvZZUoObxu1OfctSnuN8oKExR0cO4+loM=
+			j1rCmITea+ku3wnp8UdGJHXVlUntsdqow+haaeX672M=
 			</data>
 		</dict>
 		<key>Modules/VigramSDK.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			PARTyjSoTcGjpv/bPC/D0DSCaklPierBvbYlbdjMbUM=
+			lyiG21jp4ZefNxbcUXfv9hNoulRVSfG40bw/kmvxves=
 			</data>
 		</dict>
 		<key>Modules/VigramSDK.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			kUIepep51OnvZZUoObxu1OfctSnuN8oKExR0cO4+loM=
+			j1rCmITea+ku3wnp8UdGJHXVlUntsdqow+haaeX672M=
 			</data>
 		</dict>
 		<key>Modules/VigramSDK.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			9wlMWx8hEqKyDjMrVb4bxMHHKRUrZKXNCdr7chpoCqs=
+			Z2rUeyjPUvlIA6JJuhNONIDH5DBVmOYjtcK4yR6OWJ4=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
