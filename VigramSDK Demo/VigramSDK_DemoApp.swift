@@ -10,10 +10,11 @@ import SwiftUI
 
 @main
 struct VigramSDK_DemoApp: App {
-    var model = Model()
+    let vigramHelper = VigramHelper.shared
+
     var body: some Scene {
         WindowGroup {
-            ContentView(model: model)
+            MainScreenView()
         }
     }
 }

@@ -7,22 +7,60 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7036D65A2B3DB28C0036D5E0 /* MainScreenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7036D6372B3DB28B0036D5E0 /* MainScreenModel.swift */; };
+		7036D65B2B3DB28C0036D5E0 /* MainScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7036D6382B3DB28B0036D5E0 /* MainScreenViewModel.swift */; };
+		7036D65C2B3DB28C0036D5E0 /* DeviceInfoSubview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7036D63A2B3DB28B0036D5E0 /* DeviceInfoSubview.swift */; };
+		7036D65E2B3DB28C0036D5E0 /* OnlineSoftwareUpdateSubview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7036D63C2B3DB28B0036D5E0 /* OnlineSoftwareUpdateSubview.swift */; };
+		7036D65F2B3DB28C0036D5E0 /* NTRIPControlSubview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7036D63D2B3DB28B0036D5E0 /* NTRIPControlSubview.swift */; };
+		7036D6602B3DB28C0036D5E0 /* NMEASubview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7036D63E2B3DB28B0036D5E0 /* NMEASubview.swift */; };
+		7036D6612B3DB28C0036D5E0 /* PPKMeasurementsSubview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7036D63F2B3DB28B0036D5E0 /* PPKMeasurementsSubview.swift */; };
+		7036D6622B3DB28C0036D5E0 /* LaserMeasurementsSubview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7036D6402B3DB28B0036D5E0 /* LaserMeasurementsSubview.swift */; };
+		7036D6632B3DB28C0036D5E0 /* ConnectToDeviceSubview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7036D6412B3DB28B0036D5E0 /* ConnectToDeviceSubview.swift */; };
+		7036D6662B3DB28C0036D5E0 /* DeviceConfigSubview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7036D6442B3DB28B0036D5E0 /* DeviceConfigSubview.swift */; };
+		7036D6672B3DB28C0036D5E0 /* SinglePointSubview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7036D6452B3DB28B0036D5E0 /* SinglePointSubview.swift */; };
+		7036D6682B3DB28C0036D5E0 /* MainScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7036D6462B3DB28B0036D5E0 /* MainScreenView.swift */; };
+		7036D6692B3DB28C0036D5E0 /* FileWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7036D6482B3DB28B0036D5E0 /* FileWorker.swift */; };
+		7036D66A2B3DB28C0036D5E0 /* VigramHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7036D64A2B3DB28B0036D5E0 /* VigramHelper.swift */; };
+		7036D66B2B3DB28C0036D5E0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7036D64C2B3DB28C0036D5E0 /* Assets.xcassets */; };
+		7036D66C2B3DB28C0036D5E0 /* NTRIPCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7036D64E2B3DB28C0036D5E0 /* NTRIPCredentials.swift */; };
+		7036D66D2B3DB28C0036D5E0 /* Foundation+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7036D6502B3DB28C0036D5E0 /* Foundation+Extension.swift */; };
+		7036D66E2B3DB28C0036D5E0 /* SwiftUI+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7036D6512B3DB28C0036D5E0 /* SwiftUI+Extension.swift */; };
+		7036D66F2B3DB28C0036D5E0 /* Combine+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7036D6522B3DB28C0036D5E0 /* Combine+Extension.swift */; };
+		7036D6702B3DB28C0036D5E0 /* SelectButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7036D6542B3DB28C0036D5E0 /* SelectButton.swift */; };
+		7036D6712B3DB28C0036D5E0 /* ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7036D6552B3DB28C0036D5E0 /* ActivityViewController.swift */; };
+		7036D6722B3DB28C0036D5E0 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7036D6562B3DB28C0036D5E0 /* LoadingView.swift */; };
 		706DC7752B2377C0007FDB25 /* VigramSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 706DC7742B2377C0007FDB25 /* VigramSDK */; };
 		706DC7772B2377C0007FDB25 /* VigramSDK+Rx in Frameworks */ = {isa = PBXBuildFile; productRef = 706DC7762B2377C0007FDB25 /* VigramSDK+Rx */; };
 		707E0150298D08C100F3A611 /* VigramSDK_DemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707E014F298D08C100F3A611 /* VigramSDK_DemoApp.swift */; };
-		707E0152298D08C100F3A611 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707E0151298D08C100F3A611 /* ContentView.swift */; };
 		707E0154298D08C300F3A611 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 707E0153298D08C300F3A611 /* Assets.xcassets */; };
-		707E015E298D093000F3A611 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707E015D298D093000F3A611 /* Model.swift */; };
-		707E0161298D09CE00F3A611 /* SelectButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707E0160298D09CE00F3A611 /* SelectButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7036D6372B3DB28B0036D5E0 /* MainScreenModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainScreenModel.swift; sourceTree = "<group>"; };
+		7036D6382B3DB28B0036D5E0 /* MainScreenViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainScreenViewModel.swift; sourceTree = "<group>"; };
+		7036D63A2B3DB28B0036D5E0 /* DeviceInfoSubview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceInfoSubview.swift; sourceTree = "<group>"; };
+		7036D63C2B3DB28B0036D5E0 /* OnlineSoftwareUpdateSubview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnlineSoftwareUpdateSubview.swift; sourceTree = "<group>"; };
+		7036D63D2B3DB28B0036D5E0 /* NTRIPControlSubview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NTRIPControlSubview.swift; sourceTree = "<group>"; };
+		7036D63E2B3DB28B0036D5E0 /* NMEASubview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NMEASubview.swift; sourceTree = "<group>"; };
+		7036D63F2B3DB28B0036D5E0 /* PPKMeasurementsSubview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PPKMeasurementsSubview.swift; sourceTree = "<group>"; };
+		7036D6402B3DB28B0036D5E0 /* LaserMeasurementsSubview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaserMeasurementsSubview.swift; sourceTree = "<group>"; };
+		7036D6412B3DB28B0036D5E0 /* ConnectToDeviceSubview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConnectToDeviceSubview.swift; sourceTree = "<group>"; };
+		7036D6442B3DB28B0036D5E0 /* DeviceConfigSubview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceConfigSubview.swift; sourceTree = "<group>"; };
+		7036D6452B3DB28B0036D5E0 /* SinglePointSubview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SinglePointSubview.swift; sourceTree = "<group>"; };
+		7036D6462B3DB28B0036D5E0 /* MainScreenView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainScreenView.swift; sourceTree = "<group>"; };
+		7036D6482B3DB28B0036D5E0 /* FileWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileWorker.swift; sourceTree = "<group>"; };
+		7036D64A2B3DB28B0036D5E0 /* VigramHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VigramHelper.swift; sourceTree = "<group>"; };
+		7036D64C2B3DB28C0036D5E0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		7036D64E2B3DB28C0036D5E0 /* NTRIPCredentials.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NTRIPCredentials.swift; sourceTree = "<group>"; };
+		7036D6502B3DB28C0036D5E0 /* Foundation+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Foundation+Extension.swift"; sourceTree = "<group>"; };
+		7036D6512B3DB28C0036D5E0 /* SwiftUI+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SwiftUI+Extension.swift"; sourceTree = "<group>"; };
+		7036D6522B3DB28C0036D5E0 /* Combine+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Combine+Extension.swift"; sourceTree = "<group>"; };
+		7036D6542B3DB28C0036D5E0 /* SelectButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectButton.swift; sourceTree = "<group>"; };
+		7036D6552B3DB28C0036D5E0 /* ActivityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityViewController.swift; sourceTree = "<group>"; };
+		7036D6562B3DB28C0036D5E0 /* LoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		707E014C298D08C100F3A611 /* VigramSDK Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "VigramSDK Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		707E014F298D08C100F3A611 /* VigramSDK_DemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VigramSDK_DemoApp.swift; sourceTree = "<group>"; };
-		707E0151298D08C100F3A611 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		707E0153298D08C300F3A611 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		707E015D298D093000F3A611 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
-		707E0160298D09CE00F3A611 /* SelectButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectButton.swift; sourceTree = "<group>"; };
 		709B3284298D158000979F92 /* VigramSDK-Demo-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "VigramSDK-Demo-Info.plist"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
@@ -39,11 +77,98 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7036D6352B3DB28B0036D5E0 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				7036D6362B3DB28B0036D5E0 /* MainScreen */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		7036D6362B3DB28B0036D5E0 /* MainScreen */ = {
+			isa = PBXGroup;
+			children = (
+				7036D6392B3DB28B0036D5E0 /* SubViews */,
+				7036D6372B3DB28B0036D5E0 /* MainScreenModel.swift */,
+				7036D6382B3DB28B0036D5E0 /* MainScreenViewModel.swift */,
+				7036D6462B3DB28B0036D5E0 /* MainScreenView.swift */,
+			);
+			path = MainScreen;
+			sourceTree = "<group>";
+		};
+		7036D6392B3DB28B0036D5E0 /* SubViews */ = {
+			isa = PBXGroup;
+			children = (
+				7036D63A2B3DB28B0036D5E0 /* DeviceInfoSubview.swift */,
+				7036D63C2B3DB28B0036D5E0 /* OnlineSoftwareUpdateSubview.swift */,
+				7036D63D2B3DB28B0036D5E0 /* NTRIPControlSubview.swift */,
+				7036D63E2B3DB28B0036D5E0 /* NMEASubview.swift */,
+				7036D63F2B3DB28B0036D5E0 /* PPKMeasurementsSubview.swift */,
+				7036D6402B3DB28B0036D5E0 /* LaserMeasurementsSubview.swift */,
+				7036D6412B3DB28B0036D5E0 /* ConnectToDeviceSubview.swift */,
+				7036D6442B3DB28B0036D5E0 /* DeviceConfigSubview.swift */,
+				7036D6452B3DB28B0036D5E0 /* SinglePointSubview.swift */,
+			);
+			path = SubViews;
+			sourceTree = "<group>";
+		};
+		7036D6472B3DB28B0036D5E0 /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				7036D6482B3DB28B0036D5E0 /* FileWorker.swift */,
+			);
+			path = Storage;
+			sourceTree = "<group>";
+		};
+		7036D6492B3DB28B0036D5E0 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				7036D64A2B3DB28B0036D5E0 /* VigramHelper.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		7036D64B2B3DB28C0036D5E0 /* SupportingFiles */ = {
+			isa = PBXGroup;
+			children = (
+				7036D64C2B3DB28C0036D5E0 /* Assets.xcassets */,
+			);
+			path = SupportingFiles;
+			sourceTree = "<group>";
+		};
+		7036D64D2B3DB28C0036D5E0 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				7036D64E2B3DB28C0036D5E0 /* NTRIPCredentials.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		7036D64F2B3DB28C0036D5E0 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				7036D6502B3DB28C0036D5E0 /* Foundation+Extension.swift */,
+				7036D6512B3DB28C0036D5E0 /* SwiftUI+Extension.swift */,
+				7036D6522B3DB28C0036D5E0 /* Combine+Extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		7036D6532B3DB28C0036D5E0 /* CustomViews */ = {
+			isa = PBXGroup;
+			children = (
+				7036D6542B3DB28C0036D5E0 /* SelectButton.swift */,
+				7036D6552B3DB28C0036D5E0 /* ActivityViewController.swift */,
+				7036D6562B3DB28C0036D5E0 /* LoadingView.swift */,
+			);
+			path = CustomViews;
+			sourceTree = "<group>";
+		};
 		707E0143298D08C100F3A611 = {
 			isa = PBXGroup;
 			children = (
-				707E014E298D08C100F3A611 /* VigramSDK Demo */,
 				707E014D298D08C100F3A611 /* Products */,
+				707E014E298D08C100F3A611 /* VigramSDK Demo */,
 			);
 			sourceTree = "<group>";
 		};
@@ -60,10 +185,14 @@
 			children = (
 				709B3284298D158000979F92 /* VigramSDK-Demo-Info.plist */,
 				707E014F298D08C100F3A611 /* VigramSDK_DemoApp.swift */,
-				707E0151298D08C100F3A611 /* ContentView.swift */,
-				707E015D298D093000F3A611 /* Model.swift */,
-				707E0160298D09CE00F3A611 /* SelectButton.swift */,
 				707E0153298D08C300F3A611 /* Assets.xcassets */,
+				7036D6492B3DB28B0036D5E0 /* API */,
+				7036D6532B3DB28C0036D5E0 /* CustomViews */,
+				7036D64D2B3DB28C0036D5E0 /* Entities */,
+				7036D64F2B3DB28C0036D5E0 /* Extensions */,
+				7036D6352B3DB28B0036D5E0 /* Screens */,
+				7036D6472B3DB28B0036D5E0 /* Storage */,
+				7036D64B2B3DB28C0036D5E0 /* SupportingFiles */,
 			);
 			path = "VigramSDK Demo";
 			sourceTree = "<group>";
@@ -133,6 +262,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7036D66B2B3DB28C0036D5E0 /* Assets.xcassets in Resources */,
 				707E0154298D08C300F3A611 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -144,10 +274,28 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				707E015E298D093000F3A611 /* Model.swift in Sources */,
-				707E0161298D09CE00F3A611 /* SelectButton.swift in Sources */,
-				707E0152298D08C100F3A611 /* ContentView.swift in Sources */,
+				7036D65F2B3DB28C0036D5E0 /* NTRIPControlSubview.swift in Sources */,
+				7036D6682B3DB28C0036D5E0 /* MainScreenView.swift in Sources */,
+				7036D66A2B3DB28C0036D5E0 /* VigramHelper.swift in Sources */,
+				7036D6712B3DB28C0036D5E0 /* ActivityViewController.swift in Sources */,
+				7036D6722B3DB28C0036D5E0 /* LoadingView.swift in Sources */,
+				7036D65C2B3DB28C0036D5E0 /* DeviceInfoSubview.swift in Sources */,
+				7036D6622B3DB28C0036D5E0 /* LaserMeasurementsSubview.swift in Sources */,
+				7036D66C2B3DB28C0036D5E0 /* NTRIPCredentials.swift in Sources */,
+				7036D66D2B3DB28C0036D5E0 /* Foundation+Extension.swift in Sources */,
+				7036D6672B3DB28C0036D5E0 /* SinglePointSubview.swift in Sources */,
+				7036D6702B3DB28C0036D5E0 /* SelectButton.swift in Sources */,
+				7036D6612B3DB28C0036D5E0 /* PPKMeasurementsSubview.swift in Sources */,
+				7036D65A2B3DB28C0036D5E0 /* MainScreenModel.swift in Sources */,
+				7036D6632B3DB28C0036D5E0 /* ConnectToDeviceSubview.swift in Sources */,
+				7036D66F2B3DB28C0036D5E0 /* Combine+Extension.swift in Sources */,
+				7036D6692B3DB28C0036D5E0 /* FileWorker.swift in Sources */,
 				707E0150298D08C100F3A611 /* VigramSDK_DemoApp.swift in Sources */,
+				7036D6662B3DB28C0036D5E0 /* DeviceConfigSubview.swift in Sources */,
+				7036D65E2B3DB28C0036D5E0 /* OnlineSoftwareUpdateSubview.swift in Sources */,
+				7036D66E2B3DB28C0036D5E0 /* SwiftUI+Extension.swift in Sources */,
+				7036D65B2B3DB28C0036D5E0 /* MainScreenViewModel.swift in Sources */,
+				7036D6602B3DB28C0036D5E0 /* NMEASubview.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -277,7 +425,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 4;
-				DEVELOPMENT_ASSET_PATHS = "\"VigramSDK Demo/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = 36X7S3WFJC;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -309,7 +457,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 4;
-				DEVELOPMENT_ASSET_PATHS = "\"VigramSDK Demo/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = 36X7S3WFJC;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
