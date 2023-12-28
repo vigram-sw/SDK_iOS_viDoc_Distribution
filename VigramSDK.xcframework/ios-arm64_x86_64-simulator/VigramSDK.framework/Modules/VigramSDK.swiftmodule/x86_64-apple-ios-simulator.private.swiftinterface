@@ -1,5 +1,5 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.9 (swiftlang-5.9.0.128.108 clang-1500.0.40.1)
+// swift-compiler-version: Apple Swift version 5.9.2 (swiftlang-5.9.2.2.56 clang-1500.1.0.2.5)
 // swift-module-flags: -target x86_64-apple-ios15.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name VigramSDK
 // swift-module-flags-ignorable: -enable-bare-slash-regex
 import Combine
@@ -112,6 +112,9 @@ public protocol Peripheral {
   var state: VigramSDK.StatePublisher<CoreBluetooth.CBPeripheralState> { get }
   var peripheral: CoreBluetooth.CBPeripheral { get }
   var configurationState: VigramSDK.StatePublisher<VigramSDK.StatePeripheralConfiguration> { get }
+  var calibrationState: VigramSDK.StatePublisher<VigramSDK.StateIMUCalibration> { get }
+  var calibrationNextStep: VigramSDK.StatePublisher<Swift.Bool> { get }
+  var calibrationStepNumber: VigramSDK.StatePublisher<Swift.Int> { get }
   var viDocState: VigramSDK.StatePublisher<VigramSDK.StateViDoc> { get }
   var viDocResetState: VigramSDK.StatePublisher<VigramSDK.StateResetViDoc> { get }
   var ppkMeasurementsState: VigramSDK.StatePublisher<Swift.Bool> { get }
@@ -129,6 +132,10 @@ public protocol Peripheral {
   func requestIMURotationRaw() -> VigramSDK.SingleEventPublisher<VigramSDK.DeviceMessage.IMURotationRaw>
   func requestIMUMagneticRaw() -> VigramSDK.SingleEventPublisher<VigramSDK.DeviceMessage.IMUMagneticRaw>
   func requestIMUTemp() -> VigramSDK.SingleEventPublisher<VigramSDK.DeviceMessage.IMUTemp>
+  func requestIMUCalibration(autoMode: Swift.Bool) -> VigramSDK.SingleEventPublisher<Swift.Void>
+  func nextStepManualIMUCalibration() -> VigramSDK.SingleEventPublisher<Swift.Void>
+  func exitManualIMUCalibration() -> VigramSDK.SingleEventPublisher<Swift.Void>
+  func requestIMUCalibrationStatus() -> VigramSDK.SingleEventPublisher<VigramSDK.DeviceMessage.IMUCalibrationStatus>
   func getCurrentStatusGNSS(satellite: VigramSDK.NavigationSystemType) -> VigramSDK.SingleEventPublisher<VigramSDK.SatelliteMessage.StatusSattelite>
   func changeStatusGNSS(satellite: VigramSDK.NavigationSystemType, activate: Swift.Bool) -> VigramSDK.SingleEventPublisher<VigramSDK.SatelliteMessage.Acknowledge>
   func activateAllConstellationGNSS() -> VigramSDK.SingleEventPublisher<VigramSDK.SatelliteMessage.Acknowledge>
@@ -161,7 +168,7 @@ public enum PeripheralError : Swift.Error {
   case requestIsNotSupported(Swift.String)
   case accessDenied(Swift.String)
   case deviceNumberIsIncompatible
-  case deviceFirmwareIsIncompatible
+  case deviceSoftwareIsIncompatible
   case deviceIsBusy(Swift.String)
 }
 extension VigramSDK.PeripheralError : Foundation.LocalizedError {
@@ -174,6 +181,16 @@ public enum StatePeripheralConfiguration {
   case inProgress
   case failed(any Swift.Error)
   case peripheralError(VigramSDK.PeripheralError)
+}
+public enum StateIMUCalibration {
+  case start
+  case end
+  case error
+  public static func == (a: VigramSDK.StateIMUCalibration, b: VigramSDK.StateIMUCalibration) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
 }
 extension Swift.UInt16 {
   public init(with data: Foundation.Data, startAt offset: Swift.Int)
@@ -454,9 +471,20 @@ extension VigramSDK.GPSCoordinate {
 }
 public enum SinglePointRecordingError : Swift.Error {
   case badMeasurement([VigramSDK.EnvironmentData])
+  case measurementCancelled
+  case measurementFailure
+}
+extension VigramSDK.SinglePointRecordingError : Foundation.LocalizedError {
+  public var errorDescription: Swift.String? {
+    get
+  }
 }
 public protocol SinglePointRecordingService {
+  var measurementTime: VigramSDK.StatePublisher<Foundation.TimeInterval> { get }
   func record(duration: Foundation.TimeInterval, updateInterval: Foundation.TimeInterval, with correction: VigramSDK.CoordinateCorrection.Method) -> VigramSDK.SingleEventPublisher<VigramSDK.SinglePoint>
+  func startMeasurement(duration: Foundation.TimeInterval, updateInterval: Foundation.TimeInterval, with correction: VigramSDK.CoordinateCorrection.Method) -> VigramSDK.SingleEventPublisher<VigramSDK.SinglePoint>
+  func stopMeasurement()
+  func cancelMeasurement()
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension VigramSDK.SinglePointRecordingService {
@@ -485,6 +513,7 @@ public struct CoordinateCorrection {
   }
   public var method: VigramSDK.CoordinateCorrection.Method
   public var value: Swift.SIMD3<Swift.Double>
+  public var quality: VigramSDK.DeviceMessage.Measurement.MeasurementQuality
 }
 public enum NtripServiceError : Swift.Error {
   case mountPointDecodingFailed
@@ -624,6 +653,7 @@ public enum DeviceMessage {
   case imuRotationRawRates(VigramSDK.DeviceMessage.IMURotationRaw)
   case imuRawMagnetic(VigramSDK.DeviceMessage.IMUMagneticRaw)
   case imuTemperature(VigramSDK.DeviceMessage.IMUTemp)
+  case imuCalibrationStatus(VigramSDK.DeviceMessage.IMUCalibrationStatus)
   case laserState(VigramSDK.DeviceMessage.LaserState)
   case measurement(VigramSDK.DeviceMessage.Measurement)
 }
@@ -643,6 +673,7 @@ extension VigramSDK.DeviceMessage {
       case paintedGray
       case paintedBlue
       case paintedRed
+      case testSample
       public init?(rawValue: Swift.String)
       public typealias RawValue = Swift.String
       public var rawValue: Swift.String {
@@ -650,34 +681,34 @@ extension VigramSDK.DeviceMessage {
       }
     }
     public enum Mounts : Swift.String {
-      case stands
       case tablet
       case spc
       case spcPlus
       case spcPlusRegularly
       case spcPlusBackPlate
+      case spcPlusPrototype
       public init?(rawValue: Swift.String)
       public typealias RawValue = Swift.String
       public var rawValue: Swift.String {
         get
       }
     }
-    public enum HardwareRevisions : Swift.String {
-      case noMiniPCB
-      case withMiniPCB
-      case stateAtMarket
-      case withMiniPCBandIMUcalibrated
-      public init?(rawValue: Swift.String)
-      public typealias RawValue = Swift.String
-      public var rawValue: Swift.String {
-        get
-      }
+    public struct HardwareRevisions {
+      public let vigramRef: Swift.String
+      public let vigramBat: Swift.String
+      public let m88Laser: Swift.String?
+      public let l81Laser: Swift.String?
+      public let imu: Swift.String?
+      public let isCalibrated: Swift.Bool?
     }
     public let typeOfDevice: VigramSDK.DeviceVersion
     public var hasFrontLaser: Swift.Bool {
       get
     }
     public var hasBottomLaser: Swift.Bool {
+      get
+    }
+    public var isSinglePointMeasurementCancellable: Swift.Bool {
       get
     }
     public var getHousing: VigramSDK.DeviceMessage.Device.Housings? {
@@ -690,6 +721,9 @@ extension VigramSDK.DeviceMessage {
       get
     }
     public var hasIMU: Swift.Bool {
+      get
+    }
+    public var hasCalibrated: Swift.Bool {
       get
     }
   }
@@ -720,11 +754,14 @@ extension VigramSDK.DeviceMessage {
   public struct IMUTemp {
     public let degrees: Swift.Double
   }
+  public struct IMUCalibrationStatus {
+    public let times: Swift.UInt8
+  }
   public struct Measurement {
     public let start: Swift.UInt16
     public let end: Swift.UInt16
     public let distance: Swift.Double
-    public let quality: Swift.UInt16
+    public let quality: VigramSDK.DeviceMessage.Measurement.MeasurementQuality
   }
   public struct Battery {
     public let percentage: Swift.Int
@@ -773,6 +810,22 @@ extension VigramSDK.DeviceMessage {
     case update
     case safe
     public static func == (a: VigramSDK.DeviceMessage.Baudrate, b: VigramSDK.DeviceMessage.Baudrate) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+}
+extension VigramSDK.DeviceMessage.Measurement {
+  public enum MeasurementQuality {
+    case good
+    case acceptable
+    case bad
+    case error
+    public var rawValue: Swift.String {
+      get
+    }
+    public static func == (a: VigramSDK.DeviceMessage.Measurement.MeasurementQuality, b: VigramSDK.DeviceMessage.Measurement.MeasurementQuality) -> Swift.Bool
     public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
@@ -1153,6 +1206,8 @@ extension VigramSDK.AntennaOffset {
   }
 }
 extension VigramSDK.DeviceMotion.Accuracy : Swift.Hashable {}
+extension VigramSDK.StateIMUCalibration : Swift.Equatable {}
+extension VigramSDK.StateIMUCalibration : Swift.Hashable {}
 extension VigramSDK.NavigationSystemType : Swift.Equatable {}
 extension VigramSDK.NavigationSystemType : Swift.Hashable {}
 extension VigramSDK.NavigationSystemType : Swift.RawRepresentable {}
@@ -1176,15 +1231,14 @@ extension VigramSDK.DeviceMessage.Device.Housings : Swift.RawRepresentable {}
 extension VigramSDK.DeviceMessage.Device.Mounts : Swift.Equatable {}
 extension VigramSDK.DeviceMessage.Device.Mounts : Swift.Hashable {}
 extension VigramSDK.DeviceMessage.Device.Mounts : Swift.RawRepresentable {}
-extension VigramSDK.DeviceMessage.Device.HardwareRevisions : Swift.Equatable {}
-extension VigramSDK.DeviceMessage.Device.HardwareRevisions : Swift.Hashable {}
-extension VigramSDK.DeviceMessage.Device.HardwareRevisions : Swift.RawRepresentable {}
 extension VigramSDK.DeviceMessage.LaserState : Swift.Equatable {}
 extension VigramSDK.DeviceMessage.LaserState : Swift.Hashable {}
 extension VigramSDK.DeviceType : Swift.Equatable {}
 extension VigramSDK.DeviceType : Swift.Hashable {}
 extension VigramSDK.DeviceMessage.Baudrate : Swift.Equatable {}
 extension VigramSDK.DeviceMessage.Baudrate : Swift.Hashable {}
+extension VigramSDK.DeviceMessage.Measurement.MeasurementQuality : Swift.Equatable {}
+extension VigramSDK.DeviceMessage.Measurement.MeasurementQuality : Swift.Hashable {}
 extension VigramSDK.NtripMountPoint.Authentication : Swift.Equatable {}
 extension VigramSDK.NtripMountPoint.Authentication : Swift.Hashable {}
 extension VigramSDK.NtripMountPoint.Authentication : Swift.RawRepresentable {}
