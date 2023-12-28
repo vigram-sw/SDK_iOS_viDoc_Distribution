@@ -6,31 +6,31 @@
 	<dict>
 		<key>Headers/VigramSDK-Swift.h</key>
 		<data>
-		5lt2iAiHORd2PxohjQ1SwG38P7Y=
+		1KcGr0s57l89ogEqlkgkdHrm68w=
 		</data>
 		<key>Info.plist</key>
 		<data>
-		fVSfmwPs6quh1zMzGPT1tpzJ4no=
+		gJPf7A/ptImICgxU9Sf6hDPhGlk=
 		</data>
 		<key>Modules/VigramSDK.swiftmodule/arm64-apple-ios.abi.json</key>
 		<data>
-		27A6YlVFb2LXYB7CfgmxIZlOSC4=
+		fIJQEH+wYqY4a4RlqpVJBX1GQjE=
 		</data>
 		<key>Modules/VigramSDK.swiftmodule/arm64-apple-ios.private.swiftinterface</key>
 		<data>
-		8bhGC4nGYQHYQSCpD3LZetTS5As=
+		e3fYtSLJhpV6sk5csY6PGmqUY5M=
 		</data>
 		<key>Modules/VigramSDK.swiftmodule/arm64-apple-ios.swiftdoc</key>
 		<data>
-		D9yYbxBqs/bq1yV+X0/J4QbxmJw=
+		LfICPsJuBRUTYf531VRM9K4FnHo=
 		</data>
 		<key>Modules/VigramSDK.swiftmodule/arm64-apple-ios.swiftinterface</key>
 		<data>
-		8bhGC4nGYQHYQSCpD3LZetTS5As=
+		e3fYtSLJhpV6sk5csY6PGmqUY5M=
 		</data>
 		<key>Modules/VigramSDK.swiftmodule/arm64-apple-ios.swiftmodule</key>
 		<data>
-		0JYKpO8RhDH5VUKbORRx3x6693s=
+		ITdGB/Voe5u9jvUba8gRpE7AwpU=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -46,7 +46,7 @@
 		</data>
 		<key>Vigram.podspec</key>
 		<data>
-		quWLAaJ+qJ5V1m3Y9FJKyMR8b9Y=
+		D8nig6IzKtxDlUmFXVqY7jUqC3Y=
 		</data>
 		<key>check.sh</key>
 		<data>
@@ -63,42 +63,42 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			OJwhG1cgJ8VN6407F2Dxvux36QjQoNpkt5FAFVb1yEI=
+			3dmwvvvk9bCgYB6UIQCCu9roTTBKzSWngTPrnmwJrQ0=
 			</data>
 		</dict>
 		<key>Modules/VigramSDK.swiftmodule/arm64-apple-ios.abi.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			HX3+/WOcgde8/qfvE6qzYfLGvA+oUulwIlXM+UuEHLA=
+			prUp0Jv8vVlyZ/A8JSUnWoL1kSCVZGPRiBMFvwnMENY=
 			</data>
 		</dict>
 		<key>Modules/VigramSDK.swiftmodule/arm64-apple-ios.private.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			VI6RJnajYXEHnaiAL+Zqvj/0AK7KcMCb3foy8ZboQlw=
+			Kdb3sLc8DCIm9qVRhgAKAuHZGMkV8nJ4Uz4Wfy0QqIk=
 			</data>
 		</dict>
 		<key>Modules/VigramSDK.swiftmodule/arm64-apple-ios.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			WyYRmPb9K8JmmDb58aWz9PhUiBSkaJCtKzxvVDj7Nf0=
+			iln+PhDJcbsmqdqn73ScgHYEu+yVGAPtsMKAKZYvIYQ=
 			</data>
 		</dict>
 		<key>Modules/VigramSDK.swiftmodule/arm64-apple-ios.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			VI6RJnajYXEHnaiAL+Zqvj/0AK7KcMCb3foy8ZboQlw=
+			Kdb3sLc8DCIm9qVRhgAKAuHZGMkV8nJ4Uz4Wfy0QqIk=
 			</data>
 		</dict>
 		<key>Modules/VigramSDK.swiftmodule/arm64-apple-ios.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			qAYYbtLbJDWrN3J9O7R/+L0I/6n6LZDqi+frguLiKtg=
+			uYPGo4Yr777mChITTnW2n14h7koN6sbzeVR2WkQpdpA=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
@@ -126,7 +126,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			zo9Shdksupt4EoqXVIj2HHAZq5YD8iMFW5C/97fGUIs=
+			DIWOiru8UvIlTq2xZz8VEK1wQ9Er/X7XcpImTdOr9QU=
 			</data>
 		</dict>
 		<key>check.sh</key>
