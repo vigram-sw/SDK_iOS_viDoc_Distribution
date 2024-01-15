@@ -21,7 +21,6 @@
 		7036D6682B3DB28C0036D5E0 /* MainScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7036D6462B3DB28B0036D5E0 /* MainScreenView.swift */; };
 		7036D6692B3DB28C0036D5E0 /* FileWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7036D6482B3DB28B0036D5E0 /* FileWorker.swift */; };
 		7036D66A2B3DB28C0036D5E0 /* VigramHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7036D64A2B3DB28B0036D5E0 /* VigramHelper.swift */; };
-		7036D66B2B3DB28C0036D5E0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7036D64C2B3DB28C0036D5E0 /* Assets.xcassets */; };
 		7036D66C2B3DB28C0036D5E0 /* NTRIPCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7036D64E2B3DB28C0036D5E0 /* NTRIPCredentials.swift */; };
 		7036D66D2B3DB28C0036D5E0 /* Foundation+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7036D6502B3DB28C0036D5E0 /* Foundation+Extension.swift */; };
 		7036D66E2B3DB28C0036D5E0 /* SwiftUI+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7036D6512B3DB28C0036D5E0 /* SwiftUI+Extension.swift */; };
@@ -50,7 +49,6 @@
 		7036D6462B3DB28B0036D5E0 /* MainScreenView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainScreenView.swift; sourceTree = "<group>"; };
 		7036D6482B3DB28B0036D5E0 /* FileWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileWorker.swift; sourceTree = "<group>"; };
 		7036D64A2B3DB28B0036D5E0 /* VigramHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VigramHelper.swift; sourceTree = "<group>"; };
-		7036D64C2B3DB28C0036D5E0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7036D64E2B3DB28C0036D5E0 /* NTRIPCredentials.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NTRIPCredentials.swift; sourceTree = "<group>"; };
 		7036D6502B3DB28C0036D5E0 /* Foundation+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Foundation+Extension.swift"; sourceTree = "<group>"; };
 		7036D6512B3DB28C0036D5E0 /* SwiftUI+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SwiftUI+Extension.swift"; sourceTree = "<group>"; };
@@ -131,7 +129,7 @@
 		7036D64B2B3DB28C0036D5E0 /* SupportingFiles */ = {
 			isa = PBXGroup;
 			children = (
-				7036D64C2B3DB28C0036D5E0 /* Assets.xcassets */,
+				707E0153298D08C300F3A611 /* Assets.xcassets */,
 			);
 			path = SupportingFiles;
 			sourceTree = "<group>";
@@ -185,7 +183,6 @@
 			children = (
 				709B3284298D158000979F92 /* VigramSDK-Demo-Info.plist */,
 				707E014F298D08C100F3A611 /* VigramSDK_DemoApp.swift */,
-				707E0153298D08C300F3A611 /* Assets.xcassets */,
 				7036D6492B3DB28B0036D5E0 /* API */,
 				7036D6532B3DB28C0036D5E0 /* CustomViews */,
 				7036D64D2B3DB28C0036D5E0 /* Entities */,
@@ -229,7 +226,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1420;
-				LastUpgradeCheck = 1420;
+				LastUpgradeCheck = 1520;
 				TargetAttributes = {
 					707E014B298D08C100F3A611 = {
 						CreatedOnToolsVersion = 14.2;
@@ -262,7 +259,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7036D66B2B3DB28C0036D5E0 /* Assets.xcassets in Resources */,
 				707E0154298D08C300F3A611 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -338,6 +334,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -399,6 +396,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
