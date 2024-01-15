@@ -3523,19 +3523,19 @@
           },
           {
             "kind": "Var",
-            "name": "calibrationNextStep",
-            "printedName": "calibrationNextStep",
+            "name": "calibrationRawValue",
+            "printedName": "calibrationRawValue",
             "children": [
               {
                 "kind": "TypeNominal",
                 "name": "AnyPublisher",
-                "printedName": "Combine.AnyPublisher<Swift.Bool, Swift.Never>",
+                "printedName": "Combine.AnyPublisher<Swift.String, Swift.Never>",
                 "children": [
                   {
                     "kind": "TypeNominal",
-                    "name": "Bool",
-                    "printedName": "Swift.Bool",
-                    "usr": "s:Sb"
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
                   },
                   {
                     "kind": "TypeNominal",
@@ -3548,8 +3548,8 @@
               }
             ],
             "declKind": "Var",
-            "usr": "s:9VigramSDK10PeripheralP19calibrationNextStep7Combine12AnyPublisherVySbs5NeverOGvp",
-            "mangledName": "$s9VigramSDK10PeripheralP19calibrationNextStep7Combine12AnyPublisherVySbs5NeverOGvp",
+            "usr": "s:9VigramSDK10PeripheralP19calibrationRawValue7Combine12AnyPublisherVySSs5NeverOGvp",
+            "mangledName": "$s9VigramSDK10PeripheralP19calibrationRawValue7Combine12AnyPublisherVySSs5NeverOGvp",
             "moduleName": "VigramSDK",
             "protocolReq": true,
             "declAttributes": [
@@ -3564,13 +3564,13 @@
                   {
                     "kind": "TypeNominal",
                     "name": "AnyPublisher",
-                    "printedName": "Combine.AnyPublisher<Swift.Bool, Swift.Never>",
+                    "printedName": "Combine.AnyPublisher<Swift.String, Swift.Never>",
                     "children": [
                       {
                         "kind": "TypeNominal",
-                        "name": "Bool",
-                        "printedName": "Swift.Bool",
-                        "usr": "s:Sb"
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
                       },
                       {
                         "kind": "TypeNominal",
@@ -3583,81 +3583,8 @@
                   }
                 ],
                 "declKind": "Accessor",
-                "usr": "s:9VigramSDK10PeripheralP19calibrationNextStep7Combine12AnyPublisherVySbs5NeverOGvg",
-                "mangledName": "$s9VigramSDK10PeripheralP19calibrationNextStep7Combine12AnyPublisherVySbs5NeverOGvg",
-                "moduleName": "VigramSDK",
-                "genericSig": "<τ_0_0 where τ_0_0 : VigramSDK.Peripheral>",
-                "sugared_genericSig": "<Self where Self : VigramSDK.Peripheral>",
-                "protocolReq": true,
-                "reqNewWitnessTableEntry": true,
-                "accessorKind": "get"
-              }
-            ]
-          },
-          {
-            "kind": "Var",
-            "name": "calibrationStepNumber",
-            "printedName": "calibrationStepNumber",
-            "children": [
-              {
-                "kind": "TypeNominal",
-                "name": "AnyPublisher",
-                "printedName": "Combine.AnyPublisher<Swift.Int, Swift.Never>",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "Int",
-                    "printedName": "Swift.Int",
-                    "usr": "s:Si"
-                  },
-                  {
-                    "kind": "TypeNominal",
-                    "name": "Never",
-                    "printedName": "Swift.Never",
-                    "usr": "s:s5NeverO"
-                  }
-                ],
-                "usr": "s:7Combine12AnyPublisherV"
-              }
-            ],
-            "declKind": "Var",
-            "usr": "s:9VigramSDK10PeripheralP21calibrationStepNumber7Combine12AnyPublisherVySis5NeverOGvp",
-            "mangledName": "$s9VigramSDK10PeripheralP21calibrationStepNumber7Combine12AnyPublisherVySis5NeverOGvp",
-            "moduleName": "VigramSDK",
-            "protocolReq": true,
-            "declAttributes": [
-              "RawDocComment"
-            ],
-            "accessors": [
-              {
-                "kind": "Accessor",
-                "name": "Get",
-                "printedName": "Get()",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "AnyPublisher",
-                    "printedName": "Combine.AnyPublisher<Swift.Int, Swift.Never>",
-                    "children": [
-                      {
-                        "kind": "TypeNominal",
-                        "name": "Int",
-                        "printedName": "Swift.Int",
-                        "usr": "s:Si"
-                      },
-                      {
-                        "kind": "TypeNominal",
-                        "name": "Never",
-                        "printedName": "Swift.Never",
-                        "usr": "s:s5NeverO"
-                      }
-                    ],
-                    "usr": "s:7Combine12AnyPublisherV"
-                  }
-                ],
-                "declKind": "Accessor",
-                "usr": "s:9VigramSDK10PeripheralP21calibrationStepNumber7Combine12AnyPublisherVySis5NeverOGvg",
-                "mangledName": "$s9VigramSDK10PeripheralP21calibrationStepNumber7Combine12AnyPublisherVySis5NeverOGvg",
+                "usr": "s:9VigramSDK10PeripheralP19calibrationRawValue7Combine12AnyPublisherVySSs5NeverOGvg",
+                "mangledName": "$s9VigramSDK10PeripheralP19calibrationRawValue7Combine12AnyPublisherVySSs5NeverOGvg",
                 "moduleName": "VigramSDK",
                 "genericSig": "<τ_0_0 where τ_0_0 : VigramSDK.Peripheral>",
                 "sugared_genericSig": "<Self where Self : VigramSDK.Peripheral>",
@@ -6063,6 +5990,99 @@
           },
           {
             "kind": "Var",
+            "name": "go",
+            "printedName": "go",
+            "children": [
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(VigramSDK.StateIMUCalibration.Type) -> VigramSDK.StateIMUCalibration",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "StateIMUCalibration",
+                    "printedName": "VigramSDK.StateIMUCalibration",
+                    "usr": "s:9VigramSDK19StateIMUCalibrationO"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Metatype",
+                    "printedName": "VigramSDK.StateIMUCalibration.Type",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "StateIMUCalibration",
+                        "printedName": "VigramSDK.StateIMUCalibration",
+                        "usr": "s:9VigramSDK19StateIMUCalibrationO"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "EnumElement",
+            "usr": "s:9VigramSDK19StateIMUCalibrationO2goyA2CmF",
+            "mangledName": "$s9VigramSDK19StateIMUCalibrationO2goyA2CmF",
+            "moduleName": "VigramSDK",
+            "declAttributes": [
+              "RawDocComment"
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "step",
+            "printedName": "step",
+            "children": [
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(VigramSDK.StateIMUCalibration.Type) -> (Swift.Int) -> VigramSDK.StateIMUCalibration",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "(Swift.Int) -> VigramSDK.StateIMUCalibration",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "StateIMUCalibration",
+                        "printedName": "VigramSDK.StateIMUCalibration",
+                        "usr": "s:9VigramSDK19StateIMUCalibrationO"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Int",
+                        "printedName": "Swift.Int",
+                        "usr": "s:Si"
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Metatype",
+                    "printedName": "VigramSDK.StateIMUCalibration.Type",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "StateIMUCalibration",
+                        "printedName": "VigramSDK.StateIMUCalibration",
+                        "usr": "s:9VigramSDK19StateIMUCalibrationO"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "EnumElement",
+            "usr": "s:9VigramSDK19StateIMUCalibrationO4stepyACSicACmF",
+            "mangledName": "$s9VigramSDK19StateIMUCalibrationO4stepyACSicACmF",
+            "moduleName": "VigramSDK",
+            "declAttributes": [
+              "RawDocComment"
+            ]
+          },
+          {
+            "kind": "Var",
             "name": "end",
             "printedName": "end",
             "children": [
@@ -6140,102 +6160,6 @@
             "declAttributes": [
               "RawDocComment"
             ]
-          },
-          {
-            "kind": "Function",
-            "name": "==",
-            "printedName": "==(_:_:)",
-            "children": [
-              {
-                "kind": "TypeNominal",
-                "name": "Bool",
-                "printedName": "Swift.Bool",
-                "usr": "s:Sb"
-              },
-              {
-                "kind": "TypeNominal",
-                "name": "StateIMUCalibration",
-                "printedName": "VigramSDK.StateIMUCalibration",
-                "usr": "s:9VigramSDK19StateIMUCalibrationO"
-              },
-              {
-                "kind": "TypeNominal",
-                "name": "StateIMUCalibration",
-                "printedName": "VigramSDK.StateIMUCalibration",
-                "usr": "s:9VigramSDK19StateIMUCalibrationO"
-              }
-            ],
-            "declKind": "Func",
-            "usr": "s:9VigramSDK19StateIMUCalibrationO2eeoiySbAC_ACtFZ",
-            "mangledName": "$s9VigramSDK19StateIMUCalibrationO2eeoiySbAC_ACtFZ",
-            "moduleName": "VigramSDK",
-            "static": true,
-            "implicit": true,
-            "funcSelfKind": "NonMutating"
-          },
-          {
-            "kind": "Var",
-            "name": "hashValue",
-            "printedName": "hashValue",
-            "children": [
-              {
-                "kind": "TypeNominal",
-                "name": "Int",
-                "printedName": "Swift.Int",
-                "usr": "s:Si"
-              }
-            ],
-            "declKind": "Var",
-            "usr": "s:9VigramSDK19StateIMUCalibrationO9hashValueSivp",
-            "mangledName": "$s9VigramSDK19StateIMUCalibrationO9hashValueSivp",
-            "moduleName": "VigramSDK",
-            "implicit": true,
-            "accessors": [
-              {
-                "kind": "Accessor",
-                "name": "Get",
-                "printedName": "Get()",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "Int",
-                    "printedName": "Swift.Int",
-                    "usr": "s:Si"
-                  }
-                ],
-                "declKind": "Accessor",
-                "usr": "s:9VigramSDK19StateIMUCalibrationO9hashValueSivg",
-                "mangledName": "$s9VigramSDK19StateIMUCalibrationO9hashValueSivg",
-                "moduleName": "VigramSDK",
-                "implicit": true,
-                "accessorKind": "get"
-              }
-            ]
-          },
-          {
-            "kind": "Function",
-            "name": "hash",
-            "printedName": "hash(into:)",
-            "children": [
-              {
-                "kind": "TypeNominal",
-                "name": "Void",
-                "printedName": "()"
-              },
-              {
-                "kind": "TypeNominal",
-                "name": "Hasher",
-                "printedName": "Swift.Hasher",
-                "paramValueOwnership": "InOut",
-                "usr": "s:s6HasherV"
-              }
-            ],
-            "declKind": "Func",
-            "usr": "s:9VigramSDK19StateIMUCalibrationO4hash4intoys6HasherVz_tF",
-            "mangledName": "$s9VigramSDK19StateIMUCalibrationO4hash4intoys6HasherVz_tF",
-            "moduleName": "VigramSDK",
-            "implicit": true,
-            "funcSelfKind": "NonMutating"
           }
         ],
         "declKind": "Enum",
@@ -6245,22 +6169,6 @@
         "declAttributes": [
           "AccessControl",
           "RawDocComment"
-        ],
-        "conformances": [
-          {
-            "kind": "Conformance",
-            "name": "Equatable",
-            "printedName": "Equatable",
-            "usr": "s:SQ",
-            "mangledName": "$sSQ"
-          },
-          {
-            "kind": "Conformance",
-            "name": "Hashable",
-            "printedName": "Hashable",
-            "usr": "s:SH",
-            "mangledName": "$sSH"
-          }
         ]
       },
       {
@@ -47212,189 +47120,189 @@
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/Peripheral.swift",
       "kind": "IntegerLiteral",
-      "offset": 15193,
+      "offset": 14973,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/Peripheral.swift",
       "kind": "IntegerLiteral",
-      "offset": 15987,
+      "offset": 15767,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/Peripheral.swift",
       "kind": "IntegerLiteral",
-      "offset": 16201,
+      "offset": 15981,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/Peripheral.swift",
       "kind": "IntegerLiteral",
-      "offset": 16375,
+      "offset": 16155,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/Peripheral.swift",
       "kind": "StringLiteral",
-      "offset": 18099,
+      "offset": 17879,
       "length": 46,
       "value": "\"Laser measurements not available in PPK mode\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/Peripheral.swift",
       "kind": "StringLiteral",
-      "offset": 18156,
+      "offset": 17936,
       "length": 17,
       "value": "\"PeripheralError\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/Peripheral.swift",
       "kind": "StringLiteral",
-      "offset": 18250,
+      "offset": 18030,
       "length": 59,
       "value": "\"The peripheral does not have a characteristic to write to\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/Peripheral.swift",
       "kind": "StringLiteral",
-      "offset": 18320,
+      "offset": 18100,
       "length": 17,
       "value": "\"PeripheralError\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/Peripheral.swift",
       "kind": "StringLiteral",
-      "offset": 18410,
+      "offset": 18190,
       "length": 78,
       "value": "\"A send request is aborted, since the peripheral has already been deallocated\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/Peripheral.swift",
       "kind": "StringLiteral",
-      "offset": 18499,
+      "offset": 18279,
       "length": 17,
       "value": "\"PeripheralError\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/Peripheral.swift",
       "kind": "StringLiteral",
-      "offset": 18583,
+      "offset": 18363,
       "length": 28,
       "value": "\"BLE write timeout exceeded\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/Peripheral.swift",
       "kind": "StringLiteral",
-      "offset": 18622,
+      "offset": 18402,
       "length": 17,
       "value": "\"PeripheralError\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/Peripheral.swift",
       "kind": "StringLiteral",
-      "offset": 18713,
+      "offset": 18493,
       "length": 57,
       "value": "\"The configuration of the peripheral failed unexpectedly\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/Peripheral.swift",
       "kind": "StringLiteral",
-      "offset": 18781,
+      "offset": 18561,
       "length": 17,
       "value": "\"PeripheralError\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/Peripheral.swift",
       "kind": "StringLiteral",
-      "offset": 18886,
+      "offset": 18666,
       "length": 89,
       "value": "\"The method: \""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/Peripheral.swift",
       "kind": "StringLiteral",
-      "offset": 18908,
+      "offset": 18688,
       "length": 2,
       "value": "\" is not supported in this software version. Please update software\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/Peripheral.swift",
       "kind": "StringLiteral",
-      "offset": 18986,
+      "offset": 18766,
       "length": 17,
       "value": "\"PeripheralError\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/Peripheral.swift",
       "kind": "StringLiteral",
-      "offset": 19082,
+      "offset": 18862,
       "length": 53,
       "value": "\"The method: \""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/Peripheral.swift",
       "kind": "StringLiteral",
-      "offset": 19104,
+      "offset": 18884,
       "length": 2,
       "value": "\" is not available in this case\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/Peripheral.swift",
       "kind": "StringLiteral",
-      "offset": 19146,
+      "offset": 18926,
       "length": 17,
       "value": "\"PeripheralError\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/Peripheral.swift",
       "kind": "StringLiteral",
-      "offset": 19244,
+      "offset": 19024,
       "length": 60,
       "value": "\"The current RTK device is incompatible in this SDK version\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/Peripheral.swift",
       "kind": "StringLiteral",
-      "offset": 19315,
+      "offset": 19095,
       "length": 17,
       "value": "\"PeripheralError\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/Peripheral.swift",
       "kind": "StringLiteral",
-      "offset": 19415,
+      "offset": 19195,
       "length": 86,
       "value": "\"The current software of the connected RTK device is incompatible in this SDK version\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/Peripheral.swift",
       "kind": "StringLiteral",
-      "offset": 19512,
+      "offset": 19292,
       "length": 17,
       "value": "\"PeripheralError\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/Peripheral.swift",
       "kind": "StringLiteral",
-      "offset": 19608,
+      "offset": 19388,
       "length": 104,
       "value": "\"It is not possible to perform method: \""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/Peripheral.swift",
       "kind": "StringLiteral",
-      "offset": 19656,
+      "offset": 19436,
       "length": 1,
       "value": "\". Device is busy. Please wait for configuration is done\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/Peripheral.swift",
       "kind": "StringLiteral",
-      "offset": 19723,
+      "offset": 19503,
       "length": 17,
       "value": "\"PeripheralError\""
     },
@@ -53001,21 +52909,21 @@
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Models\/PeripheralMessage.swift",
       "kind": "StringLiteral",
-      "offset": 866,
+      "offset": 860,
       "length": 5,
       "value": "\"go;\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Models\/PeripheralMessage.swift",
       "kind": "StringLiteral",
-      "offset": 900,
+      "offset": 894,
       "length": 7,
       "value": "\"error\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Models\/PeripheralMessage.swift",
       "kind": "StringLiteral",
-      "offset": 934,
+      "offset": 928,
       "length": 6,
       "value": "\"end;\""
     },
@@ -53029,21 +52937,21 @@
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Models\/PeripheralMessage.swift",
       "kind": "StringLiteral",
-      "offset": 866,
+      "offset": 860,
       "length": 5,
       "value": "\"go;\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Models\/PeripheralMessage.swift",
       "kind": "StringLiteral",
-      "offset": 900,
+      "offset": 894,
       "length": 7,
       "value": "\"error\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Models\/PeripheralMessage.swift",
       "kind": "StringLiteral",
-      "offset": 934,
+      "offset": 928,
       "length": 6,
       "value": "\"end;\""
     },
@@ -55843,1757 +55751,1883 @@
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 3914,
+      "offset": 3804,
       "length": 16,
       "value": "\"Starting viDoc\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "BooleanLiteral",
-      "offset": 4006,
+      "offset": 3896,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "BooleanLiteral",
-      "offset": 4531,
+      "offset": 4421,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "BooleanLiteral",
-      "offset": 4576,
+      "offset": 4466,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "BooleanLiteral",
-      "offset": 4622,
+      "offset": 4512,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "BooleanLiteral",
-      "offset": 4672,
+      "offset": 4562,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "BooleanLiteral",
-      "offset": 4712,
+      "offset": 4602,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "BooleanLiteral",
-      "offset": 4762,
+      "offset": 4652,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "BooleanLiteral",
-      "offset": 4799,
+      "offset": 4689,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "BooleanLiteral",
-      "offset": 4838,
+      "offset": 4728,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "BooleanLiteral",
-      "offset": 4883,
+      "offset": 4773,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "BooleanLiteral",
-      "offset": 5185,
+      "offset": 5075,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "IntegerLiteral",
-      "offset": 6144,
+      "offset": 5966,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "Array",
-      "offset": 6272,
+      "offset": 6094,
       "length": 2,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "Array",
-      "offset": 6308,
+      "offset": 6130,
       "length": 2,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 6710,
+      "offset": 6532,
       "length": 38,
       "value": "\"SDK_VERS,\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 6747,
+      "offset": 6569,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 6782,
+      "offset": 6604,
       "length": 35,
       "value": "\"DEVICE_NAME,\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 6816,
+      "offset": 6638,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 6851,
+      "offset": 6673,
       "length": 88,
       "value": "\"DEVICE_SYSTEM_VERSION,\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 6904,
+      "offset": 6726,
       "length": 1,
       "value": "\"_\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 6938,
+      "offset": 6760,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 7023,
+      "offset": 6845,
       "length": 24,
       "value": "\"RTK_ROVER,\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 7046,
+      "offset": 6868,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 7115,
+      "offset": 6937,
       "length": 3,
       "value": "\" \""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 7162,
+      "offset": 6984,
       "length": 3,
       "value": "\"-\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "FloatLiteral",
-      "offset": 7434,
+      "offset": 7256,
       "length": 3,
       "value": "3.0"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 7537,
+      "offset": 7359,
       "length": 20,
       "value": "\"timerSearchDevices\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "BooleanLiteral",
-      "offset": 7580,
+      "offset": 7402,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 7699,
+      "offset": 7521,
       "length": 14,
       "value": "\"[RTK]: \""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 7712,
+      "offset": 7534,
       "length": 29,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 7974,
+      "offset": 7796,
       "length": 100,
       "value": "\"[SATELLITE]: \""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 8004,
+      "offset": 7826,
       "length": 4,
       "value": "\" GNSS Constellation \""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 8044,
+      "offset": 7866,
       "length": 12,
       "value": "\"is enabled\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 8059,
+      "offset": 7881,
       "length": 13,
       "value": "\"is disabled\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 8073,
+      "offset": 7895,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 8183,
+      "offset": 8005,
       "length": 46,
       "value": "\"[SATELLITE]: Changing rate = \""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 8228,
+      "offset": 8050,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 8340,
+      "offset": 8162,
       "length": 47,
       "value": "\"[SATELLITE]: Elevation = \""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 8386,
+      "offset": 8208,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 8468,
+      "offset": 8290,
       "length": 118,
       "value": "\"[SATELLITE]: PDOP = \""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 8515,
+      "offset": 8337,
       "length": 4,
       "value": "\" VDOP = \""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 8549,
+      "offset": 8371,
       "length": 4,
       "value": "\" HDOP = \""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 8585,
+      "offset": 8407,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 8667,
+      "offset": 8489,
       "length": 52,
       "value": "\"[SATELLITE]: COUNT = \""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 8718,
+      "offset": 8540,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 8825,
+      "offset": 8647,
       "length": 78,
       "value": "\"[SATELLITE]: Message is \""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 8867,
+      "offset": 8689,
       "length": 14,
       "value": "\"acknowledged\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 8884,
+      "offset": 8706,
       "length": 17,
       "value": "\"not acknowledge\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 8902,
+      "offset": 8724,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 8986,
+      "offset": 8808,
       "length": 65,
       "value": "\"[SATELLITE]: RAWX Message: \""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 9050,
+      "offset": 8872,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 9136,
+      "offset": 8958,
       "length": 67,
       "value": "\"[SATELLITE]: SFRBX Message: \""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 9202,
+      "offset": 9024,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 9320,
+      "offset": 9142,
       "length": 45,
       "value": "\"[SATELLITE]: Dynamic State: \""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 9364,
+      "offset": 9186,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 9426,
+      "offset": 9248,
       "length": 30,
       "value": "\"[SATELLITE]: Unknown message\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 10023,
+      "offset": 9845,
       "length": 6,
       "value": "\".txt\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "IntegerLiteral",
-      "offset": 10195,
+      "offset": 10017,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "IntegerLiteral",
-      "offset": 10284,
+      "offset": 10106,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 10310,
+      "offset": 10132,
       "length": 13,
       "value": "\"CALIBRATION\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "BooleanLiteral",
-      "offset": 10627,
+      "offset": 10449,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 10775,
+      "offset": 10597,
       "length": 38,
       "value": "\"Error: \""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 10812,
+      "offset": 10634,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "BooleanLiteral",
-      "offset": 11100,
+      "offset": 10922,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 11220,
+      "offset": 11042,
       "length": 38,
       "value": "\"Error: \""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 11257,
+      "offset": 11079,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 11550,
+      "offset": 11372,
       "length": 14,
       "value": "\"[PERIPHERAL]\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 11566,
+      "offset": 11388,
       "length": 33,
       "value": "\"Error: Authentication: \""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 11598,
+      "offset": 11420,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "BooleanLiteral",
-      "offset": 11719,
+      "offset": 11541,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "Array",
-      "offset": 12266,
+      "offset": 12088,
       "length": 6,
       "value": "[0x73]"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "FloatLiteral",
-      "offset": 12447,
+      "offset": 12269,
       "length": 3,
       "value": "3.0"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "IntegerLiteral",
-      "offset": 12939,
+      "offset": 12761,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "IntegerLiteral",
-      "offset": 13203,
+      "offset": 13025,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 14945,
+      "offset": 14767,
       "length": 6,
       "value": "\"iPad\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "IntegerLiteral",
-      "offset": 15095,
+      "offset": 14917,
       "length": 1,
       "value": "8"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "BooleanLiteral",
-      "offset": 15219,
+      "offset": 15041,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "BooleanLiteral",
-      "offset": 15294,
+      "offset": 15116,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "IntegerLiteral",
-      "offset": 15612,
+      "offset": 15434,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 15783,
+      "offset": 15605,
       "length": 99,
       "value": "\"Reset not possible: This method is not supported in this software version. Please update software\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "IntegerLiteral",
-      "offset": 16255,
+      "offset": 16077,
       "length": 1,
       "value": "8"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "BooleanLiteral",
-      "offset": 16397,
+      "offset": 16219,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "BooleanLiteral",
-      "offset": 16481,
+      "offset": 16303,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "IntegerLiteral",
-      "offset": 16825,
+      "offset": 16647,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 17008,
+      "offset": 16830,
       "length": 99,
       "value": "\"Reset not possible: This method is not supported in this software version. Please update software\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 17435,
+      "offset": 17257,
       "length": 65,
       "value": "\"Reset not possible: This method is not supported in this device\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 17699,
+      "offset": 17521,
       "length": 40,
       "value": "\"Reset not possible: viDoc is not ready\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "BooleanLiteral",
-      "offset": 18284,
+      "offset": 18106,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "BooleanLiteral",
-      "offset": 18291,
+      "offset": 18113,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "BooleanLiteral",
-      "offset": 19272,
+      "offset": 19094,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "BooleanLiteral",
-      "offset": 19279,
+      "offset": 19101,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "IntegerLiteral",
-      "offset": 19879,
+      "offset": 19701,
       "length": 2,
       "value": "60"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 27894,
+      "offset": 27716,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "IntegerLiteral",
-      "offset": 28153,
+      "offset": 27975,
       "length": 1,
       "value": "2"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 29500,
+      "offset": 29322,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 29672,
+      "offset": 29494,
       "length": 3,
       "value": "\"s\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 30711,
+      "offset": 30533,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 30883,
+      "offset": 30705,
       "length": 3,
       "value": "\"e\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 33069,
+      "offset": 32891,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 33211,
+      "offset": 33033,
       "length": 20,
       "value": "\"number = \""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 33230,
+      "offset": 33052,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "IntegerLiteral",
-      "offset": 33358,
+      "offset": 33180,
       "length": 1,
       "value": "2"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "IntegerLiteral",
-      "offset": 33781,
+      "offset": 33603,
       "length": 1,
       "value": "2"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 35179,
+      "offset": 35001,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 35394,
+      "offset": 35216,
       "length": 69,
       "value": "\"firstFrameByte=\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 35427,
+      "offset": 35249,
       "length": 1,
       "value": "\",secondFrameByte=\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 35462,
+      "offset": 35284,
       "length": 1,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "IntegerLiteral",
-      "offset": 35613,
+      "offset": 35435,
       "length": 1,
       "value": "2"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "IntegerLiteral",
-      "offset": 36038,
+      "offset": 35860,
       "length": 1,
       "value": "2"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 37429,
+      "offset": 37251,
       "length": 33,
       "value": "\"SATELLITE=\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 37461,
+      "offset": 37283,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 38064,
+      "offset": 37886,
       "length": 51,
       "value": "\"SATELLITE=\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 38096,
+      "offset": 37918,
       "length": 1,
       "value": "\",VALUE=\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 38114,
+      "offset": 37936,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 39278,
+      "offset": 39100,
       "length": 19,
       "value": "\"VALUE=\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 39296,
+      "offset": 39118,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "BooleanLiteral",
-      "offset": 39376,
+      "offset": 39198,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 39912,
+      "offset": 39734,
       "length": 19,
       "value": "\"VALUE=\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 39930,
+      "offset": 39752,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "BooleanLiteral",
-      "offset": 40010,
+      "offset": 39832,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 41048,
+      "offset": 40870,
       "length": 25,
       "value": "\"VALUE=\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 41072,
+      "offset": 40894,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 41645,
+      "offset": 41467,
       "length": 24,
       "value": "\"VALUE=\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 41668,
+      "offset": 41490,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "BooleanLiteral",
-      "offset": 41751,
+      "offset": 41573,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 42885,
+      "offset": 42707,
       "length": 19,
       "value": "\"VALUE=\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 42903,
+      "offset": 42725,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "BooleanLiteral",
-      "offset": 42991,
+      "offset": 42813,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 43426,
+      "offset": 43248,
       "length": 19,
       "value": "\"VALUE=\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 43444,
+      "offset": 43266,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "BooleanLiteral",
-      "offset": 43861,
+      "offset": 43683,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "BooleanLiteral",
-      "offset": 43959,
+      "offset": 43781,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "BooleanLiteral",
-      "offset": 44231,
+      "offset": 44053,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "BooleanLiteral",
-      "offset": 44237,
+      "offset": 44059,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "BooleanLiteral",
-      "offset": 44465,
+      "offset": 44287,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "BooleanLiteral",
-      "offset": 44471,
+      "offset": 44293,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "BooleanLiteral",
-      "offset": 44592,
+      "offset": 44414,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "BooleanLiteral",
-      "offset": 44599,
+      "offset": 44421,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "BooleanLiteral",
-      "offset": 44772,
+      "offset": 44594,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "BooleanLiteral",
-      "offset": 44778,
+      "offset": 44600,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "BooleanLiteral",
-      "offset": 44899,
+      "offset": 44721,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "BooleanLiteral",
-      "offset": 44906,
+      "offset": 44728,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "BooleanLiteral",
-      "offset": 45055,
+      "offset": 44877,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "BooleanLiteral",
-      "offset": 45164,
+      "offset": 44986,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "BooleanLiteral",
-      "offset": 45278,
+      "offset": 45100,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "BooleanLiteral",
-      "offset": 45285,
+      "offset": 45107,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 47202,
+      "offset": 47024,
       "length": 38,
       "value": "\"PPK MEASUREMENT - Recording starting\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "BooleanLiteral",
-      "offset": 47283,
+      "offset": 47105,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 47336,
+      "offset": 47158,
       "length": 18,
       "value": "\"START_RECORD_PPK\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 47416,
+      "offset": 47238,
       "length": 77,
       "value": "\"PPK MEASUREMENT - Error recording starting -  \""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 47492,
+      "offset": 47314,
       "length": 3,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 47633,
+      "offset": 47455,
       "length": 38,
       "value": "\"PPK MEASUREMENT - Recording stopping\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 47722,
+      "offset": 47544,
       "length": 17,
       "value": "\"STOP_RECORD_PPK\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "BooleanLiteral",
-      "offset": 47781,
+      "offset": 47603,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 48036,
+      "offset": 47858,
       "length": 15,
       "value": "\"VALUE=\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 48050,
+      "offset": 47872,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "BooleanLiteral",
-      "offset": 48123,
+      "offset": 47945,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "BooleanLiteral",
-      "offset": 49871,
+      "offset": 49693,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 50345,
+      "offset": 50167,
       "length": 86,
       "value": "\"[PERIPHERAL],\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 50382,
+      "offset": 50204,
       "length": 1,
       "value": "\",\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 50407,
+      "offset": 50229,
       "length": 1,
       "value": "\",\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 50430,
+      "offset": 50252,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 50489,
+      "offset": 50311,
       "length": 61,
       "value": "\"[PERIPHERAL],\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 50526,
+      "offset": 50348,
       "length": 1,
       "value": "\",\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 50549,
+      "offset": 50371,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 50659,
+      "offset": 50481,
       "length": 63,
       "value": "\"[PERIPHERAL],\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 50696,
+      "offset": 50518,
       "length": 1,
       "value": "\",\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 50721,
+      "offset": 50543,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 50780,
+      "offset": 50602,
       "length": 38,
       "value": "\"[PERIPHERAL],\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 50817,
+      "offset": 50639,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 50964,
+      "offset": 50786,
       "length": 39,
       "value": "\"[PERIPHERAL]: \""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 51002,
+      "offset": 50824,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "BooleanLiteral",
-      "offset": 51146,
+      "offset": 50968,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 52205,
+      "offset": 52027,
       "length": 86,
       "value": "\"The current software of the connected RTK device is incompatible in this SDK version\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "FloatLiteral",
-      "offset": 52675,
+      "offset": 52497,
       "length": 4,
       "value": "10.0"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 52823,
+      "offset": 52645,
       "length": 30,
       "value": "\"timercheckConfigurationState\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "BooleanLiteral",
-      "offset": 52888,
+      "offset": 52710,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "BooleanLiteral",
-      "offset": 52959,
+      "offset": 52781,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "IntegerLiteral",
-      "offset": 53086,
+      "offset": 52904,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
+      "kind": "IntegerLiteral",
+      "offset": 52965,
       "length": 2,
       "value": "11"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "IntegerLiteral",
-      "offset": 53119,
+      "offset": 53002,
       "length": 2,
       "value": "12"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "IntegerLiteral",
-      "offset": 53124,
+      "offset": 53007,
       "length": 2,
       "value": "14"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "BooleanLiteral",
-      "offset": 54124,
+      "offset": 54059,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "BooleanLiteral",
-      "offset": 54207,
+      "offset": 54146,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 54484,
+      "offset": 54439,
       "length": 60,
       "value": "\"The current RTK device is incompatible in this SDK version\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 54953,
+      "offset": 54932,
       "length": 27,
       "value": "\"SWITCH_PROTOCOL_REQUEST_1\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "BooleanLiteral",
-      "offset": 55060,
+      "offset": 55043,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "IntegerLiteral",
-      "offset": 55149,
+      "offset": 55136,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 55504,
+      "offset": 55503,
       "length": 27,
       "value": "\"SWITCH_PROTOCOL_REQUEST_2\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "BooleanLiteral",
-      "offset": 55626,
+      "offset": 55629,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "IntegerLiteral",
-      "offset": 55749,
+      "offset": 55760,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 56103,
+      "offset": 56126,
       "length": 22,
       "value": "\"SWITCH_PROTOCOL_DATA\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "BooleanLiteral",
-      "offset": 56223,
+      "offset": 56250,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "IntegerLiteral",
-      "offset": 56346,
+      "offset": 56381,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 56716,
+      "offset": 56763,
       "length": 19,
       "value": "\"GET_DEVICE_NUMBER\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "BooleanLiteral",
-      "offset": 57750,
+      "offset": 57853,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "BooleanLiteral",
-      "offset": 57833,
+      "offset": 57940,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 58110,
+      "offset": 58233,
       "length": 60,
       "value": "\"The current RTK device is incompatible in this SDK version\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 58788,
+      "offset": 58951,
       "length": 10,
       "value": "\"10.00AAA\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 59012,
+      "offset": 59187,
       "length": 10,
       "value": "\"10.00BAA\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "BooleanLiteral",
-      "offset": 59141,
+      "offset": 59324,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "BooleanLiteral",
-      "offset": 59208,
+      "offset": 59395,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
+      "kind": "IntegerLiteral",
+      "offset": 59603,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
+      "kind": "IntegerLiteral",
+      "offset": 59660,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 59773,
+      "offset": 59731,
+      "length": 27,
+      "value": "\"SWITCH_PROTOCOL_REQUEST_1\""
+    },
+    {
+      "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
+      "kind": "BooleanLiteral",
+      "offset": 59838,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
+      "kind": "IntegerLiteral",
+      "offset": 59927,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
+      "kind": "StringLiteral",
+      "offset": 60282,
+      "length": 27,
+      "value": "\"SWITCH_PROTOCOL_REQUEST_2\""
+    },
+    {
+      "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
+      "kind": "BooleanLiteral",
+      "offset": 60404,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
+      "kind": "IntegerLiteral",
+      "offset": 60527,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
+      "kind": "StringLiteral",
+      "offset": 60881,
+      "length": 22,
+      "value": "\"SWITCH_PROTOCOL_DATA\""
+    },
+    {
+      "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
+      "kind": "BooleanLiteral",
+      "offset": 61001,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
+      "kind": "IntegerLiteral",
+      "offset": 61124,
+      "length": 1,
+      "value": "1"
+    },
+    {
+      "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
+      "kind": "StringLiteral",
+      "offset": 61494,
+      "length": 19,
+      "value": "\"GET_DEVICE_NUMBER\""
+    },
+    {
+      "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
+      "kind": "BooleanLiteral",
+      "offset": 62528,
+      "length": 4,
+      "value": "true"
+    },
+    {
+      "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
+      "kind": "BooleanLiteral",
+      "offset": 62611,
+      "length": 4,
+      "value": "true"
+    },
+    {
+      "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
+      "kind": "StringLiteral",
+      "offset": 62888,
+      "length": 60,
+      "value": "\"The current RTK device is incompatible in this SDK version\""
+    },
+    {
+      "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
+      "kind": "StringLiteral",
+      "offset": 63353,
+      "length": 60,
+      "value": "\"The current RTK device is incompatible in this SDK version\""
+    },
+    {
+      "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
+      "kind": "StringLiteral",
+      "offset": 63702,
+      "length": 60,
+      "value": "\"The current RTK device is incompatible in this SDK version\""
+    },
+    {
+      "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
+      "kind": "StringLiteral",
+      "offset": 64376,
       "length": 8,
       "value": "\"CUSTOM\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "BooleanLiteral",
-      "offset": 59978,
+      "offset": 64581,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 60096,
+      "offset": 64699,
       "length": 44,
       "value": "\"RATE=\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 60139,
+      "offset": 64742,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "BooleanLiteral",
-      "offset": 60258,
+      "offset": 64861,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 60374,
+      "offset": 64977,
       "length": 40,
       "value": "\"NAVDOP=\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 60413,
+      "offset": 65016,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "BooleanLiteral",
-      "offset": 60532,
+      "offset": 65135,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 60648,
+      "offset": 65251,
       "length": 40,
       "value": "\"NAVPVT=\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 60687,
+      "offset": 65290,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "BooleanLiteral",
-      "offset": 60797,
+      "offset": 65400,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 60910,
+      "offset": 65513,
       "length": 43,
       "value": "\"DYNAMIC_TYPE=\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 60952,
+      "offset": 65555,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 61183,
+      "offset": 65786,
       "length": 47,
       "value": "\"MIN_ELEVATION=\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 61229,
+      "offset": 65832,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 61468,
+      "offset": 66071,
       "length": 42,
       "value": "\"GLONASS=\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 61509,
+      "offset": 66112,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 61744,
+      "offset": 66347,
       "length": 40,
       "value": "\"BEIDOU=\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 61783,
+      "offset": 66386,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 62022,
+      "offset": 66625,
       "length": 42,
       "value": "\"GALILEO=\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 62063,
+      "offset": 66666,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 62290,
+      "offset": 66893,
       "length": 36,
       "value": "\"QZSS=\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 62325,
+      "offset": 66928,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 62553,
+      "offset": 67156,
       "length": 38,
       "value": "\"SBASS=\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 62590,
+      "offset": 67193,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 62667,
+      "offset": 67270,
       "length": 12,
       "value": "\"BY_DEFAULT\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "BooleanLiteral",
-      "offset": 62716,
+      "offset": 67319,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "BooleanLiteral",
-      "offset": 62756,
+      "offset": 67359,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 63149,
+      "offset": 67752,
       "length": 35,
       "value": "\"RATE=\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 63183,
+      "offset": 67786,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "BooleanLiteral",
-      "offset": 63312,
+      "offset": 67915,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "BooleanLiteral",
-      "offset": 63741,
+      "offset": 68344,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "IntegerLiteral",
-      "offset": 65546,
+      "offset": 70149,
       "length": 2,
       "value": "60"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 65718,
+      "offset": 70321,
       "length": 38,
       "value": "\"Error: \""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 65755,
+      "offset": 70358,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "IntegerLiteral",
-      "offset": 67095,
+      "offset": 71698,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "IntegerLiteral",
-      "offset": 67123,
+      "offset": 71726,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "IntegerLiteral",
-      "offset": 68324,
+      "offset": 72927,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "Array",
-      "offset": 68442,
+      "offset": 73045,
       "length": 2,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "IntegerLiteral",
-      "offset": 68853,
+      "offset": 73456,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "Array",
-      "offset": 69129,
+      "offset": 73732,
       "length": 2,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "BooleanLiteral",
-      "offset": 69316,
+      "offset": 73919,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "Array",
-      "offset": 69503,
+      "offset": 74106,
       "length": 2,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "IntegerLiteral",
-      "offset": 69943,
+      "offset": 74546,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "BooleanLiteral",
-      "offset": 70129,
+      "offset": 74732,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "BooleanLiteral",
-      "offset": 70251,
+      "offset": 74854,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "FloatLiteral",
-      "offset": 70314,
+      "offset": 74917,
       "length": 3,
       "value": "1.0"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "BooleanLiteral",
-      "offset": 70668,
+      "offset": 75271,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "BooleanLiteral",
-      "offset": 70912,
+      "offset": 75515,
       "length": 5,
       "value": "false"
     },
@@ -57607,826 +57641,791 @@
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 71784,
+      "offset": 76387,
       "length": 5,
       "value": "\" - \""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 71866,
+      "offset": 76469,
       "length": 5,
       "value": "\" - \""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 72104,
+      "offset": 76707,
       "length": 5,
       "value": "\" - \""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 72186,
+      "offset": 76789,
       "length": 5,
       "value": "\" - \""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 72214,
+      "offset": 76817,
       "length": 56,
       "value": "\"Received empty data package from bluetooth peripheral.\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "IntegerLiteral",
-      "offset": 72717,
+      "offset": 77320,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 72797,
+      "offset": 77400,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "IntegerLiteral",
-      "offset": 72876,
+      "offset": 77479,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 72958,
+      "offset": 77561,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "IntegerLiteral",
-      "offset": 73037,
+      "offset": 77640,
       "length": 1,
       "value": "2"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 73118,
+      "offset": 77721,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 73172,
+      "offset": 77775,
       "length": 15,
       "value": "\"Starting GNSS\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "BooleanLiteral",
-      "offset": 73344,
+      "offset": 77947,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "BooleanLiteral",
-      "offset": 73351,
+      "offset": 77954,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "BooleanLiteral",
-      "offset": 73465,
+      "offset": 78068,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "BooleanLiteral",
-      "offset": 73472,
+      "offset": 78075,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 74344,
+      "offset": 78947,
       "length": 38,
       "value": "\"Error: \""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 74381,
+      "offset": 78984,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "IntegerLiteral",
-      "offset": 74731,
+      "offset": 79334,
       "length": 1,
       "value": "7"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 74810,
+      "offset": 79413,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "BooleanLiteral",
-      "offset": 75165,
+      "offset": 79768,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "BooleanLiteral",
-      "offset": 75237,
+      "offset": 79840,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "BooleanLiteral",
-      "offset": 75491,
+      "offset": 80094,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "BooleanLiteral",
-      "offset": 75772,
+      "offset": 80375,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "BooleanLiteral",
-      "offset": 75778,
+      "offset": 80381,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "BooleanLiteral",
-      "offset": 76031,
+      "offset": 80634,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "BooleanLiteral",
-      "offset": 76037,
+      "offset": 80640,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 76813,
+      "offset": 81416,
       "length": 38,
       "value": "\"Error: \""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 76850,
+      "offset": 81453,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "BooleanLiteral",
-      "offset": 77539,
+      "offset": 82142,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "BooleanLiteral",
-      "offset": 77545,
+      "offset": 82148,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "BooleanLiteral",
-      "offset": 77822,
+      "offset": 82425,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "BooleanLiteral",
-      "offset": 77828,
+      "offset": 82431,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 78628,
+      "offset": 83231,
       "length": 38,
       "value": "\"Error: \""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 78665,
+      "offset": 83268,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 79215,
+      "offset": 83818,
       "length": 52,
       "value": "\"LASER_MEASUREMENT_DISTANCE=\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 79266,
+      "offset": 83869,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 79333,
+      "offset": 83936,
       "length": 50,
       "value": "\"LASER_MEASUREMENT_QUALITY=\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 79382,
+      "offset": 83985,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 79449,
-      "length": 52,
-      "value": "\"LASER_MEASUREMENT_DISTANCE=\""
-    },
-    {
-      "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
-      "kind": "StringLiteral",
-      "offset": 79500,
-      "length": 2,
-      "value": "\"\""
-    },
-    {
-      "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
-      "kind": "StringLiteral",
-      "offset": 79567,
-      "length": 50,
-      "value": "\"LASER_MEASUREMENT_QUALITY=\""
-    },
-    {
-      "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
-      "kind": "StringLiteral",
-      "offset": 79616,
-      "length": 2,
-      "value": "\"\""
-    },
-    {
-      "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
-      "kind": "StringLiteral",
-      "offset": 79673,
+      "offset": 84042,
       "length": 12,
       "value": "\"poolNAVPVT\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 79897,
+      "offset": 84266,
       "length": 22,
       "value": "\"LASER_STATE=\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 79918,
+      "offset": 84287,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 80080,
+      "offset": 84449,
       "length": 27,
       "value": "\"CURRENT_DEVICE_RAW=\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 80106,
+      "offset": 84475,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 80206,
+      "offset": 84575,
       "length": 29,
       "value": "\"CURRENT_DEVICE_RAW_IS_EMPTY\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 80323,
+      "offset": 84692,
       "length": 38,
       "value": "\"CURRENT_DEVICE=\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 80360,
+      "offset": 84729,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 80651,
+      "offset": 85020,
       "length": 65,
       "value": "\"IMU,NICK_ANGLE=\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 80685,
+      "offset": 85054,
       "length": 1,
       "value": "\",ROLL_ANGLE=\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 80715,
+      "offset": 85084,
       "length": 1,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 80899,
+      "offset": 85268,
       "length": 59,
       "value": "\"IMU,ACCX=\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 80921,
+      "offset": 85290,
       "length": 1,
       "value": "\",ACCY=\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 80939,
+      "offset": 85308,
       "length": 1,
       "value": "\",ACCZ=\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 80957,
+      "offset": 85326,
       "length": 1,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 81176,
+      "offset": 85545,
       "length": 96,
       "value": "\"IMU,NICK_RATE=\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 81211,
+      "offset": 85580,
       "length": 1,
       "value": "\",ROLL_RATE=\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 81242,
+      "offset": 85611,
       "length": 1,
       "value": "\",YAW_RATE=\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 81271,
+      "offset": 85640,
       "length": 1,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 81496,
+      "offset": 85865,
       "length": 138,
       "value": "\"IMU,NICK_RATE_RAW=\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 81545,
+      "offset": 85914,
       "length": 1,
       "value": "\",ROLL_RATE_RAW=\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 81590,
+      "offset": 85959,
       "length": 1,
       "value": "\",YAW_RATE_RAW=\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 81633,
+      "offset": 86002,
       "length": 1,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 81853,
+      "offset": 86222,
       "length": 95,
       "value": "\"IMU,MAGNETICX_\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 81887,
+      "offset": 86256,
       "length": 1,
       "value": "\",MAGNETICY_\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 81917,
+      "offset": 86286,
       "length": 1,
       "value": "\",MAGNETICZ_\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 81947,
+      "offset": 86316,
       "length": 1,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 82133,
+      "offset": 86502,
       "length": 27,
       "value": "\"IMU,TEMP_\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 82159,
+      "offset": 86528,
       "length": 1,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 82351,
+      "offset": 86720,
       "length": 39,
       "value": "\"IMU,CALIBRATION_STATUS_\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 82389,
+      "offset": 86758,
       "length": 1,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 82578,
+      "offset": 86947,
       "length": 5,
       "value": "\" - \""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 82660,
+      "offset": 87029,
       "length": 5,
       "value": "\" - \""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 82688,
+      "offset": 87057,
       "length": 43,
       "value": "\"did receive \""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 82730,
+      "offset": 87099,
       "length": 1,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 82997,
+      "offset": 87366,
       "length": 18,
       "value": "\"BOOTLOADER_READY\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "BooleanLiteral",
-      "offset": 83069,
+      "offset": 87438,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "Array",
-      "offset": 83110,
+      "offset": 87479,
       "length": 6,
       "value": "[0x70]"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "Array",
-      "offset": 83363,
+      "offset": 87732,
       "length": 6,
       "value": "[0x65]"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 83717,
+      "offset": 88086,
       "length": 23,
       "value": "\"BOOTLOADER_PROG_FLASH\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 83835,
+      "offset": 88204,
       "length": 18,
       "value": "\"BOOTLOADER_RESET\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "BooleanLiteral",
-      "offset": 83904,
+      "offset": 88273,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "FloatLiteral",
-      "offset": 83978,
+      "offset": 88347,
       "length": 3,
       "value": "3.0"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 84268,
+      "offset": 88637,
       "length": 18,
       "value": "\"BOOTLOADER_ERROR\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "BooleanLiteral",
-      "offset": 84338,
+      "offset": 88707,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 84462,
+      "offset": 88831,
       "length": 17,
       "value": "\"BOOTLOADER_EXIT\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "BooleanLiteral",
-      "offset": 84665,
+      "offset": 89034,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 84791,
+      "offset": 89160,
       "length": 19,
       "value": "\"CALIBRATION_START\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 84905,
+      "offset": 89274,
       "length": 4,
       "value": "\"OK\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 85018,
-      "length": 23,
-      "value": "\"CALIBRATION_NEXT_STEP\""
-    },
-    {
-      "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
-      "kind": "BooleanLiteral",
-      "offset": 85095,
-      "length": 4,
-      "value": "true"
+      "offset": 89381,
+      "length": 16,
+      "value": "\"CALIBRATION_GO\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 85151,
+      "offset": 89449,
       "length": 4,
       "value": "\"GO\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "BooleanLiteral",
-      "offset": 85263,
+      "offset": 89561,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "BooleanLiteral",
-      "offset": 85487,
+      "offset": 89782,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 85614,
+      "offset": 89909,
       "length": 19,
       "value": "\"CALIBRATION_ERROR\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 85685,
+      "offset": 89980,
       "length": 7,
       "value": "\"ERROR\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "BooleanLiteral",
-      "offset": 85781,
+      "offset": 90076,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 85906,
+      "offset": 90201,
       "length": 17,
       "value": "\"CALIBRATION_END\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 85975,
+      "offset": 90270,
       "length": 5,
       "value": "\"END\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 86265,
+      "offset": 90618,
       "length": 21,
       "value": "\"STEP: \""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 86285,
+      "offset": 90638,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 87262,
+      "offset": 91615,
       "length": 5,
       "value": "\" - \""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 87695,
+      "offset": 92048,
       "length": 5,
       "value": "\" - \""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 87797,
+      "offset": 92150,
       "length": 37,
       "value": "\" - \""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "Array",
-      "offset": 87830,
+      "offset": 92183,
       "length": 2,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 87833,
+      "offset": 92186,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 88194,
+      "offset": 92547,
       "length": 5,
       "value": "\" - \""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 88512,
+      "offset": 92865,
       "length": 5,
       "value": "\" - \""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 88865,
+      "offset": 93218,
       "length": 5,
       "value": "\" - \""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 88938,
+      "offset": 93291,
       "length": 5,
       "value": "\" - \""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 89387,
+      "offset": 93740,
       "length": 5,
       "value": "\" - \""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 89765,
+      "offset": 94118,
       "length": 5,
       "value": "\" - \""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 90261,
+      "offset": 94614,
       "length": 5,
       "value": "\" - \""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 90733,
+      "offset": 95086,
       "length": 5,
       "value": "\" - \""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/Peripheral\/DefaultPeripheral.swift",
       "kind": "StringLiteral",
-      "offset": 90815,
+      "offset": 95168,
       "length": 5,
       "value": "\" - \""
     },
@@ -60640,7 +60639,7 @@
       "kind": "StringLiteral",
       "offset": 712,
       "length": 7,
-      "value": "\"0.6.4\""
+      "value": "\"0.6.5\""
     },
     {
       "filePath": "\/Users\/sablin_lex\/Developer\/Vigram\/SDK\/Github\/SDK\/main\/SDK_iOS_viDoc\/VigramSDK\/Source\/General\/Configuration.swift",
