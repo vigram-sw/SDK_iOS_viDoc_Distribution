@@ -14,7 +14,7 @@
 		</data>
 		<key>Modules/VigramSDK.swiftmodule/arm64-apple-ios-simulator.abi.json</key>
 		<data>
-		tLbXBEedFjHwQpDLvfFkP6G88r8=
+		xQ0AMyG5oQB6cTUg6MOW9YrSkL4=
 		</data>
 		<key>Modules/VigramSDK.swiftmodule/arm64-apple-ios-simulator.private.swiftinterface</key>
 		<data>
@@ -30,11 +30,11 @@
 		</data>
 		<key>Modules/VigramSDK.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		pOGdkB0JDkZRqw/GOBFclIccepk=
+		8so6mm+EsJUTb7hu1MFAYUvDMSo=
 		</data>
 		<key>Modules/VigramSDK.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<data>
-		tLbXBEedFjHwQpDLvfFkP6G88r8=
+		xQ0AMyG5oQB6cTUg6MOW9YrSkL4=
 		</data>
 		<key>Modules/VigramSDK.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
 		<data>
@@ -50,7 +50,7 @@
 		</data>
 		<key>Modules/VigramSDK.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		PjgZAj0szC4DrwmUi7CMlbjhLz4=
+		MorKYwKY8J8dA8VYVxpMdbPTgC0=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -66,7 +66,7 @@
 		</data>
 		<key>Vigram.podspec</key>
 		<data>
-		9bLh/5q1/vgrSNURXYupuqTBQ30=
+		WYgMAAJB7pwI+VP6uu7UWy9huys=
 		</data>
 		<key>check.sh</key>
 		<data>
@@ -90,7 +90,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			c0BGFavSZ67ZQ5jBLgkHREkOw12oljgStu8iDl9W7Z4=
+			fTdwSLkZW030KPp4cjswrucjXjExIJ12FaedEUYnV+E=
 			</data>
 		</dict>
 		<key>Modules/VigramSDK.swiftmodule/arm64-apple-ios-simulator.private.swiftinterface</key>
@@ -118,14 +118,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			/0xOimm9etqA2fwrg5oC8RQaN0OxHdmqhRUhZ0qndiM=
+			vYHXgJ7fr9fmskgEVwhclBPafpoSTSzPvpQWCT9fEu4=
 			</data>
 		</dict>
 		<key>Modules/VigramSDK.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			c0BGFavSZ67ZQ5jBLgkHREkOw12oljgStu8iDl9W7Z4=
+			fTdwSLkZW030KPp4cjswrucjXjExIJ12FaedEUYnV+E=
 			</data>
 		</dict>
 		<key>Modules/VigramSDK.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
@@ -153,7 +153,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			i4bkbE8v/vFTQP2QygOms0HeH6b4tfMXNvNZ8kM0y6I=
+			948QG/eWANUiEO85I7ovfrD8yDgIJJagrP2+YEgAA1Q=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
@@ -181,7 +181,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			FzEEtJ2oUCt1hdb6xs6w1amtX5aeadwW1/kpiMF8Fw4=
+			pRXw8wj5Lx+M4dMGxxAT3/vCFiVnlVr3LSBJDDvV4v4=
 			</data>
 		</dict>
 		<key>check.sh</key>
