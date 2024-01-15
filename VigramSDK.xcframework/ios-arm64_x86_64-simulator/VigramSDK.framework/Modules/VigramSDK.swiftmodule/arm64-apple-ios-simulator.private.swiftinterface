@@ -113,8 +113,7 @@ public protocol Peripheral {
   var peripheral: CoreBluetooth.CBPeripheral { get }
   var configurationState: VigramSDK.StatePublisher<VigramSDK.StatePeripheralConfiguration> { get }
   var calibrationState: VigramSDK.StatePublisher<VigramSDK.StateIMUCalibration> { get }
-  var calibrationNextStep: VigramSDK.StatePublisher<Swift.Bool> { get }
-  var calibrationStepNumber: VigramSDK.StatePublisher<Swift.Int> { get }
+  var calibrationRawValue: VigramSDK.StatePublisher<Swift.String> { get }
   var viDocState: VigramSDK.StatePublisher<VigramSDK.StateViDoc> { get }
   var viDocResetState: VigramSDK.StatePublisher<VigramSDK.StateResetViDoc> { get }
   var ppkMeasurementsState: VigramSDK.StatePublisher<Swift.Bool> { get }
@@ -184,13 +183,10 @@ public enum StatePeripheralConfiguration {
 }
 public enum StateIMUCalibration {
   case start
+  case go
+  case step(Swift.Int)
   case end
   case error
-  public static func == (a: VigramSDK.StateIMUCalibration, b: VigramSDK.StateIMUCalibration) -> Swift.Bool
-  public func hash(into hasher: inout Swift.Hasher)
-  public var hashValue: Swift.Int {
-    get
-  }
 }
 extension Swift.UInt16 {
   public init(with data: Foundation.Data, startAt offset: Swift.Int)
@@ -1206,8 +1202,6 @@ extension VigramSDK.AntennaOffset {
   }
 }
 extension VigramSDK.DeviceMotion.Accuracy : Swift.Hashable {}
-extension VigramSDK.StateIMUCalibration : Swift.Equatable {}
-extension VigramSDK.StateIMUCalibration : Swift.Hashable {}
 extension VigramSDK.NavigationSystemType : Swift.Equatable {}
 extension VigramSDK.NavigationSystemType : Swift.Hashable {}
 extension VigramSDK.NavigationSystemType : Swift.RawRepresentable {}
