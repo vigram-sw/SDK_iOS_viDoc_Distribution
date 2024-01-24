@@ -46,104 +46,10 @@ struct DeviceInfoSubview: View {
                         Spacer()
                     }
                     HStack {
-                        Text("  Protocol: ")
-                            .font(Font.headline.bold())
-                            .foregroundColor(.black)
-                        if let isNewProtocol = viewModel.isNewProtocol {
-                            Text(isNewProtocol ? "New" : "Old")
-                        }
-                        Spacer()
-                    }
-                    HStack {
                         Text("  Serial number: ")
                             .font(Font.headline.bold())
                             .foregroundColor(.black)
                         Text(viewModel.currentSerialNumber)
-                        Spacer()
-                    }
-                    HStack {
-                        Text("  Has front laser: ")
-                            .font(Font.headline.bold())
-                            .foregroundColor(.black)
-                        Text(viewModel.currentDeviceHasFrontLaser ? "+" : "-")
-                        Spacer()
-                    }
-                    HStack {
-                        Text("  Has bottom laser: ")
-                            .font(Font.headline.bold())
-                            .foregroundColor(.black)
-                        Text(viewModel.currentDeviceHasBottomLaser ? "+" : "-")
-                        Spacer()
-                    }
-                    HStack {
-                        Text("  Has IMU: ")
-                            .font(Font.headline.bold())
-                            .foregroundColor(.black)
-                        Text(viewModel.currentDeviceHasIMU ? "+" : "-")
-                        Spacer()
-                    }
-                    HStack {
-                        Text("  Has calibrated: ")
-                            .font(Font.headline.bold())
-                            .foregroundColor(.black)
-                        Text(viewModel.currentDeviceHasCalibrated ? "+" : "-")
-                        Spacer()
-                    }
-                    HStack {
-                        Text("  Housing: ")
-                            .font(Font.headline.bold())
-                            .foregroundColor(.black)
-                        Text(viewModel.currentDeviceHousing)
-                        Spacer()
-                    }
-                    HStack {
-                        Text("  Mount: ")
-                            .font(Font.headline.bold())
-                            .foregroundColor(.black)
-                        Text(viewModel.currentDeviceMountDevice)
-                        Spacer()
-                    }
-                    if viewModel.currentVigramRef != "" {
-                        HStack {
-                            Text("  HW Ref.: ")
-                                .font(Font.headline.bold())
-                                .foregroundColor(.black)
-                            Text(viewModel.currentVigramRef)
-                            Spacer()
-                        }
-                    }
-                    if viewModel.currentVigramBat != "" {
-                        HStack {
-                            Text("  HW Bat.: ")
-                                .font(Font.headline.bold())
-                                .foregroundColor(.black)
-                            Text(viewModel.currentVigramBat)
-                            Spacer()
-                        }
-                    }
-                    if viewModel.currentM88Laser != "" {
-                        HStack {
-                            Text("  HW M88 Laser.: ")
-                                .font(Font.headline.bold())
-                                .foregroundColor(.black)
-                            Text(viewModel.currentM88Laser)
-                            Spacer()
-                        }
-                    }
-                    if viewModel.currentL81Laser != "" {
-                        HStack {
-                            Text("  HW L81 Laser.: ")
-                                .font(Font.headline.bold())
-                                .foregroundColor(.black)
-                            Text(viewModel.currentL81Laser)
-                            Spacer()
-                        }
-                    }
-                    HStack {
-                        Text("  Current device type: ")
-                            .font(Font.headline.bold())
-                            .foregroundColor(.black)
-                        Text(viewModel.currentDevice)
                         Spacer()
                     }
                     HStack {

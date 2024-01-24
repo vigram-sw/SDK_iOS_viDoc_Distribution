@@ -350,20 +350,6 @@ struct SinglePointSubview: View {
                     .font(Font.headline.bold())
                     .foregroundColor(.black)
             }.buttonStyle(.bordered)
-            if let isNewProtocol = viewModel.isNewProtocol, isNewProtocol {
-                Button { viewModel.stopSPMeasurement() } label: {
-                    Text("Stop SP measurement")
-                        .font(Font.headline.bold())
-                        .foregroundColor(.black)
-                }.buttonStyle(.bordered)
-            }
-            if let isNewProtocol = viewModel.isNewProtocol, isNewProtocol {
-                Button { viewModel.cancelSPMeasurement() } label: {
-                    Text("Cancel SP measurement")
-                        .font(Font.headline.bold())
-                        .foregroundColor(.black)
-                }.buttonStyle(.bordered)
-            }
         }.padding(6)
     }
 }

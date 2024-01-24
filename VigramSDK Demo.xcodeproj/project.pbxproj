@@ -28,10 +28,10 @@
 		7036D6702B3DB28C0036D5E0 /* SelectButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7036D6542B3DB28C0036D5E0 /* SelectButton.swift */; };
 		7036D6712B3DB28C0036D5E0 /* ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7036D6552B3DB28C0036D5E0 /* ActivityViewController.swift */; };
 		7036D6722B3DB28C0036D5E0 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7036D6562B3DB28C0036D5E0 /* LoadingView.swift */; };
-		706DC7752B2377C0007FDB25 /* VigramSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 706DC7742B2377C0007FDB25 /* VigramSDK */; };
-		706DC7772B2377C0007FDB25 /* VigramSDK+Rx in Frameworks */ = {isa = PBXBuildFile; productRef = 706DC7762B2377C0007FDB25 /* VigramSDK+Rx */; };
 		707E0150298D08C100F3A611 /* VigramSDK_DemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707E014F298D08C100F3A611 /* VigramSDK_DemoApp.swift */; };
 		707E0154298D08C300F3A611 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 707E0153298D08C300F3A611 /* Assets.xcassets */; };
+		708020EA2B610D2A002FB79E /* VigramSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 708020E92B610D2A002FB79E /* VigramSDK */; };
+		708020EC2B610D2A002FB79E /* VigramSDK+Rx in Frameworks */ = {isa = PBXBuildFile; productRef = 708020EB2B610D2A002FB79E /* VigramSDK+Rx */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -67,8 +67,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				706DC7752B2377C0007FDB25 /* VigramSDK in Frameworks */,
-				706DC7772B2377C0007FDB25 /* VigramSDK+Rx in Frameworks */,
+				708020EA2B610D2A002FB79E /* VigramSDK in Frameworks */,
+				708020EC2B610D2A002FB79E /* VigramSDK+Rx in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -211,8 +211,8 @@
 			);
 			name = "VigramSDK Demo";
 			packageProductDependencies = (
-				706DC7742B2377C0007FDB25 /* VigramSDK */,
-				706DC7762B2377C0007FDB25 /* VigramSDK+Rx */,
+				708020E92B610D2A002FB79E /* VigramSDK */,
+				708020EB2B610D2A002FB79E /* VigramSDK+Rx */,
 			);
 			productName = "VigramSDK Demo";
 			productReference = 707E014C298D08C100F3A611 /* VigramSDK Demo.app */;
@@ -243,7 +243,7 @@
 			);
 			mainGroup = 707E0143298D08C100F3A611;
 			packageReferences = (
-				706DC7732B2377C0007FDB25 /* XCRemoteSwiftPackageReference "SDK_iOS_viDoc_Distribution" */,
+				708020E82B610D2A002FB79E /* XCRemoteSwiftPackageReference "SDK_iOS_viDoc_Distribution" */,
 			);
 			productRefGroup = 707E014D298D08C100F3A611 /* Products */;
 			projectDirPath = "";
@@ -504,25 +504,25 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		706DC7732B2377C0007FDB25 /* XCRemoteSwiftPackageReference "SDK_iOS_viDoc_Distribution" */ = {
+		708020E82B610D2A002FB79E /* XCRemoteSwiftPackageReference "SDK_iOS_viDoc_Distribution" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/vigram-gmbh/SDK_iOS_viDoc_Distribution.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 0.6.2;
+				minimumVersion = 0.5.9;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		706DC7742B2377C0007FDB25 /* VigramSDK */ = {
+		708020E92B610D2A002FB79E /* VigramSDK */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 706DC7732B2377C0007FDB25 /* XCRemoteSwiftPackageReference "SDK_iOS_viDoc_Distribution" */;
+			package = 708020E82B610D2A002FB79E /* XCRemoteSwiftPackageReference "SDK_iOS_viDoc_Distribution" */;
 			productName = VigramSDK;
 		};
-		706DC7762B2377C0007FDB25 /* VigramSDK+Rx */ = {
+		708020EB2B610D2A002FB79E /* VigramSDK+Rx */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 706DC7732B2377C0007FDB25 /* XCRemoteSwiftPackageReference "SDK_iOS_viDoc_Distribution" */;
+			package = 708020E82B610D2A002FB79E /* XCRemoteSwiftPackageReference "SDK_iOS_viDoc_Distribution" */;
 			productName = "VigramSDK+Rx";
 		};
 /* End XCSwiftPackageProductDependency section */

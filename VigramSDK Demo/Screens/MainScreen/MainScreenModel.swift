@@ -29,7 +29,6 @@ class MainScreenModel {
     public var satelliteMessage: SinglePublisher<SatelliteMessage> { _satelliteMessage.eraseToAnyPublisher() }
     public var state: SinglePublisher<CBPeripheralState> { _state.eraseToAnyPublisher() }
     public var viDocState: SinglePublisher<StateViDoc> { _viDocState.eraseToAnyPublisher() }
-    public var isNewProtocol: SinglePublisher<Bool> { _isNewProtocol.eraseToAnyPublisher() }
     public var ntripData: SinglePublisher<Data> { _ntripData.eraseToAnyPublisher() }
     public var ntripState: SinglePublisher<StateNtripConnection> { _ntripState.eraseToAnyPublisher() }
     public var singlePointTimer: SinglePublisher<String> { _singlePointTimer.eraseToAnyPublisher() }
@@ -165,10 +164,6 @@ class MainScreenModel {
         vigramHelper.resetDevice()
     }
 
-    func requestGetCurrentDevice() {
-        vigramHelper.requestGetCurrentDevice()
-    }
-    
     func setDynamicState(type: DynamicStateType) {
         vigramHelper.setDynamicState(type: type)?
             .sink(receiveCompletion: { _ in }) { [weak self] _ in
@@ -293,10 +288,6 @@ class MainScreenModel {
     func turnOffLaser(at typeOfLaser: LaserConfiguration.Position) -> SingleEventPublisher<Void>? {
         vigramHelper.turnOffLaser(at: typeOfLaser)
     }
-    
-    func getLasersStatus() -> SingleEventPublisher<DeviceMessage.LaserState>? {
-        vigramHelper.getLaserStatus()
-    }
 
     func startLaser(with configuration: LaserConfiguration) -> SingleEventPublisher<DeviceMessage.Measurement>? {
         vigramHelper.startLaser(with: configuration)
@@ -370,18 +361,6 @@ class MainScreenModel {
         } receiveValue: { [weak self] singlePoint in
             self?._singlePointMeasurement.send(.success(singlePoint))
         }.store(in: &subscription)
-    }
-    
-    func stopSPMeasurement() {
-        vigramHelper.stopSPMeasurement()
-        subscriptionSP.forEach { $0.cancel() }
-        subscriptionSP.removeAll()
-    }
-
-    func cancelSPMeasurement() {
-        vigramHelper.cancelSPMeasurement()
-        subscriptionSP.forEach { $0.cancel() }
-        subscriptionSP.removeAll()
     }
 
     // MARK: RXM
@@ -502,10 +481,6 @@ private extension MainScreenModel {
                 // PPK
                 currentDevice.ppkMeasurementsState.sink { [weak self] state in
                     self?._ppkMeasurementsState.send(state)
-                }.store(in: &self.subscription)
-                // Protocol
-                currentDevice.isNewProtocol.sink { [weak self] state in
-                    self?._isNewProtocol.send(state)
                 }.store(in: &self.subscription)
             }.store(in: &subscription)
 

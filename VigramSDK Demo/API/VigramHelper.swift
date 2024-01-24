@@ -236,10 +236,6 @@ final class VigramHelper: NSObject {
         peripheral?.requestVersion()
     }
 
-    func requestGetCurrentDevice() {
-        peripheral?.requestGetCurrentDevice().sink(receiveCompletion: { _ in }, receiveValue: { _ in }).store(in: &subscription)
-    }
-
     func resetDevice() {
         peripheral?.resetViDoc()
     }
@@ -308,16 +304,6 @@ final class VigramHelper: NSObject {
         }
 
         return laserService?.turnLaserOff(at: typeOfLaser)
-    }
-
-    func getLaserStatus() -> SingleEventPublisher<DeviceMessage.LaserState>?{
-        if laserService == nil {
-            if let peripheral = self.peripheral {
-                self.laserService = Vigram.laserService(peripheral: peripheral)
-            }
-        }
-
-        return laserService?.getLasersStatus()
     }
 
     func startLaser(with configuration: LaserConfiguration) -> SingleEventPublisher<DeviceMessage.Measurement>? {
@@ -412,28 +398,9 @@ final class VigramHelper: NSObject {
         if let environmentDataService = self.environmentDataService {
             singlePointRecordingService = Vigram.singlePointRecordingService(
                 environmentDataService: environmentDataService)
-            
-            singlePointRecordingService?.measurementTime
-                .receive(on: DispatchQueue.main)
-                .sink { [weak self] value in
-                    self?._spMeasurementTime.send(value)
-                }
-                .store(in: &subscription)
         }
-        
-        if isNewProtocol {
-            return singlePointRecordingService?.startMeasurement(duration: duration, updateInterval: 0.1, with: method)
-        } else {
-            return singlePointRecordingService?.record(duration: duration, updateInterval: 0.1, with: method)
-        }
-    }
 
-    func stopSPMeasurement() {
-        singlePointRecordingService?.stopMeasurement()
-    }
-    
-    func cancelSPMeasurement() {
-        singlePointRecordingService?.cancelMeasurement()
+        return singlePointRecordingService?.record(duration: duration, updateInterval: 0.1, with: method)
     }
 
     // MARK: RXM

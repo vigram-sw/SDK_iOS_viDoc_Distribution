@@ -33,16 +33,6 @@ struct LaserMeasurementsSubview: View {
                     .keyboardType(.decimalPad)
                 Spacer()
             }
-            if let isNewProtocol = viewModel.isNewProtocol, isNewProtocol {
-                HStack {
-                    Text("  Notice: 0 second - infinity measurements").font(Font.headline.bold())
-                    Spacer()
-                }
-                HStack {
-                    Text("  Cancel measurements - press LasersOff").font(Font.headline.bold())
-                    Spacer()
-                }
-            }
             HStack {
                 SelectButton(
                     isSelected: $viewModel.isBottomLaserSelected,
@@ -69,20 +59,6 @@ struct LaserMeasurementsSubview: View {
                     }
                 }
             }
-            if let isNewProtocol = viewModel.isNewProtocol, isNewProtocol {
-                HStack {
-                    Text("  Lasers state: ")
-                        .font(Font.headline.bold())
-                        .foregroundColor(.black)
-                    Text(viewModel.lasersState)
-                    Spacer()
-                }
-            }
-            Button { viewModel.getLaserStatus() } label: {
-                Text("Get lasers status")
-                    .font(Font.headline.bold())
-                    .foregroundColor(.black)
-            }.buttonStyle(.bordered)
             Button { viewModel.turnOnLaser() } label: {
                 Text("LaserOn")
                     .font(Font.headline.bold())

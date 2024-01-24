@@ -14,8 +14,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/vigram-gmbh/SDK_iOS_viDoc_Distribution.git",
       "state" : {
-        "revision" : "cdd759aa00dbc542dd1ec3618cc89c2bc18666c7",
-        "version" : "0.6.6"
+        "revision" : "0bcb4019b64e9884104142ea45b639e47ea9ced0",
+        "version" : "0.5.9"
       }
     }
   ],

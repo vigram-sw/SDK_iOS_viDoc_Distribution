@@ -25,27 +25,15 @@ extension MainScreenView {
         // DEVICE
         @Published var isConfiguringDevice = false
         @Published var isStartDevice = false
-        @Published private(set) var isNewProtocol: Bool?
         @Published private(set) var isConnectedDevice = false
         @Published private(set) var isResetingDevice = false
         @Published private(set) var isResetingDeviceWithReconnect = false
         @Published private(set) var isFlashingDevice = false
-        @Published private(set) var currentDevice = ""
         @Published private(set) var currentDeviceName = ""
         @Published private(set) var currentSerialNumber = ""
         @Published private(set) var currentDeviceSoftwareVersion = ""
         @Published private(set) var currentDeviceHardwareVersion = ""
         @Published private(set) var currentDeviceCharge = ""
-        @Published private(set) var currentDeviceHasFrontLaser = false
-        @Published private(set) var currentDeviceHasBottomLaser = false
-        @Published private(set) var currentDeviceHasIMU = false
-        @Published private(set) var currentDeviceHasCalibrated = false
-        @Published private(set) var currentDeviceHousing = ""
-        @Published private(set) var currentDeviceMountDevice = ""
-        @Published private(set) var currentVigramRef = ""
-        @Published private(set) var currentVigramBat = ""
-        @Published private(set) var currentM88Laser = ""
-        @Published private(set) var currentL81Laser = ""
         @Published private(set) var resetMessageError = ""
         @Published private(set) var viDocState = ""
         // SOFTWARE
@@ -97,7 +85,6 @@ extension MainScreenView {
         @Published var durationMeasurements = "5"
         @Published var isBottomLaserSelected = true
         @Published var isBackLaserSelected = false
-        @Published private(set) var lasersState = ""
         @Published private(set) var distance = ""
         @Published private(set) var quality = ""
         @Published private(set) var currentAllOffsets = [(String, SIMD3<Double>)]()
@@ -168,7 +155,6 @@ extension MainScreenView {
         func connectToDevice(name: String) {
             titleAlert = ""
             messageAlert = ""
-            currentDevice = ""
             model.connectToDevice(name: name)
         }
         
@@ -253,9 +239,6 @@ extension MainScreenView {
                         self?.isShowingAlert = true
                     }
                 }) { _ in }.store(in: &self.subscription)
-            if let isNewProtocol = self.isNewProtocol, isNewProtocol {
-                getLaserStatus()
-            }
         }
         
         func turnOffLaser() {
@@ -271,40 +254,11 @@ extension MainScreenView {
                         self?.isShowingAlert = true
                     }
                 }) { _ in }.store(in: &self.subscription)
-            if let isNewProtocol = self.isNewProtocol, isNewProtocol {
-                getLaserStatus()
-            }
-        }
-        
-        func getLaserStatus() {
-            lasersState = ""
-            model.getLasersStatus()?
-                .sink(receiveCompletion: { [weak self] complition in
-                    switch complition {
-                    case .finished:
-                        break
-                    case let .failure(error):
-                        self?.titleAlert = "Error"
-                        self?.messageAlert = error.localizedDescription
-                        self?.isShowingAlert = true
-                    }
-                }) { [weak self] laserState in
-                    switch laserState {
-                    case .backIsOn:
-                        self?.lasersState = "Back laser is on"
-                    case .bothOff:
-                        self?.lasersState = "Both lasers are off"
-                    case .bottomIsOn:
-                        self?.lasersState = "Bottom laser is on"
-                    @unknown default:
-                        break
-                    }
-                }.store(in: &subscription)
         }
         
         func startLaser(){
             if let duration = Double(durationMeasurements) {
-                if let isNewProtocol = self.isNewProtocol, !isNewProtocol && (duration <= 0 || duration > 60) {
+                if (duration <= 0 || duration > 60) {
                     titleAlert = "Error"
                     messageAlert = "The duration value of a laser recording session in this software version must be between 5 and 60 seconds."
                     isShowingAlert = true
@@ -407,7 +361,7 @@ extension MainScreenView {
         func startSPMeasurement(){
             timerMeasurementValue = ""
             if let duration = Double(durationMeasurements) {
-                if let isNewProtocol = isNewProtocol, !isNewProtocol, (duration < 0 || duration > 60) {
+                if (duration < 0 || duration > 60) {
                     titleAlert = "Error"
                     messageAlert = "Duration value is not correct"
                     isShowingAlert = true
@@ -424,11 +378,7 @@ extension MainScreenView {
                             guard let self = self else { return }
                             switch complition {
                             case .finished:
-                                if let isNewProtocol = self.isNewProtocol {
-                                    self.model.recordWithLaser(duration: duration, configuration: laserConfig, offsets: currentOffsets, isNewProtocol: isNewProtocol)
-                                } else {
-                                    self.model.recordWithLaser(duration: duration, configuration: laserConfig, offsets: currentOffsets)
-                                }
+                                self.model.recordWithLaser(duration: duration, configuration: laserConfig, offsets: currentOffsets)
                             case let .failure(error):
                                 self.titleAlert = "Error"
                                 self.messageAlert = error.localizedDescription
@@ -437,11 +387,7 @@ extension MainScreenView {
                         }) { _ in }.store(in: &self.subscription)
                 } else {
                     if let distanceToGround = Double(distanceToGround) {
-                        if let isNewProtocol = self.isNewProtocol {
-                            model.recordWithoutLaser(duration: duration, antennaDistanceToGround: distanceToGround, offsets: currentOffsets, isNewProtocol: isNewProtocol)
-                        } else {
-                            model.recordWithoutLaser(duration: duration, antennaDistanceToGround: distanceToGround, offsets: currentOffsets)
-                        }
+                        model.recordWithoutLaser(duration: duration, antennaDistanceToGround: distanceToGround, offsets: currentOffsets)
                     } else {
                         titleAlert = "Error"
                         messageAlert = "Distance to ground value is not correct"
@@ -453,16 +399,6 @@ extension MainScreenView {
                 messageAlert = "Duration value is not correct"
                 isShowingAlert = true
             }
-        }
-        
-        func stopSPMeasurement() {
-            timerMeasurementValue = ""
-            model.stopSPMeasurement()
-        }
-        
-        func cancelSPMeasurement() {
-            timerMeasurementValue = ""
-            model.cancelSPMeasurement()
         }
 
         // MARK: RXM
@@ -537,31 +473,6 @@ private extension MainScreenView.MainScreenViewModel {
                 self?.currentDeviceHardwareVersion = version.hardware.toString()
             case .battery(let value):
                 self?.currentDeviceCharge = "\(value.percentage) %"
-            case .device(let device):
-                self?.currentDeviceHasFrontLaser = device.hasFrontLaser
-                self?.currentDeviceHasBottomLaser = device.hasBottomLaser
-                self?.currentDeviceHasIMU = device.hasIMU
-                self?.currentDeviceHasCalibrated = device.hasCalibrated
-                self?.currentDeviceHousing = device.getHousing?.rawValue ?? ""
-                self?.currentDeviceMountDevice = device.getMount?.rawValue ?? ""
-                self?.currentVigramRef = device.getHardwareRevision?.vigramRef ?? ""
-                self?.currentVigramBat = device.getHardwareRevision?.vigramBat ?? ""
-                self?.currentM88Laser = device.getHardwareRevision?.m88Laser ?? ""
-                self?.currentL81Laser = device.getHardwareRevision?.l81Laser ?? ""
-                switch device.typeOfDevice {
-                case .viDoc:
-                    self?.currentDevice = "viDoc"
-                case .viDocLight:
-                    self?.currentDevice = "viDoc Light"
-                case .unknown:
-                    self?.currentDevice = "unknown device"
-                case .viDocWithOldSoftware:
-                    self?.currentDevice = "viDoc with old software"
-                case .viDocOldDevice:
-                    self?.currentDevice = "viDoc (old Device)"
-                @unknown default:
-                    break
-                }
             case .measurement(let measurement):
                 self?.distance = "\(measurement.distance)"
                 self?.quality = "\(measurement.quality)"
@@ -599,11 +510,6 @@ private extension MainScreenView.MainScreenViewModel {
                 self.titleAlert = "Error"
                 self.messageAlert = error.localizedDescription
                 self.isShowingAlert = true
-            case .peripheralError(let error):
-                self.isConfiguringDevice = false
-                self.isIncompatibleDevice = true
-                self.titleAlert = "Error"
-                self.messageAlert = error.localizedDescription
             @unknown default:
                 self.isConfiguringDevice = false
             }
@@ -828,10 +734,6 @@ private extension MainScreenView.MainScreenViewModel {
                 self?.messageAlert = "New software available. Please update the viDoc"
             }
         }.store(in: &subscription)
-
-        model.isNewProtocol.sink { [weak self] isNewProtocol in
-            self?.isNewProtocol = isNewProtocol
-        }.store(in: &subscription)
         
         model.ppkMeasurementsState.sink { [weak self] value in
             self?.rmxIsActive = value
@@ -984,7 +886,6 @@ private extension MainScreenView.MainScreenViewModel {
         lonAccErr = ""
         latAccErr = ""
         viDocState = ""
-        lasersState = ""
         dynamicState = ""
         vertAcc = ""
         horAcc = ""
@@ -1010,7 +911,6 @@ private extension MainScreenView.MainScreenViewModel {
         lonAccErr = ""
         latAccErr = ""
         currentRate = ""
-        lasersState = ""
         resetMessageError = ""
         allDeviceNames.removeAll()
         isConnectedDevice = false
@@ -1022,24 +922,12 @@ private extension MainScreenView.MainScreenViewModel {
         isFlashingDevice = false
         statusUpdate = ""
         progressUpdate = ""
-        currentDevice = ""
         currentDeviceName = ""
         currentSerialNumber = ""
         countSatellite = ""
         currentDeviceSoftwareVersion = ""
         currentDeviceHardwareVersion = ""
-        isNewProtocol = nil
         currentDeviceCharge = ""
-        currentDeviceHasFrontLaser = false
-        currentDeviceHasBottomLaser = false
-        currentDeviceHasIMU = false
-        currentDeviceHasCalibrated = false
-        currentDeviceHousing = ""
-        currentDeviceMountDevice = ""
-        currentVigramRef = ""
-        currentVigramBat = ""
-        currentM88Laser = ""
-        currentL81Laser = ""
         resetMessageError = ""
         ntripSizeParcel = ""
         ntripStatus = "Not connected"
