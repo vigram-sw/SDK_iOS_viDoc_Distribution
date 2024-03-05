@@ -28,10 +28,10 @@
 		7036D6702B3DB28C0036D5E0 /* SelectButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7036D6542B3DB28C0036D5E0 /* SelectButton.swift */; };
 		7036D6712B3DB28C0036D5E0 /* ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7036D6552B3DB28C0036D5E0 /* ActivityViewController.swift */; };
 		7036D6722B3DB28C0036D5E0 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7036D6562B3DB28C0036D5E0 /* LoadingView.swift */; };
+		70645B222B97626500B34E6A /* VigramSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 70645B212B97626500B34E6A /* VigramSDK */; };
+		70645B242B97626500B34E6A /* VigramSDK+Rx in Frameworks */ = {isa = PBXBuildFile; productRef = 70645B232B97626500B34E6A /* VigramSDK+Rx */; };
 		707E0150298D08C100F3A611 /* VigramSDK_DemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 707E014F298D08C100F3A611 /* VigramSDK_DemoApp.swift */; };
 		707E0154298D08C300F3A611 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 707E0153298D08C300F3A611 /* Assets.xcassets */; };
-		708020EA2B610D2A002FB79E /* VigramSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 708020E92B610D2A002FB79E /* VigramSDK */; };
-		708020EC2B610D2A002FB79E /* VigramSDK+Rx in Frameworks */ = {isa = PBXBuildFile; productRef = 708020EB2B610D2A002FB79E /* VigramSDK+Rx */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -67,8 +67,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				708020EA2B610D2A002FB79E /* VigramSDK in Frameworks */,
-				708020EC2B610D2A002FB79E /* VigramSDK+Rx in Frameworks */,
+				70645B222B97626500B34E6A /* VigramSDK in Frameworks */,
+				70645B242B97626500B34E6A /* VigramSDK+Rx in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -211,8 +211,8 @@
 			);
 			name = "VigramSDK Demo";
 			packageProductDependencies = (
-				708020E92B610D2A002FB79E /* VigramSDK */,
-				708020EB2B610D2A002FB79E /* VigramSDK+Rx */,
+				70645B212B97626500B34E6A /* VigramSDK */,
+				70645B232B97626500B34E6A /* VigramSDK+Rx */,
 			);
 			productName = "VigramSDK Demo";
 			productReference = 707E014C298D08C100F3A611 /* VigramSDK Demo.app */;
@@ -243,7 +243,7 @@
 			);
 			mainGroup = 707E0143298D08C100F3A611;
 			packageReferences = (
-				708020E82B610D2A002FB79E /* XCRemoteSwiftPackageReference "SDK_iOS_viDoc_Distribution" */,
+				70645B202B97626500B34E6A /* XCRemoteSwiftPackageReference "SDK_iOS_viDoc_Distribution" */,
 			);
 			productRefGroup = 707E014D298D08C100F3A611 /* Products */;
 			projectDirPath = "";
@@ -504,25 +504,25 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		708020E82B610D2A002FB79E /* XCRemoteSwiftPackageReference "SDK_iOS_viDoc_Distribution" */ = {
+		70645B202B97626500B34E6A /* XCRemoteSwiftPackageReference "SDK_iOS_viDoc_Distribution" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/vigram-gmbh/SDK_iOS_viDoc_Distribution.git";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.5.9;
+				kind = exactVersion;
+				version = 0.5.10;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		708020E92B610D2A002FB79E /* VigramSDK */ = {
+		70645B212B97626500B34E6A /* VigramSDK */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 708020E82B610D2A002FB79E /* XCRemoteSwiftPackageReference "SDK_iOS_viDoc_Distribution" */;
+			package = 70645B202B97626500B34E6A /* XCRemoteSwiftPackageReference "SDK_iOS_viDoc_Distribution" */;
 			productName = VigramSDK;
 		};
-		708020EB2B610D2A002FB79E /* VigramSDK+Rx */ = {
+		70645B232B97626500B34E6A /* VigramSDK+Rx */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 708020E82B610D2A002FB79E /* XCRemoteSwiftPackageReference "SDK_iOS_viDoc_Distribution" */;
+			package = 70645B202B97626500B34E6A /* XCRemoteSwiftPackageReference "SDK_iOS_viDoc_Distribution" */;
 			productName = "VigramSDK+Rx";
 		};
 /* End XCSwiftPackageProductDependency section */
