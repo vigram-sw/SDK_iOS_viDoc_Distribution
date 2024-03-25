@@ -2,7 +2,7 @@
 
 VigramSDK is a library to connect your app to viDoc to retrieve location data and perform laser distance recordings.
 
-For more information, you can view the documentation using [web](https://vigram-sw.github.io/SDK_iOS_viDoc_Distribution/documentation/vigramsdk/)  or [Xcode](https://github.com/vigram-sw/SDK_iOS_viDoc_Distribution/tree/docs/VigramSDK.doccarchive)
+For more information, you can view the documentation using [web](https://vigram-sw.github.io/SDK_iOS_viDoc_Distribution/documentation/vigramsdk/)  or [Xcode](https://vigram-sw.github.io/SDK_iOS_viDoc_Distribution/tutorials/viewdocs/)
 
 ## Installation
 
