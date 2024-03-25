@@ -30,7 +30,7 @@ Pod::Spec.new do |s|
                    Permission is granted to...
                   LICENSE
                 }
-    s.source = { :git => 'https://github.com/vigram-gmbh/SDK_iOS_viDoc_Distribution.git', :tag => '$TAG' }
+    s.source = { :git => 'https://github.com/vigram-sw/SDK_iOS_viDoc_Distribution.git', :tag => '$TAG' }
     s.author = { '$(git config user.name)' => '$(git config user.email)' }
 
     s.platform = :ios

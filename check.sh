@@ -2,7 +2,7 @@
 echo "--- PREPARATION ---"
 
 POD_NAME="Vigram"
-POD_URL="git@github.com:vigram-gmbh/SDK_iOS_viDoc_Distribution.git"
+POD_URL="git@github.com:vigram-sw/SDK_iOS_viDoc_Distribution.git"
 INFO_PLIST_PATH="VigramSDK.xcframework/ios-arm64/VigramSDK.framework/Info.plist"
 
 WORKSPACE="VigramSDK-DistributionApp.xcworkspace"

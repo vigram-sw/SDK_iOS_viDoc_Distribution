@@ -12,7 +12,7 @@ Copyright 2023
 Permission is granted to...
 LICENSE
 }
-s.source = { :git => 'https://github.com/vigram-gmbh/SDK_iOS_viDoc_Distribution.git', :tag => '0.5.10' }
+s.source = { :git => 'https://github.com/vigram-sw/SDK_iOS_viDoc_Distribution.git', :tag => '0.5.10' }
 s.author = { 'Iaroslav Khaustov' => 'iaroslav.khaustov@vigram.com' }
 s.platform = :ios
 s.swift_version = '5.7'
