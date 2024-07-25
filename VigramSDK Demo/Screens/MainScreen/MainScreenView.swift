@@ -17,78 +17,46 @@ struct MainScreenView: View {
 
     @State private var showRecordFiles = false
     @State private var recordIsActive = false
-    @State private var showDeviation = false
-    @State private var useNTRIP = true
-    @State private var usePPS = false
 
     // MARK: Computed properties
 
     var body: some View {
         LoadingView(
             isShowing: $viewModel.isConfiguringDevice,
-            message: viewModel.isResetingDevice ?
-                (viewModel.isResetingDeviceWithReconnect ? .resetWithNtrip : .reset) :
-                .configuration
+            message: viewModel.message
         ) {
             NavigationView {
                 if !viewModel.isConfiguringDevice {
                     ScrollView (showsIndicators: false) {
-                        OnlineSoftwareUpdateSubview(viewModel)
-                        if !viewModel.isConnectedDevice && !viewModel.isFlashingDevice {
+                        if !viewModel.isConnectedDevice {
                             VStack {
                                 ConnectToDeviceSubview(viewModel)
                             }
                         } else {
-                            if !viewModel.isFlashingDevice {
-                                VStack {
-                                    DeviceInfoSubview(viewModel)
-                                    if !viewModel.rmxIsActive {
-                                        HStack {
-                                            Text("  NMEA ready status: ").font(Font.headline.bold()).foregroundColor(.black)
-                                            if viewModel.isReadyNMEA {
-                                                Image(systemName: "network").foregroundColor(.green)
-                                            } else {
-                                                ProgressView()
-                                            }
-                                            Spacer()
-                                        }
+                            VStack {
+                                DeviceInfoSubview(viewModel)
+                                if !viewModel.rmxIsActive {
+                                    HStack {
+                                        Text("  NMEA ready status: ").font(Font.headline.bold()).foregroundColor(.black)
                                         if viewModel.isReadyNMEA {
-                                            NMEASubview(viewModel)
-                                            VStack {
-                                                HStack {
-                                                    SelectButton(
-                                                        isSelected: $useNTRIP,
-                                                        color: .green,
-                                                        text: "NTRIP"
-                                                    ).onTapGesture {
-                                                        useNTRIP = true
-                                                        usePPS = false
-                                                    }
-                                                    SelectButton(
-                                                        isSelected: $usePPS,
-                                                        color: .green,
-                                                        text: "Point Perfect (in dev)"
-                                                    ).onTapGesture {
-                                                        /*
-                                                         useNTRIP = false
-                                                         usePPS = true
-                                                         */
-                                                    }
-                                                }
-                                                if useNTRIP {
-                                                    NTRIPControlSubview(viewModel)
-                                                }
-                                            }
+                                            Image(systemName: "network").foregroundColor(.green)
+                                        } else {
+                                            ProgressView()
                                         }
-                                        LaserMeasurementsSubview(viewModel)
+                                        Spacer()
                                     }
+                                    if viewModel.isReadyNMEA {
+                                        NMEASubview(viewModel)
+                                        NTRIPControlSubview(viewModel)
+                                    }
+                                    LaserMeasurementsSubview(viewModel)
                                 }
-                                if viewModel.isStartingNtrip {
-                                    SinglePointSubview(viewModel)
-                                }
-                                PPKMeasurementsSubview(viewModel)
-                                DeviceConfigSubview(viewModel)
                             }
+                            if viewModel.isStartingNtrip {
+                                SinglePointSubview(viewModel)
+                            }
+                            PPKMeasurementsSubview(viewModel)
+                            DeviceConfigSubview(viewModel)
                         }
                     }.toolbar {
                         ToolbarItem(placement: .keyboard) {

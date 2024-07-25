@@ -10,11 +10,14 @@ import Combine
 import CoreBluetooth
 import SwiftUI
 import VigramSDK
+import CoreMotion
 
 extension MainScreenView {
     @MainActor class MainScreenViewModel: ObservableObject {
-        
+
         // MARK: Public properties
+        @Published var message = ""
+        @Published private(set) var sdk = Configuration.sdkVersion
         // ALERT
         @Published var isShowingAlert = false
         @Published private(set) var titleAlert = ""
@@ -25,26 +28,25 @@ extension MainScreenView {
         // DEVICE
         @Published var isConfiguringDevice = false
         @Published var isStartDevice = false
+        @Published private(set) var currentDeviceCharge = ""
+        @Published private(set) var protocolVersion: Double?
         @Published private(set) var isConnectedDevice = false
         @Published private(set) var isResetingDevice = false
         @Published private(set) var isResetingDeviceWithReconnect = false
-        @Published private(set) var isFlashingDevice = false
-        @Published private(set) var currentDeviceName = ""
-        @Published private(set) var currentSerialNumber = ""
-        @Published private(set) var currentDeviceSoftwareVersion = ""
-        @Published private(set) var currentDeviceHardwareVersion = ""
-        @Published private(set) var currentDeviceCharge = ""
+        @Published private(set) var currentDeviceHasFrontLaser = false
+        @Published private(set) var currentDeviceHasBottomLaser = false
+        @Published private(set) var currentDeviceHasIMU = false
+        @Published private(set) var currentDeviceHousing = ""
+        @Published private(set) var currentDeviceMountDevice = ""
+        @Published private(set) var currentVigramRef = ""
+        @Published private(set) var currentVigramBat = ""
+        @Published private(set) var currentM88Laser = ""
+        @Published private(set) var currentL81Laser = ""
+        @Published private(set) var currentIMU = ""
         @Published private(set) var resetMessageError = ""
         @Published private(set) var viDocState = ""
-        // SOFTWARE
-        @Published var allAvailableSoftwareNamesForWeb = [String]()
-        @Published private(set) var statusUpdate = ""
-        @Published private(set) var progressUpdate = ""
         // SATELLITE
         @Published private(set) var isReadyNMEA = false
-        @Published private(set) var currentTimeString = ""
-        @Published private(set) var unixTimeString = ""
-        @Published private(set) var gnssTimeString = ""
         @Published private(set) var rtkStatus = ""
         @Published private(set) var correction = ""
         @Published private(set) var latitude = ""
@@ -64,7 +66,6 @@ extension MainScreenView {
         @Published private(set) var nVelocity = ""
         @Published private(set) var eVelocity = ""
         @Published private(set) var dVelocity = ""
-        @Published private(set) var accurancy = ""
         @Published private(set) var elevation = ""
         @Published private(set) var satelliteGNSS = ""
         @Published private(set) var satelliteStatusGNSS = ""
@@ -78,15 +79,21 @@ extension MainScreenView {
         @Published var port = ""
         @Published var username = ""
         @Published var password = ""
-        @Published var ntripSizeParcel = ""
         @Published var ntripStatus = "Not connected"
         @Published var isStartingNtrip = false
+        @Published var mountPointsData = MountPointsValuesData(
+            currentMountPointName: "",
+            allMountPointNames: []
+        )
         // LASER
         @Published var durationMeasurements = "5"
         @Published var isBottomLaserSelected = true
         @Published var isBackLaserSelected = false
+        @Published var isFastLaserMeasurementsSelected = true
+        @Published var isSlowLaserMeasurementsSelected = false
+        @Published var isAutoLaserMeasurementsSelected = false
+        @Published private(set) var lasersState = ""
         @Published private(set) var distance = ""
-        @Published private(set) var quality = ""
         @Published private(set) var currentAllOffsets = [(String, SIMD3<Double>)]()
         // SINGLE POINT
         @Published var timerMeasurementValue = ""
@@ -104,94 +111,52 @@ extension MainScreenView {
         @Published var isSharePresented: Bool = false
 
         // MARK: Private properties
-        
+
         private var model = MainScreenModel()
         private var ggaMessage: GGAMessage?
         private var subscription = Set<AnyCancellable>()
-        private let unixTimeDateFormatter = DateFormatter()
-        private let currentTimeDateFormatter = DateFormatter()
-        private var isNeedUpdateSoftware = false
-        private var isSuccesUpdateSoftware = false
         private var isNormalDisconnect = false
         private var isIncompatibleDevice = false
         private var socketCodeError: Int?
-        
+
         // MARK: Init
-        
+
         init() {
-            unixTimeDateFormatter.dateFormat = "HH:mm:ss.SSS"
-            unixTimeDateFormatter.timeZone = TimeZone(abbreviation: "UTC")
-            currentTimeDateFormatter.dateFormat = "HH:mm:ss.SSS"
             configurePublishers()
             ntripCredentials = model.getAllNtripCredential()
         }
-        
-        // MARK: Public methods (Intens)
-        
-        // MARK: Software
-        
-        func installSoftware(name: String) {
-            model.installSoftware(name: name)
-            titleAlert = "Notification"
-            messageAlert = """
-                Please restart viDoc to start update.
-                Note: If the viDoc doesn't have the bootloader, the installation of the software is not possible.
-            """
-            isShowingAlert = true
-        }
 
-        func setForceUpdateSoftware() {
-            model.setForceUpdateSoftware()
-            titleAlert = "Notification"
-            messageAlert = """
-                Please restart viDoc to start update.
-                Note: If the viDoc doesn't have the bootloader, the installation of the software is not possible.
-            """
-            isShowingAlert = true
-        }
-        
+        // MARK: Public methods (Intens)
+
         // MARK: Device
-        
+
         func connectToDevice(name: String) {
             titleAlert = ""
             messageAlert = ""
             model.connectToDevice(name: name)
         }
-        
+
         func disconnect() {
             isNormalDisconnect = true
             disconnectToDevice()
         }
-        
+
         func requestBattery() {
             model.requestBattery()
-        }
-        
-        func requestVersion() {
-            model.requestVersion()?.sink(receiveCompletion: { completion in
-                switch completion {
-                case .finished:
-                    break
-                case .failure(let error):
-                    if Configuration.debug {
-                        print("Error \(error.localizedDescription)")
-                    }
-                }
-            }) { _ in }.store(in: &subscription)
         }
 
         func setDynamicState(type: DynamicStateType) {
             model.setDynamicState(type: type)
         }
-        
+
         func getDynamicState() {
             model.getDynamicState()
         }
-        
+
         func changeStatusNAVDOP(activate: Bool){
             model.changeStatusNAVDOP(activate: activate)
         }
-        
+
         func changeStatusNAVPVT(activate: Bool){
             model.changeStatusNAVPVT(activate: activate)
         }
@@ -199,7 +164,7 @@ extension MainScreenView {
         func getCurrentStatusGNSS(satellite: NavigationSystemType) {
             model.getCurrentStatusGNSS(satellite: satellite)
         }
-        
+
         func changeStatusGNSS(satellite: NavigationSystemType, activate: Bool) {
             model.changeStatusGNSS(satellite: satellite, activate: activate)
         }
@@ -223,9 +188,9 @@ extension MainScreenView {
         func getChangingRateOfMessages() {
             model.getChangingRateOfMessages()
         }
-        
+
         // MARK: LASER
-        
+
         func turnOnLaser() {
             let typeOfLaser: LaserConfiguration.Position = isBottomLaserSelected ? .bottom : .back
             model.turnOnLaser(at: typeOfLaser)?
@@ -239,8 +204,11 @@ extension MainScreenView {
                         self?.isShowingAlert = true
                     }
                 }) { _ in }.store(in: &self.subscription)
+            if let protocolVersion = self.protocolVersion, protocolVersion > 1 {
+                getLaserStatus()
+            }
         }
-        
+
         func turnOffLaser() {
             let typeOfLaser: LaserConfiguration.Position = isBottomLaserSelected ? .bottom : .back
             model.turnOffLaser(at: typeOfLaser)?
@@ -254,17 +222,47 @@ extension MainScreenView {
                         self?.isShowingAlert = true
                     }
                 }) { _ in }.store(in: &self.subscription)
+            if let protocolVersion = self.protocolVersion, protocolVersion > 1 {
+                getLaserStatus()
+            }
         }
-        
+
+        func getLaserStatus() {
+            lasersState = ""
+            model.getLasersStatus()?
+                .sink(receiveCompletion: { [weak self] complition in
+                    switch complition {
+                    case .finished:
+                        break
+                    case let .failure(error):
+                        self?.titleAlert = "Error"
+                        self?.messageAlert = error.localizedDescription
+                        self?.isShowingAlert = true
+                    }
+                }) { [weak self] laserState in
+                    switch laserState {
+                    case .backIsOn:
+                        self?.lasersState = "Back laser is on"
+                    case .bothOff:
+                        self?.lasersState = "Both lasers are off"
+                    case .bottomIsOn:
+                        self?.lasersState = "Bottom laser is on"
+                    @unknown default:
+                        break
+                    }
+                }.store(in: &subscription)
+        }
+
         func startLaser(){
             if let duration = Double(durationMeasurements) {
-                if (duration <= 0 || duration > 60) {
+                if let protocolVersion = self.protocolVersion, protocolVersion == 1 && (duration <= 0 || duration > 60) {
                     titleAlert = "Error"
                     messageAlert = "The duration value of a laser recording session in this software version must be between 5 and 60 seconds."
                     isShowingAlert = true
                 } else {
                     let typeOfLaser: LaserConfiguration.Position = isBottomLaserSelected ? .bottom : .back
-                    let laserConfig = LaserConfiguration.init(shotMode: .fast, position: typeOfLaser, duration: duration)
+                    let laserShotMode: LaserConfiguration.ShotMode = isFastLaserMeasurementsSelected ? .fast : isSlowLaserMeasurementsSelected ? .slow : .auto
+                    let laserConfig = LaserConfiguration.init(shotMode: laserShotMode, position: typeOfLaser, duration: duration)
                     model.startLaser(with: laserConfig)?
                         .sink(receiveCompletion: { [weak self] complition in
                             switch(complition) {
@@ -283,7 +281,7 @@ extension MainScreenView {
                 isShowingAlert = true
             }
         }
-        
+
         func setCurrentOffset(with position: LaserConfiguration.Position) {
             isBackLaserSelected = position == .back
             isBottomLaserSelected = position == .bottom
@@ -325,11 +323,11 @@ extension MainScreenView {
                 isShowingAlert = true
             }
         }
-        
+
         func reConnectToNTRIP() {
             model.reConnectToNTRIP()
         }
-        
+
         func reConnectToNTRIPWithReset() {
             viDocState = ""
             resetMessageError = ""
@@ -340,18 +338,56 @@ extension MainScreenView {
         func disconnectNtrip() {
             isStartingNtrip = false
             ntripStatus = "No connection"
-            ntripSizeParcel = ""
             model.disconnectNtrip()
         }
-        
+
+        func getMountpoints() {
+            if let port = Int(port) {
+                model.getMountpoints(
+                    for: .init(
+                        hostname: hostname,
+                        port: port,
+                        username: username,
+                        password: password
+                    )
+                )?.receive(on: DispatchQueue.main)
+                    .sink(receiveCompletion: { [weak self] complition in
+                    guard let self = self else { return }
+                    switch complition {
+                    case .finished:
+                        break
+                    case let .failure(error):
+                        self.titleAlert = "Error"
+                        self.messageAlert = error.localizedDescription
+                        self.isShowingAlert = true
+                    }
+                }) { [weak self] mountpoints in
+                    self?.mountPointsData.currentMountPointName = mountpoints.first?.name ?? ""
+                    self?.mountPointsData.allMountPointNames = mountpoints.map { $0.name }
+                }.store(in: &self.subscription)
+            } else {
+                titleAlert = "Error"
+                messageAlert = "Incorrect data: port"
+                isShowingAlert = true
+            }
+        }
+
+        func clearFields() {
+            mountPoint = ""
+            port = ""
+            username = ""
+            password = ""
+            hostname = ""
+        }
+
         // MARK: RESET
-        
+
         func resetDevice() {
             viDocState = ""
             resetMessageError = ""
             model.resetDevice()
         }
-        
+
         func clearTXTLog() {
             viDocState = ""
         }
@@ -361,7 +397,7 @@ extension MainScreenView {
         func startSPMeasurement(){
             timerMeasurementValue = ""
             if let duration = Double(durationMeasurements) {
-                if (duration < 0 || duration > 60) {
+                if let protocolVersion = protocolVersion, protocolVersion == 1, (duration < 0 || duration > 60) {
                     titleAlert = "Error"
                     messageAlert = "Duration value is not correct"
                     isShowingAlert = true
@@ -370,7 +406,8 @@ extension MainScreenView {
                 singlePointMeasurement = nil
                 correctedCoordinateWithFormula = nil
                 let typeOfLaser: LaserConfiguration.Position = isBottomLaserSelected ? .bottom : .back
-                let laserConfig = LaserConfiguration.init(shotMode: .fast, position: typeOfLaser, duration: duration)
+                let laserShotMode: LaserConfiguration.ShotMode = isFastLaserMeasurementsSelected ? .fast : isSlowLaserMeasurementsSelected ? .slow : .auto
+                let laserConfig = LaserConfiguration.init(shotMode: laserShotMode, position: typeOfLaser, duration: duration)
                 if useMeasurementsWithLaser {
                     let typeOfLaser: LaserConfiguration.Position = isBottomLaserSelected ? .bottom : .back
                     model.turnOffLaser(at: typeOfLaser)?
@@ -378,7 +415,11 @@ extension MainScreenView {
                             guard let self = self else { return }
                             switch complition {
                             case .finished:
-                                self.model.recordWithLaser(duration: duration, configuration: laserConfig, offsets: currentOffsets)
+                                if let protocolVersion = self.protocolVersion, protocolVersion > 1 {
+                                    self.model.recordWithLaser(duration: duration, configuration: laserConfig, offsets: currentOffsets, isNewProtocol: true)
+                                } else {
+                                    self.model.recordWithLaser(duration: duration, configuration: laserConfig, offsets: currentOffsets)
+                                }
                             case let .failure(error):
                                 self.titleAlert = "Error"
                                 self.messageAlert = error.localizedDescription
@@ -387,7 +428,11 @@ extension MainScreenView {
                         }) { _ in }.store(in: &self.subscription)
                 } else {
                     if let distanceToGround = Double(distanceToGround) {
-                        model.recordWithoutLaser(duration: duration, antennaDistanceToGround: distanceToGround, offsets: currentOffsets)
+                        if let protocolVersion = self.protocolVersion, protocolVersion > 1 {
+                            model.recordWithoutLaser(duration: duration, antennaDistanceToGround: distanceToGround, offsets: currentOffsets, isNewProtocol: true)
+                        } else {
+                            model.recordWithoutLaser(duration: duration, antennaDistanceToGround: distanceToGround, offsets: currentOffsets)
+                        }
                     } else {
                         titleAlert = "Error"
                         messageAlert = "Distance to ground value is not correct"
@@ -400,21 +445,31 @@ extension MainScreenView {
                 isShowingAlert = true
             }
         }
+        
+        func stopSPMeasurement() {
+            timerMeasurementValue = ""
+            model.stopSPMeasurement()
+        }
+    
+        func cancelSPMeasurement() {
+            timerMeasurementValue = ""
+            model.cancelSPMeasurement()
+        }
 
         // MARK: RXM
-        
+
         func changeStatusRXM(activate: Bool) {
             model.changeStatusRXM(activate: activate)
         }
-        
+
         func startRecordPPKMeasurements() {
             model.startRecordPPKMeasurements()
         }
-        
+
         func stopRecordPPKMeasurements() {
             model.stopRecordPPKMeasurements()
         }
-        
+
         func getAllUBXFiles() {
             switch model.getAllUBXFiles() {
             case .success(let values):
@@ -425,10 +480,10 @@ extension MainScreenView {
                 isShowingAlert = true
             }
         }
-        
+
         func getUBXFile(filename: String, pathName: String){
             fileLinkForUBXFile = model.getUBXFile(filename: filename, pathName: pathName)
-            
+
             if fileLinkForUBXFile != nil {
                 isSharePresented = true
             }
@@ -440,48 +495,61 @@ extension MainScreenView {
 private extension MainScreenView.MainScreenViewModel {
 
     func configurePublishers() {
-        model.allAvailableSoftwareNames.sink { [weak self] values in
-            self?.allAvailableSoftwareNamesForWeb = values
-        }.store(in: &subscription)
+        model.helperErrorMessage
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] value in
+                self?.messageAlert = value
+                self?.titleAlert = "Error"
+                self?.isShowingAlert = true
+            }.store(in: &subscription)
 
-        model.observableDeviceNames.sink { [weak self] value in
+        model.observableDeviceNames
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] value in
             self?.allDeviceNames = value
         }.store(in: &subscription)
 
-        model.isConnectedDevice.sink{ [weak self] value in
+        model.isConnectedDevice
+            .receive(on: DispatchQueue.main)
+            .sink{ [weak self] value in
             self?.isConnectedDevice = value
             self?.isNormalDisconnect = false
             self?.isIncompatibleDevice = false
         }.store(in: &subscription)
 
-        model.nameDevice.sink{ [weak self] value in
-            self?.currentDeviceName = value
-        }.store(in: &subscription)
-
-        model.serialNumberDevice.sink{ [weak self] value in
-            self?.currentSerialNumber = value
-        }.store(in: &subscription)
-
-        model.isStartDevice.sink{ [weak self] value in
+        model.isStartDevice
+            .receive(on: DispatchQueue.main)
+            .sink{ [weak self] value in
             self?.isStartDevice = value
         }.store(in: &subscription)
 
-        model.deviceMessage.sink { [weak self] message in
+        model.deviceMessage
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] message in
             switch message {
-            case .version(let version):
-                self?.currentDeviceSoftwareVersion = version.software.toString()
-                self?.currentDeviceHardwareVersion = version.hardware.toString()
+            case .version: break
             case .battery(let value):
                 self?.currentDeviceCharge = "\(value.percentage) %"
+            case .hardwareIndex(let device):
+                self?.currentDeviceHasFrontLaser = device.hasFrontLaser
+                self?.currentDeviceHasBottomLaser = device.hasBottomLaser
+                self?.currentDeviceHasIMU = device.hasIMU
+                self?.currentDeviceHousing = device.getHousing?.rawValue ?? ""
+                self?.currentDeviceMountDevice = device.getMount?.rawValue ?? ""
+                self?.currentVigramRef = device.getHardwareRevision?.vigramRef ?? ""
+                self?.currentVigramBat = device.getHardwareRevision?.vigramBat ?? ""
+                self?.currentM88Laser = device.getHardwareRevision?.m88Laser ?? ""
+                self?.currentL81Laser = device.getHardwareRevision?.l81Laser ?? ""
             case .measurement(let measurement):
                 self?.distance = "\(measurement.distance)"
-                self?.quality = "\(measurement.quality)"
             default:
                 break
             }
         }.store(in: &subscription)
 
-        model.state.sink{ [weak self] state in
+        model.state
+            .receive(on: DispatchQueue.main)
+            .sink{ [weak self] state in
             self?.periphiralState = state
             switch(state){
             case .disconnected:
@@ -491,31 +559,34 @@ private extension MainScreenView.MainScreenViewModel {
             }
         }.store(in: &subscription)
         
-        model.configurationState.sink{ [weak self] state in
+        model.configurationState
+            .receive(on: DispatchQueue.main)
+            .sink{ [weak self] state in
             guard let self = self else { return }
             switch state {
             case .inProgress:
+                self.message = "Configuration in progress..."
                 self.isConfiguringDevice = true
             case .done:
                 self.isConfiguringDevice = false
-                if self.isNeedUpdateSoftware || self.isSuccesUpdateSoftware {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [weak self] in
-                        self?.isShowingAlert = true
-                        self?.isNeedUpdateSoftware = false
-                        self?.isSuccesUpdateSoftware = false
-                    }
-                }
             case .failed(let error):
                 self.isConfiguringDevice = false
                 self.titleAlert = "Error"
                 self.messageAlert = error.localizedDescription
                 self.isShowingAlert = true
+            case .peripheralError(let error):
+                self.isConfiguringDevice = false
+                self.isIncompatibleDevice = true
+                self.titleAlert = "Error"
+                self.messageAlert = error.localizedDescription
             @unknown default:
                 self.isConfiguringDevice = false
             }
         }.store(in: &subscription)
 
-        model.resetState.sink { [weak self] state in
+        model.resetState
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] state in
             guard let self = self else { return }
             switch state {
             case let .isReseting(value):
@@ -542,7 +613,9 @@ private extension MainScreenView.MainScreenViewModel {
             }
         }.store(in: &self.subscription)
         
-        model.viDocState.sink { [weak self] state in
+        model.viDocState
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] state in
             switch state {
             case let .user(message):
                 if message != "Starting viDoc" {
@@ -565,15 +638,12 @@ private extension MainScreenView.MainScreenViewModel {
             }
         }.store(in: &self.subscription)
 
-        model.nmeaMessage.sink { [weak self] message in
+        model.nmeaMessage
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] message in
             guard let self = self else { return }
             if let ggaMessage = message as? GGAMessage {
                 self.ggaMessage = ggaMessage
-                let currentDate = Date()
-                let unixDate = NSDate(timeIntervalSince1970: Date().timeIntervalSince1970)
-                self.currentTimeString = self.currentTimeDateFormatter.string(from: currentDate)
-                self.unixTimeString = self.unixTimeDateFormatter.string(from: unixDate as Date)
-                self.gnssTimeString = ggaMessage.time?.description ?? ""
 
                 if ggaMessage.coordinate?.longitude != nil {
                     self.isReadyNMEA = true
@@ -640,7 +710,9 @@ private extension MainScreenView.MainScreenViewModel {
             }
         }.store(in: &subscription)
         
-        model.satelliteMessage.sink { [weak self] message in
+        model.satelliteMessage
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] message in
             switch message {
             case .rawx(let value):
                 self?.rawxMessage = value.message.hexStringWithSpace()
@@ -653,7 +725,6 @@ private extension MainScreenView.MainScreenViewModel {
                 self?.dVelocity = String(value.downVelocity)
             case .dop(let value):
                 self?.pdop = String(value.positionDop)
-                self?.accurancy = String(format: "%.2f", 3*value.positionDop)
                 self?.vdop = String(value.verticalDop)
                 self?.hdop = String(value.horizontalDop)
                 self?.tdop = String(value.timeDop)
@@ -694,62 +765,17 @@ private extension MainScreenView.MainScreenViewModel {
             }
         }.store(in: &subscription)
 
-        model.softwareUpdateState.sink { [weak self] updateState in
-            var status = ""
-            switch(updateState) {
-            case .startUpdate:
-                UIApplication.shared.isIdleTimerDisabled = true
-                status = "Start update"
-                self?.isFlashingDevice = true
-            case .updatingSoftware: 
-                status = "Updating..."
-            case .endUpdate:
-                status = "Update successfull"
-                self?.titleAlert = "Update successfull"
-                self?.messageAlert = "Please restart viDoc"
-                self?.model.successFullUpdateCompelete()
-                self?.isSuccesUpdateSoftware = true
-                self?.isFlashingDevice = false
-                UIApplication.shared.isIdleTimerDisabled = false
-            case .errorUpdate:
-                self?.titleAlert = "Update error"
-                self?.messageAlert = "Please try again..."
-                self?.isShowingAlert = true
-                UIApplication.shared.isIdleTimerDisabled = false
-            case .none: status = ""
-            @unknown default:
-                break
-            }
-            self?.statusUpdate = "Status: \(status)"
-        }.store(in: &subscription)
-
-        model.softwareUpdateProgress.sink { [weak self] value in
-            self?.progressUpdate = "Progress: \(String(format: "%.1f", value)) %"
-        }.store(in: &subscription)
-        
-        model.softwareIsNeedUpdate.sink { [weak self] isNeedUpdate in
-            self?.isNeedUpdateSoftware = isNeedUpdate
-            if isNeedUpdate {
-                self?.titleAlert = "Notice"
-                self?.messageAlert = "New software available. Please update the viDoc"
-            }
+        model.protocolVersion.sink { [weak self] protocolVersion in
+            self?.protocolVersion = protocolVersion
         }.store(in: &subscription)
         
         model.ppkMeasurementsState.sink { [weak self] value in
             self?.rmxIsActive = value
         }.store(in: &subscription)
-        
-        model.ntripData.sink { [weak self] data in
-            guard let self = self else { return }
-            var tempString = self.ntripSizeParcel
-            if !tempString.isEmpty {
-                tempString += "\n"
-            }
-            tempString += "\(self.currentTimeString) - \(data.count) bytes"
-            self.ntripSizeParcel = tempString
-        }.store(in: &subscription)
-        
-        model.ntripState.sink { [weak self] state in
+
+        model.ntripState
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] state in
             guard let self = self else { return }
             switch state {
             case .ready:
@@ -837,6 +863,7 @@ private extension MainScreenView.MainScreenViewModel {
             }.store(in: &subscription)
         
         model.singlePointMeasurement
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] result in
                 guard let self = self else { return }
                 self.timerMeasurementValue = ""
@@ -858,6 +885,7 @@ private extension MainScreenView.MainScreenViewModel {
             }.store(in: &subscription)
 
         model.ppkMeasurementsTimer
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] value in
                 self?.timerValue = value
             }.store(in: &subscription)
@@ -876,9 +904,6 @@ private extension MainScreenView.MainScreenViewModel {
         isIncompatibleDevice = false
         isNormalDisconnect = false
         periphiralState = .disconnected
-        currentTimeString = ""
-        unixTimeString = ""
-        gnssTimeString = ""
         rtkStatus = ""
         correction = ""
         latitude = ""
@@ -886,12 +911,11 @@ private extension MainScreenView.MainScreenViewModel {
         lonAccErr = ""
         latAccErr = ""
         viDocState = ""
+        lasersState = ""
         dynamicState = ""
         vertAcc = ""
         horAcc = ""
-        accurancy = ""
         distance = ""
-        quality = ""
         distanceToGround = ""
         timerMeasurementValue = ""
         singlePointMeasurement = nil
@@ -911,25 +935,27 @@ private extension MainScreenView.MainScreenViewModel {
         lonAccErr = ""
         latAccErr = ""
         currentRate = ""
+        lasersState = ""
         resetMessageError = ""
         allDeviceNames.removeAll()
         isConnectedDevice = false
         isStartDevice = false
         isResetingDevice = false
         isReadyNMEA = false
-        isNeedUpdateSoftware = false
         isResetingDeviceWithReconnect = false
-        isFlashingDevice = false
-        statusUpdate = ""
-        progressUpdate = ""
-        currentDeviceName = ""
-        currentSerialNumber = ""
         countSatellite = ""
-        currentDeviceSoftwareVersion = ""
-        currentDeviceHardwareVersion = ""
+        protocolVersion = nil
         currentDeviceCharge = ""
+        currentDeviceHasFrontLaser = false
+        currentDeviceHasBottomLaser = false
+        currentDeviceHasIMU = false
+        currentDeviceHousing = ""
+        currentDeviceMountDevice = ""
+        currentVigramRef = ""
+        currentVigramBat = ""
+        currentM88Laser = ""
+        currentL81Laser = ""
         resetMessageError = ""
-        ntripSizeParcel = ""
         ntripStatus = "Not connected"
         isStartingNtrip = false
         socketCodeError = nil

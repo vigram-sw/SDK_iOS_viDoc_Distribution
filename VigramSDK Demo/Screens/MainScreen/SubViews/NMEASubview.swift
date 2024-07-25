@@ -29,22 +29,6 @@ struct NMEASubview: View {
         VStack {
             if viewModel.isReadyNMEA, !viewModel.rmxIsActive {
                 HStack {
-                    Text("  Current time: ").font(Font.headline.bold()).foregroundColor(.black)
-                    Text(viewModel.currentTimeString)
-                    Spacer()
-                }
-                HStack {
-                    Text("  UTC time: ").font(Font.headline.bold()).foregroundColor(.black)
-                    Text(viewModel.unixTimeString)
-                    Spacer()
-                }
-                HStack {
-                    Text("  GNSS time: ").font(Font.headline.bold()).foregroundColor(.black)
-                    Text(viewModel.gnssTimeString)
-                    Spacer()
-                }
-                Text("")
-                HStack {
                     Text("  Latitude: ").font(Font.headline.bold()).foregroundColor(.black)
                     Text(viewModel.latitude)
                     Spacer()
@@ -67,11 +51,6 @@ struct NMEASubview: View {
                 HStack {
                     Text("  Horiz. accuracy: ").font(Font.headline.bold()).foregroundColor(.black)
                     Text(viewModel.horAcc)
-                    Spacer()
-                }
-                HStack {
-                    Text("  Accurancy (3mm * PDOP): ").font(Font.headline.bold()).foregroundColor(.black)
-                    Text(viewModel.accurancy)
                     Spacer()
                 }
                 HStack {

@@ -15,33 +15,28 @@ final class VigramHelper: NSObject {
 
     // MARK: Public properties
 
-    // Sigletone
     static let shared = VigramHelper()
 
     // MARK: Public properties
 
-    public var allAvailableSoftware: SinglePublisher<[DeviceMessage.Version.Software]> { _allAvailableSoftware.eraseToAnyPublisher() }
     public var observableDevices: SinglePublisher<[CBPeripheral]> { _observableDevices.eraseToAnyPublisher() }
     public var isConnectedDevice: SinglePublisher<Bool> { _isConnectedDevice.eraseToAnyPublisher() }
     public var isStartDevice: SinglePublisher<Bool> { _isStartDevice.eraseToAnyPublisher() }
-    public var nameDevice: SinglePublisher<String> { _nameDevice.eraseToAnyPublisher() }
-    public var serialNumberDevice: SinglePublisher<String> { _serialNumberDevice.eraseToAnyPublisher() }
-    public var currentDevice: SinglePublisher<Peripheral> { _currentDevice.eraseToAnyPublisher() }
     public var currentNtripTask: SinglePublisher<NtripTask> { _currentNtripTask.eraseToAnyPublisher() }
     public var spMeasurementTime: SinglePublisher<TimeInterval> { _spMeasurementTime.eraseToAnyPublisher() }
+    public var errorForUp: SinglePublisher<String> { _errorForUp.eraseToAnyPublisher() }
+    public var currentDevice: SinglePublisher<Peripheral> { _currentDevice.eraseToAnyPublisher() }
 
     // MARK: Private properties
 
     // Subject
-    private let _allAvailableSoftware = Passthrough<[DeviceMessage.Version.Software]>()
     private let _observableDevices = Current<[CBPeripheral]>([])
     private let _isConnectedDevice = Current<Bool>(false)
     private let _isStartDevice = Current<Bool>(false)
     private let _currentDevice = Passthrough<Peripheral>()
     private let _currentNtripTask = Passthrough<NtripTask>()
-    private let _nameDevice = Passthrough<String>()
-    private let _serialNumberDevice = Passthrough<String>()
     private let _spMeasurementTime = Passthrough<TimeInterval>()
+    private let _errorForUp = Passthrough<String>()
 
     // SDK Services
     private var bluetoothService: BluetoothService?
@@ -60,17 +55,7 @@ final class VigramHelper: NSObject {
     private override init() {
         super.init()
         setDefaultParametres()
-
-        // AUTHENTICATION
-        switch Vigram.tokenIsValid() {
-        case .success:
-            bluetoothService = Vigram.bluetoothService()
-            ntripService = Vigram.ntripService()
-            startScanBluetooth()
-            getAllAvailableSoftware()
-        case .failure:
-            authenticationToken()
-        }
+        authenticationToken()
     }
 
     // MARK: Public methods
@@ -82,6 +67,7 @@ final class VigramHelper: NSObject {
         // MARK: Token
         Vigram.initial(token: "")
             .check()
+            .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { completion in
                 switch completion {
                 case .finished:
@@ -97,11 +83,11 @@ final class VigramHelper: NSObject {
                     self?.bluetoothService = Vigram.bluetoothService()
                     self?.ntripService = Vigram.ntripService()
                     self?.startScanBluetooth()
-                    self?.getAllAvailableSoftware()
                 case .failure(let error):
                     if Configuration.debug {
                         print("[VigramHelper]: \(error.localizedDescription)")
                     }
+                    self?._errorForUp.send(error.localizedDescription)
                 }
             }.store(in: &subscription)
     }
@@ -150,13 +136,7 @@ final class VigramHelper: NSObject {
                     if let peripheral = self.peripheral {
                         self._currentDevice.send(peripheral)
                     }
-                    if let name = self.peripheral?.peripheral.name {
-                        self._nameDevice.send(name)
-                    }
-                    if let serialNumber = self.peripheral?.serialNumber {
-                        self._serialNumberDevice.send(serialNumber)
-                    }
-                    
+
                     self.peripheral?.start()
                         .sink(receiveCompletion: { completion in
                             switch completion {
@@ -190,31 +170,6 @@ final class VigramHelper: NSObject {
         subscription.forEach { $0.cancel() }
         subscription.removeAll(keepingCapacity: true)
         startScanBluetooth()
-    }
-
-    // MARK: Software
-
-    func install(software: DeviceMessage.Version.Software) {
-        peripheral?.setUpdateSoftwareToNextStartup(true, version: software)
-    }
-
-    func setForceUpdateSoftware(){
-        Configuration.forceUpdate = false
-    }
-
-    func getAllAvailableSoftware() {
-        Vigram.softwareService().getAllAvailableSoftware().sink(receiveCompletion: { completion in
-            switch completion {
-            case .finished:
-                break
-            case .failure(let error):
-                if Configuration.debug {
-                    print("[VigramHelper]: \(error.localizedDescription)")
-                }
-            }
-        }) { [weak self] softwareArray in
-            self?._allAvailableSoftware.send(softwareArray)
-        }.store(in: &subscription)
     }
 
     // MARK: Requests to viDoc
@@ -306,6 +261,16 @@ final class VigramHelper: NSObject {
         return laserService?.turnLaserOff(at: typeOfLaser)
     }
 
+    func getLaserStatus() -> SingleEventPublisher<DeviceMessage.LaserState>?{
+        if laserService == nil {
+            if let peripheral = self.peripheral {
+                self.laserService = Vigram.laserService(peripheral: peripheral)
+            }
+        }
+
+        return laserService?.getLasersStatus()
+    }
+
     func startLaser(with configuration: LaserConfiguration) -> SingleEventPublisher<DeviceMessage.Measurement>? {
         if laserService == nil {
             if let peripheral = self.peripheral {
@@ -369,6 +334,12 @@ final class VigramHelper: NSObject {
         ntripTask?.disconnect()
     }
 
+    func getMountpoints(for nci: NtripConnectionInformation) -> SingleEventPublisher<[NtripMountPoint]>? {
+        ntripService?.mountpoints(for: nci)
+    }
+
+    // MARK: Single point
+
     func recordSinglePoint(
         for duration: TimeInterval,
         antennaDistanceToGround: Double = 0.0,
@@ -383,7 +354,7 @@ final class VigramHelper: NSObject {
         if useLaser {
             guard let laserService = laserService else { return nil }
             environmentDataService = Vigram.environmentDataService(
-                gpsService: gpsService, 
+                gpsService: gpsService,
                 laserService: laserService,
                 peripheral: peripheral,
                 dynamicStateType: .stationary
@@ -398,9 +369,28 @@ final class VigramHelper: NSObject {
         if let environmentDataService = self.environmentDataService {
             singlePointRecordingService = Vigram.singlePointRecordingService(
                 environmentDataService: environmentDataService)
+            
+            singlePointRecordingService?.measurementTime
+                .receive(on: DispatchQueue.main)
+                .sink { [weak self] value in
+                    self?._spMeasurementTime.send(value)
+                }
+                .store(in: &subscription)
         }
+        
+        if isNewProtocol {
+            return singlePointRecordingService?.startMeasurement(duration: duration, updateInterval: 0.1, with: method)
+        } else {
+            return singlePointRecordingService?.record(duration: duration, updateInterval: 0.1, with: method)
+        }
+    }
 
-        return singlePointRecordingService?.record(duration: duration, updateInterval: 0.1, with: method)
+    func stopSPMeasurement() {
+        singlePointRecordingService?.stopMeasurement()
+    }
+    
+    func cancelSPMeasurement() {
+        singlePointRecordingService?.cancelMeasurement()
     }
 
     // MARK: RXM
@@ -454,9 +444,8 @@ private extension VigramHelper {
         // DEBUG CONFIG
         #if DEBUG
         // MARK: Configuration
-        Configuration.debug = true
+        Configuration.debug = false
         #endif
-        Configuration.forceUpdate = false
     }
 
     func createLogFile(nameDevice: String?, fileExtension: String, folder: String) -> URL? {

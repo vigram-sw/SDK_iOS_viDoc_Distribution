@@ -10,6 +10,7 @@ import SwiftUI
 
 @main
 struct VigramSDK_DemoApp: App {
+
     let vigramHelper = VigramHelper.shared
 
     var body: some Scene {

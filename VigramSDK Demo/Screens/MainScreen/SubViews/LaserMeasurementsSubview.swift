@@ -33,6 +33,16 @@ struct LaserMeasurementsSubview: View {
                     .keyboardType(.decimalPad)
                 Spacer()
             }
+            if let protocolVersion = viewModel.protocolVersion, protocolVersion > 1 {
+                HStack {
+                    Text("  Notice: 0 second - infinity measurements").font(Font.headline.bold())
+                    Spacer()
+                }
+                HStack {
+                    Text("  Cancel measurements - press LasersOff").font(Font.headline.bold())
+                    Spacer()
+                }
+            }
             HStack {
                 SelectButton(
                     isSelected: $viewModel.isBottomLaserSelected,
@@ -59,6 +69,49 @@ struct LaserMeasurementsSubview: View {
                     }
                 }
             }
+            HStack {
+                SelectButton(
+                    isSelected: $viewModel.isFastLaserMeasurementsSelected,
+                    color: .green,
+                    text: "Fast"
+                ).onTapGesture {
+                    viewModel.isFastLaserMeasurementsSelected = true
+                    viewModel.isSlowLaserMeasurementsSelected = false
+                    viewModel.isAutoLaserMeasurementsSelected = false
+                }
+                SelectButton(
+                    isSelected: $viewModel.isSlowLaserMeasurementsSelected,
+                    color: .green,
+                    text: "Slow"
+                ).onTapGesture {
+                    viewModel.isFastLaserMeasurementsSelected = false
+                    viewModel.isSlowLaserMeasurementsSelected = true
+                    viewModel.isAutoLaserMeasurementsSelected = false
+                }
+                SelectButton(
+                    isSelected: $viewModel.isAutoLaserMeasurementsSelected,
+                    color: .green,
+                    text: "Auto"
+                ).onTapGesture {
+                    viewModel.isFastLaserMeasurementsSelected = false
+                    viewModel.isSlowLaserMeasurementsSelected = false
+                    viewModel.isAutoLaserMeasurementsSelected = true
+                }
+            }
+            if let protocolVersion = viewModel.protocolVersion, protocolVersion > 1 {
+                HStack {
+                    Text("  Lasers state: ")
+                        .font(Font.headline.bold())
+                        .foregroundColor(.black)
+                    Text(viewModel.lasersState)
+                    Spacer()
+                }
+            }
+            Button { viewModel.getLaserStatus() } label: {
+                Text("Get lasers status")
+                    .font(Font.headline.bold())
+                    .foregroundColor(.black)
+            }.buttonStyle(.bordered)
             Button { viewModel.turnOnLaser() } label: {
                 Text("LaserOn")
                     .font(Font.headline.bold())
@@ -77,11 +130,6 @@ struct LaserMeasurementsSubview: View {
             HStack {
                 Text("  Distance: ").font(Font.headline.bold())
                 Text(viewModel.distance)
-                Spacer()
-            }
-            HStack {
-                Text("  Quality: ").font(Font.headline.bold())
-                Text(viewModel.quality)
                 Spacer()
             }
         }.padding(6)

@@ -15,6 +15,7 @@ struct SinglePointSubview: View {
     @ObservedObject private var viewModel: MainScreenView.MainScreenViewModel
 
     @State private var showOffsets = false
+    @State private var showDeviation = false
 
     // MARK: Init
 
@@ -301,12 +302,12 @@ struct SinglePointSubview: View {
                     }
                 } label: {
                     if showOffsets {
-                        Text("Hide offsets option")
+                        Text("Offsets option")
                             .font(Font.headline.bold())
                             .foregroundColor(.black)
                         Image(systemName: "chevron.up").foregroundColor(.black)
                     } else {
-                        Text("Show offsets option")
+                        Text("Offsets option")
                             .font(Font.headline.bold())
                             .foregroundColor(.black)
                         Image(systemName: "chevron.down").foregroundColor(.black)
@@ -350,6 +351,20 @@ struct SinglePointSubview: View {
                     .font(Font.headline.bold())
                     .foregroundColor(.black)
             }.buttonStyle(.bordered)
+            if let protocolVersion = viewModel.protocolVersion, protocolVersion > 1 {
+                Button { viewModel.stopSPMeasurement() } label: {
+                    Text("Stop SP measurement")
+                        .font(Font.headline.bold())
+                        .foregroundColor(.black)
+                }.buttonStyle(.bordered)
+            }
+            if let protocolVersion = viewModel.protocolVersion, protocolVersion > 1 {
+                Button { viewModel.cancelSPMeasurement() } label: {
+                    Text("Cancel SP measurement")
+                        .font(Font.headline.bold())
+                        .foregroundColor(.black)
+                }.buttonStyle(.bordered)
+            }
         }.padding(6)
     }
 }

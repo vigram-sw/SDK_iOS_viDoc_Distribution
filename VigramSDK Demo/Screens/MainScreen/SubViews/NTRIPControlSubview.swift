@@ -15,6 +15,7 @@ struct NTRIPControlSubview: View {
     @ObservedObject private var viewModel: MainScreenView.MainScreenViewModel
 
     @State private var showNtrip = false
+    @State private var showAllMountpoints = false
 
     // MARK: Init
 
@@ -30,10 +31,10 @@ struct NTRIPControlSubview: View {
                 self.showNtrip.toggle()
             } label: {
                 if showNtrip {
-                    Text("Hide NTRIP control").font(Font.headline.bold()).foregroundColor(.black)
+                    Text("NTRIP control").font(Font.headline.bold()).foregroundColor(.black)
                     Image(systemName: "chevron.up").foregroundColor(.black)
                 } else {
-                    Text("Show NTRIP control").font(Font.headline.bold()).foregroundColor(.black)
+                    Text("NTRIP control").font(Font.headline.bold()).foregroundColor(.black)
                     Image(systemName: "chevron.down").foregroundColor(.black)
                 }
             }.buttonStyle(.bordered)
@@ -60,10 +61,25 @@ struct NTRIPControlSubview: View {
                         }
                     }
                     HStack {
-                        Text("  Mount point: ")
-                        TextField("Mount point", text: $viewModel.mountPoint)
-                            .keyboardType(UIKeyboardType.default)
-                        Spacer()
+                        if viewModel.hostname != "", viewModel.port != "" {
+                            Text("  Mount point: ")
+                            if viewModel.mountPoint == "" {
+                                Button {
+                                    viewModel.getMountpoints()
+                                    showAllMountpoints = true
+                                } label: {
+                                    Text("Set mountpoints").font(Font.headline.bold()).foregroundColor(.black)
+                                }.buttonStyle(.bordered)
+                            } else {
+                                Button {
+                                    viewModel.getMountpoints()
+                                    showAllMountpoints = true
+                                } label: {
+                                    Text(viewModel.mountPoint).font(Font.headline.bold()).foregroundColor(.black)
+                                }.buttonStyle(.bordered)
+                            }
+                            Spacer()
+                        }
                     }
                     HStack {
                         Text("  Hostname: ")
@@ -89,23 +105,32 @@ struct NTRIPControlSubview: View {
                             .keyboardType(UIKeyboardType.default)
                         Spacer()
                     }
+                    Button { viewModel.clearFields() } label: {
+                        Text("Clear fields").font(Font.headline.bold()).foregroundColor(.black)
+                    }.buttonStyle(.bordered)
                 }.padding(6)
                 VStack {
-                    Text("NTRIP control").font(Font.headline.bold())
-                    HStack {
-                        Button { viewModel.connectToNTRIP() } label: {
-                            Text("Connect").font(Font.headline.bold()).foregroundColor(.black)
+                    if viewModel.mountPoint != "", viewModel.username != "",
+                       viewModel.port != "", viewModel.password != "",
+                       viewModel.hostname != ""
+                    {
+                        Text("NTRIP control").font(Font.headline.bold())
+                        HStack {
+
+                            Button { viewModel.connectToNTRIP() } label: {
+                                Text("Connect").font(Font.headline.bold()).foregroundColor(.black)
+                            }.buttonStyle(.bordered)
+                            Button { viewModel.disconnectNtrip() } label: {
+                                Text("Disconnect").font(Font.headline.bold()).foregroundColor(.black)
+                            }.buttonStyle(.bordered)
+                            Button { viewModel.reConnectToNTRIP() } label: {
+                                Text("Reconnect").font(Font.headline.bold()).foregroundColor(.black)
+                            }.buttonStyle(.bordered)
+                        }.padding(10)
+                        Button { viewModel.reConnectToNTRIPWithReset() } label: {
+                            Text("Reconnect NTRIP with Reset").font(Font.headline.bold()).foregroundColor(.black)
                         }.buttonStyle(.bordered)
-                        Button { viewModel.disconnectNtrip() } label: {
-                            Text("Disconnect").font(Font.headline.bold()).foregroundColor(.black)
-                        }.buttonStyle(.bordered)
-                        Button { viewModel.reConnectToNTRIP() } label: {
-                            Text("Reconnect").font(Font.headline.bold()).foregroundColor(.black)
-                        }.buttonStyle(.bordered)
-                    }.padding(10)
-                    Button { viewModel.reConnectToNTRIPWithReset() } label: {
-                        Text("Reconnect NTRIP with Reset").font(Font.headline.bold()).foregroundColor(.black)
-                    }.buttonStyle(.bordered)
+                    }
                 }
             }
         }
@@ -119,16 +144,23 @@ struct NTRIPControlSubview: View {
                 Spacer()
             }
         }.padding(6)
-        VStack {
-            Text("NTRIP received data info")
-                .font(Font.headline.bold())
-                .padding(6)
-            ScrollView{
-                TextEditor(text: .constant(viewModel.ntripSizeParcel))
-                    .font(.system(size: 10.0))
-                    .border(Color.black, width: 1)
-                    .frame(width: UIScreen.main.bounds.size.width-32, height: 150, alignment: .topLeading)
+        .sheet(isPresented: $showAllMountpoints) {
+            HalfSheet(isSmall: false) {
+                MountPointsSubview(
+                    data: viewModel.mountPointsData
+                )
+                .action { currentValue in
+                    viewModel.mountPoint = currentValue
+                    showAllMountpoints = false
+                }
+                .dissmiss {
+                    showAllMountpoints = false
+                }
+            }.onAppear {
+                UIScrollView.appearance().isScrollEnabled = true
+            }.onDisappear {
+                UIScrollView.appearance().isScrollEnabled = false
             }
-        }.padding(6)
+        }
     }
 }

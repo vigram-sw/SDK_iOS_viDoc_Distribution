@@ -15,12 +15,8 @@ class MainScreenModel {
 
     // MARK: Public properties
 
-    public var allAvailableSoftwareNames: SinglePublisher<[String]> { _allAvailableSoftwareNames.eraseToAnyPublisher() }
-    public var softwareIsNeedUpdate: SinglePublisher<Bool>  { _softwareIsNeedUpdate.eraseToAnyPublisher() }
     public var ppkMeasurementsState: SinglePublisher<Bool>  { _ppkMeasurementsState.eraseToAnyPublisher() }
     public var ppkMeasurementsTimer: SinglePublisher<String> { _ppkMeasurementsTimer.eraseToAnyPublisher() }
-    public var softwareUpdateState: SinglePublisher<StateUpdateSoftware>  { _softwareUpdateState.eraseToAnyPublisher() }
-    public var softwareUpdateProgress: SinglePublisher<Double>  { _softwareUpdateProgress.eraseToAnyPublisher() }
     public var observableDeviceNames: SinglePublisher<[String]> { _observableDeviceNames.eraseToAnyPublisher() }
     public var configurationState: SinglePublisher<StatePeripheralConfiguration>  { _configurationState.eraseToAnyPublisher() }
     public var resetState: SinglePublisher<StateResetViDoc>  { _resetState.eraseToAnyPublisher() }
@@ -29,6 +25,7 @@ class MainScreenModel {
     public var satelliteMessage: SinglePublisher<SatelliteMessage> { _satelliteMessage.eraseToAnyPublisher() }
     public var state: SinglePublisher<CBPeripheralState> { _state.eraseToAnyPublisher() }
     public var viDocState: SinglePublisher<StateViDoc> { _viDocState.eraseToAnyPublisher() }
+    public var protocolVersion: SinglePublisher<Double> { _protocolVersion.eraseToAnyPublisher() }
     public var ntripData: SinglePublisher<Data> { _ntripData.eraseToAnyPublisher() }
     public var ntripState: SinglePublisher<StateNtripConnection> { _ntripState.eraseToAnyPublisher() }
     public var singlePointTimer: SinglePublisher<String> { _singlePointTimer.eraseToAnyPublisher() }
@@ -36,19 +33,14 @@ class MainScreenModel {
 
     public lazy var isConnectedDevice: SinglePublisher<Bool> = vigramHelper.isConnectedDevice
     public lazy var isStartDevice: SinglePublisher<Bool> = vigramHelper.isStartDevice
-    public lazy var nameDevice: SinglePublisher<String> = vigramHelper.nameDevice
-    public lazy var serialNumberDevice: SinglePublisher<String> = vigramHelper.serialNumberDevice
+    public lazy var helperErrorMessage: SinglePublisher<String> = vigramHelper.errorForUp
 
     // MARK: Private properties
 
-    private let _allAvailableSoftwareNames = Passthrough<[String]>()
     private let _singlePointMeasurement = Passthrough<Result<SinglePoint, Error>>()
     private let _singlePointTimer = Passthrough<String>()
-    private let _softwareIsNeedUpdate = Passthrough<Bool>()
     private let _ppkMeasurementsState = Passthrough<Bool>()
     private let _ppkMeasurementsTimer = Passthrough<String>()
-    private let _softwareUpdateState = Passthrough<StateUpdateSoftware>()
-    private let _softwareUpdateProgress = Current<Double>(0.0)
     private let _observableDeviceNames = Current<[String]>([])
     private let _isConnectedDevice = Current<Bool>(false)
     private let _deviceMessage = Passthrough<DeviceMessage>()
@@ -57,12 +49,11 @@ class MainScreenModel {
     private let _state = Passthrough<CBPeripheralState>()
     private let _viDocState = Passthrough<StateViDoc>()
     private let _resetState = Passthrough<StateResetViDoc>()
-    private let _isNewProtocol = Passthrough<Bool>()
+    private let _protocolVersion = Passthrough<Double>()
     private let _ntripData = Passthrough<Data>()
     private let _ntripState = Passthrough<StateNtripConnection>()
     private let _configurationState = Passthrough<StatePeripheralConfiguration>()
     private let vigramHelper = VigramHelper.shared
-    private var allAvailableSoftware = [DeviceMessage.Version.Software]()
     private var observableDevices = [CBPeripheral]()
     private var subscription = Set<AnyCancellable>()
     private var subscriptionSP = Set<AnyCancellable>()
@@ -80,57 +71,6 @@ class MainScreenModel {
 
     init() {
         configurePublishers()
-    }
-
-    // MARK: Public methods
-
-    // MARK: Software
-    
-    func getAllAvailableSoftwareInWeb() {
-        vigramHelper.getAllAvailableSoftware()
-    }
-    
-    func getAllSoftwareFiles() -> Result<[String], Error> {
-        let result = FileWorker.checkIsExist(folder: "Software")
-        switch result {
-        case .success(let path):
-            do {
-                let items = try FileWorker.getListOfItemsFor(path: path)
-                var listNamesOfSoftwareFiles = [String]()
-                for item in items {
-                    listNamesOfSoftwareFiles.append(item)
-                }
-                return .success(listNamesOfSoftwareFiles)
-            } catch {
-                if Configuration.debug {
-                    print("[FileWorker]: \(error.localizedDescription)")
-                }
-                return .failure(error)
-            }
-        case .failure(let error):
-            if Configuration.debug {
-                print("[FileWorker]: \(error.localizedDescription)")
-            }
-            return .failure(error)
-        }
-    }
-
-    func installSoftware(name: String) {
-        if let softwareToInstall = allAvailableSoftware.first(where: { $0.toString() == name }) {
-            vigramHelper.install(software: softwareToInstall)
-        } else {
-            if Configuration.debug {
-                print("[MainScreenModel]: Name current peripheral is not found")
-            }
-        }
-    }
-
-    func setForceUpdateSoftware() {
-        vigramHelper.setForceUpdateSoftware()
-    }
-
-    func successFullUpdateCompelete() {
-        Configuration.forceUpdate = false
     }
 
     // MARK: Device
@@ -278,7 +218,11 @@ class MainScreenModel {
     func disconnectNtrip() {
         vigramHelper.disconnectNtrip()
     }
-    
+
+    func getMountpoints(for nci: NtripConnectionInformation) -> SingleEventPublisher<[NtripMountPoint]>? {
+        vigramHelper.getMountpoints(for: nci)
+    }
+
     // MARK: LASER
     
     func turnOnLaser(at typeOfLaser: LaserConfiguration.Position) -> SingleEventPublisher<Void>? {
@@ -287,6 +231,10 @@ class MainScreenModel {
 
     func turnOffLaser(at typeOfLaser: LaserConfiguration.Position) -> SingleEventPublisher<Void>? {
         vigramHelper.turnOffLaser(at: typeOfLaser)
+    }
+    
+    func getLasersStatus() -> SingleEventPublisher<DeviceMessage.LaserState>? {
+        vigramHelper.getLaserStatus()
     }
 
     func startLaser(with configuration: LaserConfiguration) -> SingleEventPublisher<DeviceMessage.Measurement>? {
@@ -362,6 +310,18 @@ class MainScreenModel {
             self?._singlePointMeasurement.send(.success(singlePoint))
         }.store(in: &subscription)
     }
+    
+    func stopSPMeasurement() {
+        vigramHelper.stopSPMeasurement()
+        subscriptionSP.forEach { $0.cancel() }
+        subscriptionSP.removeAll()
+    }
+
+    func cancelSPMeasurement() {
+        vigramHelper.cancelSPMeasurement()
+        subscriptionSP.forEach { $0.cancel() }
+        subscriptionSP.removeAll()
+    }
 
     // MARK: RXM
 
@@ -413,13 +373,6 @@ class MainScreenModel {
 
 private extension MainScreenModel {
     func configurePublishers() {
-        // MARK: All available software
-        vigramHelper.allAvailableSoftware
-            .sink { [weak self] softwares in
-                self?.allAvailableSoftware.removeAll()
-                self?.allAvailableSoftware = softwares
-             }.store(in: &subscription)
-
         // MARK: Observable CBPeripherals
         vigramHelper.observableDevices
             .sink { [weak self] devices in
@@ -433,16 +386,6 @@ private extension MainScreenModel {
             .sink { [weak self] currentDevice in
                 guard let self = self else { return }
                 self.currentDevice = currentDevice
-                // Software update
-                currentDevice.isNeedSoftwareUpdate?.sink{ [weak self] isNeedUpdate in
-                    self?._softwareIsNeedUpdate.send(isNeedUpdate)
-                }.store(in: &self.subscription)
-                currentDevice.softwareUpdateState?.sink { [weak self] state in
-                    self?._softwareUpdateState.send(state)
-                }.store(in: &self.subscription)
-                currentDevice.softwareUpdateProgress?.sink { [weak self] state in
-                    self?._softwareUpdateProgress.send(state)
-                }.store(in: &self.subscription)
                 // NMEA messages
                 currentDevice.nmea.sink { [weak self] message in
                     self?._nmeaMessage.send(message)
@@ -482,6 +425,10 @@ private extension MainScreenModel {
                 currentDevice.ppkMeasurementsState.sink { [weak self] state in
                     self?._ppkMeasurementsState.send(state)
                 }.store(in: &self.subscription)
+                // Protocol
+                currentDevice.protocolVersion.sink { [weak self] state in
+                    self?._protocolVersion.send(state)
+                }.store(in: &self.subscription)
             }.store(in: &subscription)
 
         // MARK: NTRIP
@@ -504,6 +451,25 @@ private extension MainScreenModel {
                 currentNtripTask.ntripState.sink { [weak self] state in
                     self?._ntripState.send(state)
                 }.store(in: &self.subscription)
+            }.store(in: &subscription)
+
+        // MARK: Single Point
+        vigramHelper.spMeasurementTime
+            .sink { [weak self] value in
+                if let duration = self?.duration {
+                    let resultTimeInterval = duration - value
+                    if resultTimeInterval > 0 {
+                        if let timeString = self?.timeFormatted(Int(resultTimeInterval)) {
+                            self?._singlePointTimer.send(timeString)
+                        }
+                    } else {
+                        self?._singlePointTimer.send("")
+                    }
+                } else {
+                    if let timeString = self?.timeFormatted(Int(value)) {
+                        self?._singlePointTimer.send(timeString)
+                    }
+                }
             }.store(in: &subscription)
     }
 

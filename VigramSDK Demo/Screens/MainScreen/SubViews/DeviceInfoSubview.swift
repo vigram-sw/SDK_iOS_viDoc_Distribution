@@ -39,32 +39,93 @@ struct DeviceInfoSubview: View {
             VStack {
                 VStack {
                     HStack {
-                        Text("  Name device: ")
+                        Text("  SDK: ")
                             .font(Font.headline.bold())
                             .foregroundColor(.black)
-                        Text(viewModel.currentDeviceName)
+                        Text(viewModel.sdk)
                         Spacer()
                     }
                     HStack {
-                        Text("  Serial number: ")
+                        Text("  Protocol: ")
                             .font(Font.headline.bold())
                             .foregroundColor(.black)
-                        Text(viewModel.currentSerialNumber)
+                        if let protocolVersion = viewModel.protocolVersion {
+                            Text(String(format: "%.1f", protocolVersion))
+                        }
                         Spacer()
                     }
-                    HStack {
-                        Text("  Hardware on device: ")
-                            .font(Font.headline.bold())
-                            .foregroundColor(.black)
-                        Text(viewModel.currentDeviceHardwareVersion)
-                        Spacer()
-                    }
-                    HStack {
-                        Text("  Software on device: ")
-                            .font(Font.headline.bold())
-                            .foregroundColor(.black)
-                        Text(viewModel.currentDeviceSoftwareVersion)
-                        Spacer()
+                    if let protocolVersion = viewModel.protocolVersion, protocolVersion > 1 {
+                        HStack {
+                            Text("  Has front laser: ")
+                                .font(Font.headline.bold())
+                                .foregroundColor(.black)
+                            Text(viewModel.currentDeviceHasFrontLaser ? "+" : "-")
+                            Spacer()
+                        }
+                        HStack {
+                            Text("  Has bottom laser: ")
+                                .font(Font.headline.bold())
+                                .foregroundColor(.black)
+                            Text(viewModel.currentDeviceHasBottomLaser ? "+" : "-")
+                            Spacer()
+                        }
+                        HStack {
+                            Text("  Has IMU: ")
+                                .font(Font.headline.bold())
+                                .foregroundColor(.black)
+                            Text(viewModel.currentDeviceHasIMU ? "+" : "-")
+                            Spacer()
+                        }
+                        HStack {
+                            Text("  Housing: ")
+                                .font(Font.headline.bold())
+                                .foregroundColor(.black)
+                            Text(viewModel.currentDeviceHousing)
+                            Spacer()
+                        }
+                        HStack {
+                            Text("  Mount: ")
+                                .font(Font.headline.bold())
+                                .foregroundColor(.black)
+                            Text(viewModel.currentDeviceMountDevice)
+                            Spacer()
+                        }
+                        if viewModel.currentVigramRef != "" {
+                            HStack {
+                                Text("  HW Ref.: ")
+                                    .font(Font.headline.bold())
+                                    .foregroundColor(.black)
+                                Text(viewModel.currentVigramRef)
+                                Spacer()
+                            }
+                        }
+                        if viewModel.currentVigramBat != "" {
+                            HStack {
+                                Text("  HW Bat.: ")
+                                    .font(Font.headline.bold())
+                                    .foregroundColor(.black)
+                                Text(viewModel.currentVigramBat)
+                                Spacer()
+                            }
+                        }
+                        if viewModel.currentM88Laser != "" {
+                            HStack {
+                                Text("  HW M88 Laser.: ")
+                                    .font(Font.headline.bold())
+                                    .foregroundColor(.black)
+                                Text(viewModel.currentM88Laser)
+                                Spacer()
+                            }
+                        }
+                        if viewModel.currentL81Laser != "" {
+                            HStack {
+                                Text("  HW L81 Laser.: ")
+                                    .font(Font.headline.bold())
+                                    .foregroundColor(.black)
+                                Text(viewModel.currentL81Laser)
+                                Spacer()
+                            }
+                        } 
                     }
                     HStack {
                         Text("  Battery: ")
@@ -124,12 +185,12 @@ struct DeviceInfoSubview: View {
                     self.showViDocReset.toggle()
                 } label: {
                     if showViDocReset {
-                        Text("Hide reset viDoc control")
+                        Text("Reset viDoc control")
                             .font(Font.headline.bold())
                             .foregroundColor(.black)
                         Image(systemName: "chevron.up").foregroundColor(.black)
                     } else {
-                        Text("Show reset viDoc control")
+                        Text("Reset viDoc control")
                             .font(Font.headline.bold())
                             .foregroundColor(.black)
                         Image(systemName: "chevron.down").foregroundColor(.black)
@@ -170,11 +231,6 @@ struct DeviceInfoSubview: View {
             }.padding(6)
             Button { viewModel.requestBattery() } label: {
                 Text("Get battery charge")
-                    .font(Font.headline.bold())
-                    .foregroundColor(.black)
-            }.buttonStyle(.bordered)
-            Button { viewModel.requestVersion() } label: {
-                Text("Get current software / hardware version")
                     .font(Font.headline.bold())
                     .foregroundColor(.black)
             }.buttonStyle(.bordered)

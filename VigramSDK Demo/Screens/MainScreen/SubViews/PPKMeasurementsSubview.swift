@@ -85,12 +85,12 @@ struct PPKMeasurementsSubview: View {
                 viewModel.getAllUBXFiles()
             } label: {
                 if showRecordFiles {
-                    Text("Hide all record files")
+                    Text("All record files")
                         .font(Font.headline.bold())
                         .foregroundColor(.black)
                     Image(systemName: "chevron.up").foregroundColor(.black)
                 } else {
-                    Text("Show all record files")
+                    Text("All record files")
                         .font(Font.headline.bold())
                         .foregroundColor(.black)
                     Image(systemName: "chevron.down").foregroundColor(.black)

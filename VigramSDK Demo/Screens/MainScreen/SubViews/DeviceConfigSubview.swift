@@ -34,12 +34,12 @@ struct DeviceConfigSubview: View {
             
             Button { self.showDynamicState.toggle() } label: {
                 if showDynamicState {
-                    Text("Hide dynamic state")
+                    Text("Dynamic state")
                         .font(Font.headline.bold())
                         .foregroundColor(.black)
                     Image(systemName: "chevron.up").foregroundColor(.black)
                 } else {
-                    Text("Show dynamic state")
+                    Text("Dynamic state")
                         .font(Font.headline.bold())
                         .foregroundColor(.black)
                     Image(systemName: "chevron.down").foregroundColor(.black)
@@ -62,12 +62,12 @@ struct DeviceConfigSubview: View {
             }
             Button { self.showNavdop.toggle() } label: {
                 if showNavdop {
-                    Text("Hide NAV-DOP/PVT Control")
+                    Text("NAV-DOP/PVT Control")
                         .font(Font.headline.bold())
                         .foregroundColor(.black)
                     Image(systemName: "chevron.up").foregroundColor(.black)
                 } else {
-                    Text("Show NAV-DOP/PVT Control")
+                    Text("NAV-DOP/PVT Control")
                         .font(Font.headline.bold())
                         .foregroundColor(.black)
                     Image(systemName: "chevron.down").foregroundColor(.black)
@@ -92,12 +92,12 @@ struct DeviceConfigSubview: View {
         VStack {
             Button { self.showGNSS.toggle() } label: {
                 if showGNSS {
-                    Text("Hide Constellation info")
+                    Text("Constellation info")
                         .font(Font.headline.bold())
                         .foregroundColor(.black)
                     Image(systemName: "chevron.up").foregroundColor(.black)
                 } else {
-                    Text("Show Constellation info")
+                    Text("Constellation info")
                         .font(Font.headline.bold())
                         .foregroundColor(.black)
                     Image(systemName: "chevron.down").foregroundColor(.black)
@@ -146,12 +146,12 @@ struct DeviceConfigSubview: View {
             VStack {
                 Button { self.showElevation.toggle() } label: {
                     if showElevation {
-                        Text("Hide Elevation info")
+                        Text("Elevation info")
                             .font(Font.headline.bold())
                             .foregroundColor(.black)
                         Image(systemName: "chevron.up").foregroundColor(.black)
                     } else {
-                        Text("Show Elevation info")
+                        Text("Elevation info")
                             .font(Font.headline.bold())
                             .foregroundColor(.black)
                         Image(systemName: "chevron.down").foregroundColor(.black)
@@ -186,12 +186,12 @@ struct DeviceConfigSubview: View {
             VStack {
                 Button { self.showRate.toggle() } label: {
                     if showRate {
-                        Text("Hide Rate Control")
+                        Text("Rate Control")
                             .font(Font.headline.bold())
                             .foregroundColor(.black)
                         Image(systemName: "chevron.up").foregroundColor(.black)
                     } else {
-                        Text("Show Rate Control")
+                        Text("Rate Control")
                             .font(Font.headline.bold())
                             .foregroundColor(.black)
                         Image(systemName: "chevron.down").foregroundColor(.black)
