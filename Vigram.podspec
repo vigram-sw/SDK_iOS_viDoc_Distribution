@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
 s.name         = 'Vigram'
-s.version      = '1.0.0rc1'
+s.version      = '1.0.1'
 s.summary      = 'VigramSDK allows the seamless communication with the Vigram module.'
 s.description  = <<-DESC
 VigramSDK connects to the Vigram module, forwards Ntrip correction data to it and 
@@ -8,11 +8,11 @@ receives RTK and laser information.
 DESC
 s.homepage     = 'https://vigram.de'
 s.license = { :type => 'Copyright', :text => <<-LICENSE
-Copyright 2023
+Copyright 2024
 Permission is granted to...
 LICENSE
 }
-s.source = { :git => 'https://github.com/vigram-sw/SDK_iOS_viDoc_Distribution.git', :tag => '1.0.0rc1' }
+s.source = { :git => 'https://github.com/vigram-sw/SDK_iOS_viDoc_Distribution.git', :tag => '1.0.1' }
 s.author = { 'Iaroslav Khaustov' => 'iaroslav.khaustov@vigram.com' }
 s.platform = :ios
 s.swift_version = '5.7'

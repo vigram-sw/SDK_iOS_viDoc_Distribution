@@ -973,6 +973,17 @@ public struct DMMCoordinate {
   }
 }
 extension UIKit.UIDevice {
+  public enum TypeOfCase {
+    case spcAlt
+    case spc
+    case spcPlus
+    case spcPlusLight
+    public static func == (a: UIKit.UIDevice.TypeOfCase, b: UIKit.UIDevice.TypeOfCase) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
   public enum CameraPosition {
     case top
     case middle
@@ -983,7 +994,9 @@ extension UIKit.UIDevice {
       get
     }
   }
+  @available(*, deprecated, message: "This method will be removed in future versions of the SDK. Use method cameraAntennaOffset(_: at:)")
   @_Concurrency.MainActor(unsafe) public func cameraAntennaOffset(at position: UIKit.UIDevice.CameraPosition) -> Swift.SIMD3<Swift.Double>?
+  @_Concurrency.MainActor(unsafe) public func cameraAntennaOffset(_ typeOfCase: UIKit.UIDevice.TypeOfCase, at position: UIKit.UIDevice.CameraPosition) -> Swift.SIMD3<Swift.Double>?
 }
 extension UIKit.UIDevice {
   @_Concurrency.MainActor(unsafe) public func laserAntennaOffset(at position: VigramSDK.LaserConfiguration.Position = .bottom) -> Swift.SIMD3<Swift.Double>?
@@ -1133,6 +1146,7 @@ public struct NtripConnectionInformation : Swift.Hashable {
   }
 }
 public enum AntennaOffset {
+  @available(*, deprecated, message: "This type of offset will be removed in future versions of the SDK. Use one of the following options: SPC, SPCPlus, SPCAlt, SPCPlusLight")
   public enum Camera {
     public static var iPhoneXR: Swift.SIMD3<Swift.Double>
     public static var iPhone11ProTop: Swift.SIMD3<Swift.Double>
@@ -1177,6 +1191,135 @@ public enum AntennaOffset {
     public static var iPadPro11BottomNewDevice: Swift.SIMD3<Swift.Double> {
       get
     }
+  }
+  public enum SPCAlt {
+    public static var iPhoneXR: Swift.SIMD3<Swift.Double>
+    public static var iPhone11ProTop: Swift.SIMD3<Swift.Double>
+    public static var iPhone11ProMiddle: Swift.SIMD3<Swift.Double>
+    public static var iPhone11ProBottom: Swift.SIMD3<Swift.Double>
+    public static var iPhone11ProMaxTop: Swift.SIMD3<Swift.Double>
+    public static var iPhone11ProMaxMiddle: Swift.SIMD3<Swift.Double>
+    public static var iPhone11ProMaxBottom: Swift.SIMD3<Swift.Double>
+    public static var iPhone12ProTop: Swift.SIMD3<Swift.Double>
+    public static var iPhone12ProMiddle: Swift.SIMD3<Swift.Double>
+    public static var iPhone12ProBottom: Swift.SIMD3<Swift.Double>
+    public static var iPhone12ProMaxTop: Swift.SIMD3<Swift.Double>
+    public static var iPhone12ProMaxMiddle: Swift.SIMD3<Swift.Double>
+    public static var iPhone12ProMaxBottom: Swift.SIMD3<Swift.Double>
+    public static var iPhone13ProTop: Swift.SIMD3<Swift.Double>
+    public static var iPhone13ProMiddle: Swift.SIMD3<Swift.Double>
+    public static var iPhone13ProBottom: Swift.SIMD3<Swift.Double>
+    public static var iPhone13ProMaxTop: Swift.SIMD3<Swift.Double>
+    public static var iPhone13ProMaxMiddle: Swift.SIMD3<Swift.Double>
+    public static var iPhone13ProMaxBottom: Swift.SIMD3<Swift.Double>
+    public static var iPhone14ProTop: Swift.SIMD3<Swift.Double>
+    public static var iPhone14ProMiddle: Swift.SIMD3<Swift.Double>
+    public static var iPhone14ProBottom: Swift.SIMD3<Swift.Double>
+    public static var iPhone14ProMaxTop: Swift.SIMD3<Swift.Double>
+    public static var iPhone14ProMaxMiddle: Swift.SIMD3<Swift.Double>
+    public static var iPhone14ProMaxBottom: Swift.SIMD3<Swift.Double>
+    public static var iPadPro11TopAutoDetect: Swift.SIMD3<Swift.Double> {
+      get
+    }
+    public static var iPadPro11TopOldDevice: Swift.SIMD3<Swift.Double> {
+      get
+    }
+    public static var iPadPro11TopNewDevice: Swift.SIMD3<Swift.Double> {
+      get
+    }
+    public static var iPadPro11BottomAutoDetect: Swift.SIMD3<Swift.Double> {
+      get
+    }
+    public static var iPadPro11BottomOldDevice: Swift.SIMD3<Swift.Double> {
+      get
+    }
+    public static var iPadPro11BottomNewDevice: Swift.SIMD3<Swift.Double> {
+      get
+    }
+  }
+  public enum SPC {
+    public static var iPhone11ProTop: Swift.SIMD3<Swift.Double>
+    public static var iPhone11ProMiddle: Swift.SIMD3<Swift.Double>
+    public static var iPhone11ProBottom: Swift.SIMD3<Swift.Double>
+    public static var iPhone11ProMaxTop: Swift.SIMD3<Swift.Double>
+    public static var iPhone11ProMaxMiddle: Swift.SIMD3<Swift.Double>
+    public static var iPhone11ProMaxBottom: Swift.SIMD3<Swift.Double>
+    public static var iPhone12ProTop: Swift.SIMD3<Swift.Double>
+    public static var iPhone12ProMiddle: Swift.SIMD3<Swift.Double>
+    public static var iPhone12ProBottom: Swift.SIMD3<Swift.Double>
+    public static var iPhone12ProMaxTop: Swift.SIMD3<Swift.Double>
+    public static var iPhone12ProMaxMiddle: Swift.SIMD3<Swift.Double>
+    public static var iPhone12ProMaxBottom: Swift.SIMD3<Swift.Double>
+    public static var iPhone13ProTop: Swift.SIMD3<Swift.Double>
+    public static var iPhone13ProMiddle: Swift.SIMD3<Swift.Double>
+    public static var iPhone13ProBottom: Swift.SIMD3<Swift.Double>
+    public static var iPhone13ProMaxTop: Swift.SIMD3<Swift.Double>
+    public static var iPhone13ProMaxMiddle: Swift.SIMD3<Swift.Double>
+    public static var iPhone13ProMaxBottom: Swift.SIMD3<Swift.Double>
+    public static var iPhone14ProTop: Swift.SIMD3<Swift.Double>
+    public static var iPhone14ProMiddle: Swift.SIMD3<Swift.Double>
+    public static var iPhone14ProBottom: Swift.SIMD3<Swift.Double>
+    public static var iPhone14ProMaxTop: Swift.SIMD3<Swift.Double>
+    public static var iPhone14ProMaxMiddle: Swift.SIMD3<Swift.Double>
+    public static var iPhone14ProMaxBottom: Swift.SIMD3<Swift.Double>
+    public static var iPadPro11Top: Swift.SIMD3<Swift.Double>
+    public static var iPadPro11Middle: Swift.SIMD3<Swift.Double>
+  }
+  public enum SPCPlus {
+    public static var iPhone12ProTop: Swift.SIMD3<Swift.Double>
+    public static var iPhone12ProMiddle: Swift.SIMD3<Swift.Double>
+    public static var iPhone12ProBottom: Swift.SIMD3<Swift.Double>
+    public static var iPhone12ProMaxTop: Swift.SIMD3<Swift.Double>
+    public static var iPhone12ProMaxMiddle: Swift.SIMD3<Swift.Double>
+    public static var iPhone12ProMaxBottom: Swift.SIMD3<Swift.Double>
+    public static var iPhone13ProTop: Swift.SIMD3<Swift.Double>
+    public static var iPhone13ProMiddle: Swift.SIMD3<Swift.Double>
+    public static var iPhone13ProBottom: Swift.SIMD3<Swift.Double>
+    public static var iPhone13ProMaxTop: Swift.SIMD3<Swift.Double>
+    public static var iPhone13ProMaxMiddle: Swift.SIMD3<Swift.Double>
+    public static var iPhone13ProMaxBottom: Swift.SIMD3<Swift.Double>
+    public static var iPhone14ProTop: Swift.SIMD3<Swift.Double>
+    public static var iPhone14ProMiddle: Swift.SIMD3<Swift.Double>
+    public static var iPhone14ProBottom: Swift.SIMD3<Swift.Double>
+    public static var iPhone14ProMaxTop: Swift.SIMD3<Swift.Double>
+    public static var iPhone14ProMaxMiddle: Swift.SIMD3<Swift.Double>
+    public static var iPhone14ProMaxBottom: Swift.SIMD3<Swift.Double>
+    public static var iPhone15ProTop: Swift.SIMD3<Swift.Double>
+    public static var iPhone15ProMiddle: Swift.SIMD3<Swift.Double>
+    public static var iPhone15ProBottom: Swift.SIMD3<Swift.Double>
+    public static var iPhone15ProMaxTop: Swift.SIMD3<Swift.Double>
+    public static var iPhone15ProMaxMiddle: Swift.SIMD3<Swift.Double>
+    public static var iPhone15ProMaxBottom: Swift.SIMD3<Swift.Double>
+    public static var iPadPro11Top: Swift.SIMD3<Swift.Double>
+    public static var iPadPro11Middle: Swift.SIMD3<Swift.Double>
+  }
+  public enum SPCPlusLight {
+    public static var iPhone12ProTop: Swift.SIMD3<Swift.Double>
+    public static var iPhone12ProMiddle: Swift.SIMD3<Swift.Double>
+    public static var iPhone12ProBottom: Swift.SIMD3<Swift.Double>
+    public static var iPhone12ProMaxTop: Swift.SIMD3<Swift.Double>
+    public static var iPhone12ProMaxMiddle: Swift.SIMD3<Swift.Double>
+    public static var iPhone12ProMaxBottom: Swift.SIMD3<Swift.Double>
+    public static var iPhone13ProTop: Swift.SIMD3<Swift.Double>
+    public static var iPhone13ProMiddle: Swift.SIMD3<Swift.Double>
+    public static var iPhone13ProBottom: Swift.SIMD3<Swift.Double>
+    public static var iPhone13ProMaxTop: Swift.SIMD3<Swift.Double>
+    public static var iPhone13ProMaxMiddle: Swift.SIMD3<Swift.Double>
+    public static var iPhone13ProMaxBottom: Swift.SIMD3<Swift.Double>
+    public static var iPhone14ProTop: Swift.SIMD3<Swift.Double>
+    public static var iPhone14ProMiddle: Swift.SIMD3<Swift.Double>
+    public static var iPhone14ProBottom: Swift.SIMD3<Swift.Double>
+    public static var iPhone14ProMaxTop: Swift.SIMD3<Swift.Double>
+    public static var iPhone14ProMaxMiddle: Swift.SIMD3<Swift.Double>
+    public static var iPhone14ProMaxBottom: Swift.SIMD3<Swift.Double>
+    public static var iPhone15ProTop: Swift.SIMD3<Swift.Double>
+    public static var iPhone15ProMiddle: Swift.SIMD3<Swift.Double>
+    public static var iPhone15ProBottom: Swift.SIMD3<Swift.Double>
+    public static var iPhone15ProMaxTop: Swift.SIMD3<Swift.Double>
+    public static var iPhone15ProMaxMiddle: Swift.SIMD3<Swift.Double>
+    public static var iPhone15ProMaxBottom: Swift.SIMD3<Swift.Double>
+    public static var iPadPro11Top: Swift.SIMD3<Swift.Double>
+    public static var iPadPro11Middle: Swift.SIMD3<Swift.Double>
   }
 }
 extension VigramSDK.AntennaOffset {
@@ -1267,6 +1410,8 @@ extension VigramSDK.NtripMountPoint.Carrier : Swift.RawRepresentable {}
 extension VigramSDK.NtripMountPoint.NavigationSystem : Swift.Equatable {}
 extension VigramSDK.NtripMountPoint.NavigationSystem : Swift.Hashable {}
 extension VigramSDK.NtripMountPoint.NavigationSystem : Swift.RawRepresentable {}
+extension UIKit.UIDevice.TypeOfCase : Swift.Equatable {}
+extension UIKit.UIDevice.TypeOfCase : Swift.Hashable {}
 extension UIKit.UIDevice.CameraPosition : Swift.Equatable {}
 extension UIKit.UIDevice.CameraPosition : Swift.Hashable {}
 extension VigramSDK.LaserConfiguration.ShotMode : Swift.Equatable {}
