@@ -1,6 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.10 (swiftlang-5.10.0.13 clang-1500.3.9.4)
+// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.9.10 clang-1600.0.26.2)
 // swift-module-flags: -target arm64-apple-ios15.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -enable-bare-slash-regex -module-name VigramSDK
+// swift-module-flags-ignorable: -no-verify-emitted-module-interface
 import Combine
 import CoreBluetooth
 import CoreMotion
@@ -63,12 +64,8 @@ public protocol LaserService : AnyObject {
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension VigramSDK.LaserService {
-  #if compiler(>=5.3) && $AsyncAwait
   public func turnLaserOn(at position: VigramSDK.LaserConfiguration.Position) async throws
-  #endif
-  #if compiler(>=5.3) && $AsyncAwait
   public func turnLaserOff(at position: VigramSDK.LaserConfiguration.Position) async throws
-  #endif
 }
 public struct DeviceMotion : Swift.Equatable {
   public enum Accuracy : Swift.Comparable {
@@ -153,9 +150,7 @@ public protocol Peripheral {
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension VigramSDK.Peripheral {
-  #if compiler(>=5.3) && $AsyncAwait
   public func requestBattery() async throws -> VigramSDK.DeviceMessage.Battery
-  #endif
 }
 public enum PeripheralError : Swift.Error {
   case characteristicNotFound
@@ -200,15 +195,15 @@ public protocol NtripTask {
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension VigramSDK.NtripTask {
-  #if compiler(>=5.3) && $AsyncAwait
   public func resume() async throws
-  #endif
 }
 public enum NtripTaskError : Swift.Error {
   case couldNotCreateRequest
-  case notViable
   case noData
-  case badResponse(Foundation.Data)
+  case incorrectNCI
+  case failed(Swift.String)
+  case httpResponceError(Swift.String)
+  case serverIsNotResponce
 }
 extension VigramSDK.NtripTaskError : Foundation.LocalizedError {
   public var errorDescription: Swift.String? {
@@ -479,9 +474,7 @@ public protocol SinglePointRecordingService {
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension VigramSDK.SinglePointRecordingService {
-  #if compiler(>=5.3) && $AsyncAwait
   public func record(duration: Foundation.TimeInterval, updateInterval: Foundation.TimeInterval, with correction: VigramSDK.CoordinateCorrection.Method) async throws -> VigramSDK.SinglePoint
-  #endif
 }
 public struct CoordinateCorrection {
   public struct Method {
@@ -518,9 +511,7 @@ public protocol NtripService {
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension VigramSDK.NtripService {
-  #if compiler(>=5.3) && $AsyncAwait
   public func mountpoints(for information: VigramSDK.NtripConnectionInformation) async throws -> [VigramSDK.NtripMountPoint]
-  #endif
 }
 public struct Time : Swift.CustomStringConvertible {
   public var hour: Swift.Int
@@ -533,6 +524,7 @@ public struct Time : Swift.CustomStringConvertible {
 public protocol NMEAMessage {
   var raw: Swift.String { get }
   var time: VigramSDK.Time? { get }
+  var timeStampUnix: Foundation.NSDate? { get }
   var coordinate: VigramSDK.GPSCoordinate? { get }
   var satelliteCount: Swift.Int? { get }
   var hdop: Swift.Double? { get }
@@ -558,6 +550,7 @@ public enum GPSQualityIndicator : Swift.Int {
 public struct GGAMessage : VigramSDK.NMEAMessage {
   public let raw: Swift.String
   public let time: VigramSDK.Time?
+  public let timeStampUnix: Foundation.NSDate?
   public let location: VigramSDK.DMMCoordinate?
   public let quality: VigramSDK.GPSQualityIndicator?
   public let satelliteCount: Swift.Int?
@@ -582,6 +575,7 @@ public struct GGAMessage : VigramSDK.NMEAMessage {
 public struct GSTMessage : VigramSDK.NMEAMessage {
   public let raw: Swift.String
   public let time: VigramSDK.Time?
+  public let timeStampUnix: Foundation.NSDate?
   public let rms: Swift.Double?
   public let semiMajor1SigmaError: Swift.Double?
   public let semiMinor1SigmaError: Swift.Double?
@@ -610,6 +604,7 @@ public struct GSTMessage : VigramSDK.NMEAMessage {
 }
 public struct TXTMessage : VigramSDK.NMEAMessage {
   public var time: VigramSDK.Time?
+  public let timeStampUnix: Foundation.NSDate?
   public var coordinate: VigramSDK.GPSCoordinate?
   public var satelliteCount: Swift.Int?
   public var hdop: Swift.Double?
@@ -698,6 +693,8 @@ extension VigramSDK.DeviceMessage {
       case spcPlusRegularly
       case spcPlusBackPlate
       case spcPlusPrototype
+      case spcPlusSpecialSMAReplaced
+      case spcPlusSpecialSMA
       public init?(rawValue: Swift.String)
       public typealias RawValue = Swift.String
       public var rawValue: Swift.String {
@@ -864,9 +861,7 @@ public enum BluetoothServiceError : Swift.Error {
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension VigramSDK.BluetoothService {
-  #if compiler(>=5.3) && $AsyncAwait
   public func connect(to identifier: Foundation.UUID) async throws -> CoreBluetooth.CBPeripheral
-  #endif
 }
 public struct NtripMountPoint {
   public enum Authentication : Swift.String {
@@ -960,9 +955,7 @@ extension VigramSDK.DeviceMotionService {
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension VigramSDK.DeviceMotionService {
-  #if compiler(>=5.3) && $AsyncAwait
   public func calibrate(updateInterval: Foundation.TimeInterval = 0.01, status: @escaping (Swift.Float) -> Swift.Void) async throws
-  #endif
 }
 public struct DMMCoordinate {
   public var latitude: Swift.Double {
@@ -995,15 +988,15 @@ extension UIKit.UIDevice {
     }
   }
   @available(*, deprecated, message: "This method will be removed in future versions of the SDK. Use method cameraAntennaOffset(_: at:)")
-  @_Concurrency.MainActor(unsafe) public func cameraAntennaOffset(at position: UIKit.UIDevice.CameraPosition) -> Swift.SIMD3<Swift.Double>?
-  @_Concurrency.MainActor(unsafe) public func cameraAntennaOffset(_ typeOfCase: UIKit.UIDevice.TypeOfCase, at position: UIKit.UIDevice.CameraPosition) -> Swift.SIMD3<Swift.Double>?
+  @_Concurrency.MainActor @preconcurrency public func cameraAntennaOffset(at position: UIKit.UIDevice.CameraPosition) -> Swift.SIMD3<Swift.Double>?
+  @_Concurrency.MainActor @preconcurrency public func cameraAntennaOffset(_ typeOfCase: UIKit.UIDevice.TypeOfCase, at position: UIKit.UIDevice.CameraPosition) -> Swift.SIMD3<Swift.Double>?
 }
 extension UIKit.UIDevice {
-  @_Concurrency.MainActor(unsafe) public func laserAntennaOffset(at position: VigramSDK.LaserConfiguration.Position = .bottom) -> Swift.SIMD3<Swift.Double>?
+  @_Concurrency.MainActor @preconcurrency public func laserAntennaOffset(at position: VigramSDK.LaserConfiguration.Position = .bottom) -> Swift.SIMD3<Swift.Double>?
 }
 extension UIKit.UIDevice {
   @available(*, deprecated, message: "These offsets have not yet been confirmed.")
-  @_Concurrency.MainActor(unsafe) public func mountAntennaOffset() -> Swift.SIMD3<Swift.Double>?
+  @_Concurrency.MainActor @preconcurrency public func mountAntennaOffset() -> Swift.SIMD3<Swift.Double>?
 }
 public struct SystemState : Swift.Codable {
   public func encode(to encoder: any Swift.Encoder) throws
@@ -1053,7 +1046,7 @@ public struct LaserConfiguration {
     public static func == (a: VigramSDK.LaserConfiguration.ShotMode, b: VigramSDK.LaserConfiguration.ShotMode) -> Swift.Bool
     public func hash(into hasher: inout Swift.Hasher)
     public typealias AllCases = [VigramSDK.LaserConfiguration.ShotMode]
-    public static var allCases: [VigramSDK.LaserConfiguration.ShotMode] {
+    nonisolated public static var allCases: [VigramSDK.LaserConfiguration.ShotMode] {
       get
     }
     public var hashValue: Swift.Int {
@@ -1066,7 +1059,7 @@ public struct LaserConfiguration {
     public static func == (a: VigramSDK.LaserConfiguration.Position, b: VigramSDK.LaserConfiguration.Position) -> Swift.Bool
     public func hash(into hasher: inout Swift.Hasher)
     public typealias AllCases = [VigramSDK.LaserConfiguration.Position]
-    public static var allCases: [VigramSDK.LaserConfiguration.Position] {
+    nonisolated public static var allCases: [VigramSDK.LaserConfiguration.Position] {
       get
     }
     public var hashValue: Swift.Int {
