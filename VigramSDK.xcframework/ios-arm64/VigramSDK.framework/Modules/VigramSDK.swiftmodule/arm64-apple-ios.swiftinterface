@@ -1,5 +1,5 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0 effective-5.10 (swiftlang-6.0.0.9.10 clang-1600.0.26.2)
+// swift-compiler-version: Apple Swift version 6.0.3 effective-5.10 (swiftlang-6.0.3.1.10 clang-1600.0.30.1)
 // swift-module-flags: -target arm64-apple-ios15.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -enable-bare-slash-regex -module-name VigramSDK
 // swift-module-flags-ignorable: -no-verify-emitted-module-interface
 import Combine
@@ -106,7 +106,6 @@ public protocol Peripheral {
   var isNeedSoftwareUpdate: VigramSDK.StatePublisher<Swift.Bool>? { get }
   var softwareUpdateState: VigramSDK.StatePublisher<VigramSDK.StateUpdateSoftware>? { get }
   var softwareUpdateProgress: VigramSDK.StatePublisher<Swift.Double>? { get }
-  var logger: (any VigramSDK.PeripheralLogger)? { get }
   var state: VigramSDK.StatePublisher<CoreBluetooth.CBPeripheralState> { get }
   var peripheral: CoreBluetooth.CBPeripheral { get }
   var configurationState: VigramSDK.StatePublisher<VigramSDK.StatePeripheralConfiguration> { get }
@@ -150,6 +149,7 @@ public protocol Peripheral {
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension VigramSDK.Peripheral {
+  public func start() async throws
   public func requestBattery() async throws -> VigramSDK.DeviceMessage.Battery
 }
 public enum PeripheralError : Swift.Error {
@@ -455,10 +455,25 @@ extension VigramSDK.GPSCoordinate {
   public func translate(offset: Swift.SIMD3<Swift.Double>, orientation: Swift.SIMD3<Swift.Double>) -> VigramSDK.GPSCoordinate
   public func translate(offset: Swift.SIMD3<Swift.Double>, orientation: Swift.SIMD3<Swift.Double>, laserDistance: Swift.Double, typeOfLaser: VigramSDK.LaserConfiguration.Position) -> VigramSDK.GPSCoordinate
 }
-public enum SinglePointRecordingError : Swift.Error {
-  case badMeasurement([VigramSDK.EnvironmentData])
+public enum SinglePointRecordingError : Swift.Error, Swift.Hashable {
+  case nonValidData
+  case requestIsNotSupported(Swift.String)
+  case incorrectCoordinateCorrectionMethod(Swift.String)
+  case noRunningMeasurementMethod
+  case horizontalAccuracyIsTooHigh
+  case verticalAccuracyIsTooHigh
+  case altitudeDifferenceIsTooHigh
+  case laserMeasurementsIsBadQuality
   case measurementCancelled
+  @available(*, deprecated, message: "This error was used in older versions of SDK. Will not be supported in the future")
+  case badMeasurement([VigramSDK.EnvironmentData])
+  @available(*, deprecated, message: "This error was used in older versions of SDK. Will not be supported in the future")
   case measurementFailure
+  public static func == (lhs: VigramSDK.SinglePointRecordingError, rhs: VigramSDK.SinglePointRecordingError) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
 }
 extension VigramSDK.SinglePointRecordingError : Foundation.LocalizedError {
   public var errorDescription: Swift.String? {
@@ -475,6 +490,7 @@ public protocol SinglePointRecordingService {
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension VigramSDK.SinglePointRecordingService {
   public func record(duration: Foundation.TimeInterval, updateInterval: Foundation.TimeInterval, with correction: VigramSDK.CoordinateCorrection.Method) async throws -> VigramSDK.SinglePoint
+  public func startMeasurement(duration: Foundation.TimeInterval, updateInterval: Foundation.TimeInterval, with correction: VigramSDK.CoordinateCorrection.Method) async throws -> VigramSDK.SinglePoint
 }
 public struct CoordinateCorrection {
   public struct Method {
@@ -667,6 +683,7 @@ extension VigramSDK.DeviceMessage {
   }
   public struct SwitchProtocolAnswer {
     public let payload: Swift.UInt8
+    public let countOfRemaingSwitchOns: Swift.UInt8
   }
   public struct Device {
     public enum Housings : Swift.String {
@@ -717,7 +734,7 @@ extension VigramSDK.DeviceMessage {
     public var hasBottomLaser: Swift.Bool {
       get
     }
-    public var isSinglePointMeasurementCancellable: Swift.Double {
+    public var isSinglePointMeasurementCancellable: Swift.Bool {
       get
     }
     public var getHousing: VigramSDK.DeviceMessage.Device.Housings? {
@@ -770,7 +787,6 @@ extension VigramSDK.DeviceMessage {
     public let start: Swift.UInt16
     public let end: Swift.UInt16
     public let distance: Swift.Double
-    public let qualityRaw: Swift.UInt16
     public let quality: VigramSDK.DeviceMessage.Measurement.MeasurementQuality
   }
   public struct Battery {
@@ -967,7 +983,6 @@ public struct DMMCoordinate {
 }
 extension UIKit.UIDevice {
   public enum TypeOfCase {
-    case spcAlt
     case spc
     case spcPlus
     case spcPlusLight
@@ -990,6 +1005,7 @@ extension UIKit.UIDevice {
   @available(*, deprecated, message: "This method will be removed in future versions of the SDK. Use method cameraAntennaOffset(_: at:)")
   @_Concurrency.MainActor @preconcurrency public func cameraAntennaOffset(at position: UIKit.UIDevice.CameraPosition) -> Swift.SIMD3<Swift.Double>?
   @_Concurrency.MainActor @preconcurrency public func cameraAntennaOffset(_ typeOfCase: UIKit.UIDevice.TypeOfCase, at position: UIKit.UIDevice.CameraPosition) -> Swift.SIMD3<Swift.Double>?
+  @_Concurrency.MainActor @preconcurrency public func cameraAntennaOffsetForCurrentDevice(at position: UIKit.UIDevice.CameraPosition) -> Swift.SIMD3<Swift.Double>?
 }
 extension UIKit.UIDevice {
   @_Concurrency.MainActor @preconcurrency public func laserAntennaOffset(at position: VigramSDK.LaserConfiguration.Position = .bottom) -> Swift.SIMD3<Swift.Double>?
@@ -1139,53 +1155,8 @@ public struct NtripConnectionInformation : Swift.Hashable {
   }
 }
 public enum AntennaOffset {
-  @available(*, deprecated, message: "This type of offset will be removed in future versions of the SDK. Use one of the following options: SPC, SPCPlus, SPCAlt, SPCPlusLight")
+  @available(*, deprecated, message: "This type of offset will be removed in future versions of the SDK. Use one of the following options: SPC, SPCPlus, SPCPlusLight")
   public enum Camera {
-    public static var iPhoneXR: Swift.SIMD3<Swift.Double>
-    public static var iPhone11ProTop: Swift.SIMD3<Swift.Double>
-    public static var iPhone11ProMiddle: Swift.SIMD3<Swift.Double>
-    public static var iPhone11ProBottom: Swift.SIMD3<Swift.Double>
-    public static var iPhone11ProMaxTop: Swift.SIMD3<Swift.Double>
-    public static var iPhone11ProMaxMiddle: Swift.SIMD3<Swift.Double>
-    public static var iPhone11ProMaxBottom: Swift.SIMD3<Swift.Double>
-    public static var iPhone12ProTop: Swift.SIMD3<Swift.Double>
-    public static var iPhone12ProMiddle: Swift.SIMD3<Swift.Double>
-    public static var iPhone12ProBottom: Swift.SIMD3<Swift.Double>
-    public static var iPhone12ProMaxTop: Swift.SIMD3<Swift.Double>
-    public static var iPhone12ProMaxMiddle: Swift.SIMD3<Swift.Double>
-    public static var iPhone12ProMaxBottom: Swift.SIMD3<Swift.Double>
-    public static var iPhone13ProTop: Swift.SIMD3<Swift.Double>
-    public static var iPhone13ProMiddle: Swift.SIMD3<Swift.Double>
-    public static var iPhone13ProBottom: Swift.SIMD3<Swift.Double>
-    public static var iPhone13ProMaxTop: Swift.SIMD3<Swift.Double>
-    public static var iPhone13ProMaxMiddle: Swift.SIMD3<Swift.Double>
-    public static var iPhone13ProMaxBottom: Swift.SIMD3<Swift.Double>
-    public static var iPhone14ProTop: Swift.SIMD3<Swift.Double>
-    public static var iPhone14ProMiddle: Swift.SIMD3<Swift.Double>
-    public static var iPhone14ProBottom: Swift.SIMD3<Swift.Double>
-    public static var iPhone14ProMaxTop: Swift.SIMD3<Swift.Double>
-    public static var iPhone14ProMaxMiddle: Swift.SIMD3<Swift.Double>
-    public static var iPhone14ProMaxBottom: Swift.SIMD3<Swift.Double>
-    public static var iPadPro11TopAutoDetect: Swift.SIMD3<Swift.Double> {
-      get
-    }
-    public static var iPadPro11TopOldDevice: Swift.SIMD3<Swift.Double> {
-      get
-    }
-    public static var iPadPro11TopNewDevice: Swift.SIMD3<Swift.Double> {
-      get
-    }
-    public static var iPadPro11BottomAutoDetect: Swift.SIMD3<Swift.Double> {
-      get
-    }
-    public static var iPadPro11BottomOldDevice: Swift.SIMD3<Swift.Double> {
-      get
-    }
-    public static var iPadPro11BottomNewDevice: Swift.SIMD3<Swift.Double> {
-      get
-    }
-  }
-  public enum SPCAlt {
     public static var iPhoneXR: Swift.SIMD3<Swift.Double>
     public static var iPhone11ProTop: Swift.SIMD3<Swift.Double>
     public static var iPhone11ProMiddle: Swift.SIMD3<Swift.Double>
