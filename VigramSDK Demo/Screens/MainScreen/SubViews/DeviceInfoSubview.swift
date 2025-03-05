@@ -46,6 +46,13 @@ struct DeviceInfoSubview: View {
                         Spacer()
                     }
                     HStack {
+                        Text("  Current device type: ")
+                            .font(Font.headline.bold())
+                            .foregroundColor(.black)
+                        Text(viewModel.currentDevice)
+                        Spacer()
+                    }
+                    HStack {
                         Text("  Protocol: ")
                             .font(Font.headline.bold())
                             .foregroundColor(.black)

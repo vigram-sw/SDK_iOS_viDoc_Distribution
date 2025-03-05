@@ -15,6 +15,7 @@ class MainScreenModel {
 
     // MARK: Public properties
 
+    public var currentDeviceType: SinglePublisher<DeviceMessage.Device> { _currentDeviceType.eraseToAnyPublisher() }
     public var ppkMeasurementsState: SinglePublisher<Bool>  { _ppkMeasurementsState.eraseToAnyPublisher() }
     public var ppkMeasurementsTimer: SinglePublisher<String> { _ppkMeasurementsTimer.eraseToAnyPublisher() }
     public var observableDeviceNames: SinglePublisher<[String]> { _observableDeviceNames.eraseToAnyPublisher() }
@@ -37,6 +38,7 @@ class MainScreenModel {
 
     // MARK: Private properties
 
+    private let _currentDeviceType = Passthrough<DeviceMessage.Device>()
     private let _singlePointMeasurement = Passthrough<Result<SinglePoint, Error>>()
     private let _singlePointTimer = Passthrough<String>()
     private let _ppkMeasurementsState = Passthrough<Bool>()
@@ -428,6 +430,10 @@ private extension MainScreenModel {
                 // Protocol
                 currentDevice.protocolVersion.sink { [weak self] state in
                     self?._protocolVersion.send(state)
+                }.store(in: &self.subscription)
+                // Device type
+                currentDevice.currentDevice.sink { [weak self] value in
+                    self?._currentDeviceType.send(value)
                 }.store(in: &self.subscription)
             }.store(in: &subscription)
 

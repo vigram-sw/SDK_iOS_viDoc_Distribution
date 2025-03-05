@@ -28,6 +28,7 @@ extension MainScreenView {
         // DEVICE
         @Published var isConfiguringDevice = false
         @Published var isStartDevice = false
+        @Published private(set) var currentDevice = ""
         @Published private(set) var currentDeviceCharge = ""
         @Published private(set) var protocolVersion: Double?
         @Published private(set) var isConnectedDevice = false
@@ -133,6 +134,7 @@ extension MainScreenView {
         func connectToDevice(name: String) {
             titleAlert = ""
             messageAlert = ""
+            currentDevice = ""
             model.connectToDevice(name: name)
         }
 
@@ -522,6 +524,25 @@ private extension MainScreenView.MainScreenViewModel {
             .sink{ [weak self] value in
             self?.isStartDevice = value
         }.store(in: &subscription)
+        
+        model.currentDeviceType
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] device in
+                switch device.typeOfDevice {
+                case .viDoc:
+                    self?.currentDevice = "viDoc"
+                case .viDocLight:
+                    self?.currentDevice = "viDoc Light"
+                case .unknown:
+                    self?.currentDevice = "unknown device"
+                case .viDocWithOldSoftware:
+                    self?.currentDevice = "viDoc with old software"
+                case .viDocOldDevice:
+                    self?.currentDevice = "viDoc (old Device)"
+                @unknown default:
+                    break
+                }
+            }.store(in: &subscription)
 
         model.deviceMessage
             .receive(on: DispatchQueue.main)
@@ -765,11 +786,15 @@ private extension MainScreenView.MainScreenViewModel {
             }
         }.store(in: &subscription)
 
-        model.protocolVersion.sink { [weak self] protocolVersion in
+        model.protocolVersion
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] protocolVersion in
             self?.protocolVersion = protocolVersion
         }.store(in: &subscription)
         
-        model.ppkMeasurementsState.sink { [weak self] value in
+        model.ppkMeasurementsState
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] value in
             self?.rmxIsActive = value
         }.store(in: &subscription)
 
@@ -924,6 +949,7 @@ private extension MainScreenView.MainScreenViewModel {
         sfrbxMessage = ""
         satelliteGNSS = ""
         satelliteStatusGNSS = ""
+        currentDevice = ""
         pdop = ""
         vdop = ""
         hdop = ""
