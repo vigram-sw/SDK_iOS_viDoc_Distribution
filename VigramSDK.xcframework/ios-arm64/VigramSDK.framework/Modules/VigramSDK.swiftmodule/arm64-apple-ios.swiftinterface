@@ -726,7 +726,6 @@ extension VigramSDK.DeviceMessage {
       public let imu: Swift.String?
       public let isCalibrated: Swift.Bool?
     }
-    public let rawValue: Swift.String?
     public let typeOfDevice: VigramSDK.DeviceVersion
     public var hasFrontLaser: Swift.Bool {
       get
@@ -820,15 +819,6 @@ extension VigramSDK.DeviceMessage.Version.Software {
 }
 extension VigramSDK.DeviceMessage.Version.Hardware {
   public func toString() -> Swift.String
-}
-public enum DeviceType {
-  case newDevice
-  case oldDevice
-  public static func == (a: VigramSDK.DeviceType, b: VigramSDK.DeviceType) -> Swift.Bool
-  public func hash(into hasher: inout Swift.Hasher)
-  public var hashValue: Swift.Int {
-    get
-  }
 }
 extension VigramSDK.DeviceMessage {
   public enum Baudrate {
@@ -1359,8 +1349,6 @@ extension VigramSDK.DeviceMessage.Device.Mounts : Swift.Hashable {}
 extension VigramSDK.DeviceMessage.Device.Mounts : Swift.RawRepresentable {}
 extension VigramSDK.DeviceMessage.LaserState : Swift.Equatable {}
 extension VigramSDK.DeviceMessage.LaserState : Swift.Hashable {}
-extension VigramSDK.DeviceType : Swift.Equatable {}
-extension VigramSDK.DeviceType : Swift.Hashable {}
 extension VigramSDK.DeviceMessage.Baudrate : Swift.Equatable {}
 extension VigramSDK.DeviceMessage.Baudrate : Swift.Hashable {}
 extension VigramSDK.DeviceMessage.Measurement.MeasurementQuality : Swift.Equatable {}
