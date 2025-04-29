@@ -49,19 +49,19 @@ Pod::Spec.new do |s|
     end
 
 end
-" > $NAME.podspec
+# " > $NAME.podspec
 
-echo "--- COMMIT AND PUSH ---"
+ echo "--- COMMIT AND PUSH ---"
 
-git add .
-git commit -m "$NAME $TAG"
-git push
+ git add .
+ git commit -m "$NAME $TAG"
+ git push
 
-echo "--- TAG ---"
+ echo "--- TAG ---"
 
-git tag "$TAG"
-git push origin "$TAG"
+ git tag "$TAG"
+ git push origin "$TAG"
 
-echo "--- PODSPEC LINT ---"
+ echo "--- PODSPEC LINT ---"
 
-pod spec lint --quick
+ pod spec lint --quick
