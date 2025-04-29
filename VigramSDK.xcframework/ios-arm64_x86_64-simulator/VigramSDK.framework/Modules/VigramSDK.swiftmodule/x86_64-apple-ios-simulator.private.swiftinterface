@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.0.3 effective-5.10 (swiftlang-6.0.3.1.10 clang-1600.0.30.1)
-// swift-module-flags: -target x86_64-apple-ios15.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -enable-bare-slash-regex -module-name VigramSDK
-// swift-module-flags-ignorable: -no-verify-emitted-module-interface
+// swift-compiler-version: Apple Swift version 6.1 effective-5.10 (swiftlang-6.1.0.110.21 clang-1700.0.13.3)
+// swift-module-flags: -target x86_64-apple-ios15.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -module-name VigramSDK
+// swift-module-flags-ignorable: -no-verify-emitted-module-interface -interface-compiler-version 6.1
 import Combine
 import CoreBluetooth
 import CoreMotion
@@ -1050,11 +1050,11 @@ public struct LaserConfiguration {
     case fast
     case auto
     public static func == (a: VigramSDK.LaserConfiguration.ShotMode, b: VigramSDK.LaserConfiguration.ShotMode) -> Swift.Bool
-    public func hash(into hasher: inout Swift.Hasher)
     public typealias AllCases = [VigramSDK.LaserConfiguration.ShotMode]
     nonisolated public static var allCases: [VigramSDK.LaserConfiguration.ShotMode] {
       get
     }
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -1063,11 +1063,11 @@ public struct LaserConfiguration {
     case bottom
     case back
     public static func == (a: VigramSDK.LaserConfiguration.Position, b: VigramSDK.LaserConfiguration.Position) -> Swift.Bool
-    public func hash(into hasher: inout Swift.Hasher)
     public typealias AllCases = [VigramSDK.LaserConfiguration.Position]
     nonisolated public static var allCases: [VigramSDK.LaserConfiguration.Position] {
       get
     }
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -1138,8 +1138,8 @@ public struct NtripConnectionInformation : Swift.Hashable {
   public var username: Swift.String
   public var password: Swift.String
   public init(hostname: Swift.String, port: Swift.Int, username: Swift.String, password: Swift.String)
-  public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: VigramSDK.NtripConnectionInformation, b: VigramSDK.NtripConnectionInformation) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
@@ -1244,6 +1244,12 @@ public enum AntennaOffset {
     public static var iPhone15ProMaxTop: Swift.SIMD3<Swift.Double>
     public static var iPhone15ProMaxMiddle: Swift.SIMD3<Swift.Double>
     public static var iPhone15ProMaxBottom: Swift.SIMD3<Swift.Double>
+    public static var iPhone16ProTop: Swift.SIMD3<Swift.Double>
+    public static var iPhone16ProMiddle: Swift.SIMD3<Swift.Double>
+    public static var iPhone16ProBottom: Swift.SIMD3<Swift.Double>
+    public static var iPhone16ProMaxTop: Swift.SIMD3<Swift.Double>
+    public static var iPhone16ProMaxMiddle: Swift.SIMD3<Swift.Double>
+    public static var iPhone16ProMaxBottom: Swift.SIMD3<Swift.Double>
     public static var iPadPro11Top: Swift.SIMD3<Swift.Double>
     public static var iPadPro11Middle: Swift.SIMD3<Swift.Double>
   }
@@ -1272,6 +1278,12 @@ public enum AntennaOffset {
     public static var iPhone15ProMaxTop: Swift.SIMD3<Swift.Double>
     public static var iPhone15ProMaxMiddle: Swift.SIMD3<Swift.Double>
     public static var iPhone15ProMaxBottom: Swift.SIMD3<Swift.Double>
+    public static var iPhone16ProTop: Swift.SIMD3<Swift.Double>
+    public static var iPhone16ProMiddle: Swift.SIMD3<Swift.Double>
+    public static var iPhone16ProBottom: Swift.SIMD3<Swift.Double>
+    public static var iPhone16ProMaxTop: Swift.SIMD3<Swift.Double>
+    public static var iPhone16ProMaxMiddle: Swift.SIMD3<Swift.Double>
+    public static var iPhone16ProMaxBottom: Swift.SIMD3<Swift.Double>
     public static var iPadPro11Top: Swift.SIMD3<Swift.Double>
     public static var iPadPro11Middle: Swift.SIMD3<Swift.Double>
   }
