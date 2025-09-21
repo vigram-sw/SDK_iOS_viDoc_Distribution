@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.1 effective-5.10 (swiftlang-6.1.0.110.21 clang-1700.0.13.3)
+// swift-compiler-version: Apple Swift version 6.1.2 effective-5.10 (swiftlang-6.1.2.1.2 clang-1700.0.13.5)
 // swift-module-flags: -target arm64-apple-ios15.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -module-name VigramSDK
-// swift-module-flags-ignorable: -no-verify-emitted-module-interface -interface-compiler-version 6.1
+// swift-module-flags-ignorable: -no-verify-emitted-module-interface -interface-compiler-version 6.1.2
 import Combine
 import CoreBluetooth
 import CoreMotion
@@ -428,6 +428,13 @@ extension VigramSDK.Vigram {
   public static func singlePointRecordingService(gpsService: any VigramSDK.GPSService, laserService: (any VigramSDK.LaserService)? = nil) -> any VigramSDK.SinglePointRecordingService
   public static func singlePointRecordingService(gpsService: any VigramSDK.GPSService, laserService: (any VigramSDK.LaserService)? = nil, peripheral: any VigramSDK.Peripheral, dynamicStateType: VigramSDK.DynamicStateType) -> any VigramSDK.SinglePointRecordingService
   public static func singlePointRecordingService(environmentDataService: any VigramSDK.EnvironmentDataService) -> any VigramSDK.SinglePointRecordingService
+}
+public enum CameraAntennaOffsetError : Swift.Error, Swift.CustomStringConvertible {
+  case unsupportedDevice(UIKit.UIDevice.TypeOfCase, UIKit.UIDevice.CameraPosition, Swift.String)
+  case unknownDevice
+  public var description: Swift.String {
+    get
+  }
 }
 public enum StateUpdateSoftware {
   case startUpdate(VigramSDK.DeviceMessage.Version.Software)
@@ -972,13 +979,14 @@ public struct DMMCoordinate {
   }
 }
 extension UIKit.UIDevice {
-  public enum TypeOfCase {
+  public enum TypeOfCase : Swift.String {
     case spc
     case spcPlus
     case spcPlusLight
-    public static func == (a: UIKit.UIDevice.TypeOfCase, b: UIKit.UIDevice.TypeOfCase) -> Swift.Bool
-    public func hash(into hasher: inout Swift.Hasher)
-    public var hashValue: Swift.Int {
+    public init?(rawValue: Swift.String)
+    @available(iOS 2.0, *)
+    public typealias RawValue = Swift.String
+    public var rawValue: Swift.String {
       get
     }
   }
@@ -994,11 +1002,15 @@ extension UIKit.UIDevice {
   }
   @available(*, deprecated, message: "This method will be removed in future versions of the SDK. Use method cameraAntennaOffset(_: at:)")
   @_Concurrency.MainActor @preconcurrency public func cameraAntennaOffset(at position: UIKit.UIDevice.CameraPosition) -> Swift.SIMD3<Swift.Double>?
-  @_Concurrency.MainActor @preconcurrency public func cameraAntennaOffset(_ typeOfCase: UIKit.UIDevice.TypeOfCase, at position: UIKit.UIDevice.CameraPosition) -> Swift.SIMD3<Swift.Double>?
+  @_Concurrency.MainActor @preconcurrency public func cameraAntennaOffset(_ typeOfCase: UIKit.UIDevice.TypeOfCase, at position: UIKit.UIDevice.CameraPosition) -> Swift.Result<Swift.SIMD3<Swift.Double>, VigramSDK.CameraAntennaOffsetError>
+  @available(*, deprecated, message: "Use cameraAntennaOffsetForCurrentDeviceResult(at:) -> Result instead")
   @_Concurrency.MainActor @preconcurrency public func cameraAntennaOffsetForCurrentDevice(at position: UIKit.UIDevice.CameraPosition) -> Swift.SIMD3<Swift.Double>?
+  @_Concurrency.MainActor @preconcurrency public func cameraAntennaOffsetForCurrentDeviceResult(at position: UIKit.UIDevice.CameraPosition) -> Swift.Result<Swift.SIMD3<Swift.Double>, VigramSDK.CameraAntennaOffsetError>
 }
 extension UIKit.UIDevice {
+  @available(*, deprecated, message: "Use laserAntennaOffsetResult(at:) -> Result instead")
   @_Concurrency.MainActor @preconcurrency public func laserAntennaOffset(at position: VigramSDK.LaserConfiguration.Position = .bottom) -> Swift.SIMD3<Swift.Double>?
+  @_Concurrency.MainActor @preconcurrency public func laserAntennaOffsetResult(at position: VigramSDK.LaserConfiguration.Position = .bottom) -> Swift.Result<Swift.SIMD3<Swift.Double>, VigramSDK.LaserAntennaOffsetError>
 }
 extension UIKit.UIDevice {
   @available(*, deprecated, message: "These offsets have not yet been confirmed.")
@@ -1043,6 +1055,13 @@ public enum Configuration {
   public static var maximumSinglePointVerticalAccuracy: Swift.Double
   public static var middleAntenna: Swift.Double
   public static var deviceHeight: Swift.Double
+}
+public enum LaserAntennaOffsetError : Swift.Error, Swift.CustomStringConvertible {
+  case unsupportedDevice(VigramSDK.LaserConfiguration.Position, Swift.String)
+  case unknownDevice
+  public var description: Swift.String {
+    get
+  }
 }
 public struct LaserConfiguration {
   public enum ShotMode : Swift.CaseIterable {
@@ -1308,6 +1327,8 @@ extension VigramSDK.AntennaOffset {
     public static var iPhone14ProBottom: Swift.SIMD3<Swift.Double>
     public static var iPhone14ProMaxBack: Swift.SIMD3<Swift.Double>
     public static var iPhone14ProMaxBottom: Swift.SIMD3<Swift.Double>
+    public static var defaultBack: Swift.SIMD3<Swift.Double>
+    public static var defaultBottom: Swift.SIMD3<Swift.Double>
     public static var iPadPro11: Swift.SIMD3<Swift.Double>
   }
 }
@@ -1376,6 +1397,7 @@ extension VigramSDK.NtripMountPoint.NavigationSystem : Swift.Hashable {}
 extension VigramSDK.NtripMountPoint.NavigationSystem : Swift.RawRepresentable {}
 extension UIKit.UIDevice.TypeOfCase : Swift.Equatable {}
 extension UIKit.UIDevice.TypeOfCase : Swift.Hashable {}
+extension UIKit.UIDevice.TypeOfCase : Swift.RawRepresentable {}
 extension UIKit.UIDevice.CameraPosition : Swift.Equatable {}
 extension UIKit.UIDevice.CameraPosition : Swift.Hashable {}
 extension VigramSDK.LaserConfiguration.ShotMode : Swift.Equatable {}
