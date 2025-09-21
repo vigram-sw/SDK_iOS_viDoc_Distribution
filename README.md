@@ -1,5 +1,5 @@
 # VigramSDK
-v1.0.5.
+v1.0.6.
 
 VigramSDK is a library to connect your app to viDoc to retrieve location data and perform laser distance recordings.
 
