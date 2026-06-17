@@ -1,72 +1,19 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.0.19.9 clang-1700.3.19.1)
-// swift-module-flags: -target arm64-apple-ios15.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -module-name VigramSDK
-// swift-module-flags-ignorable: -no-verify-emitted-module-interface -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
+// swift-compiler-version: Apple Swift version 6.3.2 effective-5.10 (swiftlang-6.3.2.1.108 clang-2100.1.1.101)
+// swift-module-flags: -target arm64-apple-ios15.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -O -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -module-name VigramSDK
+// swift-module-flags-ignorable: -no-verify-emitted-module-interface -formal-cxx-interoperability-mode=off -interface-compiler-version 6.3.2
 import Combine
-import CoreBluetooth
+@preconcurrency import CoreBluetooth
 import CoreMotion
 import Foundation
 import Network
+import Security
 import Swift
 import SystemConfiguration
 import UIKit
 import _Concurrency
 import _StringProcessing
 import _SwiftConcurrencyShims
-extension VigramSDK.GPSService {
-  public func cameraCoordinate(offset: Swift.SIMD3<Swift.Double>, updateInterval: Foundation.TimeInterval) -> VigramSDK.EventsPublisher<VigramSDK.GPSCoordinate>
-}
-public struct GPSCoordinate : Swift.Equatable {
-  public var latitude: Swift.Double
-  public var longitude: Swift.Double
-  public var referenceAltitude: Swift.Double
-  public var geoidSeparation: Swift.Double
-  public var altitude: Swift.Double {
-    get
-  }
-  public init(latitude: Swift.Double, longitude: Swift.Double, referenceAltitude: Swift.Double, geoidSeparation: Swift.Double)
-  public static func == (a: VigramSDK.GPSCoordinate, b: VigramSDK.GPSCoordinate) -> Swift.Bool
-}
-public protocol SoftwareService {
-  func getActualVersionSoftware() -> VigramSDK.SingleEventPublisher<VigramSDK.DeviceMessage.Version.Software>
-  func getAllAvailableSoftware() -> VigramSDK.SingleEventPublisher<[VigramSDK.DeviceMessage.Version.Software]>
-  func getSystemState() -> VigramSDK.SingleEventPublisher<VigramSDK.SystemState>
-}
-public typealias StatePublisher<Element> = Combine.AnyPublisher<Element, Swift.Never>
-public typealias SingleEventPublisher<Element> = Combine.AnyPublisher<Element, any Swift.Error>
-public typealias EventsPublisher<Element> = Combine.AnyPublisher<Element, any Swift.Error>
-public protocol DeviceMotionService {
-  func deviceMotion(updateInterval: Foundation.TimeInterval) -> VigramSDK.EventsPublisher<VigramSDK.DeviceMotion>
-}
-extension Swift.SIMD3 where Scalar : Swift.FloatingPoint {
-  public static var undefined: Swift.SIMD3<Scalar> {
-    get
-  }
-  public var pitch: Scalar {
-    get
-    set
-  }
-  public var roll: Scalar {
-    get
-    set
-  }
-  public var yaw: Scalar {
-    get
-    set
-  }
-  public init(pitch: Scalar, roll: Scalar, yaw: Scalar)
-}
-public protocol LaserService : AnyObject {
-  func getLasersStatus() -> VigramSDK.SingleEventPublisher<VigramSDK.DeviceMessage.LaserState>
-  func turnLaserOn(at position: VigramSDK.LaserConfiguration.Position) -> VigramSDK.SingleEventPublisher<Swift.Void>
-  func turnLaserOff(at position: VigramSDK.LaserConfiguration.Position) -> VigramSDK.SingleEventPublisher<Swift.Void>
-  func record(configuration: VigramSDK.LaserConfiguration) -> VigramSDK.SingleEventPublisher<VigramSDK.DeviceMessage.Measurement>
-}
-@available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
-extension VigramSDK.LaserService {
-  public func turnLaserOn(at position: VigramSDK.LaserConfiguration.Position) async throws
-  public func turnLaserOff(at position: VigramSDK.LaserConfiguration.Position) async throws
-}
 public struct DeviceMotion : Swift.Equatable {
   public enum Accuracy : Swift.Comparable {
     case lowest
@@ -90,149 +37,432 @@ extension VigramSDK.DeviceMotion {
     get
   }
 }
-public protocol EnvironmentDataService {
-  func record(updateInterval: Foundation.TimeInterval, with correction: VigramSDK.CoordinateCorrection.Method) -> VigramSDK.EventsPublisher<VigramSDK.EnvironmentData>
-  func observe(updateInterval: Foundation.TimeInterval, with correction: VigramSDK.CoordinateCorrection.Method) -> VigramSDK.EventsPublisher<VigramSDK.EnvironmentData>
+public enum NtripServiceError : Swift.Error {
+  case mountPointDecodingFailed
+  case couldNotCreateURL(VigramSDK.NtripConnectionInformation, mountPoint: Swift.String?)
+  case couldNotCreateTask
+  case couldNotAddAuthentication(Foundation.URLRequest, username: Swift.String, password: Swift.String)
 }
-public protocol Peripheral {
-  var nmea: VigramSDK.StatePublisher<any VigramSDK.NMEAMessage> { get }
-  #if compiler(>=5.3) && $NonescapableTypes
-  var serialNumber: Swift.String? { get }
-  #endif
-  var protocolVersion: VigramSDK.StatePublisher<Swift.Double> { get }
-  var currentDevice: VigramSDK.StatePublisher<VigramSDK.DeviceMessage.Device> { get }
-  var deviceMessages: VigramSDK.StatePublisher<VigramSDK.DeviceMessage> { get }
-  var satelliteMessages: VigramSDK.StatePublisher<VigramSDK.SatelliteMessage> { get }
-  var debug: VigramSDK.StatePublisher<Swift.String> { get }
-  #if compiler(>=5.3) && $NonescapableTypes
-  var softwareNotice: VigramSDK.StatePublisher<(current: VigramSDK.DeviceMessage.Version.Software?, actual: VigramSDK.DeviceMessage.Version.Software?)>? { get }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
-  var isNeedSoftwareUpdate: VigramSDK.StatePublisher<Swift.Bool>? { get }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
-  var softwareUpdateState: VigramSDK.StatePublisher<VigramSDK.StateUpdateSoftware>? { get }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
-  var softwareUpdateProgress: VigramSDK.StatePublisher<Swift.Double>? { get }
-  #endif
-  var state: VigramSDK.StatePublisher<CoreBluetooth.CBPeripheralState> { get }
-  var peripheral: CoreBluetooth.CBPeripheral { get }
-  var configurationState: VigramSDK.StatePublisher<VigramSDK.StatePeripheralConfiguration> { get }
-  var calibrationMessage: VigramSDK.StatePublisher<VigramSDK.CalibrationMessage> { get }
-  var viDocState: VigramSDK.StatePublisher<VigramSDK.StateViDoc> { get }
-  var viDocResetState: VigramSDK.StatePublisher<VigramSDK.StateResetViDoc> { get }
-  var ppkMeasurementsState: VigramSDK.StatePublisher<Swift.Bool> { get }
-  func start() -> VigramSDK.SingleEventPublisher<Swift.Void>
-  func send(_ data: Foundation.Data, chunkSize: Swift.Int) -> VigramSDK.SingleEventPublisher<Swift.Void>
-  func resetViDoc()
-  func requestVersion() -> VigramSDK.SingleEventPublisher<VigramSDK.DeviceMessage.Version>
-  func requestBattery() -> VigramSDK.SingleEventPublisher<VigramSDK.DeviceMessage.Battery>
-  func requestChange(baudrate: VigramSDK.DeviceMessage.Baudrate) -> VigramSDK.SingleEventPublisher<Swift.Void>
-  func requestIMUAngle() -> VigramSDK.SingleEventPublisher<VigramSDK.DeviceMessage.IMUAngle>
-  func requestIMUDataAcc() -> VigramSDK.SingleEventPublisher<VigramSDK.DeviceMessage.IMUACC>
-  func requestIMURotation() -> VigramSDK.SingleEventPublisher<VigramSDK.DeviceMessage.IMURotation>
-  func requestIMURotationRaw() -> VigramSDK.SingleEventPublisher<VigramSDK.DeviceMessage.IMURotationRaw>
-  func requestIMUMagneticRaw() -> VigramSDK.SingleEventPublisher<VigramSDK.DeviceMessage.IMUMagneticRaw>
-  func requestIMUTemp() -> VigramSDK.SingleEventPublisher<VigramSDK.DeviceMessage.IMUTemp>
-  func requestIMUCalibration(autoMode: Swift.Bool) -> VigramSDK.SingleEventPublisher<Swift.Void>
-  func nextStepManualIMUCalibration() -> VigramSDK.SingleEventPublisher<Swift.Void>
-  func exitManualIMUCalibration() -> VigramSDK.SingleEventPublisher<Swift.Void>
-  func requestIMUCalibrationStatus() -> VigramSDK.SingleEventPublisher<VigramSDK.DeviceMessage.IMUCalibrationStatus>
-  func getCurrentStatusGNSS(satellite: VigramSDK.NavigationSystemType) -> VigramSDK.SingleEventPublisher<VigramSDK.SatelliteMessage.StatusSattelite>
-  func changeStatusGNSS(satellite: VigramSDK.NavigationSystemType, activate: Swift.Bool) -> VigramSDK.SingleEventPublisher<VigramSDK.SatelliteMessage.Acknowledge>
-  func activateAllConstellationGNSS() -> VigramSDK.SingleEventPublisher<VigramSDK.SatelliteMessage.Acknowledge>
-  func changeStatusNAVDOP(activate: Swift.Bool) -> VigramSDK.SingleEventPublisher<VigramSDK.SatelliteMessage.Acknowledge>
-  func changeStatusNAVPVT(activate: Swift.Bool) -> VigramSDK.SingleEventPublisher<VigramSDK.SatelliteMessage.Acknowledge>
-  func getCurrentMinimumElevation() -> VigramSDK.SingleEventPublisher<VigramSDK.SatelliteMessage.Elevation>
-  func setMinimumElevation(angle: VigramSDK.ElevationValue) -> VigramSDK.SingleEventPublisher<VigramSDK.SatelliteMessage.Acknowledge>
-  func setChangingRateOfMessages(_ rate: VigramSDK.RateValue) -> VigramSDK.SingleEventPublisher<VigramSDK.SatelliteMessage.Acknowledge>
-  func getChangingRateOfMessages() -> VigramSDK.SingleEventPublisher<VigramSDK.SatelliteMessage.ChangingRate>
-  func setUpdateSoftwareToNextStartup(_: Swift.Bool, version: VigramSDK.DeviceMessage.Version.Software)
-  func changeStatusAllNavMessages(activate: Swift.Bool) -> VigramSDK.SingleEventPublisher<VigramSDK.SatelliteMessage.Acknowledge>
-  func changeStatusRXM(activate: Swift.Bool)
-  func startRecordPPKMeasurements(url: Foundation.URL)
-  func stopRecordPPKMeasurements()
-  func setDynamicState(type: VigramSDK.DynamicStateType) -> VigramSDK.SingleEventPublisher<VigramSDK.SatelliteMessage.Acknowledge>
-  func getCurrentDynamicState() -> VigramSDK.SingleEventPublisher<VigramSDK.SatelliteMessage.DynamicState>
-  #if compiler(>=5.3) && $NonescapableTypes
-  func getNewIdentity(isReset: Swift.Bool) -> VigramSDK.SingleEventPublisher<Swift.Result<Swift.Bool, any Swift.Error>>
-  #endif
-}
-@available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
-extension VigramSDK.Peripheral {
-  public func start() async throws
-  public func requestBattery() async throws -> VigramSDK.DeviceMessage.Battery
-}
-public enum PeripheralError : Swift.Error {
-  case characteristicNotFound
-  case alreadyDeallocated
-  case laserNotAvailableInPPK
-  case writeTimeOut
-  case configurationFailed
-  case requestIsNotSupported(Swift.String)
-  case accessDenied(Swift.String)
-  case deviceNumberIsIncompatible
-  case deviceSoftwareIsIncompatible
-  case deviceIsBusy(Swift.String)
-  case sdkIsOutdated
-  case verificationFailure(Swift.String)
-  case unknownError(Swift.String)
-}
-extension VigramSDK.PeripheralError : Foundation.LocalizedError {
-  #if compiler(>=5.3) && $NonescapableTypes
+extension VigramSDK.NtripServiceError : Foundation.LocalizedError, Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible {
   public var errorDescription: Swift.String? {
     get
   }
-  #endif
+  public var description: Swift.String {
+    get
+  }
+  public var debugDescription: Swift.String {
+    get
+  }
 }
-public enum StatePeripheralConfiguration {
-  case done
-  case inProgress
-  case failed(any Swift.Error)
-  case peripheralError(VigramSDK.PeripheralError)
+public protocol NtripService {
+  func mountpoints(for information: VigramSDK.NtripConnectionInformation) -> VigramSDK.SingleEventPublisher<[VigramSDK.NtripMountPoint]>
+  func task(for information: VigramSDK.NtripConnectionInformation, atMountPoint: Swift.String, message: VigramSDK.GGAMessage) throws -> any VigramSDK.NtripTask
+}
+public struct LaserConfiguration {
+  public enum ShotMode : Swift.CaseIterable {
+    case slow
+    case fast
+    case auto
+    public static func == (a: VigramSDK.LaserConfiguration.ShotMode, b: VigramSDK.LaserConfiguration.ShotMode) -> Swift.Bool
+    public typealias AllCases = [VigramSDK.LaserConfiguration.ShotMode]
+    nonisolated public static var allCases: [VigramSDK.LaserConfiguration.ShotMode] {
+      get
+    }
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+  public enum Position : Swift.CaseIterable {
+    case bottom
+    case back
+    public static func == (a: VigramSDK.LaserConfiguration.Position, b: VigramSDK.LaserConfiguration.Position) -> Swift.Bool
+    public typealias AllCases = [VigramSDK.LaserConfiguration.Position]
+    nonisolated public static var allCases: [VigramSDK.LaserConfiguration.Position] {
+      get
+    }
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+  public let shotMode: VigramSDK.LaserConfiguration.ShotMode
+  public let duration: Swift.Double
+  public let position: VigramSDK.LaserConfiguration.Position
+  public init(shotMode: VigramSDK.LaserConfiguration.ShotMode, position: VigramSDK.LaserConfiguration.Position = .bottom, duration: Swift.Double)
+}
+public struct EnvironmentData {
+  public var coordinate: VigramSDK.GPSCoordinate
+  public var correction: VigramSDK.CoordinateCorrection
+  public var date: Foundation.Date
+  public var deviceMotion: VigramSDK.DeviceMotion
+  public var horizontalAccuracy: Swift.Double
+  public var verticalAccuracy: Swift.Double
+  public var correctedCoordinate: VigramSDK.GPSCoordinate {
+    get
+  }
+  public init(date: Foundation.Date, coordinate: VigramSDK.GPSCoordinate, verticalAccuracy: Swift.Double, horizontalAccuracy: Swift.Double, deviceMotion: VigramSDK.DeviceMotion, correction: VigramSDK.CoordinateCorrection)
+}
+extension Swift.Collection {
+  public func average<Number>(_ keyPath: Swift.KeyPath<Self.Element, Number>) -> Number where Number : VigramSDK.AverageComputable
+  public func average<Number>(_ fun: (Self.Element) -> Number) -> Number where Number : VigramSDK.AverageComputable
+  public func medians<Number>(_ fun: (Self.Element) -> Number) -> Number where Number : VigramSDK.AverageComputable
+  public func medians<Number>(_ keyPath: Swift.KeyPath<Self.Element, Number>) -> Number where Number : VigramSDK.AverageComputable
+  public func median<C>(_ fun: (Self.Element) -> C) -> C where C : Swift.Comparable
+  public func median<C>(_ keyPath: Swift.KeyPath<Self.Element, C>) -> C where C : Swift.Comparable
+}
+extension Swift.Collection where Self.Element : Swift.Comparable {
+  public var median: Self.Element {
+    get
+  }
+}
+extension Swift.Array where Element : VigramSDK.AverageComputable {
+  public func average() -> Element
+  public func median() -> Element
+}
+extension Swift.Collection {
+  public func averageRadian(_ keyPath: Swift.KeyPath<Self.Element, Swift.Double>) -> Swift.Double
+  public func averageRadian(_ fun: (Self.Element) -> Swift.Double) -> Swift.Double
+  public func averageRadian(_ keyPath: Swift.KeyPath<Self.Element, Swift.SIMD3<Swift.Double>>) -> Swift.SIMD3<Swift.Double>
+  public func averageRadian(_ fun: (Self.Element) -> Swift.SIMD3<Swift.Double>) -> Swift.SIMD3<Swift.Double>
+}
+extension Swift.Collection where Self.Element == Swift.Double {
+  public func averageRadian() -> Self.Element
+}
+extension Swift.Collection where Self.Element == Swift.SIMD3<Swift.Double> {
+  public func averageRadian() -> Self.Element
+}
+public protocol LaserService : AnyObject {
+  func getLasersStatus() -> VigramSDK.SingleEventPublisher<VigramSDK.DeviceMessage.LaserState>
+  func turnLaserOn(at position: VigramSDK.LaserConfiguration.Position) -> VigramSDK.SingleEventPublisher<Swift.Void>
+  func turnLaserOff(at position: VigramSDK.LaserConfiguration.Position) -> VigramSDK.SingleEventPublisher<Swift.Void>
+  func record(configuration: VigramSDK.LaserConfiguration) -> VigramSDK.SingleEventPublisher<VigramSDK.DeviceMessage.Measurement>
+}
+extension UIKit.UIDevice {
+  public enum TypeOfCase : Swift.String {
+    case spc
+    case spcPlus
+    case spcPlusLight
+    public init?(rawValue: Swift.String)
+    @available(iOS 2.0, *)
+    public typealias RawValue = Swift.String
+    public var rawValue: Swift.String {
+      get
+    }
+  }
+  public enum CameraPosition {
+    case top
+    case middle
+    case bottom
+    public static func == (a: UIKit.UIDevice.CameraPosition, b: UIKit.UIDevice.CameraPosition) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+  @available(*, deprecated, message: "This method will be removed in future versions of the SDK. Use method cameraAntennaOffset(_: at:)")
+  @_Concurrency.MainActor @preconcurrency public func cameraAntennaOffset(at position: UIKit.UIDevice.CameraPosition) -> Swift.SIMD3<Swift.Double>?
+  @_Concurrency.MainActor @preconcurrency public func cameraAntennaOffset(_ typeOfCase: UIKit.UIDevice.TypeOfCase, at position: UIKit.UIDevice.CameraPosition) -> Swift.Result<Swift.SIMD3<Swift.Double>, VigramSDK.CameraAntennaOffsetError>
+  @available(*, deprecated, message: "Use cameraAntennaOffsetForCurrentDeviceResult(at:) -> Result instead")
+  @_Concurrency.MainActor @preconcurrency public func cameraAntennaOffsetForCurrentDevice(at position: UIKit.UIDevice.CameraPosition) -> Swift.SIMD3<Swift.Double>?
+  @_Concurrency.MainActor @preconcurrency public func cameraAntennaOffsetForCurrentDeviceResult(at position: UIKit.UIDevice.CameraPosition) -> Swift.Result<Swift.SIMD3<Swift.Double>, VigramSDK.CameraAntennaOffsetError>
+}
+extension UIKit.UIDevice {
+  @available(*, deprecated, message: "Use laserAntennaOffsetResult(at:) -> Result instead")
+  @_Concurrency.MainActor @preconcurrency public func laserAntennaOffset(at position: VigramSDK.LaserConfiguration.Position = .bottom) -> Swift.SIMD3<Swift.Double>?
+  @_Concurrency.MainActor @preconcurrency public func laserAntennaOffsetResult(at position: VigramSDK.LaserConfiguration.Position = .bottom) -> Swift.Result<Swift.SIMD3<Swift.Double>, VigramSDK.LaserAntennaOffsetError>
+}
+extension UIKit.UIDevice {
+  @available(*, deprecated, message: "These offsets have not yet been confirmed.")
+  @_Concurrency.MainActor @preconcurrency public func mountAntennaOffset() -> Swift.SIMD3<Swift.Double>?
+}
+public protocol NMEAMessage {
+  var raw: Swift.String { get }
+  var time: VigramSDK.Time? { get }
+  var timeStampUnix: Foundation.NSDate? { get }
+  var coordinate: VigramSDK.GPSCoordinate? { get }
+  var satelliteCount: Swift.Int? { get }
+  var hdop: Swift.Double? { get }
+  var vdop: Swift.Double? { get }
+  var pdop: Swift.Double? { get }
+  var accuracy: (horizontal: Swift.Double, vertical: Swift.Double)? { get }
+}
+public enum GPSQualityIndicator : Swift.Int {
+  case invalidFix
+  case singlePoint
+  case pseudoRangeDifferential
+  case notApplicable
+  case rtkFixedAmbiguitySolution
+  case rtkFloatingAmbiguitySolution
+  case isnDeadReckoning
+  case manualInput
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+public struct GGAMessage : VigramSDK.NMEAMessage {
+  public let raw: Swift.String
+  public let time: VigramSDK.Time?
+  public let timeStampUnix: Foundation.NSDate?
+  public let location: VigramSDK.DMMCoordinate?
+  public let quality: VigramSDK.GPSQualityIndicator?
+  public let satelliteCount: Swift.Int?
+  public let hdop: Swift.Double?
+  public let referenceAltitude: Swift.Double?
+  public let geoidSeparation: Swift.Double?
+  public let correctionAge: Foundation.TimeInterval?
+  public let correctionStationID: Swift.Int?
+  public var coordinate: VigramSDK.GPSCoordinate? {
+    get
+  }
+  public var accuracy: (horizontal: Swift.Double, vertical: Swift.Double)? {
+    get
+  }
+  public var horAccuracyTest: Swift.Double? {
+    get
+  }
+  public var vdop: Swift.Double? {
+    get
+  }
+  public var pdop: Swift.Double? {
+    get
+  }
+}
+public struct GSTMessage : VigramSDK.NMEAMessage {
+  public let raw: Swift.String
+  public let time: VigramSDK.Time?
+  public let timeStampUnix: Foundation.NSDate?
+  public let rms: Swift.Double?
+  public let semiMajor1SigmaError: Swift.Double?
+  public let semiMinor1SigmaError: Swift.Double?
+  public let errorEllipseOrientation: Swift.Double?
+  public let latitudeError: Swift.Double?
+  public let longitudeError: Swift.Double?
+  public let altitudeError: Swift.Double?
+  public var accuracy: (horizontal: Swift.Double, vertical: Swift.Double)? {
+    get
+  }
+  public var horAccuracyTest: Swift.Double? {
+    get
+  }
+  public var coordinate: VigramSDK.GPSCoordinate? {
+    get
+  }
+  public var hdop: Swift.Double? {
+    get
+  }
+  public var vdop: Swift.Double? {
+    get
+  }
+  public var pdop: Swift.Double? {
+    get
+  }
+  public var satelliteCount: Swift.Int? {
+    get
+  }
+}
+public struct TXTMessage : VigramSDK.NMEAMessage {
+  public var time: VigramSDK.Time?
+  public let timeStampUnix: Foundation.NSDate?
+  public var coordinate: VigramSDK.GPSCoordinate?
+  public var satelliteCount: Swift.Int?
+  public var hdop: Swift.Double?
+  public var vdop: Swift.Double?
+  public var pdop: Swift.Double?
+  public var accuracy: (horizontal: Swift.Double, vertical: Swift.Double)?
+  public var horAccuracyTest: Swift.Double?
+  public var raw: Swift.String
+  public let totalNumberOfMessage: Swift.Int
+  public let messageNumber: Swift.Int
+  public let textIdentifier: Swift.Int
+  public let message: Swift.String?
+}
+public typealias StatePublisher<Element> = Combine.AnyPublisher<Element, Swift.Never>
+public typealias SingleEventPublisher<Element> = Combine.AnyPublisher<Element, any Swift.Error>
+public typealias EventsPublisher<Element> = Combine.AnyPublisher<Element, any Swift.Error>
+public struct SinglePoint {
+  public var environmentData: VigramSDK.EnvironmentData
+  public var duration: Foundation.TimeInterval
+}
+@available(*, unavailable, message: "Legacy peripheral TXT logging was removed. Use Vigram.Logger(url:mode:) for structured support logs.")
+public enum BLELogType : Swift.String {
+  case willSend
+  case didSend
+  case didReceive
+  public init?(rawValue: Swift.String)
+  @available(*, unavailable, message: "Legacy peripheral TXT logging was removed. Use Vigram.Logger(url:mode:) for structured support logs.")
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+@available(*, unavailable, message: "Legacy peripheral TXT logging was removed. Use Vigram.Logger(url:mode:) for structured support logs.")
+public protocol PeripheralLogger : AnyObject {
+}
+public enum SDKLogMode : Swift.Int, Swift.Comparable {
+  case off
+  case basic
+  case diagnostic
+  public static func < (lhs: VigramSDK.SDKLogMode, rhs: VigramSDK.SDKLogMode) -> Swift.Bool
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+public enum SDKLogLevel : Swift.String, Swift.Codable {
+  case debug
+  case info
+  case error
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public enum SDKLogScope : Swift.String, Swift.Codable {
+  case authenticationService
+  case authenticationVerification
+  case bluetoothService
+  case deviceMotionService
+  case laserService
+  case peripheralService
+  case peripheralParser
+  case ntripService
+  case ntripSession
+  case ntripTransport
+  case gpsService
+  case gpsExchange
+  case singlePointService
+  case sdk
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public struct SDKLogEvent : Swift.Codable {
+  public let timestamp: Foundation.Date
+  public let level: VigramSDK.SDKLogLevel
+  public let scope: VigramSDK.SDKLogScope
+  public let event: Swift.String
+  public let message: Swift.String
+  public let session: Swift.String?
+  public let connection: Swift.String?
+  public let cycle: Swift.String?
+  public let serial: Swift.String?
+  public let deviceID: Swift.String?
+  public let bluetoothName: Swift.String?
+  public let protocolVersion: Swift.String?
+  public let thread: Swift.String?
+  public let metadata: [Swift.String : Swift.String]
+  public init(timestamp: Foundation.Date = Date(), level: VigramSDK.SDKLogLevel, scope: VigramSDK.SDKLogScope, event: Swift.String, message: Swift.String? = nil, metadata: [Swift.String : Swift.String] = [:])
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+}
+public protocol SDKLogger : AnyObject {
+  func log(_ event: VigramSDK.SDKLogEvent)
+}
+extension VigramSDK.Vigram {
+  final public class Logger {
+    public typealias Mode = VigramSDK.SDKLogMode
+    final public let url: Foundation.URL
+    final public let mode: VigramSDK.Vigram.Logger.Mode
+    @discardableResult
+    public init(url: Foundation.URL, mode: VigramSDK.Vigram.Logger.Mode = .basic) throws
+    public static func disable()
+    @objc deinit
+  }
+}
+public struct NtripConnectionInformation : Swift.Hashable, Swift.CustomStringConvertible, Swift.CustomDebugStringConvertible {
+  public var hostname: Swift.String
+  public var port: Swift.Int
+  public var username: Swift.String
+  public var password: Swift.String
+  public var forceHTTPSconnection: Swift.Bool
+  public var forceHTTPSMountpointsConnection: Swift.Bool
+  public var description: Swift.String {
+    get
+  }
+  public var debugDescription: Swift.String {
+    get
+  }
+  public init(hostname: Swift.String, port: Swift.Int, username: Swift.String, password: Swift.String, forceHTTPSconnection: Swift.Bool = false, forceHTTPSMountpointsConnection: Swift.Bool = false)
+  public static func == (a: VigramSDK.NtripConnectionInformation, b: VigramSDK.NtripConnectionInformation) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+public enum StateUpdateSoftware {
+  case startUpdate(VigramSDK.DeviceMessage.Version.Software)
+  case updatingSoftware
+  case errorUpdate
+  case endUpdate
+  case none
+}
+public struct CalibrationMessage {
+  public enum CalibrationProcess {
+    case startCalibration
+    case go
+    case position(Swift.Int)
+    case imuData
+    case endCalibration
+    case errorCalibration
+  }
+  public var state: VigramSDK.CalibrationMessage.CalibrationProcess
+  public var rawData: Swift.String
+}
+public enum DeviceModel {
+  case simulator
+  case iPod1, iPod2, iPod3, iPod4, iPod5, iPod6, iPod7
+  case iPad2, iPad3, iPad4, iPad5, iPad6, iPad7, iPad8, iPad9, iPad10
+  case iPadAir, iPadAir2, iPadAir3, iPadAir4, iPadAir5
+  case iPadMini, iPadMini2, iPadMini3, iPadMini4, iPadMini5, iPadMini6
+  case iPadPro9_7, iPadPro10_5, iPadPro11, iPadPro2_11, iPadPro3_11, iPadPro4_11
+  case iPadPro12_9, iPadPro2_12_9, iPadPro3_12_9, iPadPro4_12_9, iPadPro5_12_9, iPadPro6_12_9
+  case iPhone4, iPhone4S, iPhone5, iPhone5S, iPhone5C, iPhone6, iPhone6Plus, iPhone6S, iPhone6SPlus, iPhoneSE, iPhoneSE2, iPhoneSE3
+  case iPhone7, iPhone7Plus, iPhone8, iPhone8Plus, iPhoneX, iPhoneXS, iPhoneXSMax, iPhoneXR, iPhone11, iPhone11Pro, iPhone11ProMax
+  case iPhone12Mini, iPhone12, iPhone12Pro, iPhone12ProMax, iPhone13Mini, iPhone13, iPhone13Pro, iPhone13ProMax
+  case iPhone14, iPhone14Plus, iPhone14Pro, iPhone14ProMax, iPhone15, iPhone15Plus, iPhone15Pro, iPhone15ProMax
+  case iPhone16Pro, iPhone16ProMax
+  case AppleWatch1, AppleWatchS1, AppleWatchS2, AppleWatchS3, AppleWatchS4, AppleWatchS5, AppleWatchSE, AppleWatchS6, AppleWatchS7
+  case AppleTV1, AppleTV2, AppleTV3, AppleTV4, AppleTV_4K, AppleTV2_4K
+  case unrecognized
+  public static func == (a: VigramSDK.DeviceModel, b: VigramSDK.DeviceModel) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+extension Swift.SIMD3 where Scalar : Swift.FloatingPoint {
+  public static var undefined: Swift.SIMD3<Scalar> {
+    get
+  }
+  public var pitch: Scalar {
+    get
+    set
+  }
+  public var roll: Scalar {
+    get
+    set
+  }
+  public var yaw: Scalar {
+    get
+    set
+  }
+  public init(pitch: Scalar, roll: Scalar, yaw: Scalar)
+}
+@available(*, unavailable, message: "Online firmware update was removed. Use local firmware files instead.")
+public protocol SoftwareService {
+}
+public protocol DeviceMotionService {
+  func deviceMotion(updateInterval: Foundation.TimeInterval) -> VigramSDK.EventsPublisher<VigramSDK.DeviceMotion>
 }
 extension Swift.UInt16 {
   public init(with data: Foundation.Data, startAt offset: Swift.Int)
-}
-public protocol NtripTask {
-  #if compiler(>=5.3) && $NonescapableTypes
-  var host: Swift.String? { get }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
-  var port: Swift.Int? { get }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
-  var mountPoint: Swift.String? { get }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
-  var data: VigramSDK.StatePublisher<Swift.Result<Foundation.Data, any Swift.Error>> { get }
-  #endif
-  var ntripState: VigramSDK.StatePublisher<VigramSDK.StateNtripConnection> { get }
-  func resume() -> VigramSDK.SingleEventPublisher<Swift.Void>
-  func disconnect()
-  @available(*, deprecated, message: "Use function disconnect instead this. This function is not needed.")
-  func cancel()
-  func setGGA(_ message: VigramSDK.GGAMessage)
-}
-@available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
-extension VigramSDK.NtripTask {
-  public func resume() async throws
-}
-public enum NtripTaskError : Swift.Error {
-  case couldNotCreateRequest
-  case noData
-  case incorrectNCI
-  case failed(Swift.String)
-  case httpResponceError(Swift.String)
-  case serverIsNotResponce
-}
-extension VigramSDK.NtripTaskError : Foundation.LocalizedError {
-  #if compiler(>=5.3) && $NonescapableTypes
-  public var errorDescription: Swift.String? {
-    get
-  }
-  #endif
 }
 public enum GPSServiceQuality {
   case corrected
@@ -283,16 +513,95 @@ public enum StateResetViDoc {
   case failure(Swift.String)
   case isReseting(Swift.Bool)
 }
-extension Foundation.URLSession {
-  public enum Error : Swift.Error, Foundation.LocalizedError {
-    case other(response: Foundation.URLResponse, data: Foundation.Data)
-    case http(response: Foundation.HTTPURLResponse, data: Foundation.Data)
-    #if compiler(>=5.3) && $NonescapableTypes
-    public var errorDescription: Swift.String? {
+public enum SinglePointRecordingError : Swift.Error, Swift.Hashable {
+  case nonValidData
+  case noMeasurementsCollected
+  case noValidMeasurements
+  case insufficientValidMeasurements
+  case requestIsNotSupported(Swift.String)
+  case incorrectCoordinateCorrectionMethod(Swift.String)
+  case measurementAlreadyRunning
+  case noRunningMeasurementMethod
+  case horizontalAccuracyIsTooHigh
+  case verticalAccuracyIsTooHigh
+  case altitudeDifferenceIsTooHigh
+  case laserMeasurementsIsBadQuality
+  case measurementCancelled
+  @available(*, deprecated, message: "This error was used in older versions of SDK. Will not be supported in the future")
+  case badMeasurement([VigramSDK.EnvironmentData])
+  @available(*, deprecated, message: "This error was used in older versions of SDK. Will not be supported in the future")
+  case measurementFailure
+  public static func == (lhs: VigramSDK.SinglePointRecordingError, rhs: VigramSDK.SinglePointRecordingError) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+extension VigramSDK.SinglePointRecordingError : Foundation.LocalizedError {
+  public var errorDescription: Swift.String? {
+    get
+  }
+}
+public protocol SinglePointRecordingService {
+  var measurementTime: VigramSDK.StatePublisher<Foundation.TimeInterval> { get }
+  func record(duration: Foundation.TimeInterval, updateInterval: Foundation.TimeInterval, with correction: VigramSDK.CoordinateCorrection.Method) -> VigramSDK.SingleEventPublisher<VigramSDK.SinglePoint>
+  func startMeasurement(duration: Foundation.TimeInterval, updateInterval: Foundation.TimeInterval, with correction: VigramSDK.CoordinateCorrection.Method) -> VigramSDK.SingleEventPublisher<VigramSDK.SinglePoint>
+  func stopMeasurement()
+  func cancelMeasurement()
+}
+public struct CoordinateCorrection {
+  public struct Method {
+    public static func laser(configuration: VigramSDK.LaserConfiguration, antennaOffset: Swift.SIMD3<Swift.Double>, useDeviceMotion: Swift.Bool) -> VigramSDK.CoordinateCorrection.Method
+    public static func dynamic(_ antennaOffset: VigramSDK.StatePublisher<Swift.SIMD3<Swift.Double>>, useDeviceMotion: Swift.Bool) -> VigramSDK.CoordinateCorrection.Method
+    public static func device(antennaOffset: Swift.SIMD3<Swift.Double>) -> VigramSDK.CoordinateCorrection.Method
+    public static func constant(distanceFromAntennaToGround distance: Swift.Double) -> VigramSDK.CoordinateCorrection.Method
+    public static var none: VigramSDK.CoordinateCorrection.Method {
       get
     }
-    #endif
+    public var usesLaser: Swift.Bool {
+      get
+    }
+    public var offset: VigramSDK.StatePublisher<Swift.SIMD3<Swift.Double>> {
+      get
+    }
+    public var usesDeviceMotion: Swift.Bool {
+      get
+    }
   }
+  public var method: VigramSDK.CoordinateCorrection.Method
+  public var value: Swift.SIMD3<Swift.Double>
+  public var quality: VigramSDK.DeviceMessage.Measurement.MeasurementQuality
+}
+public enum Configuration {
+  public static let sdkVersion: Swift.String
+  public static var defaultRate: VigramSDK.RateValue
+  public static var updateInFile: Swift.Bool
+  public static var softwareSendInterval: Swift.UInt32
+  public static var debug: Swift.Bool
+  public static var serviceIdentifiers: [CoreBluetooth.CBUUID]?
+  public static var maximumBLEPacketSize: Swift.Int
+  public static var deviceBLEPacketSize: Swift.Int
+  public static var bleWriteTimeout: Swift.Double
+  public static var bleSendInterval: Swift.Double
+  public static var disconnectSignalTimeout: Swift.Double
+  public static var ntripSendInterval: Swift.Double
+  public static var ntripTimeout: Swift.Double
+  public static var ntripMountpointsTimeout: Swift.Double
+  public static var ntripAutoReconnectMaxAttempts: Swift.Int
+  public static var ntripAutoReconnectDelay: Swift.Double
+  public static var ntripCorrectionAgeReconnectThreshold: Swift.Double
+  public static var peripheralStartTimeout: Swift.Double
+  public static var maximumSinglePointAltitudeDifference: Swift.Double
+  public static var maximumSinglePointHorizontalAccuracy: Swift.Double
+  public static var maximumSinglePointVerticalAccuracy: Swift.Double
+  public static var middleAntenna: Swift.Double
+  public static var deviceHeight: Swift.Double
+  public static var laserFirstMeasurementTimeout: Swift.Double
+  public static var mockGGA: Swift.String?
+}
+extension VigramSDK.GPSCoordinate {
+  public func translate(offset: Swift.SIMD3<Swift.Double>, orientation: Swift.SIMD3<Swift.Double>) -> VigramSDK.GPSCoordinate
+  public func translate(offset: Swift.SIMD3<Swift.Double>, orientation: Swift.SIMD3<Swift.Double>, laserDistance: Swift.Double, typeOfLaser: VigramSDK.LaserConfiguration.Position) -> VigramSDK.GPSCoordinate
 }
 public enum SatelliteMessage {
   case changingRate(VigramSDK.SatelliteMessage.ChangingRate)
@@ -351,9 +660,7 @@ public enum NavigationSystemType : Swift.String {
   case galileo
   case qzss
   case sbas
-  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.String)
-  #endif
   public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
     get
@@ -369,9 +676,7 @@ public enum ElevationValue : Swift.Int {
   case ang30
   case ang35
   case ang40
-  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.Int)
-  #endif
   public typealias RawValue = Swift.Int
   public var rawValue: Swift.Int {
     get
@@ -388,9 +693,8 @@ public enum RateValue : Swift.Int {
   case hertz8
   case hertz9
   case hertz10
-  #if compiler(>=5.3) && $NonescapableTypes
+  case hertz15
   public init?(rawValue: Swift.Int)
-  #endif
   public typealias RawValue = Swift.Int
   public var rawValue: Swift.Int {
     get
@@ -402,11 +706,104 @@ public struct PeripheralConfiguration {
 public enum DynamicStateType : Swift.String {
   case pedestrian
   case stationary
-  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.String)
-  #endif
   public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
+    get
+  }
+}
+public struct Time : Swift.CustomStringConvertible {
+  public var hour: Swift.Int
+  public var minute: Swift.Int
+  public var second: Swift.Double
+  public var description: Swift.String {
+    get
+  }
+}
+public struct NtripMountPoint {
+  public enum Authentication : Swift.String {
+    case none
+    case basic
+    case digest
+    public init?(rawValue: Swift.String)
+    public typealias RawValue = Swift.String
+    public var rawValue: Swift.String {
+      get
+    }
+  }
+  public enum Carrier : Swift.Int {
+    case noPhaseIncluded
+    case l1PhaseIncluded
+    case l2PhaseIncluded
+    public init?(rawValue: Swift.Int)
+    public typealias RawValue = Swift.Int
+    public var rawValue: Swift.Int {
+      get
+    }
+  }
+  public struct DataFormat : Swift.RawRepresentable, Swift.Hashable, Swift.ExpressibleByStringLiteral {
+    public let rawValue: Swift.String
+    public var isRTCM: Swift.Bool {
+      get
+    }
+    public init(stringLiteral value: Swift.String)
+    public init(rawValue: Swift.String)
+    public typealias ExtendedGraphemeClusterLiteralType = Swift.String
+    public typealias RawValue = Swift.String
+    public typealias StringLiteralType = Swift.String
+    public typealias UnicodeScalarLiteralType = Swift.String
+  }
+  public enum NavigationSystem : Swift.String {
+    case bds
+    case galileo
+    case glonass
+    case gps
+    case irs
+    case sbas
+    public init?(rawValue: Swift.String)
+    public typealias RawValue = Swift.String
+    public var rawValue: Swift.String {
+      get
+    }
+  }
+  public var raw: Swift.String
+  public var name: Swift.String
+  public var sourceIdentifier: Swift.String
+  public var dataFormat: VigramSDK.NtripMountPoint.DataFormat
+  public var dataFormatDetails: Swift.String
+  public var carrier: VigramSDK.NtripMountPoint.Carrier?
+  public var navigationSystems: [VigramSDK.NtripMountPoint.NavigationSystem]
+  public var networkName: Swift.String
+  public var countryCode: Swift.String
+  public var latitude: Swift.Double?
+  public var longitude: Swift.Double?
+  public var requiresNMEA: Swift.Bool
+  public var isSingleBaseSolution: Swift.Bool
+  public var generator: Swift.String
+  public var compression: Swift.String
+  public var authentication: [VigramSDK.NtripMountPoint.Authentication]
+  public var hasFee: Swift.Bool
+  public var dataRate: Swift.Double?
+  public var miscellaneous: Swift.String
+}
+public enum RequestError : Swift.Error {
+  case dataEncodingFailed
+  case couldNotCreateURL
+  public static func == (a: VigramSDK.RequestError, b: VigramSDK.RequestError) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+public protocol EnvironmentDataService {
+  func record(updateInterval: Foundation.TimeInterval, with correction: VigramSDK.CoordinateCorrection.Method) -> VigramSDK.EventsPublisher<VigramSDK.EnvironmentData>
+  func observe(updateInterval: Foundation.TimeInterval, with correction: VigramSDK.CoordinateCorrection.Method) -> VigramSDK.EventsPublisher<VigramSDK.EnvironmentData>
+}
+public struct DMMCoordinate {
+  public var latitude: Swift.Double {
+    get
+  }
+  public var longitude: Swift.Double {
     get
   }
 }
@@ -441,43 +838,12 @@ extension VigramSDK.CoordinateCorrection : VigramSDK.AverageComputable {
 extension VigramSDK.EnvironmentData : VigramSDK.AverageComputable {
   public static func average(of values: [VigramSDK.EnvironmentData]) -> VigramSDK.EnvironmentData
 }
-public enum Vigram {
-}
-extension VigramSDK.Vigram {
-  public static func initial(token: Swift.String) -> any VigramSDK.Authentication
-  #if compiler(>=5.3) && $NonescapableTypes
-  public static func tokenIsValid() -> Swift.Result<Swift.Bool, VigramSDK.AuthenticationError>
-  #endif
-  public static func softwareService() -> any VigramSDK.SoftwareService
-  public static func bluetoothService() -> any VigramSDK.BluetoothService
-  #if compiler(>=5.3) && $NonescapableTypes
-  public static func peripheral(_ peripheral: CoreBluetooth.CBPeripheral, log: Foundation.URL?, configuration: VigramSDK.PeripheralConfiguration? = nil) throws -> any VigramSDK.Peripheral
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
-  public static func peripheral(_ peripheral: CoreBluetooth.CBPeripheral, logger: (any VigramSDK.PeripheralLogger)? = nil, configuration: VigramSDK.PeripheralConfiguration? = nil) -> any VigramSDK.Peripheral
-  #endif
-  public static func peripheralLogger(for url: Foundation.URL) throws -> any VigramSDK.PeripheralLogger
-  public static func ntripService(session: Foundation.URLSession = .init(configuration: .default)) -> any VigramSDK.NtripService
-  #if compiler(>=5.3) && $NonescapableTypes
-  public static func gpsService(peripheral: any VigramSDK.Peripheral, bluetoothService: any VigramSDK.BluetoothService, correctionTask: (any VigramSDK.NtripTask)?) -> any VigramSDK.GPSService
-  #endif
-  public static func laserService(peripheral: any VigramSDK.Peripheral) -> any VigramSDK.LaserService
-}
-extension VigramSDK.Vigram {
-  public static func deviceMotionService() -> any VigramSDK.DeviceMotionService
-  #if compiler(>=5.3) && $NonescapableTypes
-  public static func environmentDataService(deviceMotionService: any VigramSDK.DeviceMotionService = deviceMotionService(), gpsService: any VigramSDK.GPSService, laserService: (any VigramSDK.LaserService)? = nil) -> any VigramSDK.EnvironmentDataService
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
-  public static func environmentDataService(deviceMotionService: any VigramSDK.DeviceMotionService = deviceMotionService(), gpsService: any VigramSDK.GPSService, laserService: (any VigramSDK.LaserService)? = nil, peripheral: any VigramSDK.Peripheral, dynamicStateType: VigramSDK.DynamicStateType) -> any VigramSDK.EnvironmentDataService
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
-  public static func singlePointRecordingService(gpsService: any VigramSDK.GPSService, laserService: (any VigramSDK.LaserService)? = nil) -> any VigramSDK.SinglePointRecordingService
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
-  public static func singlePointRecordingService(gpsService: any VigramSDK.GPSService, laserService: (any VigramSDK.LaserService)? = nil, peripheral: any VigramSDK.Peripheral, dynamicStateType: VigramSDK.DynamicStateType) -> any VigramSDK.SinglePointRecordingService
-  #endif
-  public static func singlePointRecordingService(environmentDataService: any VigramSDK.EnvironmentDataService) -> any VigramSDK.SinglePointRecordingService
+public enum LaserAntennaOffsetError : Swift.Error, Swift.CustomStringConvertible {
+  case unsupportedDevice(VigramSDK.LaserConfiguration.Position, Swift.String)
+  case unknownDevice
+  public var description: Swift.String {
+    get
+  }
 }
 public enum CameraAntennaOffsetError : Swift.Error, Swift.CustomStringConvertible {
   case unsupportedDevice(UIKit.UIDevice.TypeOfCase, UIKit.UIDevice.CameraPosition, Swift.String)
@@ -486,265 +852,38 @@ public enum CameraAntennaOffsetError : Swift.Error, Swift.CustomStringConvertibl
     get
   }
 }
-public enum StateUpdateSoftware {
-  case startUpdate(VigramSDK.DeviceMessage.Version.Software)
-  case updatingSoftware
-  case errorUpdate
-  case endUpdate
-  case none
+public struct SystemState : Swift.Codable {
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
-public enum AuthenticationError : Swift.Error {
-  case bundleNotExist(Swift.String)
-  case tokenNotExist(Swift.String)
-  case wrongTokenAndBundle(Swift.String)
-  case wrongCombination(Swift.String)
-  case failure(Swift.String)
+public struct MessageElement : Swift.Codable {
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
 }
-extension VigramSDK.AuthenticationError : Foundation.LocalizedError {
-  #if compiler(>=5.3) && $NonescapableTypes
+public protocol NtripTask {
+  var host: Swift.String? { get }
+  var port: Swift.Int? { get }
+  var mountPoint: Swift.String? { get }
+  var data: VigramSDK.StatePublisher<Swift.Result<Foundation.Data, any Swift.Error>> { get }
+  var ntripState: VigramSDK.StatePublisher<VigramSDK.StateNtripConnection> { get }
+  func resume() -> VigramSDK.SingleEventPublisher<Swift.Void>
+  func disconnect()
+  @available(*, deprecated, message: "Use function disconnect instead this. This function is not needed.")
+  func cancel()
+  func setGGA(_ message: VigramSDK.GGAMessage)
+}
+public enum NtripTaskError : Swift.Error {
+  case couldNotCreateRequest
+  case noData
+  case incorrectNCI
+  case failed(Swift.String)
+  case httpResponceError(Swift.String)
+  case serverIsNotResponce
+}
+extension VigramSDK.NtripTaskError : Foundation.LocalizedError {
   public var errorDescription: Swift.String? {
     get
   }
-  #endif
-}
-public protocol Authentication {
-  #if compiler(>=5.3) && $NonescapableTypes
-  func check() -> VigramSDK.SingleEventPublisher<Swift.Result<Swift.Bool, VigramSDK.AuthenticationError>>
-  #endif
-}
-extension VigramSDK.GPSCoordinate {
-  public func translate(offset: Swift.SIMD3<Swift.Double>, orientation: Swift.SIMD3<Swift.Double>) -> VigramSDK.GPSCoordinate
-  public func translate(offset: Swift.SIMD3<Swift.Double>, orientation: Swift.SIMD3<Swift.Double>, laserDistance: Swift.Double, typeOfLaser: VigramSDK.LaserConfiguration.Position) -> VigramSDK.GPSCoordinate
-}
-public enum SinglePointRecordingError : Swift.Error, Swift.Hashable {
-  case nonValidData
-  case requestIsNotSupported(Swift.String)
-  case incorrectCoordinateCorrectionMethod(Swift.String)
-  case noRunningMeasurementMethod
-  case horizontalAccuracyIsTooHigh
-  case verticalAccuracyIsTooHigh
-  case altitudeDifferenceIsTooHigh
-  case laserMeasurementsIsBadQuality
-  case measurementCancelled
-  @available(*, deprecated, message: "This error was used in older versions of SDK. Will not be supported in the future")
-  case badMeasurement([VigramSDK.EnvironmentData])
-  @available(*, deprecated, message: "This error was used in older versions of SDK. Will not be supported in the future")
-  case measurementFailure
-  public static func == (lhs: VigramSDK.SinglePointRecordingError, rhs: VigramSDK.SinglePointRecordingError) -> Swift.Bool
-  public func hash(into hasher: inout Swift.Hasher)
-  public var hashValue: Swift.Int {
-    get
-  }
-}
-extension VigramSDK.SinglePointRecordingError : Foundation.LocalizedError {
-  #if compiler(>=5.3) && $NonescapableTypes
-  public var errorDescription: Swift.String? {
-    get
-  }
-  #endif
-}
-public protocol SinglePointRecordingService {
-  var measurementTime: VigramSDK.StatePublisher<Foundation.TimeInterval> { get }
-  func record(duration: Foundation.TimeInterval, updateInterval: Foundation.TimeInterval, with correction: VigramSDK.CoordinateCorrection.Method) -> VigramSDK.SingleEventPublisher<VigramSDK.SinglePoint>
-  func startMeasurement(duration: Foundation.TimeInterval, updateInterval: Foundation.TimeInterval, with correction: VigramSDK.CoordinateCorrection.Method) -> VigramSDK.SingleEventPublisher<VigramSDK.SinglePoint>
-  func stopMeasurement()
-  func cancelMeasurement()
-}
-@available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
-extension VigramSDK.SinglePointRecordingService {
-  public func record(duration: Foundation.TimeInterval, updateInterval: Foundation.TimeInterval, with correction: VigramSDK.CoordinateCorrection.Method) async throws -> VigramSDK.SinglePoint
-  public func startMeasurement(duration: Foundation.TimeInterval, updateInterval: Foundation.TimeInterval, with correction: VigramSDK.CoordinateCorrection.Method) async throws -> VigramSDK.SinglePoint
-}
-public struct CoordinateCorrection {
-  public struct Method {
-    public static func laser(configuration: VigramSDK.LaserConfiguration, antennaOffset: Swift.SIMD3<Swift.Double>, useDeviceMotion: Swift.Bool) -> VigramSDK.CoordinateCorrection.Method
-    public static func dynamic(_ antennaOffset: VigramSDK.StatePublisher<Swift.SIMD3<Swift.Double>>, useDeviceMotion: Swift.Bool) -> VigramSDK.CoordinateCorrection.Method
-    public static func device(antennaOffset: Swift.SIMD3<Swift.Double>) -> VigramSDK.CoordinateCorrection.Method
-    public static func constant(distanceFromAntennaToGround distance: Swift.Double) -> VigramSDK.CoordinateCorrection.Method
-    public static var none: VigramSDK.CoordinateCorrection.Method {
-      get
-    }
-    public var usesLaser: Swift.Bool {
-      get
-    }
-    public var offset: VigramSDK.StatePublisher<Swift.SIMD3<Swift.Double>> {
-      get
-    }
-    public var usesDeviceMotion: Swift.Bool {
-      get
-    }
-  }
-  public var method: VigramSDK.CoordinateCorrection.Method
-  public var value: Swift.SIMD3<Swift.Double>
-  public var quality: VigramSDK.DeviceMessage.Measurement.MeasurementQuality
-}
-public enum NtripServiceError : Swift.Error {
-  case mountPointDecodingFailed
-  case couldNotCreateURL(VigramSDK.NtripConnectionInformation, mountPoint: Swift.String?)
-  case couldNotCreateTask
-  case couldNotAddAuthentication(Foundation.URLRequest, username: Swift.String, password: Swift.String)
-}
-public protocol NtripService {
-  func mountpoints(for information: VigramSDK.NtripConnectionInformation) -> VigramSDK.SingleEventPublisher<[VigramSDK.NtripMountPoint]>
-  func task(for information: VigramSDK.NtripConnectionInformation, atMountPoint: Swift.String, message: VigramSDK.GGAMessage) throws -> any VigramSDK.NtripTask
-}
-@available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
-extension VigramSDK.NtripService {
-  public func mountpoints(for information: VigramSDK.NtripConnectionInformation) async throws -> [VigramSDK.NtripMountPoint]
-}
-public struct Time : Swift.CustomStringConvertible {
-  public var hour: Swift.Int
-  public var minute: Swift.Int
-  public var second: Swift.Double
-  public var description: Swift.String {
-    get
-  }
-}
-public protocol NMEAMessage {
-  var raw: Swift.String { get }
-  #if compiler(>=5.3) && $NonescapableTypes
-  var time: VigramSDK.Time? { get }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
-  var timeStampUnix: Foundation.NSDate? { get }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
-  var coordinate: VigramSDK.GPSCoordinate? { get }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
-  var satelliteCount: Swift.Int? { get }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
-  var hdop: Swift.Double? { get }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
-  var vdop: Swift.Double? { get }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
-  var pdop: Swift.Double? { get }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
-  var accuracy: (horizontal: Swift.Double, vertical: Swift.Double)? { get }
-  #endif
-}
-public enum GPSQualityIndicator : Swift.Int {
-  case invalidFix
-  case singlePoint
-  case pseudoRangeDifferential
-  case notApplicable
-  case rtkFixedAmbiguitySolution
-  case rtkFloatingAmbiguitySolution
-  case isnDeadReckoning
-  case manualInput
-  #if compiler(>=5.3) && $NonescapableTypes
-  public init?(rawValue: Swift.Int)
-  #endif
-  public typealias RawValue = Swift.Int
-  public var rawValue: Swift.Int {
-    get
-  }
-}
-public struct GGAMessage : VigramSDK.NMEAMessage {
-  public let raw: Swift.String
-  public let time: VigramSDK.Time?
-  public let timeStampUnix: Foundation.NSDate?
-  public let location: VigramSDK.DMMCoordinate?
-  public let quality: VigramSDK.GPSQualityIndicator?
-  public let satelliteCount: Swift.Int?
-  public let hdop: Swift.Double?
-  public let referenceAltitude: Swift.Double?
-  public let geoidSeparation: Swift.Double?
-  public let correctionAge: Foundation.TimeInterval?
-  public let correctionStationID: Swift.Int?
-  #if compiler(>=5.3) && $NonescapableTypes
-  public var coordinate: VigramSDK.GPSCoordinate? {
-    get
-  }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
-  public var accuracy: (horizontal: Swift.Double, vertical: Swift.Double)? {
-    get
-  }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
-  public var vdop: Swift.Double? {
-    get
-  }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
-  public var pdop: Swift.Double? {
-    get
-  }
-  #endif
-}
-public struct GSTMessage : VigramSDK.NMEAMessage {
-  public let raw: Swift.String
-  public let time: VigramSDK.Time?
-  public let timeStampUnix: Foundation.NSDate?
-  public let rms: Swift.Double?
-  public let semiMajor1SigmaError: Swift.Double?
-  public let semiMinor1SigmaError: Swift.Double?
-  public let errorEllipseOrientation: Swift.Double?
-  public let latitudeError: Swift.Double?
-  public let longitudeError: Swift.Double?
-  public let altitudeError: Swift.Double?
-  #if compiler(>=5.3) && $NonescapableTypes
-  public var accuracy: (horizontal: Swift.Double, vertical: Swift.Double)? {
-    get
-  }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
-  public var coordinate: VigramSDK.GPSCoordinate? {
-    get
-  }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
-  public var hdop: Swift.Double? {
-    get
-  }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
-  public var vdop: Swift.Double? {
-    get
-  }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
-  public var pdop: Swift.Double? {
-    get
-  }
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
-  public var satelliteCount: Swift.Int? {
-    get
-  }
-  #endif
-}
-public struct TXTMessage : VigramSDK.NMEAMessage {
-  public var time: VigramSDK.Time?
-  public let timeStampUnix: Foundation.NSDate?
-  public var coordinate: VigramSDK.GPSCoordinate?
-  public var satelliteCount: Swift.Int?
-  public var hdop: Swift.Double?
-  public var vdop: Swift.Double?
-  public var pdop: Swift.Double?
-  public var accuracy: (horizontal: Swift.Double, vertical: Swift.Double)?
-  public var raw: Swift.String
-  public let totalNumberOfMessage: Swift.Int
-  public let messageNumber: Swift.Int
-  public let textIdentifier: Swift.Int
-  public let message: Swift.String?
-}
-public struct CalibrationMessage {
-  public enum CalibrationProcess {
-    case startCalibration
-    case go
-    case position(Swift.Int)
-    case imuData
-    case endCalibration
-    case errorCalibration
-  }
-  public var state: VigramSDK.CalibrationMessage.CalibrationProcess
-  public var rawData: Swift.String
 }
 public enum DeviceVersion {
   case viDoc
@@ -798,9 +937,7 @@ extension VigramSDK.DeviceMessage {
       case paintedBlue
       case paintedRed
       case testSample
-      #if compiler(>=5.3) && $NonescapableTypes
       public init?(rawValue: Swift.String)
-      #endif
       public typealias RawValue = Swift.String
       public var rawValue: Swift.String {
         get
@@ -815,9 +952,7 @@ extension VigramSDK.DeviceMessage {
       case spcPlusPrototype
       case spcPlusSpecialSMAReplaced
       case spcPlusSpecialSMA
-      #if compiler(>=5.3) && $NonescapableTypes
       public init?(rawValue: Swift.String)
-      #endif
       public typealias RawValue = Swift.String
       public var rawValue: Swift.String {
         get
@@ -831,6 +966,7 @@ extension VigramSDK.DeviceMessage {
       public let imu: Swift.String?
       public let isCalibrated: Swift.Bool?
     }
+    public let rawValue: Swift.String?
     public let typeOfDevice: VigramSDK.DeviceVersion
     public var hasFrontLaser: Swift.Bool {
       get
@@ -841,21 +977,15 @@ extension VigramSDK.DeviceMessage {
     public var isSinglePointMeasurementCancellable: Swift.Bool {
       get
     }
-    #if compiler(>=5.3) && $NonescapableTypes
     public var getHousing: VigramSDK.DeviceMessage.Device.Housings? {
       get
     }
-    #endif
-    #if compiler(>=5.3) && $NonescapableTypes
     public var getMount: VigramSDK.DeviceMessage.Device.Mounts? {
       get
     }
-    #endif
-    #if compiler(>=5.3) && $NonescapableTypes
     public var getHardwareRevision: VigramSDK.DeviceMessage.Device.HardwareRevisions? {
       get
     }
-    #endif
     public var hasIMU: Swift.Bool {
       get
     }
@@ -897,6 +1027,7 @@ extension VigramSDK.DeviceMessage {
     public let start: Swift.UInt16
     public let end: Swift.UInt16
     public let distance: Swift.Double
+    public let qualityRaw: Swift.UInt16
     public let quality: VigramSDK.DeviceMessage.Measurement.MeasurementQuality
   }
   public struct Battery {
@@ -931,6 +1062,15 @@ extension VigramSDK.DeviceMessage.Version.Software {
 extension VigramSDK.DeviceMessage.Version.Hardware {
   public func toString() -> Swift.String
 }
+public enum DeviceType {
+  case newDevice
+  case oldDevice
+  public static func == (a: VigramSDK.DeviceType, b: VigramSDK.DeviceType) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
 extension VigramSDK.DeviceMessage {
   public enum Baudrate {
     case standart
@@ -959,339 +1099,83 @@ extension VigramSDK.DeviceMessage.Measurement {
     }
   }
 }
-public struct SinglePoint {
-  public var environmentData: VigramSDK.EnvironmentData
-  public var duration: Foundation.TimeInterval
+public protocol Peripheral {
+  var nmea: VigramSDK.StatePublisher<any VigramSDK.NMEAMessage> { get }
+  var serialNumber: Swift.String? { get }
+  var protocolVersion: VigramSDK.StatePublisher<Swift.Double> { get }
+  var currentDevice: VigramSDK.StatePublisher<VigramSDK.DeviceMessage.Device> { get }
+  var deviceMessages: VigramSDK.StatePublisher<VigramSDK.DeviceMessage> { get }
+  var satelliteMessages: VigramSDK.StatePublisher<VigramSDK.SatelliteMessage> { get }
+  var debug: VigramSDK.StatePublisher<Swift.String> { get }
+  var softwareUpdateState: VigramSDK.StatePublisher<VigramSDK.StateUpdateSoftware>? { get }
+  var softwareUpdateProgress: VigramSDK.StatePublisher<Swift.Double>? { get }
+  var state: VigramSDK.StatePublisher<CoreBluetooth.CBPeripheralState> { get }
+  var peripheral: CoreBluetooth.CBPeripheral { get }
+  var configurationState: VigramSDK.StatePublisher<VigramSDK.StatePeripheralConfiguration> { get }
+  var calibrationMessage: VigramSDK.StatePublisher<VigramSDK.CalibrationMessage> { get }
+  var viDocState: VigramSDK.StatePublisher<VigramSDK.StateViDoc> { get }
+  var viDocResetState: VigramSDK.StatePublisher<VigramSDK.StateResetViDoc> { get }
+  var ppkMeasurementsState: VigramSDK.StatePublisher<Swift.Bool> { get }
+  func start() -> VigramSDK.SingleEventPublisher<Swift.Void>
+  func send(_ data: Foundation.Data, chunkSize: Swift.Int) -> VigramSDK.SingleEventPublisher<Swift.Void>
+  func resetViDoc()
+  func requestVersion() -> VigramSDK.SingleEventPublisher<VigramSDK.DeviceMessage.Version>
+  func requestBattery() -> VigramSDK.SingleEventPublisher<VigramSDK.DeviceMessage.Battery>
+  func requestChange(baudrate: VigramSDK.DeviceMessage.Baudrate) -> VigramSDK.SingleEventPublisher<Swift.Void>
+  func requestIMUAngle() -> VigramSDK.SingleEventPublisher<VigramSDK.DeviceMessage.IMUAngle>
+  func requestIMUDataAcc() -> VigramSDK.SingleEventPublisher<VigramSDK.DeviceMessage.IMUACC>
+  func requestIMURotation() -> VigramSDK.SingleEventPublisher<VigramSDK.DeviceMessage.IMURotation>
+  func requestIMURotationRaw() -> VigramSDK.SingleEventPublisher<VigramSDK.DeviceMessage.IMURotationRaw>
+  func requestIMUMagneticRaw() -> VigramSDK.SingleEventPublisher<VigramSDK.DeviceMessage.IMUMagneticRaw>
+  func requestIMUTemp() -> VigramSDK.SingleEventPublisher<VigramSDK.DeviceMessage.IMUTemp>
+  func requestIMUCalibration(autoMode: Swift.Bool) -> VigramSDK.SingleEventPublisher<Swift.Void>
+  func nextStepManualIMUCalibration() -> VigramSDK.SingleEventPublisher<Swift.Void>
+  func exitManualIMUCalibration() -> VigramSDK.SingleEventPublisher<Swift.Void>
+  func requestIMUCalibrationStatus() -> VigramSDK.SingleEventPublisher<VigramSDK.DeviceMessage.IMUCalibrationStatus>
+  func getCurrentStatusGNSS(satellite: VigramSDK.NavigationSystemType) -> VigramSDK.SingleEventPublisher<VigramSDK.SatelliteMessage.StatusSattelite>
+  func changeStatusGNSS(satellite: VigramSDK.NavigationSystemType, activate: Swift.Bool) -> VigramSDK.SingleEventPublisher<VigramSDK.SatelliteMessage.Acknowledge>
+  func activateAllConstellationGNSS() -> VigramSDK.SingleEventPublisher<VigramSDK.SatelliteMessage.Acknowledge>
+  func changeStatusNAVDOP(activate: Swift.Bool) -> VigramSDK.SingleEventPublisher<VigramSDK.SatelliteMessage.Acknowledge>
+  func changeStatusNAVPVT(activate: Swift.Bool) -> VigramSDK.SingleEventPublisher<VigramSDK.SatelliteMessage.Acknowledge>
+  func getCurrentMinimumElevation() -> VigramSDK.SingleEventPublisher<VigramSDK.SatelliteMessage.Elevation>
+  func setMinimumElevation(angle: VigramSDK.ElevationValue) -> VigramSDK.SingleEventPublisher<VigramSDK.SatelliteMessage.Acknowledge>
+  func setChangingRateOfMessages(_ rate: VigramSDK.RateValue) -> VigramSDK.SingleEventPublisher<VigramSDK.SatelliteMessage.Acknowledge>
+  func getChangingRateOfMessages() -> VigramSDK.SingleEventPublisher<VigramSDK.SatelliteMessage.ChangingRate>
+  func changeStatusAllNavMessages(activate: Swift.Bool) -> VigramSDK.SingleEventPublisher<VigramSDK.SatelliteMessage.Acknowledge>
+  func changeStatusRXM(activate: Swift.Bool)
+  func startRecordPPKMeasurements(url: Foundation.URL)
+  func stopRecordPPKMeasurements()
+  func setDynamicState(type: VigramSDK.DynamicStateType) -> VigramSDK.SingleEventPublisher<VigramSDK.SatelliteMessage.Acknowledge>
+  func getCurrentDynamicState() -> VigramSDK.SingleEventPublisher<VigramSDK.SatelliteMessage.DynamicState>
+  func changeStatusGSTandPVTndDOPmessages(activate: Swift.Bool) -> VigramSDK.SingleEventPublisher<VigramSDK.SatelliteMessage.Acknowledge>
+  func getNewIdentity(isReset: Swift.Bool) -> VigramSDK.SingleEventPublisher<Swift.Result<Swift.Bool, any Swift.Error>>
 }
-public protocol BluetoothService : AnyObject {
-  func startScan()
-  func stopScan()
-  func state() -> VigramSDK.StatePublisher<CoreBluetooth.CBManagerState>
-  func observeAvailableDevices() -> VigramSDK.StatePublisher<[CoreBluetooth.CBPeripheral]>
-  func observeConnectedDevices() -> VigramSDK.StatePublisher<[CoreBluetooth.CBPeripheral]>
-  func connect(to identifier: Foundation.UUID) -> VigramSDK.SingleEventPublisher<CoreBluetooth.CBPeripheral>
-  func disconnect()
-}
-public enum BluetoothServiceError : Swift.Error {
-  case notAvailable(Foundation.UUID)
-  case notConnected(Foundation.UUID)
-}
-@available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
-extension VigramSDK.BluetoothService {
-  public func connect(to identifier: Foundation.UUID) async throws -> CoreBluetooth.CBPeripheral
-}
-public struct NtripMountPoint {
-  public enum Authentication : Swift.String {
-    case none
-    case basic
-    case digest
-    #if compiler(>=5.3) && $NonescapableTypes
-    public init?(rawValue: Swift.String)
-    #endif
-    public typealias RawValue = Swift.String
-    public var rawValue: Swift.String {
-      get
-    }
-  }
-  public enum Carrier : Swift.Int {
-    case noPhaseIncluded
-    case l1PhaseIncluded
-    case l2PhaseIncluded
-    #if compiler(>=5.3) && $NonescapableTypes
-    public init?(rawValue: Swift.Int)
-    #endif
-    public typealias RawValue = Swift.Int
-    public var rawValue: Swift.Int {
-      get
-    }
-  }
-  public struct DataFormat : Swift.RawRepresentable, Swift.Hashable, Swift.ExpressibleByStringLiteral {
-    public let rawValue: Swift.String
-    public var isRTCM: Swift.Bool {
-      get
-    }
-    public init(stringLiteral value: Swift.String)
-    public init(rawValue: Swift.String)
-    public typealias ExtendedGraphemeClusterLiteralType = Swift.String
-    public typealias RawValue = Swift.String
-    public typealias StringLiteralType = Swift.String
-    public typealias UnicodeScalarLiteralType = Swift.String
-  }
-  public enum NavigationSystem : Swift.String {
-    case bds
-    case galileo
-    case glonass
-    case gps
-    case irs
-    case sbas
-    #if compiler(>=5.3) && $NonescapableTypes
-    public init?(rawValue: Swift.String)
-    #endif
-    public typealias RawValue = Swift.String
-    public var rawValue: Swift.String {
-      get
-    }
-  }
-  public var raw: Swift.String
-  public var name: Swift.String
-  public var sourceIdentifier: Swift.String
-  public var dataFormat: VigramSDK.NtripMountPoint.DataFormat
-  public var dataFormatDetails: Swift.String
-  public var carrier: VigramSDK.NtripMountPoint.Carrier?
-  public var navigationSystems: [VigramSDK.NtripMountPoint.NavigationSystem]
-  public var networkName: Swift.String
-  public var countryCode: Swift.String
-  public var latitude: Swift.Double?
-  public var longitude: Swift.Double?
-  public var requiresNMEA: Swift.Bool
-  public var isSingleBaseSolution: Swift.Bool
-  public var generator: Swift.String
-  public var compression: Swift.String
-  public var authentication: [VigramSDK.NtripMountPoint.Authentication]
-  public var hasFee: Swift.Bool
-  public var dataRate: Swift.Double?
-  public var miscellaneous: Swift.String
-}
-public protocol SoftwareProcess {
-  var isWrite: Swift.Bool { get }
-  var errorWrite: Swift.Bool { get set }
-  var isNeedUpdateSoftware: VigramSDK.StatePublisher<Swift.Bool> { get }
-  #if compiler(>=5.3) && $NonescapableTypes
-  var noticeSoftware: VigramSDK.StatePublisher<(current: VigramSDK.DeviceMessage.Version.Software?, actual: VigramSDK.DeviceMessage.Version.Software?)> { get }
-  #endif
-  var stateSoftwareUpdate: VigramSDK.StatePublisher<VigramSDK.StateUpdateSoftware> { get }
-  var progressSoftwareUpdate: VigramSDK.StatePublisher<Swift.Double> { get }
-  func setUpdateSoftwareAtStartup(_: Swift.Bool, software: VigramSDK.DeviceMessage.Version.Software)
-  func write()
-}
-public enum StateNtripConnection {
-  case notConnected
-  case setup
-  case preparing
-  case ready
-  case cancelled
+public enum PeripheralError : Swift.Error {
+  case characteristicNotFound
+  case alreadyDeallocated
+  case laserNotAvailableInPPK
+  case writeTimeOut
+  case laserMeasurementTimeout(Foundation.TimeInterval)
+  case configurationFailed
+  case requestIsNotSupported(Swift.String)
+  case accessDenied(Swift.String)
+  case deviceNumberIsIncompatible
+  case deviceSoftwareIsIncompatible
+  case deviceIsBusy(Swift.String)
+  case sdkIsOutdated
+  case verificationFailure(Swift.String)
   case unknownError(Swift.String)
-  case waiting(any Swift.Error)
+}
+extension VigramSDK.PeripheralError : Foundation.LocalizedError {
+  public var errorDescription: Swift.String? {
+    get
+  }
+}
+public enum StatePeripheralConfiguration {
+  case done
+  case inProgress(Swift.String)
   case failed(any Swift.Error)
-  case socketError(Swift.Int)
-}
-extension VigramSDK.DeviceMotionService {
-  public func calibrate(updateInterval: Foundation.TimeInterval = 0.01, status: @escaping (Swift.Float) -> Swift.Void) -> VigramSDK.SingleEventPublisher<Swift.Void>
-}
-@available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
-extension VigramSDK.DeviceMotionService {
-  public func calibrate(updateInterval: Foundation.TimeInterval = 0.01, status: @escaping (Swift.Float) -> Swift.Void) async throws
-}
-public struct DMMCoordinate {
-  public var latitude: Swift.Double {
-    get
-  }
-  public var longitude: Swift.Double {
-    get
-  }
-}
-extension UIKit.UIDevice {
-  public enum TypeOfCase : Swift.String {
-    case spc
-    case spcPlus
-    case spcPlusLight
-    #if compiler(>=5.3) && $NonescapableTypes
-    public init?(rawValue: Swift.String)
-    #endif
-    @available(iOS 2.0, *)
-    public typealias RawValue = Swift.String
-    public var rawValue: Swift.String {
-      get
-    }
-  }
-  public enum CameraPosition {
-    case top
-    case middle
-    case bottom
-    public static func == (a: UIKit.UIDevice.CameraPosition, b: UIKit.UIDevice.CameraPosition) -> Swift.Bool
-    public func hash(into hasher: inout Swift.Hasher)
-    public var hashValue: Swift.Int {
-      get
-    }
-  }
-  #if compiler(>=5.3) && $NonescapableTypes
-  @available(*, deprecated, message: "This method will be removed in future versions of the SDK. Use method cameraAntennaOffset(_: at:)")
-  @_Concurrency.MainActor @preconcurrency public func cameraAntennaOffset(at position: UIKit.UIDevice.CameraPosition) -> Swift.SIMD3<Swift.Double>?
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
-  @_Concurrency.MainActor @preconcurrency public func cameraAntennaOffset(_ typeOfCase: UIKit.UIDevice.TypeOfCase, at position: UIKit.UIDevice.CameraPosition) -> Swift.Result<Swift.SIMD3<Swift.Double>, VigramSDK.CameraAntennaOffsetError>
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
-  @available(*, deprecated, message: "Use cameraAntennaOffsetForCurrentDeviceResult(at:) -> Result instead")
-  @_Concurrency.MainActor @preconcurrency public func cameraAntennaOffsetForCurrentDevice(at position: UIKit.UIDevice.CameraPosition) -> Swift.SIMD3<Swift.Double>?
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
-  @_Concurrency.MainActor @preconcurrency public func cameraAntennaOffsetForCurrentDeviceResult(at position: UIKit.UIDevice.CameraPosition) -> Swift.Result<Swift.SIMD3<Swift.Double>, VigramSDK.CameraAntennaOffsetError>
-  #endif
-}
-extension UIKit.UIDevice {
-  #if compiler(>=5.3) && $NonescapableTypes
-  @available(*, deprecated, message: "Use laserAntennaOffsetResult(at:) -> Result instead")
-  @_Concurrency.MainActor @preconcurrency public func laserAntennaOffset(at position: VigramSDK.LaserConfiguration.Position = .bottom) -> Swift.SIMD3<Swift.Double>?
-  #endif
-  #if compiler(>=5.3) && $NonescapableTypes
-  @_Concurrency.MainActor @preconcurrency public func laserAntennaOffsetResult(at position: VigramSDK.LaserConfiguration.Position = .bottom) -> Swift.Result<Swift.SIMD3<Swift.Double>, VigramSDK.LaserAntennaOffsetError>
-  #endif
-}
-extension UIKit.UIDevice {
-  #if compiler(>=5.3) && $NonescapableTypes
-  @available(*, deprecated, message: "These offsets have not yet been confirmed.")
-  @_Concurrency.MainActor @preconcurrency public func mountAntennaOffset() -> Swift.SIMD3<Swift.Double>?
-  #endif
-}
-public struct SystemState : Swift.Codable {
-  public func encode(to encoder: any Swift.Encoder) throws
-  public init(from decoder: any Swift.Decoder) throws
-}
-public struct MessageElement : Swift.Codable {
-  public func encode(to encoder: any Swift.Encoder) throws
-  public init(from decoder: any Swift.Decoder) throws
-}
-public struct EnvironmentData {
-  public var coordinate: VigramSDK.GPSCoordinate
-  public var correction: VigramSDK.CoordinateCorrection
-  public var date: Foundation.Date
-  public var deviceMotion: VigramSDK.DeviceMotion
-  public var horizontalAccuracy: Swift.Double
-  public var verticalAccuracy: Swift.Double
-  public var correctedCoordinate: VigramSDK.GPSCoordinate {
-    get
-  }
-  public init(date: Foundation.Date, coordinate: VigramSDK.GPSCoordinate, verticalAccuracy: Swift.Double, horizontalAccuracy: Swift.Double, deviceMotion: VigramSDK.DeviceMotion, correction: VigramSDK.CoordinateCorrection)
-}
-public enum Configuration {
-  public static let sdkVersion: Swift.String
-  public static var defaultRate: VigramSDK.RateValue
-  public static var forceUpdate: Swift.Bool
-  public static var debug: Swift.Bool
-  public static var serviceIdentifiers: [CoreBluetooth.CBUUID]?
-  public static var maximumBLEPacketSize: Swift.Int
-  public static var deviceBLEPacketSize: Swift.Int
-  public static var bleWriteTimeout: Swift.Double
-  public static var bleSendInterval: Swift.Double
-  public static var disconnectSignalTimeout: Swift.Double
-  public static var ntripSendInterval: Swift.Double
-  public static var ntripTimeout: Swift.Double
-  public static var peripheralStartTimeout: Swift.Double
-  public static var maximumSinglePointAltitudeDifference: Swift.Double
-  public static var maximumSinglePointHorizontalAccuracy: Swift.Double
-  public static var maximumSinglePointVerticalAccuracy: Swift.Double
-  public static var middleAntenna: Swift.Double
-  public static var deviceHeight: Swift.Double
-}
-public enum LaserAntennaOffsetError : Swift.Error, Swift.CustomStringConvertible {
-  case unsupportedDevice(VigramSDK.LaserConfiguration.Position, Swift.String)
-  case unknownDevice
-  public var description: Swift.String {
-    get
-  }
-}
-public struct LaserConfiguration {
-  public enum ShotMode : Swift.CaseIterable {
-    case slow
-    case fast
-    case auto
-    public static func == (a: VigramSDK.LaserConfiguration.ShotMode, b: VigramSDK.LaserConfiguration.ShotMode) -> Swift.Bool
-    public typealias AllCases = [VigramSDK.LaserConfiguration.ShotMode]
-    nonisolated public static var allCases: [VigramSDK.LaserConfiguration.ShotMode] {
-      get
-    }
-    public func hash(into hasher: inout Swift.Hasher)
-    public var hashValue: Swift.Int {
-      get
-    }
-  }
-  public enum Position : Swift.CaseIterable {
-    case bottom
-    case back
-    public static func == (a: VigramSDK.LaserConfiguration.Position, b: VigramSDK.LaserConfiguration.Position) -> Swift.Bool
-    public typealias AllCases = [VigramSDK.LaserConfiguration.Position]
-    nonisolated public static var allCases: [VigramSDK.LaserConfiguration.Position] {
-      get
-    }
-    public func hash(into hasher: inout Swift.Hasher)
-    public var hashValue: Swift.Int {
-      get
-    }
-  }
-  public let shotMode: VigramSDK.LaserConfiguration.ShotMode
-  public let duration: Swift.Double
-  public let position: VigramSDK.LaserConfiguration.Position
-  public init(shotMode: VigramSDK.LaserConfiguration.ShotMode, position: VigramSDK.LaserConfiguration.Position = .bottom, duration: Swift.Double)
-}
-extension Swift.Collection {
-  public func average<Number>(_ keyPath: Swift.KeyPath<Self.Element, Number>) -> Number where Number : VigramSDK.AverageComputable
-  public func average<Number>(_ fun: (Self.Element) -> Number) -> Number where Number : VigramSDK.AverageComputable
-  public func medians<Number>(_ fun: (Self.Element) -> Number) -> Number where Number : VigramSDK.AverageComputable
-  public func medians<Number>(_ keyPath: Swift.KeyPath<Self.Element, Number>) -> Number where Number : VigramSDK.AverageComputable
-  public func median<C>(_ fun: (Self.Element) -> C) -> C where C : Swift.Comparable
-  public func median<C>(_ keyPath: Swift.KeyPath<Self.Element, C>) -> C where C : Swift.Comparable
-}
-extension Swift.Collection where Self.Element : Swift.Comparable {
-  public var median: Self.Element {
-    get
-  }
-}
-extension Swift.Array where Element : VigramSDK.AverageComputable {
-  public func average() -> Element
-  public func median() -> Element
-}
-extension Swift.Collection {
-  public func averageRadian(_ keyPath: Swift.KeyPath<Self.Element, Swift.Double>) -> Swift.Double
-  public func averageRadian(_ fun: (Self.Element) -> Swift.Double) -> Swift.Double
-  public func averageRadian(_ keyPath: Swift.KeyPath<Self.Element, Swift.SIMD3<Swift.Double>>) -> Swift.SIMD3<Swift.Double>
-  public func averageRadian(_ fun: (Self.Element) -> Swift.SIMD3<Swift.Double>) -> Swift.SIMD3<Swift.Double>
-}
-extension Swift.Collection where Self.Element == Swift.Double {
-  public func averageRadian() -> Self.Element
-}
-extension Swift.Collection where Self.Element == Swift.SIMD3<Swift.Double> {
-  public func averageRadian() -> Self.Element
-}
-public enum BLELogType : Swift.String {
-  case willSend
-  case didSend
-  case didReceive
-  #if compiler(>=5.3) && $NonescapableTypes
-  public init?(rawValue: Swift.String)
-  #endif
-  public typealias RawValue = Swift.String
-  public var rawValue: Swift.String {
-    get
-  }
-}
-public protocol PeripheralLogger : AnyObject {
-  func log(ble data: Foundation.Data, for type: VigramSDK.BLELogType)
-  func log(nmea message: any VigramSDK.NMEAMessage)
-  func log(device message: VigramSDK.DeviceMessage)
-  func log(satellite message: VigramSDK.SatelliteMessage)
-  func log(other message: Swift.String)
-}
-public enum RequestError : Swift.Error {
-  case dataEncodingFailed
-  case couldNotCreateURL
-  public static func == (a: VigramSDK.RequestError, b: VigramSDK.RequestError) -> Swift.Bool
-  public func hash(into hasher: inout Swift.Hasher)
-  public var hashValue: Swift.Int {
-    get
-  }
-}
-public struct NtripConnectionInformation : Swift.Hashable {
-  public var hostname: Swift.String
-  public var port: Swift.Int
-  public var username: Swift.String
-  public var password: Swift.String
-  public init(hostname: Swift.String, port: Swift.Int, username: Swift.String, password: Swift.String)
-  public static func == (a: VigramSDK.NtripConnectionInformation, b: VigramSDK.NtripConnectionInformation) -> Swift.Bool
-  public func hash(into hasher: inout Swift.Hasher)
-  public var hashValue: Swift.Int {
-    get
-  }
+  case peripheralError(VigramSDK.PeripheralError)
 }
 public enum AntennaOffset {
   @available(*, deprecated, message: "This type of offset will be removed in future versions of the SDK. Use one of the following options: SPC, SPCPlus, SPCPlusLight")
@@ -1486,7 +1370,134 @@ extension VigramSDK.AntennaOffset {
     public static var iPadPro11: Swift.SIMD3<Swift.Double>
   }
 }
+public enum Vigram {
+}
+extension VigramSDK.Vigram {
+  public static func initial(token: Swift.String) -> any VigramSDK.Authentication
+  public static func tokenIsValid() -> Swift.Result<Swift.Bool, VigramSDK.AuthenticationError>
+  public static func bluetoothService() -> any VigramSDK.BluetoothService
+  public static func peripheral(_ peripheral: CoreBluetooth.CBPeripheral, configuration: VigramSDK.PeripheralConfiguration? = nil) -> any VigramSDK.Peripheral
+  public static func peripheral(_ peripheral: CoreBluetooth.CBPeripheral, configuration: VigramSDK.PeripheralConfiguration? = nil, softwareInFile: Foundation.Data? = nil) -> any VigramSDK.Peripheral
+  public static func ntripService(session: Foundation.URLSession = .init(configuration: .default)) -> any VigramSDK.NtripService
+  public static func gpsService(peripheral: any VigramSDK.Peripheral, bluetoothService: any VigramSDK.BluetoothService, correctionTask: (any VigramSDK.NtripTask)?, automaticallyReconnectNtrip: Swift.Bool = true) -> any VigramSDK.GPSService
+  public static func laserService(peripheral: any VigramSDK.Peripheral) -> any VigramSDK.LaserService
+  @available(*, unavailable, message: "Online firmware update was removed. Use local firmware files with peripheral(_:configuration:softwareInFile:) instead.")
+  public static func softwareService() -> any VigramSDK.SoftwareService
+  @available(*, unavailable, message: "Legacy peripheral TXT logging was removed. Use Vigram.Logger(url:mode:) to configure support logs, then call peripheral(_:configuration:) or peripheral(_:configuration:softwareInFile:).")
+  public static func peripheral(_ peripheral: CoreBluetooth.CBPeripheral, log: Foundation.URL?, configuration: VigramSDK.PeripheralConfiguration? = nil) throws -> any VigramSDK.Peripheral
+  @available(*, unavailable, message: "Legacy peripheral TXT logging was removed. Use Vigram.Logger(url:mode:) to configure support logs, then call peripheral(_:configuration:softwareInFile:).")
+  public static func peripheral(_ peripheral: CoreBluetooth.CBPeripheral, log: Foundation.URL?, configuration: VigramSDK.PeripheralConfiguration? = nil, softwareInFile: Foundation.Data? = nil) throws -> any VigramSDK.Peripheral
+  @available(*, unavailable, message: "Legacy peripheral logger injection was removed. Use Vigram.Logger(url:mode:) to configure support logs globally.")
+  public static func peripheral(_ peripheral: CoreBluetooth.CBPeripheral, logger: (any VigramSDK.PeripheralLogger)? = nil, configuration: VigramSDK.PeripheralConfiguration? = nil) -> any VigramSDK.Peripheral
+  @available(*, unavailable, message: "Legacy peripheral logger injection was removed. Use Vigram.Logger(url:mode:) to configure support logs globally.")
+  public static func peripheral(_ peripheral: CoreBluetooth.CBPeripheral, logger: (any VigramSDK.PeripheralLogger)? = nil, configuration: VigramSDK.PeripheralConfiguration? = nil, softwareInFile: Foundation.Data? = nil) -> any VigramSDK.Peripheral
+  @available(*, unavailable, message: "Legacy peripheral TXT logging was removed. Use Vigram.Logger(url:mode:) to configure structured support logs.")
+  public static func peripheralLogger(for url: Foundation.URL) throws -> any VigramSDK.PeripheralLogger
+}
+extension VigramSDK.Vigram {
+  public static func deviceMotionService() -> any VigramSDK.DeviceMotionService
+  public static func environmentDataService(deviceMotionService: any VigramSDK.DeviceMotionService = deviceMotionService(), gpsService: any VigramSDK.GPSService, laserService: (any VigramSDK.LaserService)? = nil) -> any VigramSDK.EnvironmentDataService
+  public static func environmentDataService(deviceMotionService: any VigramSDK.DeviceMotionService = deviceMotionService(), gpsService: any VigramSDK.GPSService, laserService: (any VigramSDK.LaserService)? = nil, peripheral: any VigramSDK.Peripheral, dynamicStateType: VigramSDK.DynamicStateType) -> any VigramSDK.EnvironmentDataService
+  public static func singlePointRecordingService(gpsService: any VigramSDK.GPSService, laserService: (any VigramSDK.LaserService)? = nil) -> any VigramSDK.SinglePointRecordingService
+  public static func singlePointRecordingService(gpsService: any VigramSDK.GPSService, laserService: (any VigramSDK.LaserService)? = nil, peripheral: any VigramSDK.Peripheral, dynamicStateType: VigramSDK.DynamicStateType) -> any VigramSDK.SinglePointRecordingService
+  public static func singlePointRecordingService(environmentDataService: any VigramSDK.EnvironmentDataService) -> any VigramSDK.SinglePointRecordingService
+}
+public protocol BluetoothService : AnyObject {
+  func startScan()
+  func stopScan()
+  func state() -> VigramSDK.StatePublisher<CoreBluetooth.CBManagerState>
+  func observeAvailableDevices() -> VigramSDK.StatePublisher<[CoreBluetooth.CBPeripheral]>
+  func observeConnectedDevices() -> VigramSDK.StatePublisher<[CoreBluetooth.CBPeripheral]>
+  func connect(to identifier: Foundation.UUID) -> VigramSDK.SingleEventPublisher<CoreBluetooth.CBPeripheral>
+  func disconnect()
+}
+public enum BluetoothServiceError : Swift.Error {
+  case notAvailable(Foundation.UUID)
+  case notConnected(Foundation.UUID)
+}
+public protocol SoftwareProcess {
+  var isWrite: Swift.Bool { get }
+  var errorWrite: Swift.Bool { get set }
+  var stateSoftwareUpdate: VigramSDK.StatePublisher<VigramSDK.StateUpdateSoftware> { get }
+  var progressSoftwareUpdate: VigramSDK.StatePublisher<Swift.Double> { get }
+  func write()
+}
+public enum StateNtripConnection {
+  case notConnected
+  case setup
+  case preparing
+  case ready
+  case cancelled
+  case reconnectScheduled(attempt: Swift.Int, maxAttempts: Swift.Int, delay: Foundation.TimeInterval)
+  case reconnecting(attempt: Swift.Int, maxAttempts: Swift.Int)
+  case reconnectRestored(attempt: Swift.Int)
+  case reconnectFailed(maxAttempts: Swift.Int, lastError: (any Swift.Error)?)
+  case unknownError(Swift.String)
+  case waiting(any Swift.Error)
+  case failed(any Swift.Error)
+  case socketError(Swift.Int)
+}
+extension VigramSDK.GPSService {
+  public func cameraCoordinate(offset: Swift.SIMD3<Swift.Double>, updateInterval: Foundation.TimeInterval) -> VigramSDK.EventsPublisher<VigramSDK.GPSCoordinate>
+}
+public enum AuthenticationError : Swift.Error {
+  case bundleNotExist(Swift.String)
+  case tokenNotExist(Swift.String)
+  case wrongTokenAndBundle(Swift.String)
+  case wrongCombination(Swift.String)
+  case failure(Swift.String)
+}
+extension VigramSDK.AuthenticationError : Foundation.LocalizedError {
+  public var errorDescription: Swift.String? {
+    get
+  }
+}
+public protocol Authentication {
+  func check() -> VigramSDK.SingleEventPublisher<Swift.Result<Swift.Bool, VigramSDK.AuthenticationError>>
+}
+public struct GPSCoordinate : Swift.Equatable {
+  public var latitude: Swift.Double
+  public var longitude: Swift.Double
+  public var referenceAltitude: Swift.Double
+  public var geoidSeparation: Swift.Double
+  public var altitude: Swift.Double {
+    get
+  }
+  public init(latitude: Swift.Double, longitude: Swift.Double, referenceAltitude: Swift.Double, geoidSeparation: Swift.Double)
+  public static func == (a: VigramSDK.GPSCoordinate, b: VigramSDK.GPSCoordinate) -> Swift.Bool
+}
+extension VigramSDK.DeviceMotionService {
+  public func calibrate(updateInterval: Foundation.TimeInterval = 0.01, status: @escaping (Swift.Float) -> Swift.Void) -> VigramSDK.SingleEventPublisher<Swift.Void>
+}
 extension VigramSDK.DeviceMotion.Accuracy : Swift.Hashable {}
+extension VigramSDK.GPSQualityIndicator : Swift.Equatable {}
+extension VigramSDK.GPSQualityIndicator : Swift.Hashable {}
+extension VigramSDK.GPSQualityIndicator : Swift.RawRepresentable {}
+extension VigramSDK.LaserConfiguration.ShotMode : Swift.Equatable {}
+extension VigramSDK.LaserConfiguration.ShotMode : Swift.Hashable {}
+extension VigramSDK.LaserConfiguration.Position : Swift.Equatable {}
+extension VigramSDK.LaserConfiguration.Position : Swift.Hashable {}
+extension UIKit.UIDevice.TypeOfCase : Swift.Equatable {}
+extension UIKit.UIDevice.TypeOfCase : Swift.Hashable {}
+extension UIKit.UIDevice.TypeOfCase : Swift.RawRepresentable {}
+extension UIKit.UIDevice.CameraPosition : Swift.Equatable {}
+extension UIKit.UIDevice.CameraPosition : Swift.Hashable {}
+@available(*, unavailable, message: "Legacy peripheral TXT logging was removed. Use Vigram.Logger(url:mode:) for structured support logs.")
+extension VigramSDK.BLELogType : Swift.Equatable {}
+@available(*, unavailable, message: "Legacy peripheral TXT logging was removed. Use Vigram.Logger(url:mode:) for structured support logs.")
+extension VigramSDK.BLELogType : Swift.Hashable {}
+@available(*, unavailable, message: "Legacy peripheral TXT logging was removed. Use Vigram.Logger(url:mode:) for structured support logs.")
+extension VigramSDK.BLELogType : Swift.RawRepresentable {}
+extension VigramSDK.SDKLogMode : Swift.Hashable {}
+extension VigramSDK.SDKLogMode : Swift.RawRepresentable {}
+extension VigramSDK.SDKLogLevel : Swift.Equatable {}
+extension VigramSDK.SDKLogLevel : Swift.Hashable {}
+extension VigramSDK.SDKLogLevel : Swift.RawRepresentable {}
+extension VigramSDK.SDKLogScope : Swift.Equatable {}
+extension VigramSDK.SDKLogScope : Swift.Hashable {}
+extension VigramSDK.SDKLogScope : Swift.RawRepresentable {}
+extension VigramSDK.DeviceModel : Swift.Equatable {}
+extension VigramSDK.DeviceModel : Swift.Hashable {}
 extension VigramSDK.NavigationSystemType : Swift.Equatable {}
 extension VigramSDK.NavigationSystemType : Swift.Hashable {}
 extension VigramSDK.NavigationSystemType : Swift.RawRepresentable {}
@@ -1499,23 +1510,6 @@ extension VigramSDK.RateValue : Swift.RawRepresentable {}
 extension VigramSDK.DynamicStateType : Swift.Equatable {}
 extension VigramSDK.DynamicStateType : Swift.Hashable {}
 extension VigramSDK.DynamicStateType : Swift.RawRepresentable {}
-extension VigramSDK.GPSQualityIndicator : Swift.Equatable {}
-extension VigramSDK.GPSQualityIndicator : Swift.Hashable {}
-extension VigramSDK.GPSQualityIndicator : Swift.RawRepresentable {}
-extension VigramSDK.DeviceVersion : Swift.Equatable {}
-extension VigramSDK.DeviceVersion : Swift.Hashable {}
-extension VigramSDK.DeviceMessage.Device.Housings : Swift.Equatable {}
-extension VigramSDK.DeviceMessage.Device.Housings : Swift.Hashable {}
-extension VigramSDK.DeviceMessage.Device.Housings : Swift.RawRepresentable {}
-extension VigramSDK.DeviceMessage.Device.Mounts : Swift.Equatable {}
-extension VigramSDK.DeviceMessage.Device.Mounts : Swift.Hashable {}
-extension VigramSDK.DeviceMessage.Device.Mounts : Swift.RawRepresentable {}
-extension VigramSDK.DeviceMessage.LaserState : Swift.Equatable {}
-extension VigramSDK.DeviceMessage.LaserState : Swift.Hashable {}
-extension VigramSDK.DeviceMessage.Baudrate : Swift.Equatable {}
-extension VigramSDK.DeviceMessage.Baudrate : Swift.Hashable {}
-extension VigramSDK.DeviceMessage.Measurement.MeasurementQuality : Swift.Equatable {}
-extension VigramSDK.DeviceMessage.Measurement.MeasurementQuality : Swift.Hashable {}
 extension VigramSDK.NtripMountPoint.Authentication : Swift.Equatable {}
 extension VigramSDK.NtripMountPoint.Authentication : Swift.Hashable {}
 extension VigramSDK.NtripMountPoint.Authentication : Swift.RawRepresentable {}
@@ -1525,17 +1519,21 @@ extension VigramSDK.NtripMountPoint.Carrier : Swift.RawRepresentable {}
 extension VigramSDK.NtripMountPoint.NavigationSystem : Swift.Equatable {}
 extension VigramSDK.NtripMountPoint.NavigationSystem : Swift.Hashable {}
 extension VigramSDK.NtripMountPoint.NavigationSystem : Swift.RawRepresentable {}
-extension UIKit.UIDevice.TypeOfCase : Swift.Equatable {}
-extension UIKit.UIDevice.TypeOfCase : Swift.Hashable {}
-extension UIKit.UIDevice.TypeOfCase : Swift.RawRepresentable {}
-extension UIKit.UIDevice.CameraPosition : Swift.Equatable {}
-extension UIKit.UIDevice.CameraPosition : Swift.Hashable {}
-extension VigramSDK.LaserConfiguration.ShotMode : Swift.Equatable {}
-extension VigramSDK.LaserConfiguration.ShotMode : Swift.Hashable {}
-extension VigramSDK.LaserConfiguration.Position : Swift.Equatable {}
-extension VigramSDK.LaserConfiguration.Position : Swift.Hashable {}
-extension VigramSDK.BLELogType : Swift.Equatable {}
-extension VigramSDK.BLELogType : Swift.Hashable {}
-extension VigramSDK.BLELogType : Swift.RawRepresentable {}
 extension VigramSDK.RequestError : Swift.Equatable {}
 extension VigramSDK.RequestError : Swift.Hashable {}
+extension VigramSDK.DeviceMessage.LaserState : Swift.Equatable {}
+extension VigramSDK.DeviceMessage.LaserState : Swift.Hashable {}
+extension VigramSDK.DeviceVersion : Swift.Equatable {}
+extension VigramSDK.DeviceVersion : Swift.Hashable {}
+extension VigramSDK.DeviceMessage.Device.Housings : Swift.Equatable {}
+extension VigramSDK.DeviceMessage.Device.Housings : Swift.Hashable {}
+extension VigramSDK.DeviceMessage.Device.Housings : Swift.RawRepresentable {}
+extension VigramSDK.DeviceMessage.Device.Mounts : Swift.Equatable {}
+extension VigramSDK.DeviceMessage.Device.Mounts : Swift.Hashable {}
+extension VigramSDK.DeviceMessage.Device.Mounts : Swift.RawRepresentable {}
+extension VigramSDK.DeviceType : Swift.Equatable {}
+extension VigramSDK.DeviceType : Swift.Hashable {}
+extension VigramSDK.DeviceMessage.Baudrate : Swift.Equatable {}
+extension VigramSDK.DeviceMessage.Baudrate : Swift.Hashable {}
+extension VigramSDK.DeviceMessage.Measurement.MeasurementQuality : Swift.Equatable {}
+extension VigramSDK.DeviceMessage.Measurement.MeasurementQuality : Swift.Hashable {}
