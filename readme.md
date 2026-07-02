@@ -1,6 +1,6 @@
 # VigramSDK
 
-v2.0.0-beta.
+v2.0.0-beta.2.
 
 VigramSDK is a library to connect your app to viDoc to retrieve location data and perform laser distance recordings.
 
@@ -15,14 +15,14 @@ VigramSDK supports both Cocoapods and Swift Package Manager.
 You can integrate VigramSDK into your app by using the following line in your `Podfile`:
 
 ```ruby
-pod 'Vigram', :git => 'https://github.com/vigram-sw/SDK_iOS_viDoc_Distribution.git', :tag => '2.0.0-beta'
+pod 'Vigram', :git => 'https://github.com/vigram-sw/SDK_iOS_viDoc_Distribution.git', :tag => '2.0.0-beta.2'
 ```
 
 Use the pod `Vigram/Rx` if you would like to use VigramSDK in addition to RxSwift.
 
 #### Swift Package Manager
 
-Specify the following URL and select exact version `2.0.0-beta`:
+Specify the following URL and select exact version `2.0.0-beta.2`:
 
 ```
 https://github.com/vigram-sw/SDK_iOS_viDoc_Distribution.git
