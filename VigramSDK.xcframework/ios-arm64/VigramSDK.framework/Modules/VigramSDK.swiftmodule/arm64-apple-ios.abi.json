@@ -22885,120 +22885,6 @@
                 "accessorKind": "_modify"
               }
             ]
-          },
-          {
-            "kind": "Var",
-            "name": "mockGGA",
-            "printedName": "mockGGA",
-            "children": [
-              {
-                "kind": "TypeNominal",
-                "name": "Optional",
-                "printedName": "Swift.String?",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "String",
-                    "printedName": "Swift.String",
-                    "usr": "s:SS"
-                  }
-                ],
-                "usr": "s:Sq"
-              }
-            ],
-            "declKind": "Var",
-            "usr": "s:9VigramSDK13ConfigurationO7mockGGASSSgvpZ",
-            "mangledName": "$s9VigramSDK13ConfigurationO7mockGGASSSgvpZ",
-            "moduleName": "VigramSDK",
-            "static": true,
-            "declAttributes": [
-              "HasInitialValue",
-              "HasStorage",
-              "AccessControl"
-            ],
-            "hasStorage": true,
-            "accessors": [
-              {
-                "kind": "Accessor",
-                "name": "Get",
-                "printedName": "Get()",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "Optional",
-                    "printedName": "Swift.String?",
-                    "children": [
-                      {
-                        "kind": "TypeNominal",
-                        "name": "String",
-                        "printedName": "Swift.String",
-                        "usr": "s:SS"
-                      }
-                    ],
-                    "usr": "s:Sq"
-                  }
-                ],
-                "declKind": "Accessor",
-                "usr": "s:9VigramSDK13ConfigurationO7mockGGASSSgvgZ",
-                "mangledName": "$s9VigramSDK13ConfigurationO7mockGGASSSgvgZ",
-                "moduleName": "VigramSDK",
-                "static": true,
-                "implicit": true,
-                "accessorKind": "get"
-              },
-              {
-                "kind": "Accessor",
-                "name": "Set",
-                "printedName": "Set()",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "Void",
-                    "printedName": "()"
-                  },
-                  {
-                    "kind": "TypeNominal",
-                    "name": "Optional",
-                    "printedName": "Swift.String?",
-                    "children": [
-                      {
-                        "kind": "TypeNominal",
-                        "name": "String",
-                        "printedName": "Swift.String",
-                        "usr": "s:SS"
-                      }
-                    ],
-                    "usr": "s:Sq"
-                  }
-                ],
-                "declKind": "Accessor",
-                "usr": "s:9VigramSDK13ConfigurationO7mockGGASSSgvsZ",
-                "mangledName": "$s9VigramSDK13ConfigurationO7mockGGASSSgvsZ",
-                "moduleName": "VigramSDK",
-                "static": true,
-                "implicit": true,
-                "accessorKind": "set"
-              },
-              {
-                "kind": "Accessor",
-                "name": "Modify",
-                "printedName": "Modify()",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "Void",
-                    "printedName": "()"
-                  }
-                ],
-                "declKind": "Accessor",
-                "usr": "s:9VigramSDK13ConfigurationO7mockGGASSSgvMZ",
-                "mangledName": "$s9VigramSDK13ConfigurationO7mockGGASSSgvMZ",
-                "moduleName": "VigramSDK",
-                "static": true,
-                "implicit": true,
-                "accessorKind": "_modify"
-              }
-            ]
           }
         ],
         "declKind": "Enum",
@@ -69171,7 +69057,7 @@
       "kind": "StringLiteral",
       "offset": 730,
       "length": 14,
-      "value": "\"2.0.0-beta.2\""
+      "value": "\"2.0.0-beta.3\""
     },
     {
       "filePath": "\/Users\/iaroslav\/Documents\/viGram\/iOS\/sdk_ios_vidoc\/main\/VigramSDK\/Source\/General\/Configuration.swift",
@@ -75007,7 +74893,7 @@
     {
       "filePath": "\/Users\/iaroslav\/Documents\/viGram\/iOS\/sdk_ios_vidoc\/main\/VigramSDK\/Source\/Parsing\/PeripheralParser.swift",
       "kind": "Dictionary",
-      "offset": 8542,
+      "offset": 8579,
       "length": 3,
       "value": "[]"
     },
