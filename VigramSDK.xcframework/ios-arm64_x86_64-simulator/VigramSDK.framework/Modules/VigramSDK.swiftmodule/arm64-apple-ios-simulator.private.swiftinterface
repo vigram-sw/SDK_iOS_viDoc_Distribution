@@ -220,9 +220,6 @@ public struct GGAMessage : VigramSDK.NMEAMessage {
   public var accuracy: (horizontal: Swift.Double, vertical: Swift.Double)? {
     get
   }
-  public var horAccuracyTest: Swift.Double? {
-    get
-  }
   public var vdop: Swift.Double? {
     get
   }
@@ -242,9 +239,6 @@ public struct GSTMessage : VigramSDK.NMEAMessage {
   public let longitudeError: Swift.Double?
   public let altitudeError: Swift.Double?
   public var accuracy: (horizontal: Swift.Double, vertical: Swift.Double)? {
-    get
-  }
-  public var horAccuracyTest: Swift.Double? {
     get
   }
   public var coordinate: VigramSDK.GPSCoordinate? {
@@ -272,7 +266,6 @@ public struct TXTMessage : VigramSDK.NMEAMessage {
   public var vdop: Swift.Double?
   public var pdop: Swift.Double?
   public var accuracy: (horizontal: Swift.Double, vertical: Swift.Double)?
-  public var horAccuracyTest: Swift.Double?
   public var raw: Swift.String
   public let totalNumberOfMessage: Swift.Int
   public let messageNumber: Swift.Int
@@ -301,73 +294,18 @@ public enum BLELogType : Swift.String {
 @available(*, unavailable, message: "Legacy peripheral TXT logging was removed. Use Vigram.Logger(url:mode:) for structured support logs.")
 public protocol PeripheralLogger : AnyObject {
 }
-public enum SDKLogMode : Swift.Int, Swift.Comparable {
-  case off
-  case basic
-  case diagnostic
-  public static func < (lhs: VigramSDK.SDKLogMode, rhs: VigramSDK.SDKLogMode) -> Swift.Bool
-  public init?(rawValue: Swift.Int)
-  public typealias RawValue = Swift.Int
-  public var rawValue: Swift.Int {
-    get
-  }
-}
-public enum SDKLogLevel : Swift.String, Swift.Codable {
-  case debug
-  case info
-  case error
-  public init?(rawValue: Swift.String)
-  public typealias RawValue = Swift.String
-  public var rawValue: Swift.String {
-    get
-  }
-}
-public enum SDKLogScope : Swift.String, Swift.Codable {
-  case authenticationService
-  case authenticationVerification
-  case bluetoothService
-  case deviceMotionService
-  case laserService
-  case peripheralService
-  case peripheralParser
-  case ntripService
-  case ntripSession
-  case ntripTransport
-  case gpsService
-  case gpsExchange
-  case singlePointService
-  case sdk
-  public init?(rawValue: Swift.String)
-  public typealias RawValue = Swift.String
-  public var rawValue: Swift.String {
-    get
-  }
-}
-public struct SDKLogEvent : Swift.Codable {
-  public let timestamp: Foundation.Date
-  public let level: VigramSDK.SDKLogLevel
-  public let scope: VigramSDK.SDKLogScope
-  public let event: Swift.String
-  public let message: Swift.String
-  public let session: Swift.String?
-  public let connection: Swift.String?
-  public let cycle: Swift.String?
-  public let serial: Swift.String?
-  public let deviceID: Swift.String?
-  public let bluetoothName: Swift.String?
-  public let protocolVersion: Swift.String?
-  public let thread: Swift.String?
-  public let metadata: [Swift.String : Swift.String]
-  public init(timestamp: Foundation.Date = Date(), level: VigramSDK.SDKLogLevel, scope: VigramSDK.SDKLogScope, event: Swift.String, message: Swift.String? = nil, metadata: [Swift.String : Swift.String] = [:])
-  public func encode(to encoder: any Swift.Encoder) throws
-  public init(from decoder: any Swift.Decoder) throws
-}
-public protocol SDKLogger : AnyObject {
-  func log(_ event: VigramSDK.SDKLogEvent)
-}
 extension VigramSDK.Vigram {
   final public class Logger {
-    public typealias Mode = VigramSDK.SDKLogMode
+    public enum Mode {
+      case off
+      case basic
+      case diagnostic
+      public static func == (a: VigramSDK.Vigram.Logger.Mode, b: VigramSDK.Vigram.Logger.Mode) -> Swift.Bool
+      public func hash(into hasher: inout Swift.Hasher)
+      public var hashValue: Swift.Int {
+        get
+      }
+    }
     final public let url: Foundation.URL
     final public let mode: VigramSDK.Vigram.Logger.Mode
     @discardableResult
@@ -414,28 +352,6 @@ public struct CalibrationMessage {
   }
   public var state: VigramSDK.CalibrationMessage.CalibrationProcess
   public var rawData: Swift.String
-}
-public enum DeviceModel {
-  case simulator
-  case iPod1, iPod2, iPod3, iPod4, iPod5, iPod6, iPod7
-  case iPad2, iPad3, iPad4, iPad5, iPad6, iPad7, iPad8, iPad9, iPad10
-  case iPadAir, iPadAir2, iPadAir3, iPadAir4, iPadAir5
-  case iPadMini, iPadMini2, iPadMini3, iPadMini4, iPadMini5, iPadMini6
-  case iPadPro9_7, iPadPro10_5, iPadPro11, iPadPro2_11, iPadPro3_11, iPadPro4_11
-  case iPadPro12_9, iPadPro2_12_9, iPadPro3_12_9, iPadPro4_12_9, iPadPro5_12_9, iPadPro6_12_9
-  case iPhone4, iPhone4S, iPhone5, iPhone5S, iPhone5C, iPhone6, iPhone6Plus, iPhone6S, iPhone6SPlus, iPhoneSE, iPhoneSE2, iPhoneSE3
-  case iPhone7, iPhone7Plus, iPhone8, iPhone8Plus, iPhoneX, iPhoneXS, iPhoneXSMax, iPhoneXR, iPhone11, iPhone11Pro, iPhone11ProMax
-  case iPhone12Mini, iPhone12, iPhone12Pro, iPhone12ProMax, iPhone13Mini, iPhone13, iPhone13Pro, iPhone13ProMax
-  case iPhone14, iPhone14Plus, iPhone14Pro, iPhone14ProMax, iPhone15, iPhone15Plus, iPhone15Pro, iPhone15ProMax
-  case iPhone16Pro, iPhone16ProMax
-  case AppleWatch1, AppleWatchS1, AppleWatchS2, AppleWatchS3, AppleWatchS4, AppleWatchS5, AppleWatchSE, AppleWatchS6, AppleWatchS7
-  case AppleTV1, AppleTV2, AppleTV3, AppleTV4, AppleTV_4K, AppleTV2_4K
-  case unrecognized
-  public static func == (a: VigramSDK.DeviceModel, b: VigramSDK.DeviceModel) -> Swift.Bool
-  public func hash(into hasher: inout Swift.Hasher)
-  public var hashValue: Swift.Int {
-    get
-  }
 }
 extension Swift.SIMD3 where Scalar : Swift.FloatingPoint {
   public static var undefined: Swift.SIMD3<Scalar> {
@@ -966,7 +882,6 @@ extension VigramSDK.DeviceMessage {
       public let imu: Swift.String?
       public let isCalibrated: Swift.Bool?
     }
-    public let rawValue: Swift.String?
     public let typeOfDevice: VigramSDK.DeviceVersion
     public var hasFrontLaser: Swift.Bool {
       get
@@ -1027,7 +942,6 @@ extension VigramSDK.DeviceMessage {
     public let start: Swift.UInt16
     public let end: Swift.UInt16
     public let distance: Swift.Double
-    public let qualityRaw: Swift.UInt16
     public let quality: VigramSDK.DeviceMessage.Measurement.MeasurementQuality
   }
   public struct Battery {
@@ -1061,15 +975,6 @@ extension VigramSDK.DeviceMessage.Version.Software {
 }
 extension VigramSDK.DeviceMessage.Version.Hardware {
   public func toString() -> Swift.String
-}
-public enum DeviceType {
-  case newDevice
-  case oldDevice
-  public static func == (a: VigramSDK.DeviceType, b: VigramSDK.DeviceType) -> Swift.Bool
-  public func hash(into hasher: inout Swift.Hasher)
-  public var hashValue: Swift.Int {
-    get
-  }
 }
 extension VigramSDK.DeviceMessage {
   public enum Baudrate {
@@ -1147,7 +1052,6 @@ public protocol Peripheral {
   func stopRecordPPKMeasurements()
   func setDynamicState(type: VigramSDK.DynamicStateType) -> VigramSDK.SingleEventPublisher<VigramSDK.SatelliteMessage.Acknowledge>
   func getCurrentDynamicState() -> VigramSDK.SingleEventPublisher<VigramSDK.SatelliteMessage.DynamicState>
-  func changeStatusGSTandPVTndDOPmessages(activate: Swift.Bool) -> VigramSDK.SingleEventPublisher<VigramSDK.SatelliteMessage.Acknowledge>
   func getNewIdentity(isReset: Swift.Bool) -> VigramSDK.SingleEventPublisher<Swift.Result<Swift.Bool, any Swift.Error>>
 }
 public enum PeripheralError : Swift.Error {
@@ -1173,7 +1077,7 @@ extension VigramSDK.PeripheralError : Foundation.LocalizedError {
 }
 public enum StatePeripheralConfiguration {
   case done
-  case inProgress(Swift.String)
+  case inProgress
   case failed(any Swift.Error)
   case peripheralError(VigramSDK.PeripheralError)
 }
@@ -1377,20 +1281,15 @@ extension VigramSDK.Vigram {
   public static func tokenIsValid() -> Swift.Result<Swift.Bool, VigramSDK.AuthenticationError>
   public static func bluetoothService() -> any VigramSDK.BluetoothService
   public static func peripheral(_ peripheral: CoreBluetooth.CBPeripheral, configuration: VigramSDK.PeripheralConfiguration? = nil) -> any VigramSDK.Peripheral
-  public static func peripheral(_ peripheral: CoreBluetooth.CBPeripheral, configuration: VigramSDK.PeripheralConfiguration? = nil, softwareInFile: Foundation.Data? = nil) -> any VigramSDK.Peripheral
   public static func ntripService(session: Foundation.URLSession = .init(configuration: .default)) -> any VigramSDK.NtripService
   public static func gpsService(peripheral: any VigramSDK.Peripheral, bluetoothService: any VigramSDK.BluetoothService, correctionTask: (any VigramSDK.NtripTask)?, automaticallyReconnectNtrip: Swift.Bool = true) -> any VigramSDK.GPSService
   public static func laserService(peripheral: any VigramSDK.Peripheral) -> any VigramSDK.LaserService
-  @available(*, unavailable, message: "Online firmware update was removed. Use local firmware files with peripheral(_:configuration:softwareInFile:) instead.")
+  @available(*, unavailable, message: "Online firmware update was removed.")
   public static func softwareService() -> any VigramSDK.SoftwareService
-  @available(*, unavailable, message: "Legacy peripheral TXT logging was removed. Use Vigram.Logger(url:mode:) to configure support logs, then call peripheral(_:configuration:) or peripheral(_:configuration:softwareInFile:).")
+  @available(*, unavailable, message: "Legacy peripheral TXT logging was removed. Use Vigram.Logger(url:mode:) to configure support logs, then call peripheral(_:configuration:).")
   public static func peripheral(_ peripheral: CoreBluetooth.CBPeripheral, log: Foundation.URL?, configuration: VigramSDK.PeripheralConfiguration? = nil) throws -> any VigramSDK.Peripheral
-  @available(*, unavailable, message: "Legacy peripheral TXT logging was removed. Use Vigram.Logger(url:mode:) to configure support logs, then call peripheral(_:configuration:softwareInFile:).")
-  public static func peripheral(_ peripheral: CoreBluetooth.CBPeripheral, log: Foundation.URL?, configuration: VigramSDK.PeripheralConfiguration? = nil, softwareInFile: Foundation.Data? = nil) throws -> any VigramSDK.Peripheral
   @available(*, unavailable, message: "Legacy peripheral logger injection was removed. Use Vigram.Logger(url:mode:) to configure support logs globally.")
   public static func peripheral(_ peripheral: CoreBluetooth.CBPeripheral, logger: (any VigramSDK.PeripheralLogger)? = nil, configuration: VigramSDK.PeripheralConfiguration? = nil) -> any VigramSDK.Peripheral
-  @available(*, unavailable, message: "Legacy peripheral logger injection was removed. Use Vigram.Logger(url:mode:) to configure support logs globally.")
-  public static func peripheral(_ peripheral: CoreBluetooth.CBPeripheral, logger: (any VigramSDK.PeripheralLogger)? = nil, configuration: VigramSDK.PeripheralConfiguration? = nil, softwareInFile: Foundation.Data? = nil) -> any VigramSDK.Peripheral
   @available(*, unavailable, message: "Legacy peripheral TXT logging was removed. Use Vigram.Logger(url:mode:) to configure structured support logs.")
   public static func peripheralLogger(for url: Foundation.URL) throws -> any VigramSDK.PeripheralLogger
 }
@@ -1488,16 +1387,8 @@ extension VigramSDK.BLELogType : Swift.Equatable {}
 extension VigramSDK.BLELogType : Swift.Hashable {}
 @available(*, unavailable, message: "Legacy peripheral TXT logging was removed. Use Vigram.Logger(url:mode:) for structured support logs.")
 extension VigramSDK.BLELogType : Swift.RawRepresentable {}
-extension VigramSDK.SDKLogMode : Swift.Hashable {}
-extension VigramSDK.SDKLogMode : Swift.RawRepresentable {}
-extension VigramSDK.SDKLogLevel : Swift.Equatable {}
-extension VigramSDK.SDKLogLevel : Swift.Hashable {}
-extension VigramSDK.SDKLogLevel : Swift.RawRepresentable {}
-extension VigramSDK.SDKLogScope : Swift.Equatable {}
-extension VigramSDK.SDKLogScope : Swift.Hashable {}
-extension VigramSDK.SDKLogScope : Swift.RawRepresentable {}
-extension VigramSDK.DeviceModel : Swift.Equatable {}
-extension VigramSDK.DeviceModel : Swift.Hashable {}
+extension VigramSDK.Vigram.Logger.Mode : Swift.Equatable {}
+extension VigramSDK.Vigram.Logger.Mode : Swift.Hashable {}
 extension VigramSDK.NavigationSystemType : Swift.Equatable {}
 extension VigramSDK.NavigationSystemType : Swift.Hashable {}
 extension VigramSDK.NavigationSystemType : Swift.RawRepresentable {}
@@ -1531,8 +1422,6 @@ extension VigramSDK.DeviceMessage.Device.Housings : Swift.RawRepresentable {}
 extension VigramSDK.DeviceMessage.Device.Mounts : Swift.Equatable {}
 extension VigramSDK.DeviceMessage.Device.Mounts : Swift.Hashable {}
 extension VigramSDK.DeviceMessage.Device.Mounts : Swift.RawRepresentable {}
-extension VigramSDK.DeviceType : Swift.Equatable {}
-extension VigramSDK.DeviceType : Swift.Hashable {}
 extension VigramSDK.DeviceMessage.Baudrate : Swift.Equatable {}
 extension VigramSDK.DeviceMessage.Baudrate : Swift.Hashable {}
 extension VigramSDK.DeviceMessage.Measurement.MeasurementQuality : Swift.Equatable {}
