@@ -1,0 +1,614 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		700397632B2C688800F1A720 /* LaserMeasurementsSubview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700397622B2C688800F1A720 /* LaserMeasurementsSubview.swift */; };
+		700397682B2C851500F1A720 /* PPKMeasurementsSubview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 700397672B2C851500F1A720 /* PPKMeasurementsSubview.swift */; };
+		702B96182AEA775500CF467D /* ViGRAM_SDK_demo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702B96172AEA775500CF467D /* ViGRAM_SDK_demo.swift */; };
+		702B961C2AEA775700CF467D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 702B961B2AEA775700CF467D /* Assets.xcassets */; };
+		702B96482AEA77E800CF467D /* SelectButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 702B96472AEA77E800CF467D /* SelectButton.swift */; };
+		7068A4182B2B78720035398F /* NTRIPCredentials.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7068A4172B2B78720035398F /* NTRIPCredentials.swift */; };
+		708D5C2D2B7D589000E7E876 /* HalfSheetController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708D5C2C2B7D589000E7E876 /* HalfSheetController.swift */; };
+		708D5C302B7D58D000E7E876 /* MountPointsSubview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708D5C2F2B7D58D000E7E876 /* MountPointsSubview.swift */; };
+		708D5C342B7D642E00E7E876 /* RadioButtonField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708D5C332B7D642E00E7E876 /* RadioButtonField.swift */; };
+		70A547962B284B2800D08DEB /* VigramHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A547952B284B2800D08DEB /* VigramHelper.swift */; };
+		70A5479C2B289C8500D08DEB /* MainScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A5479B2B289C8500D08DEB /* MainScreenView.swift */; };
+		70A5479E2B289C9800D08DEB /* MainScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A5479D2B289C9800D08DEB /* MainScreenViewModel.swift */; };
+		70A547A02B289CA500D08DEB /* MainScreenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A5479F2B289CA500D08DEB /* MainScreenModel.swift */; };
+		70A547A42B29759C00D08DEB /* FileWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A547A32B29759C00D08DEB /* FileWorker.swift */; };
+		70A547A82B29817D00D08DEB /* SwiftUI+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A547A72B29817D00D08DEB /* SwiftUI+Extension.swift */; };
+		70A547AA2B298C8500D08DEB /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A547A92B298C8500D08DEB /* LoadingView.swift */; };
+		70A547AC2B298D3500D08DEB /* ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A547AB2B298D3500D08DEB /* ActivityViewController.swift */; };
+		70A547AE2B299E0800D08DEB /* Combine+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A547AD2B299E0800D08DEB /* Combine+Extension.swift */; };
+		70A547B02B2A027E00D08DEB /* Foundation+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70A547AF2B2A027E00D08DEB /* Foundation+Extension.swift */; };
+		A2F200012FABC00100BEEF01 /* FirmwareToolsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F200022FABC00100BEEF01 /* FirmwareToolsViewModel.swift */; };
+		A2F200032FABC00100BEEF01 /* FirmwareToolsSubview.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F200042FABC00100BEEF01 /* FirmwareToolsSubview.swift */; };
+		A2F200052FABC00100BEEF01 /* NtripToolsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F200062FABC00100BEEF01 /* NtripToolsViewModel.swift */; };
+		A2F200072FABC00100BEEF01 /* NtripQuickCardSubview.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F200082FABC00100BEEF01 /* NtripQuickCardSubview.swift */; };
+		A2F200092FABC00100BEEF01 /* SinglePointToolsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F2000A2FABC00100BEEF01 /* SinglePointToolsViewModel.swift */; };
+		A2F2000B2FABC00100BEEF01 /* SinglePointMeasurementSubview.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F2000C2FABC00100BEEF01 /* SinglePointMeasurementSubview.swift */; };
+		A2F2000D2FABC00100BEEF01 /* LaserToolsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F2000E2FABC00100BEEF01 /* LaserToolsViewModel.swift */; };
+		A2F2000F2FABC00100BEEF01 /* CorrectionToolsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F200102FABC00100BEEF01 /* CorrectionToolsViewModel.swift */; };
+		A2F200112FABC00100BEEF01 /* SupportLogToolsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F200122FABC00100BEEF01 /* SupportLogToolsViewModel.swift */; };
+		A2F200132FABC00100BEEF01 /* ServiceToolsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F200142FABC00100BEEF01 /* ServiceToolsViewModel.swift */; };
+		A2F200152FABC00100BEEF01 /* ServiceToolsSubview.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F200162FABC00100BEEF01 /* ServiceToolsSubview.swift */; };
+		A2F200172FABC00100BEEF01 /* IMUToolsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F200182FABC00100BEEF01 /* IMUToolsViewModel.swift */; };
+		A2F200192FABC00100BEEF01 /* IMUToolsSubview.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F2001A2FABC00100BEEF01 /* IMUToolsSubview.swift */; };
+		A2F2001B2FABC00100BEEF01 /* GNSSToolsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F2001C2FABC00100BEEF01 /* GNSSToolsViewModel.swift */; };
+		A2F2001D2FABC00100BEEF01 /* GNSSToolsSubview.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F2001E2FABC00100BEEF01 /* GNSSToolsSubview.swift */; };
+		A2F200202FABC00100BEEF01 /* SDKToolsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F200212FABC00100BEEF01 /* SDKToolsViewModel.swift */; };
+		A2F200222FABC00100BEEF01 /* SDKToolsSubview.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F200232FABC00100BEEF01 /* SDKToolsSubview.swift */; };
+		A2F200242FABC00100BEEF01 /* ConnectedDeviceOverviewSubview.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F200252FABC00100BEEF01 /* ConnectedDeviceOverviewSubview.swift */; };
+		A2F200262FABC00100BEEF01 /* ConnectionLandingSubview.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F200272FABC00100BEEF01 /* ConnectionLandingSubview.swift */; };
+		A2F200282FABC00100BEEF01 /* DeviceSessionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F200292FABC00100BEEF01 /* DeviceSessionViewModel.swift */; };
+		D408AEAA300003860009010B /* VigramSDK in Frameworks */ = {isa = PBXBuildFile; productRef = D408AEA9300003860009010B /* VigramSDK */; };
+		D408AEAC300003860009010B /* VigramSDK+Rx in Frameworks */ = {isa = PBXBuildFile; productRef = D408AEAB300003860009010B /* VigramSDK+Rx */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		700397622B2C688800F1A720 /* LaserMeasurementsSubview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaserMeasurementsSubview.swift; sourceTree = "<group>"; };
+		700397672B2C851500F1A720 /* PPKMeasurementsSubview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PPKMeasurementsSubview.swift; sourceTree = "<group>"; };
+		702B96142AEA775500CF467D /* ViGRAM_SDK_demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ViGRAM_SDK_demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		702B96172AEA775500CF467D /* ViGRAM_SDK_demo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViGRAM_SDK_demo.swift; sourceTree = "<group>"; };
+		702B961B2AEA775700CF467D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		702B96472AEA77E800CF467D /* SelectButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectButton.swift; sourceTree = "<group>"; };
+		7068A4172B2B78720035398F /* NTRIPCredentials.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NTRIPCredentials.swift; sourceTree = "<group>"; };
+		708D5C2C2B7D589000E7E876 /* HalfSheetController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HalfSheetController.swift; sourceTree = "<group>"; };
+		708D5C2F2B7D58D000E7E876 /* MountPointsSubview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MountPointsSubview.swift; sourceTree = "<group>"; };
+		708D5C332B7D642E00E7E876 /* RadioButtonField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioButtonField.swift; sourceTree = "<group>"; };
+		70A547952B284B2800D08DEB /* VigramHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VigramHelper.swift; sourceTree = "<group>"; };
+		70A5479B2B289C8500D08DEB /* MainScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenView.swift; sourceTree = "<group>"; };
+		70A5479D2B289C9800D08DEB /* MainScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenViewModel.swift; sourceTree = "<group>"; };
+		70A5479F2B289CA500D08DEB /* MainScreenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenModel.swift; sourceTree = "<group>"; };
+		70A547A32B29759C00D08DEB /* FileWorker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileWorker.swift; sourceTree = "<group>"; };
+		70A547A72B29817D00D08DEB /* SwiftUI+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SwiftUI+Extension.swift"; sourceTree = "<group>"; };
+		70A547A92B298C8500D08DEB /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		70A547AB2B298D3500D08DEB /* ActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityViewController.swift; sourceTree = "<group>"; };
+		70A547AD2B299E0800D08DEB /* Combine+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Combine+Extension.swift"; sourceTree = "<group>"; };
+		70A547AF2B2A027E00D08DEB /* Foundation+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Foundation+Extension.swift"; sourceTree = "<group>"; };
+		A2F200022FABC00100BEEF01 /* FirmwareToolsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirmwareToolsViewModel.swift; sourceTree = "<group>"; };
+		A2F200042FABC00100BEEF01 /* FirmwareToolsSubview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirmwareToolsSubview.swift; sourceTree = "<group>"; };
+		A2F200062FABC00100BEEF01 /* NtripToolsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NtripToolsViewModel.swift; sourceTree = "<group>"; };
+		A2F200082FABC00100BEEF01 /* NtripQuickCardSubview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NtripQuickCardSubview.swift; sourceTree = "<group>"; };
+		A2F2000A2FABC00100BEEF01 /* SinglePointToolsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SinglePointToolsViewModel.swift; sourceTree = "<group>"; };
+		A2F2000C2FABC00100BEEF01 /* SinglePointMeasurementSubview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SinglePointMeasurementSubview.swift; sourceTree = "<group>"; };
+		A2F2000E2FABC00100BEEF01 /* LaserToolsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaserToolsViewModel.swift; sourceTree = "<group>"; };
+		A2F200102FABC00100BEEF01 /* CorrectionToolsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CorrectionToolsViewModel.swift; sourceTree = "<group>"; };
+		A2F200122FABC00100BEEF01 /* SupportLogToolsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportLogToolsViewModel.swift; sourceTree = "<group>"; };
+		A2F200142FABC00100BEEF01 /* ServiceToolsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceToolsViewModel.swift; sourceTree = "<group>"; };
+		A2F200162FABC00100BEEF01 /* ServiceToolsSubview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceToolsSubview.swift; sourceTree = "<group>"; };
+		A2F200182FABC00100BEEF01 /* IMUToolsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMUToolsViewModel.swift; sourceTree = "<group>"; };
+		A2F2001A2FABC00100BEEF01 /* IMUToolsSubview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMUToolsSubview.swift; sourceTree = "<group>"; };
+		A2F2001C2FABC00100BEEF01 /* GNSSToolsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GNSSToolsViewModel.swift; sourceTree = "<group>"; };
+		A2F2001E2FABC00100BEEF01 /* GNSSToolsSubview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GNSSToolsSubview.swift; sourceTree = "<group>"; };
+		A2F200212FABC00100BEEF01 /* SDKToolsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SDKToolsViewModel.swift; sourceTree = "<group>"; };
+		A2F200232FABC00100BEEF01 /* SDKToolsSubview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SDKToolsSubview.swift; sourceTree = "<group>"; };
+		A2F200252FABC00100BEEF01 /* ConnectedDeviceOverviewSubview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectedDeviceOverviewSubview.swift; sourceTree = "<group>"; };
+		A2F200272FABC00100BEEF01 /* ConnectionLandingSubview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionLandingSubview.swift; sourceTree = "<group>"; };
+		A2F200292FABC00100BEEF01 /* DeviceSessionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceSessionViewModel.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		702B96112AEA775500CF467D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D408AEAA300003860009010B /* VigramSDK in Frameworks */,
+				D408AEAC300003860009010B /* VigramSDK+Rx in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		7005A7752B2AD5300046A006 /* SubViews */ = {
+			isa = PBXGroup;
+			children = (
+				700397622B2C688800F1A720 /* LaserMeasurementsSubview.swift */,
+				700397672B2C851500F1A720 /* PPKMeasurementsSubview.swift */,
+				A2F200042FABC00100BEEF01 /* FirmwareToolsSubview.swift */,
+				A2F200082FABC00100BEEF01 /* NtripQuickCardSubview.swift */,
+				A2F2000C2FABC00100BEEF01 /* SinglePointMeasurementSubview.swift */,
+				A2F200162FABC00100BEEF01 /* ServiceToolsSubview.swift */,
+				A2F2001A2FABC00100BEEF01 /* IMUToolsSubview.swift */,
+				A2F2001E2FABC00100BEEF01 /* GNSSToolsSubview.swift */,
+				A2F200232FABC00100BEEF01 /* SDKToolsSubview.swift */,
+				A2F200252FABC00100BEEF01 /* ConnectedDeviceOverviewSubview.swift */,
+				A2F200272FABC00100BEEF01 /* ConnectionLandingSubview.swift */,
+				708D5C2F2B7D58D000E7E876 /* MountPointsSubview.swift */,
+			);
+			path = SubViews;
+			sourceTree = "<group>";
+		};
+		702B960B2AEA775500CF467D = {
+			isa = PBXGroup;
+			children = (
+				702B96162AEA775500CF467D /* ViGRAM_SDK_demo */,
+				702B96152AEA775500CF467D /* Products */,
+				702B967F2AEA788600CF467D /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		702B96152AEA775500CF467D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				702B96142AEA775500CF467D /* ViGRAM_SDK_demo.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		702B96162AEA775500CF467D /* ViGRAM_SDK_demo */ = {
+			isa = PBXGroup;
+			children = (
+				70A547A12B29755800D08DEB /* API */,
+				70A547A52B297EC200D08DEB /* CustomViews */,
+				7068A4162B2B78210035398F /* Entities */,
+				70A547A62B29816700D08DEB /* Extensions */,
+				70A547992B289C4F00D08DEB /* Screens */,
+				70A547A22B29756F00D08DEB /* Storage */,
+				7068A4192B2B7C3F0035398F /* SupportingFiles */,
+				702B96172AEA775500CF467D /* ViGRAM_SDK_demo.swift */,
+			);
+			path = ViGRAM_SDK_demo;
+			sourceTree = "<group>";
+		};
+		702B967F2AEA788600CF467D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		7068A4162B2B78210035398F /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				7068A4172B2B78720035398F /* NTRIPCredentials.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		7068A4192B2B7C3F0035398F /* SupportingFiles */ = {
+			isa = PBXGroup;
+			children = (
+				702B961B2AEA775700CF467D /* Assets.xcassets */,
+			);
+			path = SupportingFiles;
+			sourceTree = "<group>";
+		};
+		70A547992B289C4F00D08DEB /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				70A5479A2B289C5E00D08DEB /* MainScreen */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		70A5479A2B289C5E00D08DEB /* MainScreen */ = {
+			isa = PBXGroup;
+			children = (
+				7005A7752B2AD5300046A006 /* SubViews */,
+				70A5479B2B289C8500D08DEB /* MainScreenView.swift */,
+				70A5479D2B289C9800D08DEB /* MainScreenViewModel.swift */,
+				70A5479F2B289CA500D08DEB /* MainScreenModel.swift */,
+				A2F200292FABC00100BEEF01 /* DeviceSessionViewModel.swift */,
+				A2F200022FABC00100BEEF01 /* FirmwareToolsViewModel.swift */,
+				A2F200062FABC00100BEEF01 /* NtripToolsViewModel.swift */,
+				A2F200122FABC00100BEEF01 /* SupportLogToolsViewModel.swift */,
+				A2F200142FABC00100BEEF01 /* ServiceToolsViewModel.swift */,
+				A2F200182FABC00100BEEF01 /* IMUToolsViewModel.swift */,
+				A2F2001C2FABC00100BEEF01 /* GNSSToolsViewModel.swift */,
+				A2F200212FABC00100BEEF01 /* SDKToolsViewModel.swift */,
+				A2F200102FABC00100BEEF01 /* CorrectionToolsViewModel.swift */,
+				A2F2000E2FABC00100BEEF01 /* LaserToolsViewModel.swift */,
+				A2F2000A2FABC00100BEEF01 /* SinglePointToolsViewModel.swift */,
+			);
+			path = MainScreen;
+			sourceTree = "<group>";
+		};
+		70A547A12B29755800D08DEB /* API */ = {
+			isa = PBXGroup;
+			children = (
+				70A547952B284B2800D08DEB /* VigramHelper.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		70A547A22B29756F00D08DEB /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				70A547A32B29759C00D08DEB /* FileWorker.swift */,
+			);
+			path = Storage;
+			sourceTree = "<group>";
+		};
+		70A547A52B297EC200D08DEB /* CustomViews */ = {
+			isa = PBXGroup;
+			children = (
+				708D5C2C2B7D589000E7E876 /* HalfSheetController.swift */,
+				70A547AB2B298D3500D08DEB /* ActivityViewController.swift */,
+				70A547A92B298C8500D08DEB /* LoadingView.swift */,
+				702B96472AEA77E800CF467D /* SelectButton.swift */,
+				708D5C332B7D642E00E7E876 /* RadioButtonField.swift */,
+			);
+			path = CustomViews;
+			sourceTree = "<group>";
+		};
+		70A547A62B29816700D08DEB /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				70A547AD2B299E0800D08DEB /* Combine+Extension.swift */,
+				70A547A72B29817D00D08DEB /* SwiftUI+Extension.swift */,
+				70A547AF2B2A027E00D08DEB /* Foundation+Extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		702B96132AEA775500CF467D /* ViGRAM_SDK_demo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 702B96382AEA775700CF467D /* Build configuration list for PBXNativeTarget "ViGRAM_SDK_demo" */;
+			buildPhases = (
+				702B96102AEA775500CF467D /* Sources */,
+				702B96112AEA775500CF467D /* Frameworks */,
+				702B96122AEA775500CF467D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ViGRAM_SDK_demo;
+			packageProductDependencies = (
+				D408AEA9300003860009010B /* VigramSDK */,
+				D408AEAB300003860009010B /* VigramSDK+Rx */,
+			);
+			productName = ViGRAM_SDK_demo;
+			productReference = 702B96142AEA775500CF467D /* ViGRAM_SDK_demo.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		702B960C2AEA775500CF467D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					702B96132AEA775500CF467D = {
+						CreatedOnToolsVersion = 15.0.1;
+					};
+				};
+			};
+			buildConfigurationList = 702B960F2AEA775500CF467D /* Build configuration list for PBXProject "ViGRAM_SDK_demo" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 702B960B2AEA775500CF467D;
+			packageReferences = (
+				D408AEA8300003860009010B /* XCRemoteSwiftPackageReference "SDK_iOS_viDoc_Distribution" */,
+			);
+			productRefGroup = 702B96152AEA775500CF467D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				702B96132AEA775500CF467D /* ViGRAM_SDK_demo */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		702B96122AEA775500CF467D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				702B961C2AEA775700CF467D /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		702B96102AEA775500CF467D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				708D5C342B7D642E00E7E876 /* RadioButtonField.swift in Sources */,
+				700397682B2C851500F1A720 /* PPKMeasurementsSubview.swift in Sources */,
+				70A547AE2B299E0800D08DEB /* Combine+Extension.swift in Sources */,
+				708D5C2D2B7D589000E7E876 /* HalfSheetController.swift in Sources */,
+				A2F200032FABC00100BEEF01 /* FirmwareToolsSubview.swift in Sources */,
+				A2F200072FABC00100BEEF01 /* NtripQuickCardSubview.swift in Sources */,
+				A2F2000B2FABC00100BEEF01 /* SinglePointMeasurementSubview.swift in Sources */,
+				70A547A02B289CA500D08DEB /* MainScreenModel.swift in Sources */,
+				A2F200282FABC00100BEEF01 /* DeviceSessionViewModel.swift in Sources */,
+				7068A4182B2B78720035398F /* NTRIPCredentials.swift in Sources */,
+				702B96182AEA775500CF467D /* ViGRAM_SDK_demo.swift in Sources */,
+				70A547B02B2A027E00D08DEB /* Foundation+Extension.swift in Sources */,
+				708D5C302B7D58D000E7E876 /* MountPointsSubview.swift in Sources */,
+				70A547A82B29817D00D08DEB /* SwiftUI+Extension.swift in Sources */,
+				70A5479E2B289C9800D08DEB /* MainScreenViewModel.swift in Sources */,
+				A2F200012FABC00100BEEF01 /* FirmwareToolsViewModel.swift in Sources */,
+				A2F200052FABC00100BEEF01 /* NtripToolsViewModel.swift in Sources */,
+				A2F200112FABC00100BEEF01 /* SupportLogToolsViewModel.swift in Sources */,
+				A2F200132FABC00100BEEF01 /* ServiceToolsViewModel.swift in Sources */,
+				A2F200172FABC00100BEEF01 /* IMUToolsViewModel.swift in Sources */,
+				A2F2001B2FABC00100BEEF01 /* GNSSToolsViewModel.swift in Sources */,
+				A2F2000F2FABC00100BEEF01 /* CorrectionToolsViewModel.swift in Sources */,
+				A2F2000D2FABC00100BEEF01 /* LaserToolsViewModel.swift in Sources */,
+				A2F200092FABC00100BEEF01 /* SinglePointToolsViewModel.swift in Sources */,
+				A2F200152FABC00100BEEF01 /* ServiceToolsSubview.swift in Sources */,
+				A2F200192FABC00100BEEF01 /* IMUToolsSubview.swift in Sources */,
+				A2F2001D2FABC00100BEEF01 /* GNSSToolsSubview.swift in Sources */,
+				A2F200202FABC00100BEEF01 /* SDKToolsViewModel.swift in Sources */,
+				A2F200222FABC00100BEEF01 /* SDKToolsSubview.swift in Sources */,
+				A2F200242FABC00100BEEF01 /* ConnectedDeviceOverviewSubview.swift in Sources */,
+				A2F200262FABC00100BEEF01 /* ConnectionLandingSubview.swift in Sources */,
+				702B96482AEA77E800CF467D /* SelectButton.swift in Sources */,
+				700397632B2C688800F1A720 /* LaserMeasurementsSubview.swift in Sources */,
+				70A547962B284B2800D08DEB /* VigramHelper.swift in Sources */,
+				70A5479C2B289C8500D08DEB /* MainScreenView.swift in Sources */,
+				70A547AC2B298D3500D08DEB /* ActivityViewController.swift in Sources */,
+				70A547AA2B298C8500D08DEB /* LoadingView.swift in Sources */,
+				70A547A42B29759C00D08DEB /* FileWorker.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		702B96362AEA775700CF467D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		702B96372AEA775700CF467D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		702B96392AEA775700CF467D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "ViGRAM-SDK-demo-Info.plist";
+				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
+				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "Vigram SDK uses bluetooth for works with viDoc RTK device";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 2.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yourcompany;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		702B963A2AEA775700CF467D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "ViGRAM-SDK-demo-Info.plist";
+				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
+				INFOPLIST_KEY_NSBluetoothAlwaysUsageDescription = "Vigram SDK uses bluetooth for works with viDoc RTK device";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 2.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yourcompany;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		702B960F2AEA775500CF467D /* Build configuration list for PBXProject "ViGRAM_SDK_demo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				702B96362AEA775700CF467D /* Debug */,
+				702B96372AEA775700CF467D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		702B96382AEA775700CF467D /* Build configuration list for PBXNativeTarget "ViGRAM_SDK_demo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				702B96392AEA775700CF467D /* Debug */,
+				702B963A2AEA775700CF467D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		D408AEA8300003860009010B /* XCRemoteSwiftPackageReference "SDK_iOS_viDoc_Distribution" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/vigram-sw/SDK_iOS_viDoc_Distribution";
+			requirement = {
+				kind = exactVersion;
+				version = "2.0.0-beta.3";
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		D408AEA9300003860009010B /* VigramSDK */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D408AEA8300003860009010B /* XCRemoteSwiftPackageReference "SDK_iOS_viDoc_Distribution" */;
+			productName = VigramSDK;
+		};
+		D408AEAB300003860009010B /* VigramSDK+Rx */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D408AEA8300003860009010B /* XCRemoteSwiftPackageReference "SDK_iOS_viDoc_Distribution" */;
+			productName = "VigramSDK+Rx";
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 702B960C2AEA775500CF467D /* Project object */;
+}
