@@ -1,0 +1,24 @@
+{
+  "originHash" : "88d507fedaa2794df5111e1f657d661ea148e154d01c4de57174cd9543e12f68",
+  "pins" : [
+    {
+      "identity" : "rxswift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/ReactiveX/RxSwift.git",
+      "state" : {
+        "revision" : "132aea4f236ccadc51590b38af0357a331d51fa2",
+        "version" : "6.10.2"
+      }
+    },
+    {
+      "identity" : "sdk_ios_vidoc_distribution",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/vigram-sw/SDK_iOS_viDoc_Distribution",
+      "state" : {
+        "revision" : "b025dd5a8ad116bdd0a8d8dcc6058a87cd393d45",
+        "version" : "2.0.0-beta.3"
+      }
+    }
+  ],
+  "version" : 3
+}

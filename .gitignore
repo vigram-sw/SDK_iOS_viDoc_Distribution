@@ -54,6 +54,11 @@ playground.xcworkspace
 Podfile.lock
 Pods
 *.xcworkspace
+!**/*.xcodeproj/project.xcworkspace/
+**/*.xcodeproj/project.xcworkspace/contents.xcworkspacedata
+!**/*.xcodeproj/project.xcworkspace/xcshareddata/
+!**/*.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/
+!**/*.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved
 
 # Carthage
 #
@@ -84,3 +89,6 @@ fastlane/test_output
 # https://github.com/johnno1962/injectionforxcode
 
 iOSInjectionProject/
+
+# Local demo secrets
+App/ViGRAM_SDK_demo/DemoConfiguration.local.swift
