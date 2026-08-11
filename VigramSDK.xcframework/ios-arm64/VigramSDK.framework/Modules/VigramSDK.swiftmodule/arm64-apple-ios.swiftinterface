@@ -768,14 +768,6 @@ public enum CameraAntennaOffsetError : Swift.Error, Swift.CustomStringConvertibl
     get
   }
 }
-public struct SystemState : Swift.Codable {
-  public func encode(to encoder: any Swift.Encoder) throws
-  public init(from decoder: any Swift.Decoder) throws
-}
-public struct MessageElement : Swift.Codable {
-  public func encode(to encoder: any Swift.Encoder) throws
-  public init(from decoder: any Swift.Decoder) throws
-}
 public protocol NtripTask {
   var host: Swift.String? { get }
   var port: Swift.Int? { get }
@@ -970,6 +962,10 @@ extension VigramSDK.DeviceMessage.Version {
     public let minor: Swift.UInt8
   }
 }
+extension VigramSDK.DeviceMessage.Version.Software : Swift.Comparable {
+  public static func < (lhs: VigramSDK.DeviceMessage.Version.Software, rhs: VigramSDK.DeviceMessage.Version.Software) -> Swift.Bool
+  public static func == (lhs: VigramSDK.DeviceMessage.Version.Software, rhs: VigramSDK.DeviceMessage.Version.Software) -> Swift.Bool
+}
 extension VigramSDK.DeviceMessage.Version.Software {
   public func toString() -> Swift.String
 }
@@ -1061,6 +1057,7 @@ public enum PeripheralError : Swift.Error {
   case writeTimeOut
   case laserMeasurementTimeout(Foundation.TimeInterval)
   case configurationFailed
+  case connectionLostDuringConfiguration
   case requestIsNotSupported(Swift.String)
   case accessDenied(Swift.String)
   case deviceNumberIsIncompatible
@@ -1277,7 +1274,7 @@ extension VigramSDK.AntennaOffset {
 public enum Vigram {
 }
 extension VigramSDK.Vigram {
-  public static func initial(token: Swift.String) -> any VigramSDK.Authentication
+  public static func initial(token: Swift.String? = nil) -> any VigramSDK.Authentication
   public static func tokenIsValid() -> Swift.Result<Swift.Bool, VigramSDK.AuthenticationError>
   public static func bluetoothService() -> any VigramSDK.BluetoothService
   public static func peripheral(_ peripheral: CoreBluetooth.CBPeripheral, configuration: VigramSDK.PeripheralConfiguration? = nil) -> any VigramSDK.Peripheral
